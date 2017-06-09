@@ -23,3 +23,8 @@ def test(request):
 
     return HttpResponse(template.render(context, request))
 
+
+def about(request):
+    template = loader.get_template("dj-testing/about.html")
+    context = {}
+    return HttpResponse(template.render(context, request))
