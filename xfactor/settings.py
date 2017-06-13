@@ -123,14 +123,20 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
+## Media files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
 ## Redirection
 LOGIN_REDIRECT_URL = reverse_lazy('dashboard')
 LOGIN_URL = reverse_lazy('login')
 LOGOUT_URL = reverse_lazy('logout')
 
 ## SMTP Server
-
+## Use this to get mail content in the console
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+## Use this to get mail content in your emails inbox
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 DEFAULT_FROM_EMAIL = 'pythonmailingdaniel@gmail.com'
 SERVER_EMAIL = 'pythonmailingdaniel@gmail.com'
@@ -139,3 +145,9 @@ EMAIL_HOST_USER = 'pythonmailingdaniel@gmail.com'
 EMAIL_HOST_PASSWORD = 'mannmedmangebein'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+## Custom authentication backen
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'account.authentication.EmailAuthBackend',
+)
