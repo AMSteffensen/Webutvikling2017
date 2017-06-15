@@ -26,6 +26,9 @@ SECRET_KEY = 'igu*b8cki054arveyd(w-gw5u51@(pfo!$1osvyr&pwph=yrwy'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+#TEMPLATE_DEBUG = True
+THUMBNAIL_DEBUG = True
+
 
 ALLOWED_HOSTS = []
 
@@ -40,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'account',
     'django.contrib.admin',
+    'sorl.thumbnail',
 ]
 
 MIDDLEWARE = [
@@ -60,6 +64,7 @@ TEMPLATES = [
         'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
+            'debug': DEBUG,
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
@@ -123,19 +128,23 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
-## Media files
+# Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
-## Redirection
+# Redirection
 LOGIN_REDIRECT_URL = reverse_lazy('dashboard')
 LOGIN_URL = reverse_lazy('login')
 LOGOUT_URL = reverse_lazy('logout')
 
-## SMTP Server
-## Use this to get mail content in the console
+ABSOLUTE_URL_OVERRIDES = {
+    'auth.user': lambda u: reverse_lazy('user_detail', args=[u.username])
+}
+
+# SMTP Server
+# Use this to get mail content in the console
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-## Use this to get mail content in your emails inbox
+# Use this to get mail content in your emails inbox
 #EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 DEFAULT_FROM_EMAIL = 'pythonmailingdaniel@gmail.com'
@@ -146,7 +155,7 @@ EMAIL_HOST_PASSWORD = 'mannmedmangebein'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-## Custom authentication backen
+# Custom authentication backen
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'account.authentication.EmailAuthBackend',
