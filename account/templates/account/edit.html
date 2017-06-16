@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load thumbnail %}
 
 {% block title %}Edit your account{% endblock %}
 
@@ -8,6 +9,16 @@
     <form action="." method="post" enctype="multipart/form-data">
         {{ user_form.as_p }}
         {{ profile_form.as_p }}
+        {% if user.profile.photo %}
+            {% thumbnail user.profile.photo "180x180" crop="100%" as im %}
+                <img src="{{ im.url }}" class="user-detail">
+            {% endthumbnail %}
+        {% else %}
+            {% thumbnail "no_image.png" "180x180" crop="100%" as im %}
+                <img src="{{ im.url }}" class="user-detail">
+            {% endthumbnail %}
+        {% endif %}
+        <br>
         {% csrf_token %}
         <p><input type="submit" value="Save changes"></p>
     </form>
