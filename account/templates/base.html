@@ -10,7 +10,9 @@
 <body>
     <!-- HEADER -->
     <div id="header">
-        <span class="logo">XFactor</span>
+        <a href="{% url 'dashboard' %}">
+            <span class="logo">XFactor</span>
+        </a>
         {% if request.user.is_authenticated %}
         <ul class="menu">
             <li {% if section == "dashboard" %}class="selected"{% endif %}><a href="{% url "dashboard" %}">My dashboard</a></li>
@@ -23,6 +25,19 @@
         <span class="user">
             {% if request.user.is_authenticated %}
                 Hello {{ request.user.first_name }}, <a href="{% url 'logout' %}">Logout</a>
+
+                <a href="{{ user.get_absolute_url }}">
+                    {% load thumbnail %}
+                    {% if user.profile.photo %}
+                        {% thumbnail user.profile.photo "35x35" crop="100%" as im %}
+                            <img src="{{ im.url }}" class="user-detail">
+                        {% endthumbnail %}
+                    {% else %}
+                        {% thumbnail "no_image.png" "35x35" crop="100%" as im %}
+                            <img src="{{ im.url }}" class="user-detail">
+                        {% endthumbnail %}
+                    {% endif %}
+                </a>
             {% else %}
                 <a href="{% url 'login' %}">Log-in</a>
             {% endif %}

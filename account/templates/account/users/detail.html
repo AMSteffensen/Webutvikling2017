@@ -6,15 +6,22 @@
 {% block content %}
     <h1>{{ user.get_full_name }}</h1>
     <div class="profile-info">
-    {% thumbnail user.profile.photo "180x180" crop="100%" as im %}
-        <img src="{{ im.url }}" class="user-detail">
-    {% endthumbnail %}
+        {% if user.profile.photo %}
+        {% thumbnail user.profile.photo "180x180" crop="100%" as im %}
+            <img src="{{ im.url }}" class="user-detail">
+        {% endthumbnail %}
+        {% else %}
+            {% thumbnail "no_image.png" "180x180" crop="100%" as im %}
+                <img src="{{ im.url }}" class="user-detail">
+            {% endthumbnail %}
+        {% endif %}
     </div>
     {% with total_followers=user.followers.count %}
         <span class="count">
             <span class="total">{{ total_followers }}</span>
             follower{{ total_followers|pluralize }}
         </span>
+        {% if user.id is not request.user.id %}
         <a href="#" data-id="{{ user.id }}" data-action="{% if request.user in user.followers.all %}un{% endif %}follow" class="follow button">
             {% if request.user not in user.followers.all %}
                 Follow
@@ -22,6 +29,7 @@
                 Unfollow
             {% endif %}
         </a>
+        {% endif %}
     {% endwith %}
 {% endblock %}
 
