@@ -28,8 +28,8 @@
 
                 <a href="{{ user.get_absolute_url }}">
                     {% load thumbnail %}
-                    {% if user.profile.photo %}
-                        {% thumbnail user.profile.photo "35x35" crop="100%" as im %}
+                    {% if request.user.profile.photo %}
+                        {% thumbnail request.user.profile.photo "35x35" crop="100%" as im %}
                             <img src="{{ im.url }}" class="user-detail">
                         {% endthumbnail %}
                     {% else %}
