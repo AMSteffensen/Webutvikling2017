@@ -1,1 +1,1 @@
-C:\Python27\python.exe manage.py runserver 8080
+C:\Python36\python.exe manage.py runserver 8080

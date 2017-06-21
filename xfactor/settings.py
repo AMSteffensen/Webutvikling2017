@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'account',
     'django.contrib.admin',
     'sorl.thumbnail',
+    'actions',
 ]
 
 MIDDLEWARE = [
@@ -113,7 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'nb'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Oslo'
 
 USE_I18N = True
 

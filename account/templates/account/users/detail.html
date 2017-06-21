@@ -31,6 +31,13 @@
         </a>
         {% endif %}
     {% endwith %}
+
+    <div class="user_information">
+        <p>Name: {{ user.first_name }}&nbsp{{ user.last_name }}</p>
+        <p>Birthdate: {{ user.profile.date_of_birth }}</p>
+        <p>Mail: {{ user.email }}</p>
+    </div>
+
 {% endblock %}
 
 {% block domready %}
