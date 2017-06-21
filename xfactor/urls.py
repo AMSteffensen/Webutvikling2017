@@ -20,6 +20,7 @@ from django.contrib import admin
 from django.conf import settings
 from account.views import dashboard
 
+
 urlpatterns = [
     # admin panel
     url(r'^admin/', admin.site.urls),
@@ -28,6 +29,9 @@ urlpatterns = [
 
     # account app
     url(r'^account/', include('account.urls')),
+
+    # job app
+    url(r'^job/', include('job.urls', namespace='job', app_name='job')),
 ]
 
 if settings.DEBUG:
