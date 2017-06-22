@@ -5,8 +5,14 @@ from sorl.thumbnail import ImageField
 
 
 class Profile(models.Model):
+    GENDER_CHOICES = (
+        ('gender..', 'Gender..'),
+        ('male', 'Male'),
+        ('female', 'Female'),
+    )
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
     date_of_birth = models.DateField(blank=True, null=True)
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES, default=GENDER_CHOICES[0][0])
     photo = models.ImageField(upload_to='users/%Y/%m/%d', blank=True)
 
     def __str__(self):
