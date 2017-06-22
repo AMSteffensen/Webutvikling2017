@@ -81,7 +81,8 @@ def dashboard(request):
 
 @login_required
 def user_list(request):
-    users = User.objects.filter(is_active=True)
+    #users = User.objects.filter(is_active=True).order_by('first_name')
+    users = User.objects.filter(is_active=True).extra(select={'lower_first_name': 'lower(first_name)'}).order_by('lower_first_name')
     return render(request, 'account/users/list.html', {'section': 'people', 'users': users})
 
 

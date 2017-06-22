@@ -4,6 +4,12 @@
 
 {% block content %}
     <h1>{{ post.title }}</h1>
+    {% if request.user == post.author %}
+        <a href="#" class="button">Delete Post</a>
+    {% endif %}
     <p class="date">Published {{ post.publish }} by {{ post.author }}</p>
     {{ post.body|linebreaks }}
+    {% if request.user == post.author %}
+        <br><p><i>This was made by you</i></p>
+    {% endif %}
 {% endblock %}
