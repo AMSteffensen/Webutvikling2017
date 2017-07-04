@@ -33,9 +33,19 @@
                             <img src="{{ im.url }}" class="user-detail">
                         {% endthumbnail %}
                     {% else %}
-                        {% thumbnail "no_image.png" "35x35" crop="100%" as im %}
-                            <img src="{{ im.url }}" class="user-detail">
-                        {% endthumbnail %}
+                        {% if request.user.profile.gender == "mann" %}
+                            {% thumbnail "no_image_male.png" "35x35" crop="100%" as im %}
+                                <img src="{{ im.url }}" class="user-detail">
+                            {% endthumbnail %}
+                        {% elif request.user.profile.gender == "kvinne" %}
+                            {% thumbnail "no_image_female.png" "35x35" crop="100%" as im %}
+                                <img src="{{ im.url }}" class="user-detail">
+                            {% endthumbnail %}
+                        {% else %}
+                            {% thumbnail "no_image.png" "35x35" crop="100%" as im %}
+                                <img src="{{ im.url }}" class="user-detail">
+                            {% endthumbnail %}
+                        {% endif %}
                     {% endif %}
                 </a>
             {% else %}
