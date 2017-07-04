@@ -1,5 +1,5 @@
 .gitattributes
 .git
 .idea/
-db.dqlite3
+db.sqlite3
 /**/*.pyc
