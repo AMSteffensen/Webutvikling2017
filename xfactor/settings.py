@@ -27,7 +27,7 @@ SECRET_KEY = 'igu*b8cki054arveyd(w-gw5u51@(pfo!$1osvyr&pwph=yrwy'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 #TEMPLATE_DEBUG = True
-THUMBNAIL_DEBUG = True
+THUMBNAIL_DEBUG = DEBUG
 
 
 ALLOWED_HOSTS = []
@@ -115,6 +115,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
 LANGUAGE_CODE = 'nb'
+#LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'Europe/Oslo'
 

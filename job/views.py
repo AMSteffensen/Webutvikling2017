@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
@@ -15,11 +16,15 @@ def post_list(request):
 
 
 def post_detail(request, year, month, day, post):
-    post = get_object_or_404(Post, slug=post,
-                                    status='published',
-                                    publish__year=year,
-                                    publish__month=month,
-                                    publish__day=day)
+
+    try:
+        post = get_object_or_404(Post, slug=post,
+                                        status='publisert',
+                                        publish__year=year,
+                                        publish__month=month,
+                                        publish__day=day)
+    except Http404:
+        return redirect("job:post_list")
     return render(request, 'job/post/detail.html', {'post': post})
 
 

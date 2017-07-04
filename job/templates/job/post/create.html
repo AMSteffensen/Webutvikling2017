@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 
-{% block title %}Create a new job{% endblock %}
+{% block title %}Opprett ny jobb{% endblock %}
 
 {% block content %}
-    <h1>Create a new job</h1>
-    <p>You can create a new job using the following form:</p>
+    <h1>Opprett ny jobb</h1>
+    <p>Bruk formen under for å opprette en ny jobb:</p>
     <form action="." method="post" enctype="multipart/form-data">
         {{ post_form.as_p }}
         <br>
         {% csrf_token %}
-        <p><input type="submit" value="Save changes"></p>
+        <p><input type="submit" value="Lagre"></p>
     </form>
 {% endblock %}

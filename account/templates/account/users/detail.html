@@ -24,17 +24,17 @@
         {% if user.id is not request.user.id %}
         <a href="#" data-id="{{ user.id }}" data-action="{% if request.user in user.followers.all %}un{% endif %}follow" class="follow button">
             {% if request.user not in user.followers.all %}
-                Follow
+                Følg
             {% else %}
-                Unfollow
+                Slutt å følge
             {% endif %}
         </a>
         {% endif %}
     {% endwith %}
 
     <div class="user_information">
-        <p>Name: {{ user.first_name }}&nbsp{{ user.last_name }}</p>
-        <p>Birthdate: {{ user.profile.date_of_birth }}</p>
+        <p>Navn: {{ user.first_name }}&nbsp{{ user.last_name }}</p>
+        <p>Fødselsdato: {{ user.profile.date_of_birth }}</p>
         <p>Mail: {{ user.email }}</p>
     </div>
 

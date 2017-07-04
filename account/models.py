@@ -6,9 +6,8 @@ from sorl.thumbnail import ImageField
 
 class Profile(models.Model):
     GENDER_CHOICES = (
-        ('gender..', 'Gender..'),
-        ('male', 'Male'),
-        ('female', 'Female'),
+        ('mann', 'Mann'),
+        ('kvinne', 'Kvinne'),
     )
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
     date_of_birth = models.DateField(blank=True, null=True)

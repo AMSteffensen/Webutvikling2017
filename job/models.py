@@ -7,13 +7,13 @@ from django.core.urlresolvers import reverse
 
 class PublishedManager(models.Manager):
     def get_queryset(self):
-        return super(PublishedManager, self).get_queryset().filter(status='published')
+        return super(PublishedManager, self).get_queryset().filter(status='publisert')
 
 
 class Post(models.Model):
     STATUS_CHOICES = (
-        ('draft', 'Draft'),
-        ('published','Published'),
+        ('mal', 'Mal'),
+        ('publisert','Publisert'),
     )
 
     title = models.CharField(max_length=250)
