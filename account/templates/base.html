@@ -75,6 +75,8 @@
         {% block content %}
         {% endblock %}
     </div>
+
+      <!-- MENU SIDEBAR -->
     <div class="container">
           <div class="row">
             <div class="col-sm-3 col-md-3">
@@ -88,15 +90,20 @@
                   </div>
                   <div id="collapseOne" class="panel-collapse collapse in">
                     <ul class="list-group">
-                      <li class="list-group-item"><span class="glyphicon glyphicon-pencil text-primary"></span><a href="http://fb.com/moinakbarali">Articles</a>
+                      <li class="list-group-item"><span class="glyphicon glyphicon-pencil text-primary">
+                      </span><a href="http://fb.com/moinakbarali">Articles</a>
                         <ul class="list-group">
-                          <li class="list-group-item"><span class="glyphicon glyphicon-pencil text-primary"></span><a href="http://fb.com/moinakbarali">Articles</a></li>
+                          <li class="list-group-item"><span class="glyphicon glyphicon-pencil text-primary">
+                          </span><a href="http://fb.com/moinakbarali">Articles</a></li>
 
-                          <li class="list-group-item"><span class="glyphicon glyphicon-flash text-success"></span><a href="http://fb.com/moinakbarali">News</a></li>
+                          <li class="list-group-item"><span class="glyphicon glyphicon-flash text-success">
+                          </span><a href="http://fb.com/moinakbarali">News</a></li>
 
-                          <li class="list-group-item"><span class="glyphicon glyphicon-file text-info"></span><a href="http://fb.com/moinakbarali">Newsletters</a></li>
+                          <li class="list-group-item"><span class="glyphicon glyphicon-file text-info">
+                          </span><a href="http://fb.com/moinakbarali">Newsletters</a></li>
 
-                          <li class="list-group-item"> <span class="glyphicon glyphicon-comment text-success"></span><a href="http://fb.com/moinakbarali">Comments</a><span class="badge">42</span></li>
+                          <li class="list-group-item"><span class="glyphicon glyphicon-comment text-success">
+                          </span><a href="http://fb.com/moinakbarali">Comments</a><span class="badge">42</span></li>
 
                         </ul>
                       </li>
@@ -174,8 +181,9 @@
                   <h3 class="panel-title">Dashboard</h3>
                 </div>
                 <div class="panel-body">
-                  <p>Admin Dashboard Accordion List Group Menu</p>
-                  <div class="alert alert-success"><h3>Yes! It's compatible with BS 3.0.3, 3.1 & 3.2 </h3></div>
+                  <h1>Dashbord</h1>
+                  <p>Velkommen til ditt dashbord. Du kan <a href="{% url "edit" %}">redigere profilen din</a> eller <a href="{% url "password_change" %}">bytte passordet</a>.<p>
+                  </div>
 
     <!-- Repsonsible for securing scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
