@@ -45,8 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'sorl.thumbnail',
     'actions',
-    'job',
-    'dashboard'
+    'job'
 ]
 
 MIDDLEWARE = [
