@@ -76,6 +76,7 @@
         {% endblock %}
     </div>
 
+    {% if request.user.is_authenticated %}
       <!-- MENU SIDEBAR -->
     <div class="container">
           <div class="row">
@@ -173,6 +174,8 @@
                   <h1>Dashbord</h1>
                   <p>Velkommen til ditt dashbord. Du kan <a href="{% url "edit" %}">redigere profilen din</a> eller <a href="{% url "password_change" %}">bytte passordet</a>.<p>
                   </div>
+
+    {% endif %}
 
     <!-- Repsonsible for securing scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
