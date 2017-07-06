@@ -69,9 +69,6 @@
     {% endif %}
 
 
-
-
-
     {% if request.user.is_authenticated %}
       <!-- MENU SIDEBAR -->
     <div class="container">
@@ -82,13 +79,13 @@
                   <div class="panel-heading">
                     <h4 class="panel-title">
                       <!-- <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="glyphicon glyphicon-folder-close">
-                      --></span>Meny</a>
+                      </span>-->Meny<!--</a>-->
                     </h4>
                   </div>
                   <div id="collapseOne" class="panel-collapse collapse in">
                     <ul class="list-group">
 
-                      <li class="list-group-item"></span><a href="{% url 'dashboard' %}">Dashbord</a></li>
+                      <li class="list-group-item"><a href="{% url 'dashboard' %}">Dashbord</a></li>
 
                       <li class="list-group-item"><span class="glyphicon glyphicon-flash text-success"></span><a href="{% url 'dashboard' %}">Feed</a></li>
 
@@ -148,6 +145,13 @@
 
     {% endif %}
 
+    <!-- Content -->
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+
     <!-- Repsonsible for securing scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src=" http://cdn.jsdelivr.net/jquery.cookie/1.4.1/jquery.cookie.min.js "></script>
@@ -177,11 +181,6 @@
 		});
     </script>
 
-    <!-- Content -->
-    <div id="content">
-        {% block content %}
-        {% endblock %}
-    </div>
 
 </body>
 </html>
