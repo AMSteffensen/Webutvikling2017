@@ -70,11 +70,7 @@
 
 
 
-    <!-- Content -->
-    <div id="content">
-        {% block content %}
-        {% endblock %}
-    </div>
+
 
     {% if request.user.is_authenticated %}
       <!-- MENU SIDEBAR -->
@@ -98,11 +94,13 @@
 
                       <li class="list-group-item"><span class="glyphicon glyphicon-align-left"></span><a href="{% url 'dashboard' %}">Stats</a></li>
 
-                      <li class="list-group-item"><img src="{% static 'images/group_icon.png' %}"><span class="glyphicon-border"></span><a href="{% url 'user_list' %}">Grupper</a></li>
+                      <li class="list-group-item"><span class="glyphicon glyphicon-star"></span><a href="{% url 'dashboard' %}">Grupper</a></li>
+
+                      <li class="list-group-item"><img src="{% static 'images/group_icon.png' %}"><span class="glyphicon-border"></span><a href="{% url 'user_list' %}">Brukere</a></li>
 
                       <li class="list-group-item"><span class="glyphicon glyphicon-briefcase"></span><a href="{% url 'job:post_list' %}">Jobber</a></li>
 
-                      <li class="list-group-item"><span class="glyphicon glyphicon-wrench"></span><a href="{% url 'dashboard' %}">Innstillinger</a></li>
+                      <li class="list-group-item"><span class="glyphicon glyphicon-user"></span><a href="{% url 'dashboard' %}">Min profil</a></li>
 
 
                     </ul>
@@ -136,34 +134,6 @@
                     </div>
                   </div>
                 </div>
-                <!--<div class="panel panel-default">
-                  <div class="panel-heading">
-                    <h4 class="panel-title">
-                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive"><span class="glyphicon glyphicon-heart">
-                        </span>Reports</a>
-                    </h4>
-                  </div>
-                  <div id="collapseFive" class="panel-collapse collapse">
-                    <div class="list-group">
-                      <a href="#" class="list-group-item">
-                        <h4 class="list-group-item-heading">List group item heading</h4>
-                        <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                      </a>
-                    </div>
-                    <div class="list-group">
-                      <a href="#" class="list-group-item active">
-                        <h4 class="list-group-item-heading">List group item heading</h4>
-                        <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                      </a>
-                    </div>
-                    <div class="list-group">
-                      <a href="#" class="list-group-item">
-                        <h4 class="list-group-item-heading">List group item heading</h4>
-                        <p class="list-group-item-text">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                      </a>
-                    </div>
-                  </div>
-                </div> -->
               </div>
             </div>
             <div class="col-sm-9 col-md-9">
@@ -206,6 +176,12 @@
             {% endblock %}
 		});
     </script>
+
+    <!-- Content -->
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
 
 </body>
 </html>
