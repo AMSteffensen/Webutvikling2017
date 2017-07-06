@@ -11,3 +11,9 @@ class PostCreateForm(forms.ModelForm):
             'body': 'Text',
             'email': 'Email',
         }
+
+    def __init__(self, *args, **kwargs):
+        super(PostCreateForm, self).__init__(*args, **kwargs)
+        self.fields['title'].required = True
+        self.fields['body'].required = True
+        self.fields['status'].required = True
