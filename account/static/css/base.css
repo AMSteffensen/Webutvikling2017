@@ -11,12 +11,12 @@ p {
 }
 
 a {
-    color:#12c064;
+    color:#0049C1;
     text-decoration:none;
 }
 
 a:hover {
-    color:#00a74f;
+    color:#317AF7;
 }
 
 h1, h2, h3, h4, h5 , h6 { font-family: 'Muli', sans-serif; font-weight:normal; }
@@ -112,7 +112,7 @@ input, textarea {
 }
 input[type=submit], a.button {
     font-weight:bold;
-    background:#12c064;
+    background:#0049C1;
     color:#fff;
     padding:10px 20px;
     font-size:14px;
