@@ -48,6 +48,10 @@
         <p>Mail: {{ user.email }}</p>
     </div>
 
+    {% if user.id is  request.user.id %}
+        <p>Du kan <a href="{% url "edit" %}">redigere profilen din</a> eller <a href="{% url "password_change" %}">bytte passordet</a>.</p>
+    {% endif %}
+
 {% endblock %}
 
 {% block domready %}
