@@ -315,6 +315,28 @@ img.user-detail {
   border-top: 1px solid #DDD !important;
 }
 
+
 .glyphicon-border{
   border: 4px solid transparent;
 }
+
+.footer-bottom {
+    background-color: #F1F1F1;
+    min-height: 30px;
+    width: 100%;
+    bottom:0px;
+    position:fixed;
+    left:0px;
+}
+.copyright {
+    color: #000;
+    line-height: 30px;
+    min-height: 30px;
+    padding: 7px 0;
+    font-size:12px;
+}
+
+.bottom_ul { list-style-type:none; float:right; margin-bottom:0px; padding: 7px 0;}
+.bottom_ul li { float:left; line-height:30px;}
+.bottom_ul li:after { content:"/"; color:#000; margin-right:8px; margin-left:8px;}
+.bottom_ul li a { color:#000;  font-size:12px;}
