@@ -11,10 +11,10 @@
 
 <body>
     <!-- HEADER -->
-    <div id="header">
+  <!--   <div id="header">
         <a href="{% url 'dashboard' %}">
             <span class="logo">XFactor</span>
-        </a>
+        </a> -->
 <!--
         <ul class="menu">
             <li {% if section == "dashboard" %}class="selected"{% endif %}><a href="{% url 'dashboard' %}">Dashbord</a></li>
@@ -23,8 +23,8 @@
         </ul>
 -->
 
-        <!-- HEADER User class-->
-        <span class="user">
+       <!-- HEADER User class-->
+      <!--  <span class="user">
             {% if request.user.is_authenticated %}
                 Hei {{ request.user.first_name }}, <a href="{% url 'logout' %}">Logg ut</a>
 
@@ -55,7 +55,7 @@
             {% endif %}
         </span>
     </div>
-
+ -->
       <!-- MESSAGES -->
     {% if messages %}
         <ul class="messages">
@@ -71,69 +71,53 @@
 
     {% if request.user.is_authenticated %}
       <!-- MENU SIDEBAR -->
-    <div class="container">
-          <div class="row">
-            <div class="col-sm-3 col-md-3">
-              <div class="panel-group" id="accordion">
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <h4 class="panel-title">
-                      <!-- <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="glyphicon glyphicon-folder-close">
-                      </span>-->Meny<!--</a>-->
-                    </h4>
-                  </div>
-                  <div id="collapseOne" class="panel-collapse collapse in">
-                    <ul class="list-group">
-
-                      <li class="list-group-item"><span class="glyphicon glyphicon-th-list"></span><a href="{% url 'dashboard' %}">Dashbord</a></li>
 
 
-                      <li class="list-group-item"><span class="glyphicon glyphicon-flash text-success"></span><a href="#">Feed</a></li>
+      <div class="nav-side-menu">
+          <div class="brand">XFaktor</div>
+          <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
 
-                      <li class="list-group-item"><span class="glyphicon glyphicon-align-left"></span><a href="#">Stats</a></li>
+              <div class="menu-list">
 
-                      <li class="list-group-item"><span class="glyphicon glyphicon-star"></span><a href="#">Grupper</a></li>
-
-                      <li class="list-group-item"><img src="{% static 'images/group_icon.png' %}"><span class="glyphicon-border"></span><a href="{% url 'user_list' %}">Brukere</a></li>
-
-                      <li class="list-group-item"><span class="glyphicon glyphicon-briefcase"></span><a href="{% url 'job:post_list' %}">Jobber</a></li>
-
-                      <li class="list-group-item"><span class="glyphicon glyphicon-user"></span><a href="{{ request.user.get_absolute_url }}">Min profil</a></li>
-
-
-                    </ul>
-                  </div>
-                </div>
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <h4 class="panel-title">
-                      <a data-toggle="collapse" data-parent="#accordion" href="{% url 'logout' %}"><span class="glyphicon glyphicon-off">
-                      </span>Logg ut</a>
-                    </h4>
-                  </div>
-                  <div id="collapseFour" class="panel-collapse collapse">
-                    <div class="list-group">
-                      <a href="#" class="list-group-item">
-                        Cras justo odio
-                      </a>
-                      <div class="list-group">
-                        <a href="#" class="list-group-item">
-                          Cras justo odio
+                  <ul id="menu-content" class="menu-content collapse out">
+                      <li>
+                        <a href="{% url 'dashboard' %}">
+                        <span class="glyphicon glyphicon-th-list"></span> Dashboard
                         </a>
-                        <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-                        <a href="#" class="list-group-item">Morbi leo risus</a>
-                        <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-                        <a href="#" class="list-group-item">Vestibulum at eros</a>
-                      </div>
-                      <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
-                      <a href="#" class="list-group-item">Morbi leo risus</a>
-                      <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-                      <a href="#" class="list-group-item">Vestibulum at eros</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+                      </li>
+
+                      <li  data-toggle="collapse" data-target="#products" class="collapsed active">
+                        <a href="#"><span class="glyphicon glyphicon-flash"></span> Feed</a>
+                      </li>
+
+
+                      <li data-toggle="collapse" data-target="#service" class="collapsed">
+                        <a href="#"><span class="glyphicon glyphicon-align-left"></span> Stats</a>
+                      </li>
+
+
+                      <li data-toggle="collapse" data-target="#new" class="collapsed">
+                        <a href="#"><span class="glyphicon glyphicon-star"></span> Grupper</a>
+                      </li>
+
+                       <li>
+                        <a href="{% url 'user_list' %}">
+                        <img src="{% static 'images/group_icon.png' %}"> Brukere</a>
+                        </li>
+
+                       <li>
+                        <a href="{% url 'job:post_list' %}">
+                        <span class="glyphicon glyphicon-briefcase"></span> Jobber</a>
+                      </li>
+
+                      <li>
+                       <a href="{{ request.user.get_absolute_url }}">
+                       <span class="glyphicon glyphicon-user"></span> Min profil</a>
+                       </li>
+
+                  </ul>
+           </div>
+      </div>
 
     {% endif %}
 
@@ -173,8 +157,6 @@
 		});
     </script>
 
-</body>
-
     <div class="footer-bottom" >
 
     	<div class="container">
@@ -201,9 +183,7 @@
  </div>
 
     		</div>
-
     	</div>
-
     </div>
-
+</body>
 </html>
