@@ -44,16 +44,26 @@ def register(request):
         user_form = UserRegistrationForm(request.POST)
         profile_form = ProfileRegistrationForm(data=request.POST, files=request.FILES)
 
-        if user_form.is_valid() and not User.objects.filter(email=user_form.cleaned_data['email']).exists() and profile_form.is_valid():
+        if user_form.is_valid() and profile_form.is_valid():
+
             # Create a new user object but avoid saving it yet
             new_user = user_form.save(commit=False)
+            print("user {}".format(type(new_user)))
             # Set the chosen password
             new_user.set_password(user_form.cleaned_data['password'])
             # Save the User object
             new_user.save()
-            profile_form.save()
             # Create the user profile
-            profile = Profile.objects.create(user=new_user)
+            profile = Profile()
+            profile_cleaned = profile_form.cleaned_data
+            setattr(profile, 'user', new_user)
+            setattr(profile, 'gender', profile_cleaned['gender'])
+            setattr(profile, 'date_of_birth', profile_cleaned['date_of_birth'])
+            setattr(profile, 'photo', profile_cleaned['photo'])
+            profile.save()
+
+            #, gender=new_profile['gender'], date_of_birth=new_profile['date_of_birth'], photo=new_profile['photo']
+
             return render(request, 'account/register_done.html', {'new_user': new_user})
     else:
         user_form = UserRegistrationForm()
