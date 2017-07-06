@@ -88,19 +88,19 @@
                   <div id="collapseOne" class="panel-collapse collapse in">
                     <ul class="list-group">
 
-                      <li class="list-group-item"></span><a href="{% url 'dashboard' %}">Dashbord</a></li>
+                      <li class="list-group-item"><span class="glyphicon glyphicon-th-list"></span><a href="{% url 'dashboard' %}">Dashbord</a></li>
 
-                      <li class="list-group-item"><span class="glyphicon glyphicon-flash text-success"></span><a href="{% url 'dashboard' %}">Feed</a></li>
+                      <li class="list-group-item"><span class="glyphicon glyphicon-flash text-success"></span><a href="#">Feed</a></li>
 
-                      <li class="list-group-item"><span class="glyphicon glyphicon-align-left"></span><a href="{% url 'dashboard' %}">Stats</a></li>
+                      <li class="list-group-item"><span class="glyphicon glyphicon-align-left"></span><a href="#">Stats</a></li>
 
-                      <li class="list-group-item"><span class="glyphicon glyphicon-star"></span><a href="{% url 'dashboard' %}">Grupper</a></li>
+                      <li class="list-group-item"><span class="glyphicon glyphicon-star"></span><a href="#">Grupper</a></li>
 
                       <li class="list-group-item"><img src="{% static 'images/group_icon.png' %}"><span class="glyphicon-border"></span><a href="{% url 'user_list' %}">Brukere</a></li>
 
                       <li class="list-group-item"><span class="glyphicon glyphicon-briefcase"></span><a href="{% url 'job:post_list' %}">Jobber</a></li>
 
-                      <li class="list-group-item"><span class="glyphicon glyphicon-user"></span><a href="{% url 'dashboard' %}">Min profil</a></li>
+                      <li class="list-group-item"><span class="glyphicon glyphicon-user"></span><a href="{{ request.user.get_absolute_url }}">Min profil</a></li>
 
 
                     </ul>
