@@ -69,9 +69,6 @@
     {% endif %}
 
 
-
-
-
     {% if request.user.is_authenticated %}
       <!-- MENU SIDEBAR -->
     <div class="container">
@@ -82,13 +79,15 @@
                   <div class="panel-heading">
                     <h4 class="panel-title">
                       <!-- <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="glyphicon glyphicon-folder-close">
-                      --></span>Meny</a>
+                      </span>-->Meny<!--</a>-->
                     </h4>
                   </div>
                   <div id="collapseOne" class="panel-collapse collapse in">
                     <ul class="list-group">
 
+
                       <li class="list-group-item"><span class="glyphicon glyphicon-th-list"></span><a href="{% url 'dashboard' %}">Dashbord</a></li>
+
 
                       <li class="list-group-item"><span class="glyphicon glyphicon-flash text-success"></span><a href="#">Feed</a></li>
 
@@ -136,17 +135,18 @@
                 </div>
               </div>
             </div>
-            <div class="col-sm-9 col-md-9">
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h3 class="panel-title">Dashboard</h3>
-                </div>
-                <div class="panel-body">
-                  <h1>Dashbord</h1>
-                  <p>Velkommen til ditt dashbord!</p>
-                  </div>
+
+
+
 
     {% endif %}
+
+    <!-- Content -->
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+
 
     <!-- Repsonsible for securing scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -177,11 +177,6 @@
 		});
     </script>
 
-    <!-- Content -->
-    <div id="content">
-        {% block content %}
-        {% endblock %}
-    </div>
 
 </body>
 </html>

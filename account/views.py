@@ -12,6 +12,7 @@ from django.views.decorators.http import require_POST
 from common.decorators import ajax_required
 from .forms import LoginForm
 from .forms import UserRegistrationForm
+from .forms import ProfileRegistrationForm
 from .forms import UserEditForm
 from .forms import ProfileEditForm
 from .models import Profile
@@ -41,20 +42,23 @@ def user_login(request):
 def register(request):
     if request.method == 'POST':
         user_form = UserRegistrationForm(request.POST)
+        profile_form = ProfileRegistrationForm(data=request.POST, files=request.FILES)
 
-        if user_form.is_valid() and not User.objects.filter(email=user_form.cleaned_data['email']).exists():
+        if user_form.is_valid() and not User.objects.filter(email=user_form.cleaned_data['email']).exists() and profile_form.is_valid():
             # Create a new user object but avoid saving it yet
             new_user = user_form.save(commit=False)
             # Set the chosen password
             new_user.set_password(user_form.cleaned_data['password'])
             # Save the User object
             new_user.save()
+            profile_form.save()
             # Create the user profile
             profile = Profile.objects.create(user=new_user)
             return render(request, 'account/register_done.html', {'new_user': new_user})
     else:
         user_form = UserRegistrationForm()
-    return render(request, 'account/register.html', {'user_form': user_form})
+        profile_form =  ProfileRegistrationForm()
+    return render(request, 'account/register.html', {'user_form': user_form, 'profile_form': profile_form})
 
 
 @login_required
