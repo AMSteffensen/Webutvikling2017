@@ -37,6 +37,14 @@ class UserRegistrationForm(forms.ModelForm):
             raise forms.ValidationError('Passordene stemmer ikke.')
         return cd['password2']
 
+    def clean_email(self):
+        cd = self.cleaned_data
+        if User.objects.filter(email=cd['email']).exists():
+            print("{} already exists".format(cd['email']))
+            raise forms.ValidationError('Det eksisterer allerede en bruker med denne mailen.')
+        print("{} does not exist".format(cd['email']))
+        return cd['email']
+
 
 class ProfileRegistrationForm(forms.ModelForm):
     class Meta:
