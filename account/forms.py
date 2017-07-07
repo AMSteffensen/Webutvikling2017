@@ -16,10 +16,12 @@ class UserRegistrationForm(forms.ModelForm):
         model = User
         fields = ('username', 'first_name', 'last_name', 'email')
 
-        error_messages = {'username': { 'require': "Dette feltet er påkrevd"}}
-
     def __init__(self, *args, **kwargs):
         super(UserRegistrationForm, self).__init__(*args, **kwargs)
+
+        # Default css class attributes
+        for field in self.fields.values():
+            field.widget.attrs['class'] = ""
 
         # Labels
         self.fields['username'].label = '* Brukernavn'
@@ -34,7 +36,8 @@ class UserRegistrationForm(forms.ModelForm):
         self.fields['email'].required = True
 
         # Help Texts
-        #self.fields['username'].help_text = 'Hei'
+        self.fields['username'].help_text = 'Kan ikke være lenger enn 22 karakterer.<br>Kan ikke inneholde spesialkarakterer !,@,#,$,&,%,(,}...'
+        self.fields['password'].help_text = 'Kan ikke være mindre enn 7 karakterer.<br>Må inneholde både store og små bokstaver samt tall.'
 
         # Placeholders
         self.fields['username'].widget.attrs['placeholder'] = 'e.g. Joe'
@@ -47,19 +50,44 @@ class UserRegistrationForm(forms.ModelForm):
         #    field.widget.attrs['oninvalid'] = 'this.setCustomValidity("{} er påkrevd")'.format(field.label.replace('*', '').strip())
         #    field.widget.attrs['oninput'] = 'this.setCustomValidity("")'
 
+    # Verify Password
+    def clean_password(self):
+        print("cleaning password1")
+        pwd = self.cleaned_data
+        # Check if password is at least 7 characters long
+        if len(cd['password']) < 7:
+            self.fields['password'].widget.attrs['class'] = "cFormInputError"
+            raise forms.ValidationError('Passordet må være minst 7 karakterer langt')
+        # Check if password contains at least one lower case letter
+        if not any(x.islower() for x in cd['password']):
+            self.fields['password'].widget.attrs['class'] = "cFormInputError"
+            raise forms.ValidationError('Passordet må inneholde minst én liten bokstav')
+        # Check if password contains at least one upper case letter
+        if not any(x.isupper() for x in cd['password']):
+            self.fields['password'].widget.attrs['class'] = "cFormInputError"
+            raise forms.ValidationError('Passordet må inneholde minst én stor bokstav')
+        # Check if password contains at least one didgit
+        if not any(x.isdigit() for x in cd['password']):
+            self.fields['password'].widget.attrs['class'] = "cFormInputError"
+            raise forms.ValidationError('Passordet må inneholde minste ett tall')
+        return cd['password']
 
+
+    # Verify Password2
     def clean_password2(self):
         cd = self.cleaned_data
         if cd['password'] != cd['password2']:
+            self.fields['password2'].widget.attrs['class'] = "cFormInputError"
             raise forms.ValidationError('Passordene stemmer ikke.')
         return cd['password2']
 
+
+    # Verify Email
     def clean_email(self):
         cd = self.cleaned_data
         if User.objects.filter(email=cd['email']).exists():
-            print("{} already exists".format(cd['email']))
+            self.fields['email'].widget.attrs['class'] = "cFormInputError"
             raise forms.ValidationError('Det eksisterer allerede en bruker med denne mailen.')
-        print("{} does not exist".format(cd['email']))
         return cd['email']
 
 

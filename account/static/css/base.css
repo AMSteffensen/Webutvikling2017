@@ -461,3 +461,5 @@ body {
 .cWrapper { overflow: auto; }
 .cContent { float:right; width: 80%}
 .cSidebar { float:left; width: 20%}
+
+.cFormInputError { border: 2px red solid; }
