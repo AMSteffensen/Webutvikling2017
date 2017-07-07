@@ -334,9 +334,10 @@ body {
 
 .cWrapper { overflow: auto; }
 .cContent { float:right; width: 80%}
+
 .cSidebarleft { float:left; width: 10%}
 .cSidebarright{float:right; width:10%}
-
+.cFormInputError { border: 2px red solid; }
 
 
 body {
