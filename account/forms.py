@@ -53,6 +53,10 @@ class UserRegistrationForm(forms.ModelForm):
         #    field.widget.attrs['oninvalid'] = 'this.setCustomValidity("{} er påkrevd")'.format(field.label.replace('*', '').strip())
         #    field.widget.attrs['oninput'] = 'this.setCustomValidity("")'
 
+        # Disable suggestions
+        for field in self.fields.values():
+            field.widget.attrs['autocomplete'] = 'off'
+
 
     # Verify username
     def clean_username(self):
@@ -134,6 +138,10 @@ class ProfileRegistrationForm(forms.ModelForm):
 
         # Placeholders
         self.fields['date_of_birth'].widget.attrs['placeholder'] = 'dd.mm.yyyy'
+
+        # Disable suggestions
+        for field in self.fields.values():
+            field.widget.attrs['autocomplete'] = 'off'
 
 
 class UserEditForm(forms.ModelForm):

@@ -20,6 +20,10 @@ from .models import Contact
 
 
 def user_login(request):
+    # Redirect the user to the dashboard if already signed in
+    if request.user.is_authenticated:
+        return redirect('dashboard')
+
     if request.method == 'POST':
         form = LoginForm(request.POST)
         if form.is_valid():
@@ -40,6 +44,10 @@ def user_login(request):
 
 
 def register(request):
+    # Redirect the user to the dashboard if already signed in
+    if request.user.is_authenticated:
+        return redirect('dashboard')
+
     if request.method == 'POST':
         user_form = UserRegistrationForm(request.POST)
         profile_form = ProfileRegistrationForm(data=request.POST, files=request.FILES)
@@ -60,9 +68,15 @@ def register(request):
             setattr(profile, 'date_of_birth', profile_cleaned['date_of_birth'])
             profile.save()
 
-            #, gender=new_profile['gender'], date_of_birth=new_profile['date_of_birth'], photo=new_profile['photo']
+            user = authenticate(username=user_form.cleaned_data['username'], password=user_form.cleaned_data['password'])
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return redirect('dashboard')
+                else:
+                    return HttpResponse('Disabled account')
 
-            return render(request, 'account/register_done.html', {'new_user': new_user})
+            #return render(request, 'account/register_done.html', {'new_user': new_user})
     else:
         user_form = UserRegistrationForm()
         profile_form =  ProfileRegistrationForm()
