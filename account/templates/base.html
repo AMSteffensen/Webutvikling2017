@@ -7,6 +7,7 @@
   <title>{% block title %}{% endblock %}</title>
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
   <link href="{% static 'css/base.css' %}" rel="stylesheet">
 </head>
 
@@ -24,7 +25,6 @@
   </ul>
   {% endif %}
 
-
   <div class="cWrapper">
     {% if request.user.is_authenticated %}
     <!-- MENU SIDEBAR -->
@@ -36,29 +36,33 @@
           <ul id="menu-content" class="menu-content collapse out">
             <li>
               <a href="{% url 'dashboard' %}">
-                                <span class="glyphicon glyphicon-th-list"></span> Dashboard
+                                <i class="fa fa-th-list"></i> Dashboard
                                 </a>
             </li>
-            <li data-toggle="collapse" data-target="#products" class="collapsed">
-              <a href="#"><span class="glyphicon glyphicon-flash"></span> Feed</a>
+            <li data-toggle="collapse" data-target="#feed" class="collapsed">
+              <a href="#"><i class="fa fa-bolt"></i> Feed</a>
             </li>
-            <li data-toggle="collapse" data-target="#service" class="collapsed">
-              <a href="#"><span class="glyphicon glyphicon-align-left"></span> Stats</a>
+            <li data-toggle="collapse" data-target="#stats" class="collapsed">
+              <a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i> Stats</a>
             </li>
-            <li data-toggle="collapse" data-target="#new" class="collapsed">
-              <a href="#"><span class="glyphicon glyphicon-star"></span> Grupper</a>
+            <li data-toggle="collapse" data-target="#grupper" class="collapsed">
+              <a href="#"><i class="fa fa-star"></i> Grupper</a>
             </li>
             <li>
               <a href="{% url 'user_list' %}">
-                                <img src="{% static 'images/group_icon.png' %}"> Brukere</a>
+                                <i class="fa fa-users" aria-hidden="true"></i> Brukere</a>
             </li>
             <li>
               <a href="{% url 'job:post_list' %}">
-                                <span class="glyphicon glyphicon-briefcase"></span> Jobber</a>
+                                <i class="fa fa-suitcase" aria-hidden="true"></i> Jobber</a>
             </li>
             <li>
               <a href="{{ request.user.get_absolute_url }}">
-                                <span class="glyphicon glyphicon-user"></span> Min profil</a>
+                                <i class="fa fa-user fa-lg"></i> Min profil</a>
+            </li>
+            <li>
+              <a href="{% url 'logout' %}">
+                                <i class="fa fa-sign-out"></i> Logg ut</a>
             </li>
           </ul>
         </div>
@@ -71,6 +75,7 @@
     <div class="cContent" id="content">
       {% block content %} {% endblock %}
     </div>
+
   </div>
 
 

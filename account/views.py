@@ -48,7 +48,6 @@ def register(request):
 
             # Create a new user object but avoid saving it yet
             new_user = user_form.save(commit=False)
-            print("user {}".format(type(new_user)))
             # Set the chosen password
             new_user.set_password(user_form.cleaned_data['password'])
             # Save the User object
@@ -59,7 +58,6 @@ def register(request):
             setattr(profile, 'user', new_user)
             setattr(profile, 'gender', profile_cleaned['gender'])
             setattr(profile, 'date_of_birth', profile_cleaned['date_of_birth'])
-            setattr(profile, 'photo', profile_cleaned['photo'])
             profile.save()
 
             #, gender=new_profile['gender'], date_of_birth=new_profile['date_of_birth'], photo=new_profile['photo']
