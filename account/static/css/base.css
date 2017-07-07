@@ -1,5 +1,8 @@
 @import url(http://fonts.googleapis.com/css?family=Muli);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 10fa806fdb257c490923234318a2c456364d7288
 
 body {
     margin:0px;padding:0px;font-family:helvetica, sans-serif;
@@ -334,6 +337,7 @@ body {
 
 .cWrapper { overflow: auto; }
 .cContent { float:right; width: 80%}
+
 
 .cSidebarleft { float:left; width: 10%}
 .cSidebarright{float:right; width:10%}
