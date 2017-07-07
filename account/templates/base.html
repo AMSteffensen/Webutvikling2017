@@ -1,128 +1,138 @@
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>{% block title %}{% endblock %}</title>
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-        <link href="{% static 'css/base.css' %}" rel="stylesheet">
-    </head>
-    <body>
 
-        <!-- MESSAGES -->
-        {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-            <li class="{{ message.tags }}">
-                {{ message|safe }}
-                <a href="#" onclick="closeMessage(event, this)" class="close">x</a>
-            </li>
-            {% endfor %}
-        </ul>
-        {% endif %}
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}{% endblock %}</title>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+  <link href="{% static 'css/base.css' %}" rel="stylesheet">
+</head>
 
-        <div class="cWrapper">
-            {% if request.user.is_authenticated %}
-            <!-- MENU SIDEBAR -->
-            <div class="cSidebar">
-                <div class="nav-side-menu">
-                    <div class="brand">XFaktor</div>
-                    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
-                    <div class="menu-list">
-                        <ul id="menu-content" class="menu-content collapse out">
-                            <li>
-                                <a href="{% url 'dashboard' %}">
-                                <span class="glyphicon glyphicon-th-list"></span> Dashboard
+<body>
+
+  <!-- MESSAGES -->
+  {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+    <li class="{{ message.tags }}">
+      {{ message|safe }}
+      <a href="#" onclick="closeMessage(event, this)" class="close">x</a>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+
+  <div class="cWrapper">
+    {% if request.user.is_authenticated %}
+    <!-- MENU SIDEBAR -->
+    <div class="cSidebar">
+      <div class="nav-side-menu">
+        <div class="brand">XFaktor</div>
+        <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+        <div class="menu-list">
+          <ul id="menu-content" class="menu-content collapse out">
+            <li>
+              <a href="{% url 'dashboard' %}">
+                                <i class="fa fa-th-list"></i> Dashboard
                                 </a>
-                            </li>
-                            <li  data-toggle="collapse" data-target="#products" class="collapsed">
-                                <a href="#"><span class="glyphicon glyphicon-flash"></span> Feed</a>
-                            </li>
-                            <li data-toggle="collapse" data-target="#service" class="collapsed">
-                                <a href="#"><span class="glyphicon glyphicon-align-left"></span> Stats</a>
-                            </li>
-                            <li data-toggle="collapse" data-target="#new" class="collapsed">
-                                <a href="#"><span class="glyphicon glyphicon-star"></span> Grupper</a>
-                            </li>
-                            <li>
-                                <a href="{% url 'user_list' %}">
-                                <img src="{% static 'images/group_icon.png' %}"> Brukere</a>
-                            </li>
-                            <li>
-                                <a href="{% url 'job:post_list' %}">
-                                <span class="glyphicon glyphicon-briefcase"></span> Jobber</a>
-                            </li>
-                            <li>
-                                <a href="{{ request.user.get_absolute_url }}">
-                                <span class="glyphicon glyphicon-user"></span> Min profil</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            {% endif %}
-
-
-            <!-- CONTENT -->
-            <div class="cContent" id="content">
-                {% block content %}
-                {% endblock %}
-            </div>
-
+            </li>
+            <li data-toggle="collapse" data-target="#feed" class="collapsed">
+              <a href="#"><i class="fa fa-bolt"></i> Feed</a>
+            </li>
+            <li data-toggle="collapse" data-target="#stats" class="collapsed">
+              <a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i> Stats</a>
+            </li>
+            <li data-toggle="collapse" data-target="#grupper" class="collapsed">
+              <a href="#"><i class="fa fa-star"></i> Grupper</a>
+            </li>
+            <li>
+              <a href="{% url 'user_list' %}">
+                                <i class="fa fa-users" aria-hidden="true"></i> Brukere</a>
+            </li>
+            <li>
+              <a href="{% url 'job:post_list' %}">
+                                <i class="fa fa-suitcase" aria-hidden="true"></i> Jobber</a>
+            </li>
+            <li>
+              <a href="{{ request.user.get_absolute_url }}">
+                                <i class="fa fa-user fa-lg"></i> Min profil</a>
+            </li>
+            <li>
+              <a href="{% url 'logout' %}">
+                                <i class="fa fa-sign-out"></i> Logg ut</a>
+            </li>
+          </ul>
         </div>
+      </div>
+    </div>
+    {% endif %}
 
 
-        <!-- FOOTER -->
-        <div class="footer-bottom" >
-            <div class="container">
-                <div class="row">
-                    <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-                        <div class="copyright">
-                            © 2017, XFactor, All rights reserved
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <ul class="bottom_ul">
-                            <li><a href="#">Om oss</a></li>
-                            <li><a href="#">Kontakt oss</a></li>
-                            <li><a href="#">Innstillinger</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    <!-- CONTENT -->
+    <div class="cContent" id="content">
+      {% block content %} {% endblock %}
+    </div>
+
+  </div>
+
+
+  <!-- FOOTER -->
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+          <div class="copyright">
+            © 2017, XFactor, All rights reserved
+          </div>
         </div>
+        <div class="col-md-6">
+          <ul class="bottom_ul">
+            <li><a href="#">Om oss</a></li>
+            <li><a href="#">Kontakt oss</a></li>
+            <li><a href="#">Innstillinger</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 
 
-        <!-- Repsonsible for securing scripts -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-        <script src=" http://cdn.jsdelivr.net/jquery.cookie/1.4.1/jquery.cookie.min.js "></script>
-        <script>
-            var csrftoken = $.cookie('csrftoken');
-            function csrfSafeMethod(method) {
-                // these HTTP methods do not require CSRF protection
-                return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-            }
-            $.ajaxSetup({
-                beforeSend: function(xhr, settings) {
-                    if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                        xhr.setRequestHeader("X-CSRFToken", csrftoken);
-                    }
-                }
-            });
+  <!-- Repsonsible for securing scripts -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src=" http://cdn.jsdelivr.net/jquery.cookie/1.4.1/jquery.cookie.min.js "></script>
+  <script>
+    var csrftoken = $.cookie('csrftoken');
 
-            // Close message box
-            function closeMessage(e, that){
-                e.preventDefault();
-                $(that.parentNode).fadeOut();
-            }
+    function csrfSafeMethod(method) {
+      // these HTTP methods do not require CSRF protection
+      return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+    $.ajaxSetup({
+      beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+          xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+      }
+    });
 
-            $(document).ready(function(){
-                {% block domready %}
-                {% endblock %}
-            });
-        </script>
+    // Close message box
+    function closeMessage(e, that) {
+      e.preventDefault();
+      $(that.parentNode).fadeOut();
+    }
+
+    $(document).ready(function() {
+      { % block domready %
+      } { % endblock %
+      }
+    });
+  </script>
 
 
-    </body>
+</body>
+
 </html>
