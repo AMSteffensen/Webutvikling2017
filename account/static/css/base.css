@@ -1,8 +1,10 @@
 @import url(http://fonts.googleapis.com/css?family=Muli);
 
+
 body {
     margin:0px;padding:0px;font-family:helvetica, sans-serif;
     }
+
 
 p {
     line-height: 1.8;
@@ -212,7 +214,8 @@ img.user-detail {float:left;
 
 .nav-side-menu {position: fixed;top: 0px;
 
-  overflow: auto;width: 300px;height: 100%;color: #e1ffff;background-color: #2e353d;font-family: verdana;font-size: 12px;font-weight: 200;
+overflow: auto;width: 300px;height: 100%;color: #e1ffff;background-color: #2e353d;font-family: verdana;font-size: 12px;font-weight: 200;
+
   }
 .nav-side-menu .brand {display: block;text-align: center;
 
@@ -331,4 +334,73 @@ body {
 
 .cWrapper { overflow: auto; }
 .cContent { float:right; width: 80%}
-.cSidebar { float:left; width: 20%}
+.cSidebarleft { float:left; width: 10%}
+.cSidebarright{float:right; width:10%}
+
+
+
+body {
+  background: #F1F3FA;
+}
+
+/* Profile container */
+.profile {
+  top:0px;
+    margin:0px ;
+}
+
+/* Profile sidebar */
+.profile-sidebar {
+  padding: 20px 0 10px 0;
+  background: #fff;
+  width:100px;
+}
+
+.profile-userpic img {
+  float:right;
+  margin-right: 20px;
+
+  width: 50%;
+  height: 50%;
+  -webkit-border-radius: 50% !important;
+  -moz-border-radius: 50% !important;
+  border-radius: 50% !important;
+}
+
+.profile-usertitle {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.profile-usertitle-name {
+  color: #5a7391;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 7px;
+}
+
+.profile-usertitle-job {
+  text-transform: uppercase;
+  color: #5b9bd1;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+/*
+.profile-userbuttons {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.profile-userbuttons .btn {
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 6px 15px;
+  margin-right: 5px;
+}
+
+.profile-userbuttons .btn:last-child {
+  margin-right: 0px;
+}
+*/
