@@ -21,8 +21,8 @@ from .models import Contact
 
 def user_login(request):
     # Redirect the user to the dashboard if already signed in
-    if request.user.is_authenticated:
-        return redirect('dashboard')
+    #if request.user.is_authenticated:
+    #    return redirect('dashboard')
 
     if request.method == 'POST':
         form = LoginForm(request.POST)

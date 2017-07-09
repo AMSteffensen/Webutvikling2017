@@ -1,197 +1,184 @@
-
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+  </head>
 
-<head>
-  <meta charset="utf-8">
-  <title>{% block title %}{% endblock %}</title>
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-  <link href="{% static 'css/base.css' %}" rel="stylesheet">
-</head>
+  <body>
 
-<body>
-
-  <!-- MESSAGES -->
-  {% if messages %}
-  <ul class="messages">
-    {% for message in messages %}
-    <li class="{{ message.tags }}">
-      {{ message|safe }}
-      <a href="#" onclick="closeMessage(event, this)" class="close">x</a>
-    </li>
-    {% endfor %}
-  </ul>
-  {% endif %}
-
-  <div class="cWrapper">
-    {% if request.user.is_authenticated %}
-
-    <!-- MENU SIDEBAR -->
-    <div class="cSidebarleft">
-      <div class="nav-side-menu">
-        <div class="brand">XFaktor</div>
-        <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
-        <div class="menu-list">
-          <ul id="menu-content" class="menu-content collapse out">
-            <li>
-              <a href="{% url 'dashboard' %}">
-                                <i class="fa fa-th-list"></i> Dashboard
-                                </a>
-            </li>
-            <li data-toggle="collapse" data-target="#feed" class="collapsed">
-              <a href="#"><i class="fa fa-bolt"></i> Feed</a>
-            </li>
-            <li data-toggle="collapse" data-target="#stats" class="collapsed">
-              <a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i> Stats</a>
-            </li>
-            <li data-toggle="collapse" data-target="#grupper" class="collapsed">
-              <a href="#"><i class="fa fa-star"></i> Grupper</a>
-            </li>
-            <li>
-              <a href="{% url 'user_list' %}">
-                                <i class="fa fa-users" aria-hidden="true"></i> Brukere</a>
-            </li>
-            <li>
-              <a href="#">
-              <i class="fa fa-suitcase  collapsed:active" aria-hidden="true"></i> Jobber <span class="arrow"></span></a>
-            </li>
-            <ul class="sub-menu collapse" id="jobber">
-              <li><a href="{% url 'job:post_list' %}">Finn jobber</li>
-              <li><a href="{% url 'job:post_list' %}">Mine jobber</li>
-            </ul>
-
-            <li>
-              <a href="{{ request.user.get_absolute_url }}">
-                                <i class="fa fa-user fa-lg"></i> Min profil</a>
-            </li>
-            <li>
-              <a href="{% url 'logout' %}">
-                                <i class="fa fa-power-off"></i> Logg ut</a>
-            </li>
-
-          </ul>
-        </div>
-      </div>
-    </div>
+    <!-- MESSAGES -->
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li class="{{ message.tags }}">
+        {{ message|safe }}
+        <a href="#" onclick="closeMessage(event, this)" class="close">x</a>
+      </li>
+      {% endfor %}
+    </ul>
     {% endif %}
+    <div class="cWrapper">
 
-
-
-    <!-- CONTENT -->
-    <div class="cContent" id="content">
-      {% block content %} {% endblock %}
-    </div>
-
-  </div>
-
-
-  <!-- FOOTER -->
-  <div class="footer-bottom">
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-          <div class="copyright">
-            © 2017, XFactor, All rights reserved
+      <!-- MENU SIDEBAR -->
+      {% if request.user.is_authenticated %}
+      <div class="cLeftSidebar">
+        <div class="nav-side-menu">
+          <div class="brand">XFaktor</div>
+          <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+          <div class="menu-list">
+            <ul id="menu-content" class="menu-content collapse out">
+              <li>
+                <a href="{% url 'dashboard' %}">
+                <i class="fa fa-th-list"></i>&nbsp;Dashboard</a>
+              </li>
+              <li data-toggle="collapse" data-target="#feed" class="collapsed">
+                <a href="#"><i class="fa fa-bolt"></i>&nbsp;Feed</a>
+              </li>
+              <li data-toggle="collapse" data-target="#stats" class="collapsed">
+                <a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i> Stats</a>
+              </li>
+              <li data-toggle="collapse" data-target="#grupper" class="collapsed">
+                <a href="#"><i class="fa fa-star"></i>&nbsp;Grupper</a>
+              </li>
+              <li>
+                <a href="{% url 'user_list' %}">
+                <i class="fa fa-users" aria-hidden="true"></i>&nbsp;Brukere</a>
+              </li>
+              <li>
+                <a href="#">
+                <i class="fa fa-suitcase  collapsed:active" aria-hidden="true"></i>&nbsp;Jobber<span class="arrow"></span></a>
+              </li>
+              <ul class="sub-menu collapse" id="jobber">
+                <li>
+                  <a href="{% url 'job:post_list' %}">
+                    Finn jobber
+                </li>
+                <li><a href="{% url 'job:post_list' %}">Mine jobber</li>
+              </ul>
+              <li>
+              <a href="{{ request.user.get_absolute_url }}">
+              <i class="fa fa-user fa-lg"></i>&nbsp;Min profil</a>
+              </li>
+              <li>
+                <a href="{% url 'logout' %}">
+                <i class="fa fa-power-off"></i>&nbsp;Logg ut</a>
+              </li>
+            </ul>
           </div>
         </div>
-        <div class="col-md-6">
-          <ul class="bottom_ul">
-            <li><a href="#">Om oss</a></li>
-            <li><a href="#">Kontakt oss</a></li>
-            <li><a href="#">Innstillinger</a></li>
-          </ul>
+      </div>
+      {% endif %}
+
+      <!-- MENU SIDEBAR -->
+      {% if request.user.is_authenticated %}
+      <div class="cRightSidebar">
+        <div class="nav-side-menu">
+          <div class="brand">XFaktor</div>
+          <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+          <div class="menu-list">
+            <ul id="menu-content" class="menu-content collapse out">
+              <li>
+                <a href="{% url 'dashboard' %}">
+                <i class="fa fa-th-list"></i> Dashboard</a>
+              </li>
+              <li data-toggle="collapse" data-target="#feed" class="collapsed">
+                <a href="#"><i class="fa fa-bolt"></i> Feed</a>
+              </li>
+              <li data-toggle="collapse" data-target="#stats" class="collapsed">
+                <a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i> Stats</a>
+              </li>
+              <li data-toggle="collapse" data-target="#grupper" class="collapsed">
+                <a href="#"><i class="fa fa-star"></i> Grupper</a>
+              </li>
+              <li>
+                <a href="{% url 'user_list' %}">
+                <i class="fa fa-users" aria-hidden="true"></i> Brukere</a>
+              </li>
+              <li>
+                <a href="#">
+                <i class="fa fa-suitcase  collapsed:active" aria-hidden="true"></i> Jobber <span class="arrow"></span></a>
+              </li>
+              <ul class="sub-menu collapse" id="jobber">
+                <li>
+                  <a href="{% url 'job:post_list' %}">
+                    Finn jobber
+                </li>
+                <li><a href="{% url 'job:post_list' %}">Mine jobber</li>
+              </ul>
+              <li>
+              <a href="{{ request.user.get_absolute_url }}">
+              <i class="fa fa-user fa-lg"></i> Min profil</a>
+              </li>
+              <li>
+                <a href="{% url 'logout' %}">
+                <i class="fa fa-power-off"></i> Logg ut</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+
+      <!-- CONTENT -->
+      <div class="cContent" id="content">
+        {% block content %}
+        {% endblock %}
+      </div>
+      <!-- FOOTER -->
+      <div class="footer-bottom">
+        <div class="container">
+          <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+              <div class="copyright">
+                © 2017, XFactor, All rights reserved
+              </div>
+            </div>
+            <div class="col-md-6">
+              <ul class="bottom_ul">
+                <li><a href="#">Om oss</a></li>
+                <li><a href="#">Kontakt oss</a></li>
+                <li><a href="#">Innstillinger</a></li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
+    <!-- Repsonsible for securing scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src=" http://cdn.jsdelivr.net/jquery.cookie/1.4.1/jquery.cookie.min.js "></script>
+    <script>
+      var csrftoken = $.cookie('csrftoken');
 
-  <!-- Repsonsible for securing scripts -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-  <script src=" http://cdn.jsdelivr.net/jquery.cookie/1.4.1/jquery.cookie.min.js "></script>
-  <script>
-    var csrftoken = $.cookie('csrftoken');
-
-    function csrfSafeMethod(method) {
-      // these HTTP methods do not require CSRF protection
-      return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-    }
-    $.ajaxSetup({
-      beforeSend: function(xhr, settings) {
-        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-          xhr.setRequestHeader("X-CSRFToken", csrftoken);
+      function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+      }
+      $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+          if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+          }
         }
+      });
+
+      // Close message box
+      function closeMessage(e, that) {
+        e.preventDefault();
+        $(that.parentNode).fadeOut();
       }
-    });
 
-    // Close message box
-    function closeMessage(e, that) {
-      e.preventDefault();
-      $(that.parentNode).fadeOut();
-    }
-
-    $(document).ready(function() {
-      { % block domready %
-      } { % endblock %
-      }
-    });
-  </script>
-<!-- Profile-pic side-bar -->
-<div class="cSidebarright">
-  <div class="container">
-      <div class="row profile">
-  		<div class="col-md-3">
-  			<div class="profile-sidebar">
-  				<!-- SIDEBAR USERPIC -->
-  				<div class="profile-userpic">
-            <a href="{{ request.user.get_absolute_url }}">
-                    {% load thumbnail %}
-                    {% if request.user.profile.photo %}
-                        {% thumbnail request.user.profile.photo "35x35" crop="100%" as im %}
-                            <img src="{{ im.url }}" class="user-detail">
-                        {% endthumbnail %}
-                    {% else %}
-                        {% if request.user.profile.gender == "mann" %}
-                            {% thumbnail "no_image_male.png" "35x35" crop="100%" as im %}
-                                <img src="{{ im.url }}" class="user-detail">
-                            {% endthumbnail %}
-                        {% elif request.user.profile.gender == "kvinne" %}
-                            {% thumbnail "no_image_female.png" "35x35" crop="100%" as im %}
-                                <img src="{{ im.url }}" class="user-detail">
-                            {% endthumbnail %}
-                        {% else %}
-                            {% thumbnail "no_image.png" "35x35" crop="100%" as im %}
-                                <img src="{{ im.url }}" class="user-detail">
-                            {% endthumbnail %}
-                        {% endif %}
-                    {% endif %}
-                </a>
-  				</div>
-  				<!-- END SIDEBAR USERPIC -->
-  				<!-- SIDEBAR USER TITLE -->
-  				<div class="profile-usertitle">
-  					<div class="profile-usertitle-name">
-  						Velkommen {{request.user.username}}
-  					</div>
-  					<div class="profile-usertitle-job">
-  						Developer
-  					</div>
-  				</div>
-  				<!-- END SIDEBAR USER TITLE -->
-  				<!-- SIDEBAR BUTTONS -->
-  				<!--<div class="profile-userbuttons">
-  					<button type="button" class="btn btn-success btn-sm">Follow</button>
-  					<button type="button" class="btn btn-danger btn-sm">Message</button>
-  				</div> -->
-  				<!-- END SIDEBAR BUTTONS -->
-
-  			</div>
-  		</div>
-    </div>
-
-</body>
-
+      $(document).ready(function() {
+        {% block domready %}
+        {% endblock %}
+      });
+    </script>
+  </body>
 </html>
