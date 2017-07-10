@@ -255,6 +255,7 @@ ul.messages li a.close {
 }
 
 .count {
+  float:right;
   margin: 20px 10px 0;
   padding: 10px 20px;
   color: #aaa;
