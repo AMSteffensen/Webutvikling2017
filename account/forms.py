@@ -73,26 +73,26 @@ class UserRegistrationForm(forms.ModelForm):
         return cd['username']
 
 
-    # Verify Password
-    def clean_password(self):
-        cd = self.cleaned_data
-        # Check if password is at least 7 characters long
-        if len(cd['password']) < 7:
-            self.fields['password'].widget.attrs['class'] = 'cFormInputError'
-            raise forms.ValidationError('Passordet må være minst 7 karakterer langt')
-        # Check if password contains at least one lower case letter
-        if not any(x.islower() for x in cd['password']):
-            self.fields['password'].widget.attrs['class'] = 'cFormInputError'
-            raise forms.ValidationError('Passordet må inneholde minst én liten bokstav')
-        # Check if password contains at least one upper case letter
-        if not any(x.isupper() for x in cd['password']):
-            self.fields['password'].widget.attrs['class'] = 'cFormInputError'
-            raise forms.ValidationError('Passordet må inneholde minst én stor bokstav')
-        # Check if password contains at least one didgit
-        if not any(x.isdigit() for x in cd['password']):
-            self.fields['password'].widget.attrs['class'] = 'cFormInputError'
-            raise forms.ValidationError('Passordet må inneholde minste ett tall')
-        return cd['password']
+    # # Verify Password
+    # def clean_password(self):
+    #     cd = self.cleaned_data
+    #     # Check if password is at least 7 characters long
+    #     if len(cd['password']) < 7:
+    #         self.fields['password'].widget.attrs['class'] = 'cFormInputError'
+    #         raise forms.ValidationError('Passordet må være minst 7 karakterer langt')
+    #     # Check if password contains at least one lower case letter
+    #     if not any(x.islower() for x in cd['password']):
+    #         self.fields['password'].widget.attrs['class'] = 'cFormInputError'
+    #         raise forms.ValidationError('Passordet må inneholde minst én liten bokstav')
+    #     # Check if password contains at least one upper case letter
+    #     if not any(x.isupper() for x in cd['password']):
+    #         self.fields['password'].widget.attrs['class'] = 'cFormInputError'
+    #         raise forms.ValidationError('Passordet må inneholde minst én stor bokstav')
+    #     # Check if password contains at least one didgit
+    #     if not any(x.isdigit() for x in cd['password']):
+    #         self.fields['password'].widget.attrs['class'] = 'cFormInputError'
+    #         raise forms.ValidationError('Passordet må inneholde minste ett tall')
+    #     return cd['password']
 
 
     # Verify Password2
