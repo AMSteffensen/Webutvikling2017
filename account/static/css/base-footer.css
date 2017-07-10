@@ -1,0 +1,40 @@
+.footer-bottom {
+  position: fixed;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
+  min-height: 30px;
+  background-color: #F1F1F1;
+}
+
+.copyright {
+  min-height: 30px;
+  padding: 7px 0;
+  color: #000;
+  font-size: 12px;
+  line-height: 30px;
+}
+
+.bottom_ul {
+  float: right;
+  margin-bottom: 0px;
+  padding: 7px 0;
+  list-style-type: none;
+}
+
+.bottom_ul li {
+  float: left;
+  line-height: 30px;
+}
+
+.bottom_ul li:after {
+  margin-right: 8px;
+  margin-left: 8px;
+  content: "/";
+  color: #000;
+}
+
+.bottom_ul li a {
+  color: #000;
+  font-size: 12px;
+}

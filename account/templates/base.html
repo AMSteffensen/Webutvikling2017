@@ -4,10 +4,24 @@
   <head>
     <meta charset="utf-8">
     <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+
+    <!-- External Resources -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">-->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!--<script src=" http://cdn.jsdelivr.net/jquery.cookie/1.4.1/jquery.cookie.min.js "></script>-->
+    <!-- /External Resources -->
+
+    <!-- My Resources -->
+    <link rel="stylesheet" href="{% static 'css/base-django-tut.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base-sidenav.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base-profilenav.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base-footer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base-mycss.css' %}">
+    <!-- /My Resources -->
   </head>
 
   <body>
@@ -23,113 +37,78 @@
       {% endfor %}
     </ul>
     {% endif %}
+
+    <!-- WRAPPER -->
     <div class="cWrapper">
 
-      <!-- MENU SIDEBAR -->
+      <!-- MENU-SIDEBAR -->
       {% if request.user.is_authenticated %}
-      <div class="cLeftSidebar">
         <div class="nav-side-menu">
           <div class="brand">XFaktor</div>
           <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
           <div class="menu-list">
-            <ul id="menu-content" class="menu-content collapse out">
+            <ul id="menu-content" class="menu-content collapse in">
+              <!-- Dashboard -->
               <li>
-                <a href="{% url 'dashboard' %}">
-                <i class="fa fa-th-list"></i>&nbsp;Dashboard</a>
+                <a href="{% url 'dashboard' %}"><i class="fa fa-th-list"></i> Dashboard </a>
               </li>
+              <!-- /Dashboard -->
+              <!-- Feed -->
               <li data-toggle="collapse" data-target="#feed" class="collapsed">
-                <a href="#"><i class="fa fa-bolt"></i>&nbsp;Feed</a>
+                <a href="#"><i class="fa fa-bolt"></i> Feed </a>
               </li>
+              <!-- /Feed -->
+              <!-- Stats -->
               <li data-toggle="collapse" data-target="#stats" class="collapsed">
-                <a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i> Stats</a>
+                <a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i> Stats </a>
               </li>
+              <!-- /Stats -->
+              <!-- Groups -->
               <li data-toggle="collapse" data-target="#grupper" class="collapsed">
-                <a href="#"><i class="fa fa-star"></i>&nbsp;Grupper</a>
+                <a href="#"><i class="fa fa-star"></i> Grupper </a>
               </li>
+              <!-- /Groups -->
+              <!-- Users -->
               <li>
-                <a href="{% url 'user_list' %}">
-                <i class="fa fa-users" aria-hidden="true"></i>&nbsp;Brukere</a>
+                <a href="{% url 'user_list' %}"><i class="fa fa-users" aria-hidden="true"></i> Brukere </a>
               </li>
+              <!-- /Users -->
+              <!-- Jobs -->
+              <li data-toggle="collapse" data-target="#jobber" class="collapsed">
+                <a href="#"><i class="fa fa-suitcase collapsed" aria-hidden="true"></i> Jobber <span class="arrow"></span></a>
+              </li>
+                <ul class="sub-menu collapse" id="jobber">
+                  <li>
+                    <a href="{% url 'job:post_list' %}">Finn jobber </a>
+                  </li>
+                  <li>
+                    <a href="{% url 'job:post_list' %}">Mine jobber </a>
+                  </li>
+                </ul>
+              <!-- /Jobs -->
+              <!-- My-Profile -->
               <li>
-                <a href="#">
-                <i class="fa fa-suitcase  collapsed:active" aria-hidden="true"></i>&nbsp;Jobber<span class="arrow"></span></a>
+                <a href="{{ request.user.get_absolute_url }}"><i class="fa fa-user fa-lg"></i> Min profil </a>
               </li>
-              <ul class="sub-menu collapse" id="jobber">
-                <li>
-                  <a href="{% url 'job:post_list' %}">
-                    Finn jobber
-                </li>
-                <li><a href="{% url 'job:post_list' %}">Mine jobber</li>
-              </ul>
+              <!-- /My-Profile -->
+              <!-- Log-Out -->
               <li>
-              <a href="{{ request.user.get_absolute_url }}">
-              <i class="fa fa-user fa-lg"></i>&nbsp;Min profil</a>
+                <a href="{% url 'logout' %}"><i class="fa fa-power-off"></i> Logg ut </a>
               </li>
-              <li>
-                <a href="{% url 'logout' %}">
-                <i class="fa fa-power-off"></i>&nbsp;Logg ut</a>
-              </li>
+              <!-- /Log-Out -->
             </ul>
           </div>
         </div>
-      </div>
       {% endif %}
-
-      <!-- MENU SIDEBAR -->
-      {% if request.user.is_authenticated %}
-      <div class="cRightSidebar">
-        <div class="nav-side-menu">
-          <div class="brand">XFaktor</div>
-          <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
-          <div class="menu-list">
-            <ul id="menu-content" class="menu-content collapse out">
-              <li>
-                <a href="{% url 'dashboard' %}">
-                <i class="fa fa-th-list"></i> Dashboard</a>
-              </li>
-              <li data-toggle="collapse" data-target="#feed" class="collapsed">
-                <a href="#"><i class="fa fa-bolt"></i> Feed</a>
-              </li>
-              <li data-toggle="collapse" data-target="#stats" class="collapsed">
-                <a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i> Stats</a>
-              </li>
-              <li data-toggle="collapse" data-target="#grupper" class="collapsed">
-                <a href="#"><i class="fa fa-star"></i> Grupper</a>
-              </li>
-              <li>
-                <a href="{% url 'user_list' %}">
-                <i class="fa fa-users" aria-hidden="true"></i> Brukere</a>
-              </li>
-              <li>
-                <a href="#">
-                <i class="fa fa-suitcase  collapsed:active" aria-hidden="true"></i> Jobber <span class="arrow"></span></a>
-              </li>
-              <ul class="sub-menu collapse" id="jobber">
-                <li>
-                  <a href="{% url 'job:post_list' %}">
-                    Finn jobber
-                </li>
-                <li><a href="{% url 'job:post_list' %}">Mine jobber</li>
-              </ul>
-              <li>
-              <a href="{{ request.user.get_absolute_url }}">
-              <i class="fa fa-user fa-lg"></i> Min profil</a>
-              </li>
-              <li>
-                <a href="{% url 'logout' %}">
-                <i class="fa fa-power-off"></i> Logg ut</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      {% endif %}
+      <!-- /MENU-SIDEBAR -->
 
       <!-- CONTENT -->
       <div class="cContent" id="content">
         {% block content %}
         {% endblock %}
       </div>
+      <!-- /CONTENT -->
+
       <!-- FOOTER -->
       <div class="footer-bottom">
         <div class="container">
@@ -150,10 +129,9 @@
         </div>
       </div>
     </div>
+    <!-- /FOOTER -->
 
     <!-- Repsonsible for securing scripts -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src=" http://cdn.jsdelivr.net/jquery.cookie/1.4.1/jquery.cookie.min.js "></script>
     <script>
       var csrftoken = $.cookie('csrftoken');
 
@@ -174,7 +152,6 @@
         e.preventDefault();
         $(that.parentNode).fadeOut();
       }
-
       $(document).ready(function() {
         {% block domready %}
         {% endblock %}
