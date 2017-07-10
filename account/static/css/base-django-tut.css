@@ -319,7 +319,7 @@ a.like, a.follow {
 #people-list .user {
   float: left;
   overflow: auto;
-  width: 180px;
+  /*width: 180px;*/
   padding: 10px;
 }
 
