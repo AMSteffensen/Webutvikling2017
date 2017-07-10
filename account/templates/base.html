@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="{% static 'css/base-profilenav.css' %}">
     <link rel="stylesheet" href="{% static 'css/base-footer.css' %}">
     <link rel="stylesheet" href="{% static 'css/base-mycss.css' %}">
+
+    <script src="{% static 'js/base.js' %}"></script>
     <!-- /My Resources -->
   </head>
 
@@ -43,7 +45,6 @@
 
       <!-- MENU-SIDEBAR -->
       {% if request.user.is_authenticated %}
-      <div class="cLeftSidebar">
         <div class="nav-side-menu">
           <div class="brand">XFaktor</div>
           <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
@@ -100,7 +101,6 @@
             </ul>
           </div>
         </div>
-      </div>
       {% endif %}
       <!-- /MENU-SIDEBAR -->
 
@@ -130,34 +130,10 @@
           </div>
         </div>
       </div>
+      <!-- /FOOTER -->
+
     </div>
-    <!-- /FOOTER -->
+    <!-- /WRAPPER -->
 
-    <!-- Repsonsible for securing scripts -->
-    <script>
-      var csrftoken = $.cookie('csrftoken');
-
-      function csrfSafeMethod(method) {
-        // these HTTP methods do not require CSRF protection
-        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-      }
-      $.ajaxSetup({
-        beforeSend: function(xhr, settings) {
-          if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-            xhr.setRequestHeader("X-CSRFToken", csrftoken);
-          }
-        }
-      });
-
-      // Close message box
-      function closeMessage(e, that) {
-        e.preventDefault();
-        $(that.parentNode).fadeOut();
-      }
-      $(document).ready(function() {
-        {% block domready %}
-        {% endblock %}
-      });
-    </script>
   </body>
 </html>
