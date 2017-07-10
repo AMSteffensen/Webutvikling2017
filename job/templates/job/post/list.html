@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
-{% block title %}Jobber{% endblock %}
+{% block title %}Prosjekter{% endblock %}
 
 {% block content %}
-    <h1>Jobber</h1>
+    <h1>Prosjekter</h1>
 
     {% if request.user.is_authenticated %}
-        <a href="{% url 'job:post_create' %}" class="button">+ Opprett Jobb</a>
+        <a href="{% url 'job:post_create' %}" class="button">+ Opprett Prosjekt</a>
     {% endif %}
 
     {% for post in posts %}

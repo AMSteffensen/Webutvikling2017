@@ -5,7 +5,7 @@
 {% block content %}
     <h1>{{ post.title }}</h1>
     {% if request.user == post.author %}
-        <a href="#" class="button">Slett jobb</a>
+        <a href="#" class="button">Slett prosjekt</a>
     {% endif %}
     <p class="date">Publisert {{ post.publish }} av {{ post.author }}</p>
     {{ post.body|linebreaks }}
