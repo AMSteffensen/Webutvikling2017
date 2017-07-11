@@ -43,13 +43,13 @@
     {% endwith %}
 
     <div class="user_information">
-        <p>Navn: {{ user.first_name }}&nbsp{{ user.last_name }}</p>
+        <p>Navn: {{ user.first_name }}&nbsp;{{ user.last_name }}</p>
         <p>Fødselsdato: {{ user.profile.date_of_birth }}</p>
         <p>Mail: {{ user.email }}</p>
     </div>
 
     {% if user.id is  request.user.id %}
-        <p>Du kan <a href="{% url "edit" %}">redigere profilen din</a> eller <a href="{% url "password_change" %}">bytte passordet</a>.</p>
+      <p><a href="{% url 'user_settings' %}">Instillinger</a></p>
     {% endif %}
 
 {% endblock %}

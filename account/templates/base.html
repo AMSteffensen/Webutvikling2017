@@ -58,17 +58,17 @@
           <!-- /Dashboard -->
           <!-- Feed -->
           <li data-toggle="collapse" data-target="#feed" class="collapsed">
-            <a href="#"><i class="fa fa-bolt"></i> Feed <span class="badge cBadge">14</span></a>
+            <a><i class="fa fa-bolt"></i> Feed <span class="badge cBadge">14</span></a>
           </li>
           <!-- /Feed -->
           <!-- Stats -->
           <li data-toggle="collapse" data-target="#stats" class="collapsed">
-            <a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i> Stats </a>
+            <a><i class="fa fa-bar-chart" aria-hidden="true"></i> Stats </a>
           </li>
           <!-- /Stats -->
           <!-- Team -->
           <li data-toggle="collapse" data-target="#team" class="collapsed">
-            <a href="#"><i class="fa fa-star collapsed" aria-hidden="true"></i> Team <span class="arrow"></span></a>
+            <a><i class="fa fa-star collapsed" aria-hidden="true"></i> Team <span class="arrow"></span></a>
           </li>
           <ul class="sub-menu collapse" id="team">
             <li>
@@ -95,7 +95,7 @@
           <!-- /Users -->
           <!-- Prosjekter -->
           <li data-toggle="collapse" data-target="#prosjekter" class="collapsed">
-            <a href="#"><i class="fa fa-suitcase collapsed" aria-hidden="true"></i> Prosjekter <span class="arrow"></span></a>
+            <a><i class="fa fa-suitcase collapsed" aria-hidden="true"></i> Prosjekter <span class="arrow"></span></a>
           </li>
           <ul class="sub-menu collapse" id="prosjekter">
             <li>
@@ -109,14 +109,14 @@
           <!-- My-Profile -->
           <li>
             <li data-toggle="collapse" data-target="#minProfil" class="collapsed">
-              <a href="#"><i class="fa fa-user fa-lg collapsed"></i> Min Profil <span class="arrow"></span></a>
+              <a><i class="fa fa-user fa-lg collapsed"></i> Min Profil <span class="arrow"></span></a>
             </li>
             <ul class="sub-menu collapse" id="minProfil">
               <li>
                 <a href="{{ request.user.get_absolute_url }}">Vis Min Profil </a>
               </li>
               <li>
-                <a href="{{ request.user.get_absolute_url }}">Innstillinger</a>
+                <a href="{% url 'user_settings' %}">Innstillinger</a>
               </li>
             </ul>
             <!-- /My-Profile -->

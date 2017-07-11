@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block title %}Konto Innstillinger{% endblock %}
+
+{% block content %}
+    <h1>Konto Innstillinger</h1>
+    <p>Du kan <a href="{% url 'edit' %}">redigere profilen din</a> eller <a href="{% url 'password_change' %}">bytte passordet</a>.</p>
+
+{% endblock %}

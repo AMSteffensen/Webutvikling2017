@@ -117,6 +117,9 @@ def user_detail(request, username):
     user = get_object_or_404(User, username=username, is_active=True)
     return render(request, 'account/users/detail.html', {'section': 'people', 'user': user})
 
+@login_required
+def user_settings(request):
+    return render(request, 'account/users/settings.html')
 
 @ajax_required
 @require_POST
