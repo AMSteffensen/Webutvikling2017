@@ -1,138 +1,166 @@
 {% load staticfiles %}
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>{% block title %}{% endblock %}</title>
 
-    <!-- External Resources -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">-->
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <!--<script src=" http://cdn.jsdelivr.net/jquery.cookie/1.4.1/jquery.cookie.min.js "></script>-->
-    <!-- /External Resources -->
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}{% endblock %}</title>
 
-    <!-- My Resources -->
-    <link rel="stylesheet" href="{% static 'css/base-django-tut.css' %}">
-    <link rel="stylesheet" href="{% static 'css/base-sidenav.css' %}">
-    <link rel="stylesheet" href="{% static 'css/base-profilenav.css' %}">
-    <link rel="stylesheet" href="{% static 'css/base-footer.css' %}">
-    <link rel="stylesheet" href="{% static 'css/base-mycss.css' %}">
+  <!-- External Resources -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">-->
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <!--<script src=" http://cdn.jsdelivr.net/jquery.cookie/1.4.1/jquery.cookie.min.js "></script>-->
+  <!-- /External Resources -->
 
-    <script src="{% static 'js/base.js' %}"></script>
-    <!-- /My Resources -->
-  </head>
-  <body>
+  <!-- My Resources -->
+  <link rel="stylesheet" href="{% static 'css/base-django-tut.css' %}">
+  <link rel="stylesheet" href="{% static 'css/base-sidenav.css' %}">
+  <link rel="stylesheet" href="{% static 'css/base-profilenav.css' %}">
+  <link rel="stylesheet" href="{% static 'css/base-footer.css' %}">
+  <link rel="stylesheet" href="{% static 'css/base-mycss.css' %}">
 
-    <!-- MESSAGES -->
-    {% if messages %}
-    <ul class="messages">
-      {% for message in messages %}
-      <li class="{{ message.tags }}">
-        {{ message|safe }}
-        <a href="#" onclick="closeMessage(event, this)" class="close">x</a>
-      </li>
-      {% endfor %}
-    </ul>
+  <script src="{% static 'js/base.js' %}"></script>
+  <!-- /My Resources -->
+</head>
+
+<body>
+
+  <!-- MESSAGES -->
+  {% if messages %}
+  <ul class="messages">
+    {% for message in messages %}
+    <li class="{{ message.tags }}">
+      {{ message|safe }}
+      <a href="#" onclick="closeMessage(event, this)" class="close">x</a>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+
+  <!-- WRAPPER -->
+  <div class="cWrapper">
+
+    <!-- MENU-SIDEBAR -->
+    {% if request.user.is_authenticated %}
+    <div class="nav-side-menu">
+      <div class="brand">XFaktor</div>
+      <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+      <div class="menu-list">
+        <ul id="menu-content" class="menu-content collapse in">
+          <!-- Dashboard -->
+          <li>
+            <a href="{% url 'dashboard' %}"><i class="fa fa-th-list"></i> Dashboard </a>
+          </li>
+          <!-- /Dashboard -->
+          <!-- Feed -->
+          <li data-toggle="collapse" data-target="#feed" class="collapsed">
+            <a href="#"><i class="fa fa-bolt"></i> Feed <span class="badge cBadge">14</span></a>
+          </li>
+          <!-- /Feed -->
+          <!-- Stats -->
+          <li data-toggle="collapse" data-target="#stats" class="collapsed">
+            <a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i> Stats </a>
+          </li>
+          <!-- /Stats -->
+          <!-- Team -->
+          <li data-toggle="collapse" data-target="#team" class="collapsed">
+            <a href="#"><i class="fa fa-star collapsed" aria-hidden="true"></i> Team <span class="arrow"></span></a>
+          </li>
+          <ul class="sub-menu collapse" id="team">
+            <li>
+              <a href="#">Finn Team </a>
+            </li>
+            <li>
+              <a href="#">Mine Team</a>
+            </li>
+          </ul>
+          <!-- /Team -->
+          <!-- Users -->
+          <li data-toggle="collapse" data-target="#brukere" class="collapsed">
+            <a><i class="fa fa-users collapsed" aria-hidden="true"></i> Brukere <span class="arrow"></span></a>
+          </li>
+          <ul class="sub-menu collapse" id="brukere">
+            <li>
+              <a href="{% url 'user_list' %}">Finn Brukere</a>
+            </li>
+            <li>
+              <a href="{% url 'user_list' %}">Relasjoner</a>
+            </li>
+          </ul>
+
+          <!-- /Users -->
+          <!-- Prosjekter -->
+          <li data-toggle="collapse" data-target="#prosjekter" class="collapsed">
+            <a href="#"><i class="fa fa-suitcase collapsed" aria-hidden="true"></i> Prosjekter <span class="arrow"></span></a>
+          </li>
+          <ul class="sub-menu collapse" id="prosjekter">
+            <li>
+              <a href="{% url 'job:post_list' %}">Finn Prosjekt </a>
+            </li>
+            <li>
+              <a href="{% url 'job:post_list' %}">Mine Prosjekter</a>
+            </li>
+          </ul>
+          <!-- /Prosjekter -->
+          <!-- My-Profile -->
+          <li>
+            <li data-toggle="collapse" data-target="#minProfil" class="collapsed">
+              <a href="#"><i class="fa fa-user fa-lg collapsed"></i> Min Profil <span class="arrow"></span></a>
+            </li>
+            <ul class="sub-menu collapse" id="minProfil">
+              <li>
+                <a href="{{ request.user.get_absolute_url }}">Vis Min Profil </a>
+              </li>
+              <li>
+                <a href="{{ request.user.get_absolute_url }}">Innstillinger</a>
+              </li>
+            </ul>
+            <!-- /My-Profile -->
+            <!-- Log-Out -->
+            <li>
+              <a href="{% url 'logout' %}"><i class="fa fa-power-off"></i> Logg ut </a>
+            </li>
+            <!-- /Log-Out -->
+        </ul>
+      </div>
+    </div>
     {% endif %}
+    <!-- /MENU-SIDEBAR -->
 
-    <!-- WRAPPER -->
-    <div class="cWrapper">
+    <!-- CONTENT -->
+    <div class="cContent" id="content">
+      {% block content %} {% endblock %}
+    </div>
+    <!-- /CONTENT -->
 
-      <!-- MENU-SIDEBAR -->
-      {% if request.user.is_authenticated %}
-        <div class="nav-side-menu">
-          <div class="brand">XFaktor</div>
-          <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
-          <div class="menu-list">
-            <ul id="menu-content" class="menu-content collapse in">
-              <!-- Dashboard -->
-              <li>
-                <a href="{% url 'dashboard' %}"><i class="fa fa-th-list"></i> Dashboard </a>
-              </li>
-              <!-- /Dashboard -->
-              <!-- Feed -->
-              <li data-toggle="collapse" data-target="#feed" class="collapsed">
-                <a href="#"><i class="fa fa-bolt"></i> Feed </a>
-              </li>
-              <!-- /Feed -->
-              <!-- Stats -->
-              <li data-toggle="collapse" data-target="#stats" class="collapsed">
-                <a href="#"><i class="fa fa-bar-chart" aria-hidden="true"></i> Stats </a>
-              </li>
-              <!-- /Stats -->
-              <!-- Groups -->
-              <li data-toggle="collapse" data-target="#grupper" class="collapsed">
-                <a href="#"><i class="fa fa-star"></i> Grupper </a>
-              </li>
-              <!-- /Groups -->
-              <!-- Users -->
-              <li>
-                <a href="{% url 'user_list' %}"><i class="fa fa-users" aria-hidden="true"></i> Brukere </a>
-              </li>
-              <!-- /Users -->
-              <!-- Jobs -->
-              <li data-toggle="collapse" data-target="#prosjekter" class="collapsed">
-                <a><i class="fa fa-suitcase collapsed" aria-hidden="true"></i> Prosjekter <span class="arrow"></span></a>
-              </li>
-                <ul class="sub-menu collapse" id="prosjekter">
-                  <li>
-                    <a href="{% url 'job:post_list' %}">Finn Prosjekt </a>
-                  </li>
-                  <li>
-                    <a href="{% url 'job:post_list' %}">Mine prosjekter</a>
-                  </li>
-                </ul>
-              <!-- /Jobs -->
-              <!-- My-Profile -->
-              <li>
-                <a href="{{ request.user.get_absolute_url }}"><i class="fa fa-user fa-lg"></i> Min profil </a>
-              </li>
-              <!-- /My-Profile -->
-              <!-- Log-Out -->
-              <li>
-                <a href="{% url 'logout' %}"><i class="fa fa-power-off"></i> Logg ut </a>
-              </li>
-              <!-- /Log-Out -->
+    <!-- FOOTER -->
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+            <div class="copyright">
+              © 2017, XFactor, All rights reserved
+            </div>
+          </div>
+          <div class="col-md-6">
+            <ul class="bottom_ul">
+              <li><a href="#">Om oss</a></li>
+              <li><a href="#">Kontakt oss</a></li>
+              <li><a href="#">Innstillinger</a></li>
             </ul>
           </div>
         </div>
-      {% endif %}
-      <!-- /MENU-SIDEBAR -->
-
-      <!-- CONTENT -->
-      <div class="cContent" id="content">
-        {% block content %}
-        {% endblock %}
       </div>
-      <!-- /CONTENT -->
-
-      <!-- FOOTER -->
-      <div class="footer-bottom">
-        <div class="container">
-          <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-              <div class="copyright">
-                © 2017, XFactor, All rights reserved
-              </div>
-            </div>
-            <div class="col-md-6">
-              <ul class="bottom_ul">
-                <li><a href="#">Om oss</a></li>
-                <li><a href="#">Kontakt oss</a></li>
-                <li><a href="#">Innstillinger</a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- /FOOTER -->
-
     </div>
-    <!-- /WRAPPER -->
+    <!-- /FOOTER -->
 
-  </body>
+  </div>
+  <!-- /WRAPPER -->
+
+</body>
+
 </html>

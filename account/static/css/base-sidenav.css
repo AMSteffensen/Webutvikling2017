@@ -156,6 +156,13 @@
   }
 }
 
+.cBadge{
+  margin-top: 8px;
+  float:right;
+  background-color: #101D30;
+  color: #E1FFFF;
+}
+
 body {
   margin: 0px;
   padding: 0px;
