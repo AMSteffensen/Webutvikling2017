@@ -43,6 +43,14 @@
   border: 2px red solid;
 }
 
+.inline {
+  display: inline;
+}
+
+.project-status {
+  font-size: 12px;
+}
+
 body {
   background: #FFFFFF;
 }

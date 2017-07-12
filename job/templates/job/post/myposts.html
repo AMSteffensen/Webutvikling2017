@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Mine Prosjekter{% endblock %}
+
+{% block content %}
+    <h1>Mine Prosjekter</h1>
+
+    {% if request.user.is_authenticated %}
+        <a href="{% url 'job:post_create' %}" class="button">+ Opprett Prosjekt</a>
+    {% endif %}
+
+    {% if posts %}
+      <br>
+      {% for post in posts %}
+        <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+        {% if post.status == "publisert" %}
+          <p class="date"><span style="color: green;">Publisert</span> {{ post.publish }}</p>
+          {{ post.body|truncatewords:30|linebreaks }}
+        {% elif post.status == "mal" %}
+          <p class="date"><span style="color: red;">Mal</span> {{ post.created }}</p>
+          {{ post.body|truncatewords:30|linebreaks }}
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      <br><br>
+      <p>Du har ikke opprettet noen prosjekter enda.<p>
+    {% endif %}
+{% endblock %}

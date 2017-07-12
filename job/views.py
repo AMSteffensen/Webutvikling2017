@@ -27,6 +27,12 @@ def post_detail(request, year, month, day, post):
         return redirect("job:post_list")
     return render(request, 'job/post/detail.html', {'post': post})
 
+@login_required
+def post_mine(request):
+    #objects.filter(is_active=True).extra(select={'lower_first_name': 'lower(first_name)'}).order_by('lower_first_name')
+    posts = Post.objects.filter(author=request.user)
+    return render(request, 'job/post/myposts.html', {'posts': posts})
+
 
 @login_required
 def post_create(request):
