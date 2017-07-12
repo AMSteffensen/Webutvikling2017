@@ -46,6 +46,7 @@
 
   <!-- WRAPPER -->
   <div class="cWrapper">
+    {% if request.user.is_authenticated %}
     <!--Header-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <div class="top-bar">
@@ -119,7 +120,6 @@
     <!--/Header-->
 
     <!-- MENU-SIDEBAR -->
-    {% if request.user.is_authenticated %}
     <div class="nav-side-menu">
       <div class="brand">XFaktor</div>
       <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
@@ -194,7 +194,7 @@
           <!-- /My-Profile -->
           <!-- Log-Out -->
           <li>
-            <a href="{% url 'logout_then_login' %}"><i class="fa fa-power-off"></i> Logg ut </a>
+            <a href="{% url 'logout' %}"><i class="fa fa-power-off"></i> Logg ut </a>
           </li>
           <!-- /Log-Out -->
         </ul>
