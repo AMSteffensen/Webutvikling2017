@@ -86,6 +86,30 @@
             <ul>
               <li><a href="#"><i class="fa fa-comments" aria-hidden="true"></i></a></li>
               <li><a href="#"><i class="fa fa-bell" aria-hidden="true"></i></i></a></li>
+              <li style="background-color: transparent;"><a href="{{ request.user.get_absolute_url }}">
+                <i>
+                  {% if user.profile.photo %}
+                    {% load thumbnail %}
+                    {% thumbnail request.user.profile.photo "32x32" crop="100%" format="PNG" as im %}
+                        <img src="{{ im.url }}" class="user-detail">
+                    {% endthumbnail %}
+                  {% else %}
+                    {% if request.user.profile.gender == "mann" %}
+                        {% thumbnail "no_image_male.png" "32x32" crop="100%" format="PNG" as im %}
+                            <img src="{{ im.url }}" class="user-detail">
+                        {% endthumbnail %}
+                    {% elif request.user.profile.gender == "kvinne" %}
+                        {% thumbnail "no_image_female.png" "32x32" crop="100%" format="PNG" as im %}
+                            <img src="{{ im.url }}" class="user-detail">
+                        {% endthumbnail %}
+                    {% else %}
+                        {% thumbnail "no_image.png" "32x32" crop="100%" format="PNG" as im %}
+                            <img src="{{ im.url }}" class="user-detail">
+                        {% endthumbnail %}
+                    {% endif %}
+                  {% endif %}
+                </i></a></li>
+                <span style="color: white;">{{ request.user.first_name }}</span>
             </ul>
           </div>
         </div>
