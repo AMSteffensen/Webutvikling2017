@@ -92,7 +92,7 @@
       </div>
     </div>
 
-    <!--Header-->
+    <!--/Header-->
 
     <!-- MENU-SIDEBAR -->
     {% if request.user.is_authenticated %}
@@ -116,6 +116,19 @@
             <a><i class="fa fa-bar-chart" aria-hidden="true"></i> Stats </a>
           </li>
           <!-- /Stats -->
+          <!-- Users -->
+          <li data-toggle="collapse" data-target="#brukere" class="collapsed">
+            <a><i class="fa fa-users collapsed" aria-hidden="true"></i> Brukere <span class="arrow"></span></a>
+          </li>
+          <ul class="sub-menu collapse" id="brukere">
+            <li>
+              <a href="{% url 'user_list' %}">Finn Brukere</a>
+            </li>
+            <li>
+              <a href="{% url 'user_list' %}">Relasjoner</a>
+            </li>
+          </ul>
+          <!-- /Users -->
           <!-- Team -->
           <li data-toggle="collapse" data-target="#team" class="collapsed">
             <a><i class="fa fa-star collapsed" aria-hidden="true"></i> Team <span class="arrow"></span></a>
@@ -129,22 +142,7 @@
             </li>
           </ul>
           <!-- /Team -->
-          <!-- Users -->
-          <li data-toggle="collapse" data-target="#brukere" class="collapsed">
-            <a><i class="fa fa-users collapsed" aria-hidden="true"></i> Brukere <span class="arrow"></span></a>
-          </li>
-          <ul class="sub-menu collapse" id="brukere">
-            <li>
-              <a href="{% url 'user_list' %}">Finn Brukere</a>
-            </li>
-            <li>
-              <a href="{% url 'user_list' %}">Relasjoner</a>
-            </li>
-          </ul>
-
-          <!-- /Users -->
           <!-- Prosjekter -->
-
           <li data-toggle="collapse" data-target="#prosjekter" class="collapsed">
             <a><i class="fa fa-suitcase collapsed"></i> Prosjekter <span class="arrow"></span></a>
           </li>
@@ -158,7 +156,6 @@
           </ul>
           <!-- /Prosjekter -->
           <!-- My-Profile -->
-
           <li data-toggle="collapse" data-target="#minProfil" class="collapsed">
             <a><i class="fa fa-user fa-lg collapsed"></i> Min Profil <span class="arrow"></span></a>
           </li>
