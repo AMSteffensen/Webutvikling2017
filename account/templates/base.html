@@ -41,8 +41,57 @@
   </ul>
   {% endif %}
 
+
+
   <!-- WRAPPER -->
   <div class="cWrapper">
+    <!--Header-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <div class="top-bar">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6">
+            <!--Search bar -->
+            <div class="container searchBody" id="searchBar">
+              <div class="row">
+                <div class="col-xs-8 col-xs-offset-0">
+                  <div class="input-group">
+                    <div class="input-group-btn search-panel">
+                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                  <span id="search_concept">Kategori</span> <span class="caret"></span>
+                                </button>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="#contains">Team</a></li>
+                        <li><a href="#its_equal">Prosjekter</a></li>
+                        <li><a href="#greather_than">Brukere</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#all">Alt</a></li>
+                      </ul>
+                    </div>
+                    <input type="hidden" name="search_param" value="all" id="search_param">
+                    <input type="text" class="form-control" name="x" placeholder="Søk her...">
+                    <span class="input-group-btn">
+                                <button class="btn btn-default" type="button">Søk <span style="display:inline-block; width:5px;"></span><span class="glyphicon glyphicon-search text"></span></button>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--/Search bar -->
+          </div>
+
+          <div class="col-md-6 socl-icons">
+            <ul>
+              <li><a href="#"><i class="fa fa-comments" aria-hidden="true"></i></a></li>
+              <li><a href="#"><i class="fa fa-bell" aria-hidden="true"></i></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Header-->
 
     <!-- MENU-SIDEBAR -->
     {% if request.user.is_authenticated %}
@@ -94,37 +143,38 @@
 
           <!-- /Users -->
           <!-- Prosjekter -->
+
           <li data-toggle="collapse" data-target="#prosjekter" class="collapsed">
-            <a><i class="fa fa-suitcase collapsed" aria-hidden="true"></i> Prosjekter <span class="arrow"></span></a>
+            <a><i class="fa fa-suitcase collapsed"></i> Prosjekter <span class="arrow"></span></a>
           </li>
           <ul class="sub-menu collapse" id="prosjekter">
             <li>
-              <a href="{% url 'job:post_list' %}">Finn Prosjekt </a>
+              <a href="{% url 'job:post_list' %}">Finn prosjekt </a>
             </li>
             <li>
-              <a href="{% url 'job:post_list' %}">Mine Prosjekter</a>
+              <a href="{% url 'job:post_list' %}">Mine prosjekter</a>
             </li>
           </ul>
           <!-- /Prosjekter -->
           <!-- My-Profile -->
-          <li>
-            <li data-toggle="collapse" data-target="#minProfil" class="collapsed">
-              <a><i class="fa fa-user fa-lg collapsed"></i> Min Profil <span class="arrow"></span></a>
-            </li>
-            <ul class="sub-menu collapse" id="minProfil">
-              <li>
-                <a href="{{ request.user.get_absolute_url }}">Vis Min Profil </a>
-              </li>
-              <li>
-                <a href="{% url 'user_settings' %}">Innstillinger</a>
-              </li>
-            </ul>
-            <!-- /My-Profile -->
-            <!-- Log-Out -->
+
+          <li data-toggle="collapse" data-target="#minProfil" class="collapsed">
+            <a><i class="fa fa-user fa-lg collapsed"></i> Min Profil <span class="arrow"></span></a>
+          </li>
+          <ul class="sub-menu collapse" id="minProfil">
             <li>
-              <a href="{% url 'logout' %}"><i class="fa fa-power-off"></i> Logg ut </a>
+              <a href="{{ request.user.get_absolute_url }}">Vis Min Profil </a>
             </li>
-            <!-- /Log-Out -->
+            <li>
+              <a href="{% url 'user_settings' %}">Innstillinger</a>
+            </li>
+          </ul>
+          <!-- /My-Profile -->
+          <!-- Log-Out -->
+          <li>
+            <a href="{% url 'logout' %}"><i class="fa fa-power-off"></i> Logg ut </a>
+          </li>
+          <!-- /Log-Out -->
         </ul>
       </div>
     </div>
