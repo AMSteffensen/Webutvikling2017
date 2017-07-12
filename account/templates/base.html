@@ -13,7 +13,7 @@
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-  <!--<script src=" http://cdn.jsdelivr.net/jquery.cookie/1.4.1/jquery.cookie.min.js "></script>-->
+  <script src=" http://cdn.jsdelivr.net/jquery.cookie/1.4.1/jquery.cookie.min.js "></script>
   <!-- /External Resources -->
 
   <!-- My Resources -->
@@ -194,7 +194,7 @@
           <!-- /My-Profile -->
           <!-- Log-Out -->
           <li>
-            <a href="{% url 'logout' %}"><i class="fa fa-power-off"></i> Logg ut </a>
+            <a href="{% url 'logout_then_login' %}"><i class="fa fa-power-off"></i> Logg ut </a>
           </li>
           <!-- /Log-Out -->
         </ul>
@@ -232,6 +232,14 @@
 
   </div>
   <!-- /WRAPPER -->
+
+  <!-- Used for scripts in external template files -->
+  <script>
+    $(document).ready(function() {
+      {% block domready %}
+      {% endblock %}
+    });
+  </script>
 
 </body>
 

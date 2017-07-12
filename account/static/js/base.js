@@ -13,12 +13,40 @@ $.ajaxSetup({
   }
 });
 
-// Close message box
-function closeMessage(e, that) {
-  e.preventDefault();
-  $(that.parentNode).fadeOut();
-}
+
+// Keep SideNav collapse open on refresh (WORK IN PROGRESS)
 $(document).ready(function() {
-  {% block domready %}
-  {% endblock %}
-});
+  Array.prototype.remove = function() {
+      var what, a = arguments, L = a.length, ax;
+      while (L && this.length) {
+          what = a[--L];
+          while ((ax = this.indexOf(what)) !== -1) {
+              this.splice(ax, 1);
+          }
+      }
+      return this;
+  };
+
+//   var shownOnRefresh = [];
+//   localStorage.setItem('shownOnRefresh', JSON.stringify(shownOnRefresh));
+//
+//   $('#brukere').on('shown.bs.collapse', '.panel-collapse', function() {
+//           shownOnRefresh = JSON.parse(localStorage.getItem('shownOnRefresh'));
+//           if ($.inArray($(this).attr('id'), shownOnRefresh) == -1) {
+//               shownOnRefresh.push($(this).attr('id'));
+//           };
+//           localStorage.setItem('shownOnRefresh', JSON.stringify(shownOnRefresh));
+//   });
+// 
+//   $('#brukere').on('hidden.bs.collapse', '.panel-collapse', function() {
+//           shownOnRefresh = JSON.parse(localStorage.getItem('shownOnRefresh'));
+//           shownOnRefresh.splice( $.inArray($(this).attr('id'), shownOnRefresh), 1 );//remove item from array
+//           localStorage.setItem('shownOnRefresh', JSON.stringify(shownOnRefresh));
+//   });
+//
+//   // On page refresh
+//   var shownOnRefresh = JSON.parse(localStorage.getItem('shownOnRefresh '));
+//   for (var i in shownOnRefresh ) {
+//       $('#' + shownOnRefresh [i]).addClass('in');
+//   }
+// });
