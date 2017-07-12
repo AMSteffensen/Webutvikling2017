@@ -21,8 +21,8 @@ from .models import Contact
 
 def user_login(request):
     # Redirect the user to the dashboard if already signed in
-    #if request.user.is_authenticated:
-    #    return redirect('dashboard')
+    if request.user.is_authenticated:
+        return redirect('dashboard')
 
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -117,9 +117,11 @@ def user_detail(request, username):
     user = get_object_or_404(User, username=username, is_active=True)
     return render(request, 'account/users/detail.html', {'section': 'people', 'user': user})
 
+
 @login_required
 def user_settings(request):
     return render(request, 'account/users/settings.html')
+
 
 @ajax_required
 @require_POST

@@ -15,10 +15,10 @@
 }
 
 .cContent {
-  position: fixed;
+  position: absolute;
   left: 10%;
   height: 100%;
-  width: 80%;
+  width: 90%;
   /*right: -10%;*/
 }
 
