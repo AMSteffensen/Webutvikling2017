@@ -22,7 +22,6 @@ def project_detail(request, year, month, day, project):
         try:
             projectObj = get_object_or_404(Project, pk=project_pk)
         except Http404:
-            print("error 1")
             return redirect('proj:project_list')
 
         project_title = projectObj.title
@@ -35,7 +34,6 @@ def project_detail(request, year, month, day, project):
             projectObj = get_object_or_404(Project, slug=project, status='published', publish__year=year, publish__month=month, publish__day=day)
         # It failed, try to get a drafted project for your user
         except Http404:
-            print("error 2")
             try:
             #slug=project, status='draft',
                 projectObj = get_object_or_404(Project, slug=project, status='draft', author=request.user, publish__year=year, publish__month=month, publish__day=day)
