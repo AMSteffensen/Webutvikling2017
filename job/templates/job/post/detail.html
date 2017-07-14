@@ -5,7 +5,10 @@
 {% block content %}
     <h1>{{ post.title }}</h1>
     {% if request.user == post.author %}
-      <a href="#" class="button">Slett prosjekt</a>
+      <form action="" method="post">
+        {% csrf_token %}
+        <button name="delete_post" value="{{ post.pk }}">Slett prosjekt</button>
+      </form>
     {% endif %}
     <br><br>
     {% if post.status == "publisert" %}

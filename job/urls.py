@@ -14,5 +14,4 @@ urlpatterns = [
 
     # Create jobs
     url(r'^create/$', views.post_create, name='post_create'),
-
 ]
