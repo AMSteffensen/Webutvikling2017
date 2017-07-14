@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'sorl.thumbnail',
     'actions',
-    'job'
+    'project'
 ]
 
 MIDDLEWARE = [

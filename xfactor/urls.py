@@ -30,8 +30,8 @@ urlpatterns = [
     # account app
     url(r'^account/', include('account.urls')),
 
-    # job app
-    url(r'^job/', include('job.urls', namespace='job', app_name='job')),
+    # project app
+    url(r'^project/', include('project.urls', namespace='proj', app_name='project')),
 ]
 
 if settings.DEBUG:

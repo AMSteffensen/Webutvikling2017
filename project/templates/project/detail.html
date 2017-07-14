@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}{{ project.title }}{% endblock %}
+
+{% block content %}
+    <h1>{{ project.title }}</h1>
+    {% if request.user == project.author %}
+      <form action="" method="post">
+        {% csrf_token %}
+        <button name="delete_project" value="{{ project.pk }}">Slett prosjekt</button>
+      </form>
+    {% endif %}
+    <br><br>
+    {% if project.status == "published" %}
+      <p class="date"><span style="color: green;">Publisert</span> {{ project.publish }} av {{ project.author }}</p>
+      {{ project.body|linebreaks }}
+    {% elif project.status == "draft" %}
+      <p class="date"><span style="color: red;">Mal</span> {{ project.publish }} av {{ project.author }}</p>
+      {{ project.body|linebreaks }}
+    {% endif %}
+    {% if request.user == project.author %}
+        <br><p><i>Opprettet av deg</i></p>
+    {% endif %}
+{% endblock %}
