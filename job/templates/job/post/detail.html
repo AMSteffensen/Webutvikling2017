@@ -8,8 +8,13 @@
       <a href="#" class="button">Slett prosjekt</a>
     {% endif %}
     <br><br>
-    <p class="date">Publisert {{ post.publish }} av {{ post.author }}</p>
-    {{ post.body|linebreaks }}
+    {% if post.status == "publisert" %}
+      <p class="date"><span style="color: green;">Publisert</span> {{ post.publish }} av {{ post.author }}</p>
+      {{ post.body|linebreaks }}
+    {% elif post.status == "mal" %}
+      <p class="date"><span style="color: red;">Mal</span> {{ post.publish }} av {{ post.author }}</p>
+      {{ post.body|linebreaks }}
+    {% endif %}
     {% if request.user == post.author %}
         <br><p><i>Opprettet av deg</i></p>
     {% endif %}

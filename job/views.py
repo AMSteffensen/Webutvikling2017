@@ -16,15 +16,25 @@ def post_list(request):
 
 
 def post_detail(request, year, month, day, post):
-
+    # Trying to get a published post
     try:
         post = get_object_or_404(Post, slug=post,
                                         status='publisert',
                                         publish__year=year,
                                         publish__month=month,
                                         publish__day=day)
+    # It failed, try to get a drafted post for your user
     except Http404:
-        return redirect("job:post_list")
+        try:
+            post = get_object_or_404(Post, slug=post,
+                                            status='mal',
+                                            publish__year=year,
+                                            publish__month=month,
+                                            publish__day=day,
+                                            author=request.user)
+        # It failed, return 404
+        except Http404:
+            return redirect("job:post_list")
     return render(request, 'job/post/detail.html', {'post': post})
 
 @login_required
