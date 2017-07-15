@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'frontpage',
     'dashboard',
-    'registration',
     'account',
     'django.contrib.admin',
     'sorl.thumbnail',
