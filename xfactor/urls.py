@@ -27,11 +27,27 @@ urlpatterns = [
     # front page
     url(r'^$', dashboard),
 
-    # account app
-    url(r'^account/', include('account.urls')),
+    # front page app
+    #url(r'^$', frontpage),
+
+    # user authentication app
+    url(r'^uauth/', include('user_auth.urls', namespace='uauth', app_name='user_auth')),
+
+    # user app
+    url(r'^user/', include('user.urls', namespace='user', app_name='user')),
+
+    # team app
+    #url(r'^team/', include('team.urls', namespace='team', app_name='team')),
 
     # project app
     url(r'^project/', include('project.urls', namespace='proj', app_name='project')),
+
+    # contract app
+    url(r'^contract/', include('contract.urls', namespace='ctrt', app_name='contract')),
+
+    # support app
+    url(r'^support/', include('support.urls', namespace='sup', app_name='support')),
+
 ]
 
 if settings.DEBUG:
