@@ -17,7 +17,7 @@ from . import views
 urlpatterns = [
 
     # registration
-    url(r'^register/$', views.register, name='register'),
+    url(r'^register/$', views.user_register, name='register'),
 
     # login / logout urls
     url(r'^login/$', login, name='login'),

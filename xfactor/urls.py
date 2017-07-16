@@ -18,7 +18,8 @@ from django.conf.urls import include
 from django.conf.urls import url
 from django.contrib import admin
 from django.conf import settings
-from account.views import dashboard
+
+from user.views import dashboard
 
 
 urlpatterns = [
@@ -43,10 +44,10 @@ urlpatterns = [
     url(r'^project/', include('project.urls', namespace='proj', app_name='project')),
 
     # contract app
-    url(r'^contract/', include('contract.urls', namespace='ctrt', app_name='contract')),
+    #url(r'^contract/', include('contract.urls', namespace='ctrt', app_name='contract')),
 
     # support app
-    url(r'^support/', include('support.urls', namespace='sup', app_name='support')),
+    #url(r'^support/', include('support.urls', namespace='sup', app_name='support')),
 
 ]
 

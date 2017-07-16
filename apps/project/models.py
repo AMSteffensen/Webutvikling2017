@@ -4,6 +4,9 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 
 
+def get_current_timezone():
+    return timezone.localtime(timezone.now())
+
 
 class PublishedManager(models.Manager):
     def get_queryset(self):
@@ -20,7 +23,7 @@ class Project(models.Model):
     slug = models.SlugField(max_length=250, unique_for_date='published')
     author = models.ForeignKey(User, related_name='project_post')
     body = models.TextField()
-    publish = models.DateTimeField(default=lambda: timezone.localtime(timezone.now()))
+    publish = models.DateTimeField(default=get_current_timezone)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default=STATUS_CHOICES[0][0])

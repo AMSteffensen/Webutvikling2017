@@ -1,28 +1,18 @@
 from django.http import HttpResponse
-from django.http import JsonResponse
 from django.shortcuts import render
 from django.shortcuts import redirect
-from django.shortcuts import get_object_or_404
 from django.contrib.auth import authenticate
 from django.contrib.auth import login
-from django.contrib.auth.models import User
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required
-from django.views.decorators.http import require_POST
-from common.decorators import ajax_required
 from .forms import LoginForm
 from .forms import UserRegistrationForm
 from .forms import ProfileRegistrationForm
-from .forms import UserEditForm
-from .forms import ProfileEditForm
-from .models import Profile
-from .models import Contact
 
+from user.models import Profile
 
 def user_login(request):
     # Redirect the user to the dashboard if already signed in
     if request.user.is_authenticated:
-        return redirect('dashboard')
+        return redirect('user:dashboard')
 
     if request.method == 'POST':
         form = LoginForm(request.POST)
@@ -40,13 +30,13 @@ def user_login(request):
         ## Else; Errors are being called and showed in the html by django
     else:
         form = LoginForm()
-    return render(request, 'account/login.html', {'form': form})
+    return render(request, 'user_auth/login/login.html', {'form': form})
 
 
-def register(request):
+def user_register(request):
     # Redirect the user to the dashboard if already signed in
     if request.user.is_authenticated:
-        return redirect('dashboard')
+        return redirect('user:dashboard')
 
     if request.method == 'POST':
         user_form = UserRegistrationForm(request.POST)
@@ -72,7 +62,7 @@ def register(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return redirect('dashboard')
+                    return redirect('user:dashboard')
                 else:
                     return HttpResponse('Disabled account')
 
@@ -80,4 +70,4 @@ def register(request):
     else:
         user_form = UserRegistrationForm()
         profile_form =  ProfileRegistrationForm()
-    return render(request, 'account/register.html', {'user_form': user_form, 'profile_form': profile_form})
+    return render(request, 'user_auth/register/register.html', {'user_form': user_form, 'profile_form': profile_form})

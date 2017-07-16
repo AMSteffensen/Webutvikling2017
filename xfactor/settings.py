@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'user_auth',
     'django.contrib.admin',
     'sorl.thumbnail',
-    'frontpage',
+    'front_page',
     'user',
     'actions',
     'team',
@@ -169,5 +169,5 @@ EMAIL_USE_TLS = True
 # Custom authentication backen
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
-    'account.authentication.EmailAuthBackend',
+    'user_auth.authentication.EmailAuthBackend',
 )
