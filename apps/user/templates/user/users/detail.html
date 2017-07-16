@@ -49,7 +49,7 @@
     </div>
 
     {% if user.id is  request.user.id %}
-      <p><a href="{% url 'user_settings' %}">Instillinger</a></p>
+      <p><a href="{% url 'user:user_settings' %}">Instillinger</a></p>
     {% endif %}
 
 {% endblock %}
@@ -57,7 +57,7 @@
 {% block domready %}
     $('a.follow').click(function(e){
         e.preventDefault();
-        $.post('{% url "user_follow" %}',
+        $.post('{% url "user:user_follow" %}',
             {
                 id: $(this).data('id'),
                 action: $(this).data('action')

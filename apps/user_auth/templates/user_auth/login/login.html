@@ -8,15 +8,15 @@
         <p>Brukernavn eller passord stemmer ikke. Vennligst prøv igjen.</p>
     {% else %}
         <p>Vennligst bruk følgende form for å logge inn:</p>
-        <p>Har du ikke konto? <a href="{% url 'register' %}">Registrer deg her.</a></p>
+        <p>Har du ikke konto? <a href="{% url 'uauth:register' %}">Registrer deg her.</a></p>
     {% endif %}
     <div class="login-form">
-        <form action="{% url 'login' %}" method="post">
+        <form action="{% url 'uauth:login' %}" method="post">
             {{ form.as_p }}
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ next }}" />
             <p><input type="submit" value="Logg Inn"></p>
         </form>
-        <p><a href="{% url 'password_reset' %}">Glemt passord?</a></p>
+        <p><a href="{% url 'uauth:password_reset' %}">Glemt passord?</a></p>
     </div>
 {% endblock %}

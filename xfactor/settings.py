@@ -144,12 +144,12 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # Redirection
-LOGIN_REDIRECT_URL = reverse_lazy('dashboard')
-LOGIN_URL = reverse_lazy('login')
-LOGOUT_URL = reverse_lazy('logout')
+LOGIN_REDIRECT_URL = reverse_lazy('user:dashboard')
+LOGIN_URL = reverse_lazy('uauth:login')
+LOGOUT_URL = reverse_lazy('uauth:logout')
 
 ABSOLUTE_URL_OVERRIDES = {
-    'auth.user': lambda u: reverse_lazy('user_detail', args=[u.username])
+    'auth.user': lambda u: reverse_lazy('user:user_detail', args=[u.username])
 }
 
 # SMTP Server

@@ -127,7 +127,7 @@
         <ul id="menu-content" class="menu-content collapse in">
           <!-- Dashboard -->
           <li>
-            <a href="{% url 'dashboard' %}"><i class="fa fa-th-list"></i> Dashboard </a>
+            <a href="{% url 'user:dashboard' %}"><i class="fa fa-th-list"></i> Dashboard </a>
           </li>
           <!-- /Dashboard -->
           <!-- Feed -->
@@ -146,10 +146,10 @@
           </li>
           <ul class="sub-menu collapse" id="brukere">
             <li>
-              <a href="{% url 'user_list' %}">Finn Brukere</a>
+              <a href="{% url 'user:user_list' %}">Finn Brukere</a>
             </li>
             <li>
-              <a href="{% url 'user_list' %}">Relasjoner</a>
+              <a href="{% url 'user:user_list' %}">Relasjoner</a>
             </li>
           </ul>
           <!-- /Users -->
@@ -188,13 +188,13 @@
               <a href="{{ request.user.get_absolute_url }}">Vis Min Profil </a>
             </li>
             <li>
-              <a href="{% url 'user_settings' %}">Innstillinger</a>
+              <a href="{% url 'user:user_settings' %}">Innstillinger</a>
             </li>
           </ul>
           <!-- /My-Profile -->
           <!-- Log-Out -->
           <li>
-            <a href="{% url 'logout_then_login' %}"><i class="fa fa-power-off"></i> Logg ut </a>
+            <a href="{% url 'uauth:logout_then_login' %}"><i class="fa fa-power-off"></i> Logg ut </a>
           </li>
           <!-- /Log-Out -->
         </ul>
@@ -222,7 +222,7 @@
             <ul class="bottom_ul">
               <li><a href="#">Om oss</a></li>
               <li><a href="#">Kontakt oss</a></li>
-              <li><a href="{% url 'user_settings' %}">Innstillinger</a></li>
+              <li><a href="{% url 'user:user_settings' %}">Innstillinger</a></li>
             </ul>
           </div>
         </div>
