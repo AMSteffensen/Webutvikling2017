@@ -52,7 +52,10 @@ class Team(models.Model):
 class TeamUser(models.Model):
     team_id = models.ForeignKey(Team)
     user_id = models.ForeignKey(User)
-    joined = models.DateTimeField(auto_now_add=True, db_index=True)
+    joined = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('-team_id',)
 
     def __str__(self):
         return "{} is a member of {}".format(self.user_id, self.team_id)
