@@ -3,6 +3,7 @@ body {
   margin: 0px;
   padding: 0px;
   font-family: helvetica, sans-serif;
+  background: #FFFFFF;
 }
 
 p {
@@ -37,52 +38,8 @@ ol {
   line-height: 1.5;
 }
 
-#header {
-  overflow: auto;
-  padding: 10px 100px;
-  color: #fff;
-  border-bottom: 4px solid #317af7;
-  background: #0049c1;
-  font-size: 14px;
-}
 
-#header .logo {
-  float: left;
-  margin-right: 10%;
-  color: #f3f7cc;
-  font-family: 'Muli', sans-serif;
-  font-size: 20px;
-}
-
-#header ul.menu {
-  float: left;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-#header ul.menu li {
-  float: left;
-  padding: 4px 10px;
-}
-
-#header ul.menu li.selected a, #header ul.menu li.selected a:hover {
-  color: #1b6d32;
-  font-weight: bold;
-}
-
-#header a {
-  color: #f3f7cc;
-}
-
-#header a:hover {
-  color: #fff;
-}
-
-#header .user {
-  float: right;
-  padding-top: 4px;
-}
+/* Content */
 
 #content {
   padding: 30px 100px;
@@ -126,7 +83,7 @@ input[type=submit], a.button {
   font-weight: bold;
 }
 
-.errorlist {
+7.errorlist {
   float: left;
   clear: both;
   padding-left: 10px;
@@ -141,99 +98,8 @@ input[type=submit], a.button {
   font-size: 13px;
 }
 
-
-/* messages */
-
-ul.messages {
-  margin: 10px 100px;
-  padding: 0;
-  list-style-type: none;
-}
-
-ul.messages li.success, ul.messages li.warning, ul.messages li.error, ul.messages li.info {
-  margin: 0;
-  padding: 14px 20px;
-  list-style: none;
-  color: #fff;
-}
-
-ul.messages li.success {
-  background: #81ce81;
-}
-
-ul.messages li.success a {
-  color: #0ac33e;
-}
-
-ul.messages li.error {
-  color: #e9828e;
-  background: #a30029;
-}
-
-ul.messages li.error a {
-  color: #e9828e;
-}
-
-ul.messages li.info {
-  color: #696b4e;
-  background: #faffae;
-}
-
-ul.messages li.info a {
-  color: #1586de;
-}
-
-ul.messages li.warning {
-  background: #de9404;
-}
-
-ul.messages li.warning a {
-  color: #f49000;
-}
-
-ul.messages li a.close {
-  float: right;
-  margin: 0;
-  opacity: 1;
-  border: 0;
-  box-shadow: none;
-  text-shadow: none;
-}
-
 .login-form {
   float: left;
-}
-
-
-/* social-auth */
-
-.social {
-  float: right;
-}
-
-.social li {
-  margin: 0 0 10px 0;
-  padding: 10px 20px;
-  list-style: none;
-}
-
-.social li a {
-  display: block;
-  width: 100%;
-  height: 100%;
-  color: #fff;
-}
-
-.social li.facebook {
-  background: #3b5399;
-}
-
-.social li.twitter {
-  background: #00cffa;
-}
-
-.social li.google {
-  background: #de1710;
 }
 
 
@@ -255,7 +121,8 @@ ul.messages li a.close {
 }
 
 .count {
-  float:right;
+  /*followers*/
+  float: right;
   margin: 20px 10px 0;
   padding: 10px 20px;
   color: #aaa;
@@ -266,45 +133,6 @@ ul.messages li a.close {
 a.like, a.follow {
   float: right;
   margin-top: -8px;
-}
-
-#image-list {
-  overflow: auto;
-}
-
-#image-list .image {
-  float: left;
-  width: 220px;
-  height: 300px;
-  margin: 0 10px 10px 10px;
-  border-top: 8px solid #12c064;
-  background: #eee;
-}
-
-#image-list img {
-  width: 220px;
-  height: 220px;
-}
-
-#image-list .info {
-  padding: 10px;
-}
-
-#image-list .info a {
-  color: #333;
-}
-
-.image-likes div {
-  float: left;
-  width: auto;
-  padding: 10px;
-  text-align: center;
-}
-
-.image-likes img {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
 }
 
 
@@ -337,10 +165,6 @@ img.user-detail {
   float: left;
   overflow: auto;
   margin-right: 20px;
-}
-
-.image-container {
-  margin-top: 40px;
 }
 
 

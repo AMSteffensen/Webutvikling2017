@@ -2,11 +2,6 @@
   border: 4px solid transparent;
 }
 
-.panel-1 {
-  float: left;
-  padding: 10px;
-}
-
 
 /* Left/Right Sidebar with Content in the middle */
 
@@ -22,7 +17,8 @@
   /*right: -10%;*/
 }
 
-.cLeftSidebar {
+
+/*.cLeftSidebar {
   position: absolute;
   top: 0;
   left: 0;
@@ -34,7 +30,7 @@
   top: 0;
   right: 10%;
   height: 100%;
-}
+}*/
 
 
 /* Left/Right Sidebar with Content in the middle */
@@ -49,8 +45,4 @@
 
 .project-status {
   font-size: 12px;
-}
-
-body {
-  background: #FFFFFF;
 }
