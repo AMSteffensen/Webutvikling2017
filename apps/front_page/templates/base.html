@@ -30,9 +30,9 @@
 
 <body>
 
-  <!-- WRAPPER -->
-  <div class="cWrapper">
-    {% if request.user.is_authenticated %}
+<!-- WRAPPER -->
+<div class="cWrapper">
+  {% if request.user.is_authenticated %}
     <!--Header-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <div class="top-bar">
@@ -46,8 +46,8 @@
                   <div class="input-group">
                     <div class="input-group-btn search-panel">
                       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                  <span id="search_concept">Kategori</span> <span class="caret"></span>
-                                </button>
+                        <span id="search_concept">Kategori</span> <span class="caret"></span>
+                      </button>
                       <ul class="dropdown-menu" role="menu">
                         <li><a href="#">Team</a></li>
                         <li><a href="#">Prosjekter</a></li>
@@ -78,25 +78,25 @@
                   {% if user.profile.photo %}
                     {% load thumbnail %}
                     {% thumbnail request.user.profile.photo "32x32" crop="100%" format="PNG" as im %}
-                        <img src="{{ im.url }}" class="user-detail">
+                      <img src="{{ im.url }}" class="user-detail">
                     {% endthumbnail %}
                   {% else %}
                     {% if request.user.profile.gender == "mann" %}
-                        {% thumbnail "no_image_male.png" "32x32" crop="100%" format="PNG" as im %}
-                            <img src="{{ im.url }}" class="user-detail">
-                        {% endthumbnail %}
+                      {% thumbnail "no_image_male.png" "32x32" crop="100%" format="PNG" as im %}
+                        <img src="{{ im.url }}" class="user-detail">
+                      {% endthumbnail %}
                     {% elif request.user.profile.gender == "kvinne" %}
-                        {% thumbnail "no_image_female.png" "32x32" crop="100%" format="PNG" as im %}
-                            <img src="{{ im.url }}" class="user-detail">
-                        {% endthumbnail %}
+                      {% thumbnail "no_image_female.png" "32x32" crop="100%" format="PNG" as im %}
+                        <img src="{{ im.url }}" class="user-detail">
+                      {% endthumbnail %}
                     {% else %}
-                        {% thumbnail "no_image.png" "32x32" crop="100%" format="PNG" as im %}
-                            <img src="{{ im.url }}" class="user-detail">
-                        {% endthumbnail %}
+                      {% thumbnail "no_image.png" "32x32" crop="100%" format="PNG" as im %}
+                        <img src="{{ im.url }}" class="user-detail">
+                      {% endthumbnail %}
                     {% endif %}
                   {% endif %}
                 </i></a></li>
-                <span style="color: white;">{{ request.user.first_name }}</span>
+              <span style="color: white;">{{ request.user.first_name }}</span>
             </ul>
           </div>
         </div>
@@ -186,46 +186,46 @@
         </ul>
       </div>
     </div>
-    {% endif %}
-    <!-- /MENU-SIDEBAR -->
+  {% endif %}
+  <!-- /MENU-SIDEBAR -->
 
-    <!-- CONTENT -->
-    <div class="cContent" id="content">
-      {% block content %} {% endblock %}
-    </div>
-    <!-- /CONTENT -->
+  <!-- CONTENT -->
+  <div class="cContent" id="content">
+    {% block content %} {% endblock %}
+  </div>
+  <!-- /CONTENT -->
 
-    <!-- FOOTER -->
-    <div class="footer-bottom">
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-            <div class="copyright">
-              © 2017, XFactor, All rights reserved
-            </div>
+  <!-- FOOTER -->
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+          <div class="copyright">
+            © 2017, XFactor, All rights reserved
           </div>
-          <div class="col-md-6">
-            <ul class="bottom_ul">
-              <li><a href="#">Om oss</a></li>
-              <li><a href="#">Kontakt oss</a></li>
-              <li><a href="{% url 'user:user_settings' %}">Innstillinger</a></li>
-            </ul>
-          </div>
+        </div>
+        <div class="col-md-6">
+          <ul class="bottom_ul">
+            <li><a href="#">Om oss</a></li>
+            <li><a href="#">Kontakt oss</a></li>
+            <li><a href="{% url 'user:user_settings' %}">Innstillinger</a></li>
+          </ul>
         </div>
       </div>
     </div>
-    <!-- /FOOTER -->
-
   </div>
-  <!-- /WRAPPER -->
+  <!-- /FOOTER -->
 
-  <!-- Used for scripts in external template files -->
-  <script>
-    $(document).ready(function() {
-      {% block domready %}
-      {% endblock %}
+</div>
+<!-- /WRAPPER -->
+
+<!-- Used for scripts in external template files -->
+<script>
+    $(document).ready(function () {
+        {% block domready %}
+        {% endblock %}
     });
-  </script>
+</script>
 
 </body>
 
