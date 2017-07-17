@@ -38,7 +38,7 @@ urlpatterns = [
     url(r'^user/', include('user.urls', namespace='user', app_name='user')),
 
     # team app
-    #url(r'^team/', include('team.urls', namespace='team', app_name='team')),
+    url(r'^team/', include('team.urls', namespace='team', app_name='team')),
 
     # project app
     url(r'^project/', include('project.urls', namespace='proj', app_name='project')),

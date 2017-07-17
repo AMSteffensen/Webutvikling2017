@@ -25,28 +25,27 @@ $(document).ready(function() {
           }
       }
       return this;
-  };
+  }});
 
-//   var shownOnRefresh = [];
-//   localStorage.setItem('shownOnRefresh', JSON.stringify(shownOnRefresh));
-//
-//   $('#brukere').on('shown.bs.collapse', '.panel-collapse', function() {
-//           shownOnRefresh = JSON.parse(localStorage.getItem('shownOnRefresh'));
-//           if ($.inArray($(this).attr('id'), shownOnRefresh) == -1) {
-//               shownOnRefresh.push($(this).attr('id'));
-//           };
-//           localStorage.setItem('shownOnRefresh', JSON.stringify(shownOnRefresh));
-//   });
-// 
-//   $('#brukere').on('hidden.bs.collapse', '.panel-collapse', function() {
-//           shownOnRefresh = JSON.parse(localStorage.getItem('shownOnRefresh'));
-//           shownOnRefresh.splice( $.inArray($(this).attr('id'), shownOnRefresh), 1 );//remove item from array
-//           localStorage.setItem('shownOnRefresh', JSON.stringify(shownOnRefresh));
-//   });
-//
-//   // On page refresh
-//   var shownOnRefresh = JSON.parse(localStorage.getItem('shownOnRefresh '));
-//   for (var i in shownOnRefresh ) {
-//       $('#' + shownOnRefresh [i]).addClass('in');
-//   }
-// });
+
+  // localStorage.setItem('shownOnRefresh', JSON.stringify(shownOnRefresh));
+  //
+  // $('#brukere').on('shown.bs.collapse', '.panel-collapse', function() {
+  //         shownOnRefresh = JSON.parse(localStorage.getItem('shownOnRefresh'));
+  //         if ($.inArray($(this).attr('id'), shownOnRefresh) == -1) {
+  //             shownOnRefresh.push($(this).attr('id'));
+  //         };
+  //         localStorage.setItem('shownOnRefresh', JSON.stringify(shownOnRefresh));
+  // });
+  //
+  // $('#brukere').on('hidden.bs.collapse', '.panel-collapse', function() {
+  //         shownOnRefresh = JSON.parse(localStorage.getItem('shownOnRefresh'));
+  //         shownOnRefresh.splice( $.inArray($(this).attr('id'), shownOnRefresh), 1 );//remove item from array
+  //         localStorage.setItem('shownOnRefresh', JSON.stringify(shownOnRefresh));
+  // });
+  //
+  // // On page refresh
+  // var shownOnRefresh = JSON.parse(localStorage.getItem('shownOnRefresh '));
+  // for (var i in shownOnRefresh ) {
+  //     $('#' + shownOnRefresh [i]).addClass('in');
+  // }

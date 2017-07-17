@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}{{ team.name }}{% endblock %}
+
+{% block content %}
+  <h1>{{ team.name }}</h1>
+  {% if request.user == team.author %}
+    <form action="" method="post">
+      {% csrf_token %}
+      <button type="button" name="delete_team" value="{{ team.pk }}">Slett team</button>
+    </form>
+  {% endif %}
+
+  {% if team.status == "shown" %}
+    <p class="date"><span style="color: green;">Offentlig</span> {{ team.created }} av {{ team.author }}</p>
+  {% elif team.status == "hidden" %}
+    <p class="date"><span style="color: red;">Skjult</span> {{ team.created }} av {{ team.author }}</p>
+  {% endif %}
+{% endblock %}
