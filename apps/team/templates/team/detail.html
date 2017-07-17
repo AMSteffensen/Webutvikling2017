@@ -16,4 +16,16 @@
   {% elif team.status == "hidden" %}
     <p class="date"><span style="color: red;">Skjult</span> {{ team.created }} av {{ team.author }}</p>
   {% endif %}
+
+
+    <h4>Members of this group</h4>
+    <ul>
+      <li>{{ team.author }}</li>
+    {% if members %}
+    {% for member in members %}
+      <li>{{ member }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+
 {% endblock %}
