@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Mine Teams{% endblock %}
+
+{% block content %}
+    <h1>Mine Teams</h1>
+
+    {% if request.user.is_authenticated %}
+        <a href="{% url 'team:team_create' %}" class="button">+ Opprett Team</a>
+    {% endif %}
+
+    {% if teams %}
+      <br>
+      {% for team in teams %}
+        <h2><a href="{{ team.get_absolute_url }}">{{ team.name }}</a></h2>
+        {% if team.status == "public" %}
+          <p class="date"><span style="color: green;">Offentlig</span> {{ team.created }}</p>
+          {{ team.desc }}
+        {% elif team.status == "private" %}
+          <p class="date"><span style="color: red;">Skjult</span> {{ team.created }}</p>
+          {{ team.desc }}
+        {% endif %}
+      {% endfor %}
+    {% else %}
+      <br><br>
+      <p>Du er ikke medlem av noen teams enda.<p>
+      <p>Opprett et team selv, eller <a href="{% url 'team:team_list' %}">finn eksisterende</a> team.</p>
+    {% endif %}
+{% endblock %}

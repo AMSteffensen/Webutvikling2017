@@ -15,10 +15,9 @@ def project_list(request):
     return render(request, 'project/list.html', {'projects': projects})
 
 
-def project_detail(request, year, month, day, project):
+def project_detail(request, year, month, day, slug):
     if request.method == 'POST':
         project_pk = request.POST.get('delete_project', '')
-
         try:
             projectObj = get_object_or_404(Project, pk=project_pk)
         except Http404:
@@ -31,12 +30,12 @@ def project_detail(request, year, month, day, project):
     else:
         # Trying to get a published project
         try:
-            projectObj = get_object_or_404(Project, slug=project, status='published', publish__year=year, publish__month=month, publish__day=day)
+            projectObj = get_object_or_404(Project, slug=slug, status='published', publish__year=year, publish__month=month, publish__day=day)
         # It failed, try to get a drafted project for your user
         except Http404:
             try:
             #slug=project, status='draft',
-                projectObj = get_object_or_404(Project, slug=project, status='draft', author=request.user, publish__year=year, publish__month=month, publish__day=day)
+                projectObj = get_object_or_404(Project, slug=slug, status='draft', author=request.user, publish__year=year, publish__month=month, publish__day=day)
             # It failed, return 404
             except Http404:
                 return redirect('proj:project_list')

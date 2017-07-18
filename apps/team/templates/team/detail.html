@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}{{ team.name }}{% endblock %}
+
+{% block content %}
+  <h1>{{ team.name }}</h1>
+
+  {% if request.user in members %}
+    {% if request.user == team.author %}
+      <form action="" method="post">
+        {% csrf_token %}
+        <button name="delete_team" value="{{ team.pk }}">Slett team</button>
+      </form>
+    {% endif %}
+
+    {% if team.status == "public" %}
+      <p class="date"><span style="color: green;">Offentlig</span> {{ team.created }} av {{ team.author }}</p>
+    {% elif team.status == "private" %}
+      <p class="date"><span style="color: red;">Skjult</span> {{ team.created }} av {{ team.author }}</p>
+    {% endif %}
+
+
+    {% if members %}
+      <h4>Members of this group</h4>
+      <ul>
+        {% for member in members %}
+          <li>{{ member }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% else %}
+    <p>Du er ikke medlem av denne gruppen, derfor har du ikke tilgang.</p>
+  {% endif %}
+
+{% endblock %}

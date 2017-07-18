@@ -3,6 +3,9 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from sorl.thumbnail import ImageField
 
+from team.models import Team
+from team.models import TeamUser
+
 
 class Profile(models.Model):
     GENDER_CHOICES = (
@@ -33,3 +36,14 @@ class Contact(models.Model):
 
 # Add following field to User dynamically
 User.add_to_class('following', models.ManyToManyField('self', through=Contact, related_name='followers', symmetrical=False))
+# Add team field to User dynamically
+User.add_to_class('member_of_team', models.ManyToManyField(Team, through=TeamUser, related_name='teammember', symmetrical=False))
+
+
+
+
+
+
+
+
+
