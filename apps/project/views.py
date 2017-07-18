@@ -18,7 +18,6 @@ def project_list(request):
 def project_detail(request, year, month, day, slug):
     if request.method == 'POST':
         project_pk = request.POST.get('delete_project', '')
-
         try:
             projectObj = get_object_or_404(Project, pk=project_pk)
         except Http404:

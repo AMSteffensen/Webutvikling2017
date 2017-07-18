@@ -9,7 +9,7 @@
     {% if request.user == team.author %}
       <form action="" method="post">
         {% csrf_token %}
-        <button type="button" name="delete_team" value="{{ team.pk }}">Slett team</button>
+        <button name="delete_team" value="{{ team.pk }}">Slett team</button>
       </form>
     {% endif %}
 
