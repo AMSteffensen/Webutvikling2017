@@ -20,13 +20,12 @@
     {% endif %}
 
 
+    {% if members %}
       <h4>Members of this group</h4>
       <ul>
-        <li>{{ team.author }}</li>
-      {% if members %}
-      {% for member in members %}
-        <li>{{ member }}</li>
-      {% endfor %}
+        {% for member in members %}
+          <li>{{ member }}</li>
+        {% endfor %}
       </ul>
     {% endif %}
   {% else %}

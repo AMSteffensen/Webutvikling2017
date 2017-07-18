@@ -8,4 +8,6 @@ urlpatterns = [
 
     # Detail teams
     url(r'^view/(?P<slug>[-\w]+)/$', views.team_detail, name='team_detail'),
+
+    url(r'^create/$', views.team_create, name='team_create')
 ]
