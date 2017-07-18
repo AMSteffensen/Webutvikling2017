@@ -54,3 +54,12 @@ class Project(models.Model):
             local_pub_date.strftime('%d'),
             self.slug
         ])
+
+    def get_edit_url(self):
+        local_pub_date = timezone.localtime(self.publish)
+        return reverse('proj:project_edit', args=[
+            local_pub_date.year,
+            local_pub_date.strftime('%m'),
+            local_pub_date.strftime('%d'),
+            self.slug,
+        ])

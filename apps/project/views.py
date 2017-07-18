@@ -39,6 +39,10 @@ def project_detail(request, year, month, day, slug):
             # It failed, return 404
             except Http404:
                 return redirect('proj:project_list')
+
+        # Restrict unallowed users
+        if projectObj.status == 'draft' and projectObj.author != request.user:
+            return redirect('proj:project_list')
         return render(request, 'project/detail.html', {'project': projectObj})
 
 
@@ -65,3 +69,48 @@ def project_create(request):
     else:
         project_form = ProjectCreateForm()
     return render(request, 'project/create.html', {'project_form': project_form})
+
+
+@login_required
+def project_edit(request, year, month, day, slug):
+    try:
+        projectObj = get_object_or_404(Project, slug=slug, status='published', publish__year=year, publish__month=month, publish__day=day)
+    except Http404:
+        return redirect('proj:list')
+
+    # Restrict unallowed users
+    if projectObj.author != request.user:
+        redirect('proj:project_list')
+
+    if request.method == 'POST':
+        project_form = ProjectCreateForm(instance=projectObj, data=request.POST)
+        if project_form.is_valid():
+            project_item = project_form.save(commit=False)
+            project_item.slug = slugify(project_item.title)
+            project_item.save()
+            return redirect(project_item.get_absolute_url())
+        else:
+            project_form = ProjectCreateForm(instance=projectObj)
+    else:
+        project_form = ProjectCreateForm(instance=projectObj)
+
+    return render(request, 'project/edit.html', {'project_form': project_form})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

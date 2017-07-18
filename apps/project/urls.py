@@ -11,6 +11,8 @@ urlpatterns = [
 
     # Detail projects
     url(r'^view/(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/(?P<slug>[-\w]+)/$', views.project_detail, name='project_detail'),
+    # Detail projects
+    url(r'^view/(?P<year>\d{4})/(?P<month>\d{2})/(?P<day>\d{2})/(?P<slug>[-\w]+)/edit/$', views.project_edit, name='project_edit'),
 
     # Create projects
     url(r'^create/$', views.project_create, name='project_create'),

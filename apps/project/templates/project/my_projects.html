@@ -3,26 +3,26 @@
 {% block title %}Mine Prosjekter{% endblock %}
 
 {% block content %}
-    <h1>Mine Prosjekter</h1>
+  <h1>Mine Prosjekter</h1>
 
-    {% if request.user.is_authenticated %}
-        <a href="{% url 'proj:project_create' %}" class="button">+ Opprett Prosjekt</a>
-    {% endif %}
-
-    {% if projects %}
-      <br>
-      {% for project in projects %}
-        <h2><a href="{{ project.get_absolute_url }}">{{ project.title }}</a></h2>
-        {% if project.status == "published" %}
-          <p class="date"><span style="color: green;">Publisert</span> {{ project.publish }}</p>
-          {{ project.body|truncatewords:30|linebreaks }}
-        {% elif project.status == "draft" %}
-          <p class="date"><span style="color: red;">Mal</span> {{ project.created }}</p>
-          {{ project.body|truncatewords:30|linebreaks }}
-        {% endif %}
-      {% endfor %}
-    {% else %}
-      <br><br>
-      <p>Du har ikke opprettet noen prosjekter enda.<p>
-    {% endif %}
+  {% if request.user.is_authenticated %}
+    <a href="{% url 'proj:project_create' %}" class="button">+ Opprett Prosjekt</a>
+  {% endif %}
+  {% if projects %}
+    <br>
+    {% for project in projects %}
+      <h2><a href="{{ project.get_absolute_url }}">{{ project.title }}</a></h2>
+      <p class="date inline"><span style="
+              {% if project.status == "published" %}color: green;
+              {% elif project.status == "draft" %}color: red;
+              {% endif %}">Publisert</span> {{ project.publish }}</p>
+      <form action="{{ project.get_edit_url }}" class="inline">
+        <button type="submit"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+      </form>
+      {{ project.body|truncatewords:30|linebreaks }}
+    {% endfor %}
+  {% else %}
+    <br><br>
+    <p>Du har ikke opprettet noen prosjekter enda.<p>
+  {% endif %}
 {% endblock %}
