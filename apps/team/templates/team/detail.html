@@ -13,9 +13,9 @@
       </form>
     {% endif %}
 
-    {% if team.status == "shown" %}
+    {% if team.status == "public" %}
       <p class="date"><span style="color: green;">Offentlig</span> {{ team.created }} av {{ team.author }}</p>
-    {% elif team.status == "hidden" %}
+    {% elif team.status == "private" %}
       <p class="date"><span style="color: red;">Skjult</span> {{ team.created }} av {{ team.author }}</p>
     {% endif %}
 

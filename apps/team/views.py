@@ -12,7 +12,7 @@ from snippets.unique_slug import unique_slugify
 
 
 def team_list(request):
-    teams = Team.everything.all()
+    teams = Team.public.all()
     return render(request, 'team/list.html', {'teams': teams})
 
 
@@ -31,11 +31,11 @@ def team_detail(request, slug):
     else:
         # trying to get a published project
         try:
-            teamObj = get_object_or_404(Team, slug=slug, status='shown')
+            teamObj = get_object_or_404(Team, slug=slug, status='public')
         # it failed, try to get a hidden project for your user
         except Http404:
             try:
-                teamObj = get_object_or_404(Team, slug=slug, status='hidden')
+                teamObj = get_object_or_404(Team, slug=slug, status='private')
             # it failed, return 404
             except Http404:
                 return redirect('team:team_list')
@@ -66,3 +66,10 @@ def team_create(request):
     else:
         team_form = TeamCreateForm()
     return render(request, 'team/create.html', {'team_form': team_form})
+
+
+@login_required
+def team_mine(request):
+    memberOf = TeamUser.objects.filter(user_id=request.user)
+    teams = [getattr(team, 'team_id') for team in memberOf]
+    return render(request, 'team/my_teams.html', {'teams': teams})

@@ -5,5 +5,5 @@
 {% block content %}
     <h1>{{ team_name }} - <span style="color: red;">er slettet</span></h1>
     <p><a href="{% url 'user:dashboard' %}">Dashbord</a></p>
-    <p><a href="#">Mine Team</a></p>
+    <p><a href="{% url 'team:team_mine' %}">Mine Team</a></p>
 {% endblock %}

@@ -6,13 +6,13 @@ from snippets.unique_slug import unique_slugify
 
 class TeamManager(models.Manager):
     def get_queryset(self):
-        return super(TeamManager, self).get_queryset()
+        return super(TeamManager, self).get_queryset().filter(status='public')
 
 
 class Team(models.Model):
     STATUS_CHOICES = (
-        ('shown', 'Offentlig'),
-        ('hidden', 'Skjult'),
+        ('public', 'Offentlig'),
+        ('private', 'Skjult'),
     )
 
     name = models.CharField(max_length=100)
@@ -23,7 +23,7 @@ class Team(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default=STATUS_CHOICES[0][0])
 
     objects = models.Manager()
-    everything = TeamManager()
+    public = TeamManager()
 
 
     class Meta:

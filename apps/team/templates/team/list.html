@@ -12,6 +12,6 @@
     {% for team in teams %}
         <h2><a href="{{ team.get_absolute_url }}">{{ team.name }}</a></h2>
         <p class="date">Opprettet {{ team.created }} av {{ team.author }}</p>
-        {{ team.desc|linebreaks }}
+        {{ team.desc }}
     {% endfor %}
 {% endblock %}
