@@ -34,7 +34,6 @@ def project_detail(request, year, month, day, slug):
         # It failed, try to get a drafted project for your user
         except Http404:
             try:
-            #slug=project, status='draft',
                 projectObj = get_object_or_404(Project, slug=slug, status='draft', author=request.user, publish__year=year, publish__month=month, publish__day=day)
             # It failed, return 404
             except Http404:
@@ -76,11 +75,11 @@ def project_edit(request, year, month, day, slug):
     try:
         projectObj = get_object_or_404(Project, slug=slug, status='published', publish__year=year, publish__month=month, publish__day=day)
     except Http404:
-        return redirect('proj:list')
+        return redirect('proj:project_list')
 
     # Restrict unallowed users
     if projectObj.author != request.user:
-        redirect('proj:project_list')
+        return redirect('proj:project_list')
 
     if request.method == 'POST':
         project_form = ProjectCreateForm(instance=projectObj, data=request.POST)
