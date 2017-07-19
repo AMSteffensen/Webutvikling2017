@@ -10,8 +10,10 @@ def get_current_timezone():
 
 
 class PublishedManager(models.Manager):
-    def get_queryset(self):
+    def published(self):
         return super(PublishedManager, self).get_queryset().filter(status='published')
+    def draft(self):
+        return super(PublishedManager, self).get_queryset().filter(status='draft')
 
 
 class Project(models.Model):
@@ -30,7 +32,7 @@ class Project(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default=STATUS_CHOICES[0][0])
 
     objects = models.Manager()
-    published = PublishedManager()
+    get = PublishedManager()
 
     class Meta:
         ordering = ('-publish',)

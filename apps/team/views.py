@@ -2,9 +2,7 @@ from django.http import Http404
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
-from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.utils.text import slugify
 from .models import Team
 from .models import TeamUser
 from .forms import TeamCreateForm
@@ -12,7 +10,7 @@ from snippets.unique_slug import unique_slugify
 
 
 def team_list(request):
-    teams = Team.public.all()
+    teams = Team.get.public()
     return render(request, 'team/list.html', {'teams': teams})
 
 
@@ -41,8 +39,7 @@ def team_detail(request, slug):
                 return redirect('team:team_list')
 
         # Get members of this team
-        teamUserObj = TeamUser.objects.filter(team_id=teamObj)
-        members = [getattr(member, 'user_id') for member in teamUserObj]
+        members = TeamUser.get.members(teamObj)
 
         return render(request, 'team/detail.html', {'team': teamObj, 'members': members})
 
