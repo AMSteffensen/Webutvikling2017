@@ -11,10 +11,10 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">-->
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script> <!-- Searchbar slide down -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="http://cdn.jsdelivr.net/jquery.cookie/1.4.1/jquery.cookie.min.js "></script>
-  <script src="https://code.jquery.com/jquery-1.10.2.js"></script> <!-- Searchbar slide down -->
   <!-- /External Resources -->
 
   <!-- My Resources -->
@@ -237,19 +237,15 @@
         {% endblock %}
     });
 
-  </script>
-
-  <script>
-    $("#searchIcon").click(function() {
-      if ( $( "#searchBar" ).is( ":hidden" ) ) {
-      $("#searchBar").slideDown(1000, function() {
-      });
-        } else {
-          $( "#searchBar" ).hide();
-        }
+  $("#searchIcon").click(function() {
+    if ( $( "#searchBar" ).is( ":hidden" ) ) {
+    $("#searchBar").slideDown(1000, function() {
     });
-  </script>
-
+      } else {
+        $( "#searchBar" ).hide();
+      }
+  });
+</script>
 
 </body>
 
