@@ -75,10 +75,10 @@
 
           <div class="col-md-6 socl-icons">
             <ul>
-              <li><a href="#" id="searchIcon"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+              <li><a id="searchIcon" style="cursor: pointer"><i class="fa fa-search" aria-hidden="true"></i></a></li>
               <li><a href="#"><i class="fa fa-comments" aria-hidden="true"></i></a></li>
 
-              <li><a href="#"><i class="fa fa-bell" aria-hidden="true"></i></i></a></li>
+              <li><a href="#"><i class="fa fa-bell" aria-hidden="true"></i></a></li>
               <li><a href="{{ request.user.get_absolute_url }}">
                 <i>
                   {% if user.profile.photo %}
@@ -239,10 +239,11 @@
 
   $("#searchIcon").click(function() {
     if ( $( "#searchBar" ).is( ":hidden" ) ) {
-    $("#searchBar").slideDown(1000, function() {
+    $("#searchBar").slideDown(350, function() {
     });
       } else {
-        $( "#searchBar" ).hide();
+        $( "#searchBar" ).slideUp(350, function() {
+    });
       }
   });
 </script>

@@ -10,8 +10,11 @@ from snippets.unique_slug import unique_slugify
 
 
 def team_list(request):
+    # Get all public teams
     teams = Team.get.public()
-    return render(request, 'team/list.html', {'teams': teams})
+    # Get all teams you are a member of
+    memberOf = [getattr(team, 'team_id') for team in TeamUser.objects.filter(user_id=request.user)]
+    return render(request, 'team/list.html', {'teams': teams, 'memberOf': memberOf})
 
 
 def team_detail(request, slug):
