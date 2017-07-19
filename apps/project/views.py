@@ -11,7 +11,7 @@ from .models import Project
 
 
 def project_list(request):
-    projects = Project.published.all()
+    projects = Project.get.published()
     return render(request, 'project/list.html', {'projects': projects})
 
 
