@@ -27,6 +27,19 @@ $(document).ready(function() {
       return this;
   }});
 
+  <!-- Hide/show searchbar -->
+
+    document.getElementById("searchBar").style.display = 'none';
+      function hideShow() {
+
+          var x = document.getElementById('searchBar');
+          if (x.style.display === 'none') {
+              x.style.display = 'block';
+          } else {
+              x.style.display = 'none';
+          }
+      }
+
 
   // localStorage.setItem('shownOnRefresh', JSON.stringify(shownOnRefresh));
   //

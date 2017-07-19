@@ -14,6 +14,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="http://cdn.jsdelivr.net/jquery.cookie/1.4.1/jquery.cookie.min.js "></script>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script> <!-- Searchbar slide down -->
   <!-- /External Resources -->
 
   <!-- My Resources -->
@@ -74,7 +75,7 @@
 
           <div class="col-md-6 socl-icons">
             <ul>
-              <li><a href="#" onclick="hideShow()"><i class="fa fa-search" aria-hidden="true"></i></a></li>
+              <li><a href="#" id="searchIcon"><i class="fa fa-search" aria-hidden="true"></i></a></li>
               <li><a href="#"><i class="fa fa-comments" aria-hidden="true"></i></a></li>
 
               <li><a href="#"><i class="fa fa-bell" aria-hidden="true"></i></i></a></li>
@@ -238,19 +239,17 @@
 
   </script>
 
-<!-- Hide/show searchbar -->
   <script>
-document.getElementById("searchBar").style.display = 'none';
-  function hideShow() {
+    $("#searchIcon").click(function() {
+      if ( $( "#searchBar" ).is( ":hidden" ) ) {
+      $("#searchBar").slideDown(1000, function() {
+      });
+        } else {
+          $( "#searchBar" ).hide();
+        }
+    });
+  </script>
 
-      var x = document.getElementById('searchBar');
-      if (x.style.display === 'none') {
-          x.style.display = 'block';
-      } else {
-          x.style.display = 'none';
-      }
-  }
-</script>
 
 </body>
 
