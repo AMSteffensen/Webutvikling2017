@@ -16,16 +16,9 @@ $.ajaxSetup({
 
 // Keep SideNav collapse open on refresh (WORK IN PROGRESS)
 $(document).ready(function() {
-  Array.prototype.remove = function() {
-      var what, a = arguments, L = a.length, ax;
-      while (L && this.length) {
-          what = a[--L];
-          while ((ax = this.indexOf(what)) !== -1) {
-              this.splice(ax, 1);
-          }
-      }
-      return this;
-  }});
+  var loc = location.pathname.split("/");
+      $('#menu-content a[href*="/' + loc[loc.length -3] + "/" + loc[loc.length -2] + '/"]').parents("ul:first").attr("aria-expanded",true).addClass("in");
+  });
 
 
   // localStorage.setItem('shownOnRefresh', JSON.stringify(shownOnRefresh));
