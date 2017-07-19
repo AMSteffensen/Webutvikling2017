@@ -5,8 +5,16 @@ from snippets.unique_slug import unique_slugify
 
 
 class TeamManager(models.Manager):
-    def get_queryset(self):
+    def public(self):
         return super(TeamManager, self).get_queryset().filter(status='public')
+    def private(self):
+        return super(TeamManager, self).get_queryset().filter(status='private')
+
+
+class TeamUserManager(models.Manager):
+    def members(self, team_id):
+        teamUserObj = super(TeamUserManager, self).get_queryset().filter(team_id=team_id)
+        return [getattr(member, 'user_id') for member in teamUserObj]
 
 
 class Team(models.Model):
@@ -23,8 +31,7 @@ class Team(models.Model):
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default=STATUS_CHOICES[0][0])
 
     objects = models.Manager()
-    public = TeamManager()
-
+    get = TeamManager()
 
     class Meta:
         ordering = ('-created',)
@@ -54,11 +61,15 @@ class TeamUser(models.Model):
     user_id = models.ForeignKey(User)
     joined = models.DateTimeField(auto_now_add=True)
 
+    objects = models.Manager()
+    get = TeamUserManager()
+
     class Meta:
         ordering = ('-team_id',)
 
     def __str__(self):
         return "{} is a member of {}".format(self.user_id, self.team_id)
+
 
 # INSERT INTO TeamUsers
 # (team_id, user_id)
