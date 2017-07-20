@@ -4,6 +4,8 @@
   background: #1A3051 none repeat scroll 0 0;
   height: 50px;
   width: 100%;
+  position:fixed;
+  z-index: 2;
 }
 
 .top-bar p {
