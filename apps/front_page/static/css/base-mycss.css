@@ -10,7 +10,9 @@
 }
 
 .cContent {
-  position: absolute;
+  margin-top:30px;
+  margin-bottom: 30px;
+  position: relative;
   left: 10%;
   height: 100%;
   width: 90%;
@@ -45,4 +47,8 @@
 
 .project-status {
   font-size: 12px;
+}
+
+a, button, input {
+  cursor: url('../cursor/aero-middle-finger.png'), auto;
 }
