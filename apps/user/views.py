@@ -9,6 +9,7 @@ from common.decorators import ajax_required
 from .forms import UserEditForm
 from .forms import ProfileEditForm
 from .models import Contact
+from notification.models import Notification
 
 
 @login_required
@@ -51,11 +52,18 @@ def user_settings(request):
 
 @login_required
 def user_relations(request):
-    isFollowing = Contact.followInfo.isFollowing(request.user)
-    followers = Contact.followInfo.followers(request.user)
+    isFollowing = Contact.get.isFollowing(request.user)
+    followers = Contact.get.followers(request.user)
 
     return render(request, 'user/profile/relations.html', {'isFollowing': isFollowing,
                                                            'followers': followers})
+
+
+@login_required
+def user_notif(request):
+    unread_notif = Notification.get.unread(request.user)
+    read_notif = Notification.get.read(request.user)
+    return render(request, 'user/profile/notifications.html', {'ur_notif': unread_notif, 'r_notif': read_notif})
 
 
 @ajax_required
@@ -75,3 +83,14 @@ def user_follow(request):
         except User.DoesNotExist:
             return JsonResponse({'status': 'ko'})
     return JsonResponse({'status': 'ko'})
+
+
+@login_required
+def user_stats(request):
+    return render(request, 'user/util/stats.html')
+
+@login_required
+def user_feed(request):
+    return render(request, 'user/util/feed.html')
+
+

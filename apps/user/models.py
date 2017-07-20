@@ -43,7 +43,7 @@ class Contact(models.Model):
 
 
     objects = models.Manager()
-    followInfo = ContactManager()
+    get = ContactManager()
 
 
 # Add following field to User dynamically
