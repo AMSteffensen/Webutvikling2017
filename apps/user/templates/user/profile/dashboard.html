@@ -3,9 +3,9 @@
 {% block title %}Dashbord{% endblock %}
 
 {% block content %}
-<h1>Dashbord</h1>
-<p>Dette er dashbordet</p>
-
+  <h1>Dashbord</h1>
+  <p>Dette er dashbordet</p>
+  <p><a href="{% url 'user:user_notif' %}">Notifikasjoner</a></p>
 {% endblock %}
 
 {% block domready %}

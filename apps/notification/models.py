@@ -3,9 +3,10 @@ from django.contrib.auth.models import User
 
 
 class NotificationManager(models.Manager):
-    def unread(self):
-        return super(NotificationManager, self).get_queryset().filter(read=False)
-
+    def unread(self, user_id):
+        return super(NotificationManager, self).get_queryset().filter(user_to=user_id, read=False)
+    def read(self, user_id):
+        return super(NotificationManager, self).get_queryset().filter(user_to=user_id, read=True)
 
 
 class Notification(models.Model):
@@ -14,6 +15,8 @@ class Notification(models.Model):
         ('project', 'project'),
         ('user', 'user'),
     )
+
+
 
     user_from = models.ForeignKey(User, related_name='user_from')
     user_to = models.ForeignKey(User, related_name='user_to')
@@ -24,7 +27,7 @@ class Notification(models.Model):
     context = models.CharField(max_length=10, choices=CONTEXT_TYPE)
 
     objects = models.Manager()
-    unread = NotificationManager()
+    get = NotificationManager()
 
 
     class Meta:

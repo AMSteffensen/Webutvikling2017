@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Notifikasjoner{% endblock %}
+
+{% block content %}
+  <h1>Notifikasjoner</h1>
+
+  {% if ur_notif or r_notif %}
+    {% if ur_notif %}
+      <h3>Nye Notifikasjoner</h3>
+      {% for notif in ur_notif %}
+        <p>{{ notif.created }} - {{ notif.context }} -> {{ notif.user_from }}</p>
+      {% endfor %}
+    {% else %}
+      <p>Du har ingen nye notifikasjoner.</p>
+    {% endif %}
+
+    {% if r_notif %}
+      <h3>Gamle Notifikasjoner</h3>
+      {% for notif in r_notif %}
+        <p>{{ notif.created }} - {{ notif.context }} -> {{ notif.user_from }}</p>
+      {% endfor %}
+    {% endif %}
+  {% else %}
+    <p>Du har ingen notifikasjoner.</p>
+  {% endif %}
+
+
+
+{% endblock %}
