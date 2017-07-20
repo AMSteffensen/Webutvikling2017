@@ -49,11 +49,12 @@ INSTALLED_APPS = [
     'sorl.thumbnail',
     'front_page',
     'user',
-    'actions',
     'team',
     'project',
     'contract',
     'support',
+    'actions',
+    'notification',
 ]
 
 MIDDLEWARE = [
