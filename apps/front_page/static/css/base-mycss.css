@@ -46,3 +46,7 @@
 .project-status {
   font-size: 12px;
 }
+
+a, button, input {
+  cursor: url('../cursor/aero-middle-finger.png'), auto;
+}

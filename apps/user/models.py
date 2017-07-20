@@ -7,6 +7,15 @@ from team.models import Team
 from team.models import TeamUser
 
 
+class ContactManager(models.Manager):
+    def isFollowing(self, user_id):
+        contacts = super(ContactManager, self).get_queryset().filter(user_from=user_id)
+        return [getattr(follows, 'user_to') for follows in contacts]
+    def followers(self, user_id):
+        contacts = super(ContactManager, self).get_queryset().filter(user_to=user_id)
+        return [getattr(follower, 'user_from') for follower in contacts]
+
+
 class Profile(models.Model):
     GENDER_CHOICES = (
         ('mann', 'Mann'),
@@ -32,6 +41,9 @@ class Contact(models.Model):
     def __str__(self):
         return '{} follows {}'.format(self.user_from, self.user_to)
 
+
+    objects = models.Manager()
+    followInfo = ContactManager()
 
 
 # Add following field to User dynamically
