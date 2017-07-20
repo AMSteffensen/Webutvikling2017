@@ -3,14 +3,12 @@ from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
-from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from common.decorators import ajax_required
 from .forms import UserEditForm
 from .forms import ProfileEditForm
 from .models import Contact
-
 
 
 @login_required
@@ -49,6 +47,15 @@ def user_detail(request, username):
 @login_required
 def user_settings(request):
     return render(request, 'user/profile/settings.html')
+
+
+@login_required
+def user_relations(request):
+    isFollowing = Contact.followInfo.isFollowing(request.user)
+    followers = Contact.followInfo.followers(request.user)
+
+    return render(request, 'user/profile/relations.html', {'isFollowing': isFollowing,
+                                                           'followers': followers})
 
 
 @ajax_required
