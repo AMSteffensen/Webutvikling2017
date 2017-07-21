@@ -11,20 +11,26 @@ class NotificationManager(models.Manager):
 
 class Notification(models.Model):
     CONTEXT_TYPE = (
+        ('none', 'none'),
         ('team', 'team'),
         ('project', 'project'),
         ('user', 'user'),
     )
 
-
+    ACTION_TYPE = (
+        ('none', 'none'),
+        ('team_req_join', 'ønsker å bli med i ditt team'),
+    )
 
     user_from = models.ForeignKey(User, related_name='user_from')
     user_to = models.ForeignKey(User, related_name='user_to')
+    foreignPK = models.PositiveIntegerField()
     created = models.DateTimeField(auto_now_add=True)
     read = models.BooleanField(default=False)
     url = models.URLField(blank=True)
 
-    context = models.CharField(max_length=10, choices=CONTEXT_TYPE)
+    context = models.CharField(max_length=10, choices=CONTEXT_TYPE, default='none')
+    action = models.CharField(max_length=25, choices=ACTION_TYPE, default='none')
 
     objects = models.Manager()
     get = NotificationManager()

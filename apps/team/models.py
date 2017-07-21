@@ -13,8 +13,16 @@ class TeamManager(models.Manager):
 
 class TeamUserManager(models.Manager):
     def members(self, team_id):
-        teamUserObj = super(TeamUserManager, self).get_queryset().filter(team_id=team_id)
-        return [getattr(member, 'user_id') for member in teamUserObj]
+        teamUserObjs = super(TeamUserManager, self).get_queryset().filter(team_id=team_id)
+        return [getattr(member, 'user_id') for member in teamUserObjs]
+    def memberOf(self, user_id):
+        teamUserObjs = super(TeamUserManager, self).get_queryset().filter(user_id=user_id)
+        return [getattr(teamObj, 'team_id') for teamObj in teamUserObjs]
+
+class TeamJoinManager(models.Manager):
+    def pending(self, user_id):
+        teamJoinObjs = super(TeamJoinManager, self).get_queryset().filter(user_ask=user_id)
+        return [getattr(teamReq, 'team_id') for teamReq in teamJoinObjs]
 
 
 class Team(models.Model):
@@ -75,3 +83,17 @@ class TeamUser(models.Model):
 # (team_id, user_id)
 # VALUES
 # ('1', '1');
+
+
+class TeamJoin(models.Model):
+    user_ask = models.ForeignKey(User)
+    team_id = models.ForeignKey(Team)
+    asked = models.DateTimeField(auto_now_add=True)
+    invited = models.BooleanField()
+    accepted = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ('-team_id',)
+
+    objects = models.Manager()
+    get = TeamJoinManager()

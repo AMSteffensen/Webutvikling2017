@@ -12,11 +12,41 @@
   {% for team in teams %}
     <h2><a href="{{ team.get_absolute_url }}">{{ team.name }}</a></h2>
     {% if team not in memberOf %}
-      <form action="#" class="inline">
-        <button type="button"><i class="fa fa-plus" aria-hidden="true"></i></button>
-      </form>
+      {% if team in pending %}
+        <button><i class="fa fa-clock-o" aria-hidden="true"></i> Pending</button>
+      {% else %}
+        <button type="button" id="req_join"
+                data-team="{{ team.pk }}"
+                data-action="team_req_join">
+          <i class="fa fa-plus" aria-hidden="true"></i> Req to join</button>
+      {% endif %}
     {% endif %}
     <p class="date">Opprettet {{ team.created }} av {{ team.author }}</p>
     {{ team.desc }}
   {% endfor %}
+{% endblock %}
+
+{% block domready %}
+    $('button#req_join').click(function(e){
+        e.preventDefault();
+        var buttonClicked = $(this);
+        $.post('{% url "team:team_req_join" %}',
+            {
+                team: $(this).data('team'),
+                action: $(this).data('action'),
+            },
+            function(data) {
+                if (data['status'] === 'ok') {
+                    $(buttonClicked).unbind();
+                    var $icon = (buttonClicked).find('i');
+                    $icon.removeClass('fa-plus');
+                    $icon.addClass('fa-clock-o');
+                    $(buttonClicked).html($icon);
+                    $(buttonClicked).append(' Pending');
+                    $(buttonClicked).removeAttr('id');
+                    $(buttonClicked).removeAttr('data-team');
+                    $(buttonClicked).removeAttr('data-action');
+                }
+            });
+    });
 {% endblock %}

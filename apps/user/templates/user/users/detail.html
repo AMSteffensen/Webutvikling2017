@@ -43,7 +43,7 @@
     {% endwith %}
 
     <div class="user_information">
-        <p>Navn: {{ user.first_name }}&nbsp;{{ user.last_name }}</p>
+        <p>Navn: {{ user.first_name }} {{ user.last_name }}</p>
         <p>Fødselsdato: {{ user.profile.date_of_birth }}</p>
         <p>Mail: {{ user.email }}</p>
     </div>

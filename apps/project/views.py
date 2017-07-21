@@ -23,9 +23,11 @@ def project_detail(request, year, month, day, slug):
         except Http404:
             return redirect('proj:project_list')
 
-        project_title = projectObj.title
-        projectObj.delete()
-        return render(request, 'project/project_deleted.html', {'project_title': project_title})
+        # Check if you actually own this project
+        if projectObj.author == request.user:
+            project_title = projectObj.title
+            projectObj.delete()
+            return render(request, 'project/project_deleted.html', {'project_title': project_title})
 
     else:
         # Trying to get a published project

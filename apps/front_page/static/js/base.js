@@ -14,6 +14,9 @@ $.ajaxSetup({
 });
 
 
+
+
+
 // Keep SideNav collapse open on refresh (WORK IN PROGRESS)
 $(document).ready(function() {
   var loc = location.pathname.split("/");

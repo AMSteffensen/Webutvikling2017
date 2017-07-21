@@ -1,20 +1,28 @@
+from django.http import JsonResponse
 from django.http import Http404
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
+from common.decorators import ajax_required
 from .models import Team
 from .models import TeamUser
+from .models import TeamJoin
 from .forms import TeamCreateForm
+from notification.models import Notification
 from snippets.unique_slug import unique_slugify
 
 
 def team_list(request):
     # Get all public teams
     teams = Team.get.public()
+    # Get all teams you're waiting to join
+    pending = TeamJoin.get.pending(request.user)
     # Get all teams you are a member of
-    memberOf = [getattr(team, 'team_id') for team in TeamUser.objects.filter(user_id=request.user)]
-    return render(request, 'team/list.html', {'teams': teams, 'memberOf': memberOf})
+    memberOf = TeamUser.get.memberOf(request.user)
+    return render(request, 'team/list.html', {'teams': teams, 'memberOf': memberOf, 'pending': pending})
 
 
 def team_detail(request, slug):
@@ -73,3 +81,48 @@ def team_mine(request):
     memberOf = TeamUser.objects.filter(user_id=request.user)
     teams = [getattr(team, 'team_id') for team in memberOf]
     return render(request, 'team/my_teams.html', {'teams': teams})
+
+
+@ajax_required
+@require_POST
+@login_required
+def team_req_join(request):
+    teamPK = request.POST.get('team')
+    action = request.POST.get('action')
+    print("ajax submit")
+
+    try:
+        team = get_object_or_404(Team, pk=teamPK)
+    except Http404:
+        print("team not found", teamPK)
+        return JsonResponse({'status': 'ko'})
+
+    author = team.author
+
+    if TeamJoin.objects.filter(user_ask=request.user,
+                               team_id=team,
+                               invited=False,
+                               accepted=False).exists():
+        print("Did exist")
+        return JsonResponse({'status': 'ko'})
+
+    print("Did not exist")
+    notif_req = Notification(
+        user_from=request.user,
+        user_to=author,
+        foreignPK=teamPK,
+        context='team',
+        action=action,
+    )
+    notif_req.save()
+
+    team_req = TeamJoin(
+        user_ask=request.user,
+        team_id=team,
+        invited=False,
+        accepted=False
+    )
+    team_req.save()
+
+    print("Created!")
+    return JsonResponse({'status': 'ok', 'team': teamPK})

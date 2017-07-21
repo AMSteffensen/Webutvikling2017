@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Team
 from .models import TeamUser
+from .models import TeamJoin
 
 
 class TeamAdmin(admin.ModelAdmin):
@@ -14,6 +15,10 @@ class TeamUserAdmin(admin.ModelAdmin):
     def get_name(self, obj):
         return obj.team_id.name
 
+class TeamJoinAdmin(admin.ModelAdmin):
+    list_display = ('user_ask', 'team_id', 'asked', 'invited', 'accepted')
+    ordering = ['team_id',]
 
 admin.site.register(Team, TeamAdmin)
 admin.site.register(TeamUser, TeamUserAdmin)
+admin.site.register(TeamJoin, TeamJoinAdmin)

@@ -9,7 +9,7 @@
     {% if ur_notif %}
       <h3>Nye Notifikasjoner</h3>
       {% for notif in ur_notif %}
-        <p>{{ notif.created }} - {{ notif.context }} -> {{ notif.user_from }}</p>
+        <p><em>{{ notif.created }}</em> - <a href="{{ notif.user_from.get_absolute_url }}">{{ notif.user_from }}</a> {{ notif.get_action_display }}.</p>
       {% endfor %}
     {% else %}
       <p>Du har ingen nye notifikasjoner.</p>
@@ -18,7 +18,7 @@
     {% if r_notif %}
       <h3>Gamle Notifikasjoner</h3>
       {% for notif in r_notif %}
-        <p>{{ notif.created }} - {{ notif.context }} -> {{ notif.user_from }}</p>
+        <p><em>{{ notif.created }}</em> - <a href="{{ notif.user_from.get_absolute_url }}">{{ notif.user_from }}</a> {{ notif.get_action_display }}.</p>
       {% endfor %}
     {% endif %}
   {% else %}
