@@ -3,8 +3,14 @@
 <li>
   <div id="notif-panel" class="dropdown">
     <a class="dropdown-toggle"><i class="fa fa-bell widthHeight" aria-hidden="true"></i><span id="notif-amount" class="badge cBadge">{{ notif_list|length }}</span></a>
-    <ul class="dropdown-menu message-dropdown  box n2">
-      <div class="arrow-up n1"></div>
+    <ul class="dropdown-menu message-dropdown notificationBar nMargLeft">
+      <div class="arrow nArrowPos"></div>
+      <li class="message-preview barTopBottom margTop1">
+        <h5 class="media-heading hStyle"><strong>Notifications</strong>
+        </h5>
+      </li>
+      <li class="topPadding">
+      </li>
       {% if notif_list %}
         {% for noti in notif_list %}
           <li class="message-preview">
@@ -62,6 +68,12 @@
           </a>
         </li>
       {% endif %}
+      <li class="message-preview barTopBottom margTop2">
+        <h5 class="media-heading hStyle"><strong>View more...</strong>
+        </h5>
+      </li>
+      <li class="botPadding">
+      </li>
     </ul>
   </div>
 </li>
