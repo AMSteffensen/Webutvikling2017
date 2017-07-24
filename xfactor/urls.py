@@ -49,6 +49,7 @@ urlpatterns = [
     # support app
     #url(r'^support/', include('support.urls', namespace='sup', app_name='support')),
 
+    url(r'^notif/', include('notification.urls', namespace='noti', app_name='notifications')),
 ]
 
 if settings.DEBUG:

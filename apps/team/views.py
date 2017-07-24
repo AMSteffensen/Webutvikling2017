@@ -3,7 +3,6 @@ from django.http import Http404
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
-from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from common.decorators import ajax_required
@@ -13,7 +12,7 @@ from .models import TeamJoin
 from .forms import TeamCreateForm
 from notification.models import Notification
 from snippets.unique_slug import unique_slugify
-
+from snippets.hasher import encode_data
 
 def team_list(request):
     # Get all public teams
@@ -107,12 +106,18 @@ def team_req_join(request):
         return JsonResponse({'status': 'ko'})
 
     print("Did not exist")
+
+    print("Generating hash")
+    notif_url = encode_data([request.user.pk, teamPK])
+    print(notif_url)
+
     notif_req = Notification(
         user_from=request.user,
         user_to=author,
         foreignPK=teamPK,
         context='team',
         action=action,
+        url=notif_url,
     )
     notif_req.save()
 

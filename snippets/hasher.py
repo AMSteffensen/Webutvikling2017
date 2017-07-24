@@ -7,10 +7,10 @@ from .swapper import swap
 
 
 def _urlify(text):
-    return text.replace('=', '#').replace('/', '.').replace('+', '-')
+    return text.replace('=', '_').replace('/', '.').replace('+', '-')
 
 def _deurlify(text):
-    return text.replace('#', '=').replace('.', '/').replace('-', '+')
+    return text.replace('_', '=').replace('.', '/').replace('-', '+')
 
 
 def encode_data(dataLst):
@@ -29,14 +29,16 @@ def encode_data(dataLst):
     compressed = zlib.compress(translated.encode())
     text = b64encode(compressed)
     ourHash = hashlib.md5(secret + text).hexdigest()[:12]
-    return ourHash, _urlify(text.decode())
+    return ourHash + _urlify(text.decode())
 
 
-def decode_data(ourHash, enc):
+def decode_data(payload):
     secret = b"9m6WDiXc4X"
     salt = b"f3bulEiIpR"
     separator = "#"
 
+    ourHash = payload[:12]
+    enc = payload[12:]
     enc = _deurlify(enc).encode()
 
     translateA = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789+/"
