@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Relasjoner{% endblock %}
+
+{% block content %}
+  <h1>Relasjoner</h1>
+
+  <h3>Du følger</h3>
+  {% if isFollowing %}
+    <ul>
+      {% for follow_user in isFollowing %}
+        <li><a href="{{ follow_user.get_absolute_url }}">{{ follow_user }}</a></li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Du følger ingen brukere.</p>
+  {% endif %}
+
+  <h3>Følger deg</h3>
+  {% if followers %}
+    <ul>
+      {% for user_follow in followers %}
+        <li><a href="{{ user_follow.get_absolute_url }}">{{ user_follow }}</a></li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>Ingen følger deg :(</p>
+  {% endif %}
+
+{% endblock %}
