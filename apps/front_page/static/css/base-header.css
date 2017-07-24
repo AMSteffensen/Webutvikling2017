@@ -4,7 +4,7 @@
   background: #1A3051 none repeat scroll 0 0;
   height: 50px;
   width: 100%;
-  position:fixed;
+  position: fixed;
   z-index: 2;
 }
 
@@ -13,7 +13,9 @@
   font: 500 20px/38px roboto;
 }
 
+
 /*Icons in header */
+
 .socl-icons {
   padding-top: 5px;
 }
@@ -32,7 +34,6 @@
 .top-bar .socl-icons li a {
   display: inline-block;
   border-radius: 0;
-
   /*background: #000;*/
   color: #fff;
   margin: 5px 0px;
@@ -42,93 +43,140 @@
   color: #fff;
 }
 
-.top-bar .socl-icons li a .widthHeight{
+.top-bar .socl-icons li a .widthHeight {
   width: 30px;
   height: 30px;
   line-height: 30px;
 }
 
-.username{
-  float:right;
-  color:white;
-  padding-top:10px;
+.username {
+  float: right;
+  color: white;
+  padding-top: 10px;
 }
+
 
 /*Search bar*/
 
 .searchbarBody {
   margin-top: 8px;
-  margin-left:40px;
+  margin-left: 40px;
 }
 
-.searchbarInput{
-  border:2px #1A3051;
+.searchbarInput {
+  border: 2px #1A3051;
   border-radius: 5px;
 }
 
 
-/* Messages */
-.top-bar .socl-icons .arrow-up  {
+/* Messages and Notifications */
+
+
+/* -Dropdown Menu */
+
+.top-bar .socl-icons li .notificationBar {
+  width: 360px;
+  height: 370px;
+  margin-top: 10px;
+  overflow-y: scroll;
+}
+
+.top-bar .socl-icons .mMargLeft {
+  /*Position for message dropdown */
+  margin-left: -51px;
+}
+
+.top-bar .socl-icons .nMargLeft {
+  /*Position for notification dropdown */
+  margin-left: -89px;
+}
+
+
+/* -Arrow */
+
+.top-bar .socl-icons .arrow {
   width: 0;
   height: 0;
   border-left: 7px solid transparent;
   border-right: 7px solid transparent;
-
   border-bottom: 7px solid #C5C5C5;
-
-
-
+  position: fixed;
+  margin-top: -13px;
 }
 
-.top-bar .socl-icons .m1{
-    margin-left: 52px;
+.top-bar .socl-icons li .mArrowPos {
+  /*Position for message dropdown arrow*/
+  margin-left: 57px;
 }
 
-.top-bar .socl-icons .n1{
-    margin-left: 90px;
-}
-
-.top-bar .socl-icons li .box{
-  width:360px;
-  height: 335px;
-  margin-left: -45px;
-  margin-top:10px;
-  overflow-y: scroll;
-
+.top-bar .socl-icons li .nArrowPos {
+  /*Position for notification dropdown arrow*/
+  margin-left: 95px;
 }
 
 
-.top-bar .socl-icons li .m2{
-  margin-left: -42px;
+/* -Header and Footer */
 
+.top-bar .socl-icons .barTopBottom {
+  /* Used for the header and the footer in the notification dropdown menu */
+  position: fixed;
+  background: #fff none repeat scroll 0 0;
+  width: 340px;
+  height: 20px;
 }
-.top-bar .socl-icons li .n2{
-  margin-left: -80px;
 
+.top-bar .socl-icons .margTop1 {
+  /*Position for header*/
+  margin-top: -5px;
+  border-bottom: 1px solid #c5c5c5;
+  padding: 3px;
 }
-.top-bar .socl-icons li .image{
-  width:90%;
+
+.top-bar .socl-icons .margTop2 {
+  /*position for footer*/
+  margin-top: 343px;
+  border-top: 1px solid #c5c5c5;
+  padding: 3px;
+}
+
+.top-bar .socl-icons .topPadding {
+  /* Padding after header */
+  margin-top: 12px;
+}
+
+.top-bar .socl-icons .botPadding {
+  /* Padding before footer */
+  margin-top: 10px;
+}
+
+
+/* -Content */
+
+.top-bar .socl-icons li .image {
+  width: 90%;
   height: 90%;
-  float:left;
+  float: left;
+}
 
+.top-bar .socl-icons li .hStyle {
+  font-size: 12px;
+  color: black;
+  text-align: left;
 }
-.top-bar .socl-icons li .hStyle{
-font-size: 12px;
-color:black;
-text-align: left;
 
+.top-bar .socl-icons li .pStyle {
+  text-align: left;
+  line-height: 5px;
+  font-family: helvetica, sans-serif;
 }
-.top-bar .socl-icons li .pStyle{
-text-align: left;
-line-height: 5px;
-font-family: helvetica, sans-serif;
-}
-.top-bar .socl-icons li .p1Style{
-line-height: 2px;
+
+.top-bar .socl-icons li .p1Style {
+  line-height: 2px;
   font-size: 9px;
-font-style: italic;
+  font-style: italic;
 }
-.top-bar .socl-icons li .p2Style{
+
+.top-bar .socl-icons li .p2Style {
   line-height: 5px;
   font-size: 11px;
 }

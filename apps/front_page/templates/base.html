@@ -4,6 +4,7 @@
 
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}{% endblock %}</title>
 
   <!-- External Resources -->
@@ -11,7 +12,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">-->
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script src="https://code.jquery.com/jquery-1.10.2.js"></script> <!-- Searchbar slide down -->
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <!-- Searchbar slide down -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="http://cdn.jsdelivr.net/jquery.cookie/1.4.1/jquery.cookie.min.js "></script>
@@ -31,9 +33,9 @@
 
 <body>
 
-<!-- WRAPPER -->
-<div class="cWrapper">
-  {% if request.user.is_authenticated %}
+  <!-- WRAPPER -->
+  <div class="cWrapper">
+    {% if request.user.is_authenticated %}
     <!--Header-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <div class="top-bar">
@@ -69,17 +71,17 @@
                 </div>
               </div>
             </div>
-
-            <!--/Search bar -->
           </div>
+          <!--/Search bar -->
 
           <div class="col-md-6 socl-icons">
             <ul>
               <li><a id="searchIcon" style="cursor: pointer"><i class="fa fa-search widthHeight" aria-hidden="true"></i></a></li>
-              <!--<li><a href="#"><i class="fa fa-comments" aria-hidden="true"></i></a></li>-->
 
               <!-- Messages -->
+
               <li>
+<<<<<<< HEAD
                 <div id="msg-panel" class="dropdown">
                   <a class="dropdown-toggle"><i class="fa fa-comments widthHeight" aria-hidden="true"></i> </a>
 
@@ -132,8 +134,38 @@
                           </div>
                         </div>
                       </a>
+=======
+                <div class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-comments widthHeight" aria-hidden="true"></i> </a>
+                  <ul class="dropdown-menu message-dropdown  notificationBar mMargLeft">
+                    <div class="arrow mArrowPos"></div>
+
+                    <li class="message-preview barTopBottom margTop1">
+                      <h5 class="media-heading hStyle"><strong>Messages</strong>
+                      </h5>
                     </li>
 
+                    <li class="topPadding">
+>>>>>>> 62c8c37e4c1246e46950d8a3857a9dd9fbcca9a3
+                    </li>
+
+                    <li class="message-preview ">
+                      <a href="#">
+                        <div class="media">
+                          <span class="pull-left">
+                        <img class="media-object image" src="http://placehold.it/50x50" alt="">
+                        </span>
+                          <div class="media-body">
+                            <h5 class="media-heading hStyle"><strong>John Smith</strong>
+                            </h5>
+                            <p class="small text-muted p1Style pStyle"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                            <p class="pStyle p2Style">Lorem ipsum dolor sit amet, consectetur gtdd...</p>
+                          </div>
+                        </div>
+                      </a>
+                    </li>
+
+<<<<<<< HEAD
                     <li class="message-preview ">
                       <a href="#">
                         <div class="media">
@@ -164,37 +196,64 @@
                           </div>
                         </div>
                       </a>
+=======
+                    <li class="message-preview barTopBottom margTop2">
+                      <h5 class="media-heading hStyle"><strong>View more...</strong>
+                    </h5>
                     </li>
-
-                    <li class="message-preview ">
-                      <a href="#">
-                        <div class="media">
-                          <span class="pull-left">
-                        <img class="media-object image" src="http://placehold.it/50x50" alt="">
-                        </span>
-                          <div class="media-body">
-                            <h5 class="media-heading hStyle"><strong>John Smith</strong>
-                            </h5>
-                            <p class="small text-muted p1Style pStyle"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                            <p class="p2Style pStyle">Lorem ipsum dolor sit amet, consectetur gtdd...</p>
-                          </div>
-                        </div>
-                      </a>
+                    <li class="botPadding">
+>>>>>>> 62c8c37e4c1246e46950d8a3857a9dd9fbcca9a3
                     </li>
 
                   </ul>
-
                 </div>
 
               </li>
               <!-- /Messages -->
 
-              <!--<li><a href="#"><i class="fa fa-bell widthHeight" aria-hidden="true"></i></a></li>-->
 
               <!-- Notifications -->
+<<<<<<< HEAD
 
               {% include "notifications.html" %}
 
+=======
+              <li>
+                <div class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell widthHeight" aria-hidden="true"></i> </a>
+                  <ul class="dropdown-menu message-dropdown  notificationBar nMargLeft">
+                    <div class="arrow nArrowPos"></div>
+                    <li class="message-preview barTopBottom margTop1">
+                      <h5 class="media-heading hStyle"><strong>Notifications</strong>
+                      </h5>
+                    </li>
+                    <li class="topPadding">
+                    </li>
+                    <li class="message-preview ">
+                      <a href="#">
+                        <div class="media">
+                          <span class="pull-left">
+                        <img class="media-object image" src="http://placehold.it/50x50" alt="">
+                        </span>
+                          <div class="media-body">
+                            <h5 class="media-heading hStyle"><strong>John Smith</strong>
+                          </h5>
+                            <p class="small text-muted p1Style pStyle"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                            <p class="pStyle p2Style">Lorem ipsum dolor sit amet, consectetur gtdd...</p>
+                          </div>
+                        </div>
+                      </a>
+                    </li>
+                    <li class="message-preview barTopBottom margTop2">
+                      <h5 class="media-heading hStyle"><strong>View more...</strong>
+                    </h5>
+                    </li>
+                    <li class="botPadding">
+                    </li>
+                  </ul>
+                </div>
+              </li>
+>>>>>>> 62c8c37e4c1246e46950d8a3857a9dd9fbcca9a3
               <!-- /Notifications -->
 
               <li><a href="{{ request.user.get_absolute_url }}">
@@ -220,7 +279,10 @@
                     {% endif %}
                   {% endif %}
                 </i></a></li>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 62c8c37e4c1246e46950d8a3857a9dd9fbcca9a3
               <div class="username"><span>{{ request.user.first_name }}</span></div>
             </ul>
           </div>
@@ -311,8 +373,8 @@
         </ul>
       </div>
     </div>
-  {% endif %}
-  <!-- /MENU-SIDEBAR -->
+    {% endif %}
+    <!-- /MENU-SIDEBAR -->
 
 
   <!-- CONTENT -->
@@ -329,6 +391,7 @@
           <div class="copyright">
             © 2017, XFactor, All rights reserved
           </div>
+<<<<<<< HEAD
         </div>
         <div class="col-md-6">
           <ul class="bottom_ul">
@@ -339,15 +402,24 @@
           </ul>
 
 
+=======
+          <div class="col-md-6">
+            <ul class="bottom_ul">
+              <li><a href="#">Om oss</a></li>
+              <li><a href="#">Kontakt oss</a></li>
+              <li><a href="{% url 'user:user_settings' %}">Innstillinger</a></li>
+            </ul>
+          </div>
+>>>>>>> 62c8c37e4c1246e46950d8a3857a9dd9fbcca9a3
         </div>
       </div>
     </div>
+    <!-- /FOOTER -->
+
   </div>
-  <!-- /FOOTER -->
+  <!-- /WRAPPER -->
 
-</div>
-<!-- /WRAPPER -->
-
+<<<<<<< HEAD
 <!-- Used for scripts in external template files -->
 <script>
     $(document).ready(function () {
@@ -384,6 +456,24 @@
         }
     });
 </script>
+=======
+  <!-- Used for scripts in external template files -->
+  <script>
+    $(document).ready(function() {
+      { % block domready %
+      } { % endblock %
+      }
+    });
+
+    $("#searchIcon").click(function() {
+      if ($("#searchBar").is(":hidden")) {
+        $("#searchBar").slideDown(350, function() {});
+      } else {
+        $("#searchBar").slideUp(350, function() {});
+      }
+    });
+  </script>
+>>>>>>> 62c8c37e4c1246e46950d8a3857a9dd9fbcca9a3
 
 </body>
 
