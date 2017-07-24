@@ -18,14 +18,10 @@ def team_handel_req(request):
     payload = request.POST.get('payload')
     action = request.POST.get('action')
 
-    print(payload)
-    print(action)
-
     # Verify the payload
     try:
         data = decode_data(payload)
     except Exception:
-        print("bad payload")
         return JsonResponse({'status': 'ko'})
 
     user_id = int(data[0])
@@ -34,7 +30,6 @@ def team_handel_req(request):
     # Verify the person is still waiting
     joinObj = TeamJoin.objects.filter(user_ask=user_id, team_id=team_id, invited=False)
     if not joinObj:
-        print("no teamjoin obj")
         return JsonResponse({'status': 'ko'})
 
     # Mark the notification as read
@@ -58,5 +53,4 @@ def team_handel_req(request):
     # Delete TeamJoin object
     joinObj.delete()
 
-    print("went well")
     return JsonResponse({'status': 'ok'})
