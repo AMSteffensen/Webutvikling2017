@@ -80,8 +80,8 @@
 
               <!-- Messages -->
               <li>
-                <div class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-comments widthHeight" aria-hidden="true"></i> </a>
+                <div id="msg-panel" class="dropdown">
+                  <a class="dropdown-toggle"><i class="fa fa-comments widthHeight" aria-hidden="true"></i> </a>
 
                   <ul class="dropdown-menu message-dropdown  box m2">
                     <div id="mArrow" class="arrow-up m1"></div>
@@ -93,7 +93,7 @@
                         </span>
                           <div class="media-body">
                             <h5 class="media-heading hStyle"><strong>John Smith</strong>
-                          </h5>
+                            </h5>
 
                             <p class="small text-muted p1Style pStyle"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                             <p class="pStyle p2Style">Lorem ipsum dolor sit amet, consectetur gtdd...</p>
@@ -110,7 +110,7 @@
                         </span>
                           <div class="media-body">
                             <h5 class="media-heading hStyle"><strong>John Smith</strong>
-                          </h5>
+                            </h5>
                             <p class="small text-muted p1Style pStyle"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                             <p class="p2Style pStyle">Lorem ipsum dolor sit amet, consectetur gtdd...</p>
                           </div>
@@ -126,7 +126,7 @@
                         </span>
                           <div class="media-body">
                             <h5 class="media-heading hStyle"><strong>John Smith</strong>
-                          </h5>
+                            </h5>
                             <p class="small text-muted p1Style pStyle"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                             <p class="p2Style pStyle">Lorem ipsum dolor sit amet, consectetur gtdd...</p>
                           </div>
@@ -142,7 +142,7 @@
                         </span>
                           <div class="media-body">
                             <h5 class="media-heading hStyle"><strong>John Smith</strong>
-                          </h5>
+                            </h5>
                             <p class="small text-muted p1Style pStyle"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                             <p class="p2Style pStyle">Lorem ipsum dolor sit amet, consectetur gtdd...</p>
                           </div>
@@ -158,7 +158,7 @@
                         </span>
                           <div class="media-body">
                             <h5 class="media-heading hStyle"><strong>John Smith</strong>
-                          </h5>
+                            </h5>
                             <p class="small text-muted p1Style pStyle"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                             <p class="p2Style pStyle">Lorem ipsum dolor sit amet, consectetur gtdd...</p>
                           </div>
@@ -174,7 +174,7 @@
                         </span>
                           <div class="media-body">
                             <h5 class="media-heading hStyle"><strong>John Smith</strong>
-                          </h5>
+                            </h5>
                             <p class="small text-muted p1Style pStyle"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
                             <p class="p2Style pStyle">Lorem ipsum dolor sit amet, consectetur gtdd...</p>
                           </div>
@@ -192,98 +192,9 @@
               <!--<li><a href="#"><i class="fa fa-bell widthHeight" aria-hidden="true"></i></a></li>-->
 
               <!-- Notifications -->
-              <li>
-                <div class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell widthHeight" aria-hidden="true"></i> </a>
-                  <ul class="dropdown-menu message-dropdown  box n2">
-                      <div class="arrow-up n1"></div>
-                    <li class="message-preview ">
-                      <a href="#">
-                        <div class="media">
-                          <span class="pull-left">
-                        <img class="media-object image" src="http://placehold.it/50x50" alt="">
-                        </span>
-                          <div class="media-body">
-                            <h5 class="media-heading hStyle"><strong>John Smith</strong>
-                          </h5>
 
-                            <p class="small text-muted p1Style pStyle"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                            <p class="pStyle p2Style">Lorem ipsum dolor sit amet, consectetur gtdd...</p>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
+              {% include "notifications.html" %}
 
-                    <li class="message-preview ">
-                      <a href="#">
-                        <div class="media">
-                          <span class="pull-left">
-                        <img class="media-object image" src="http://placehold.it/50x50" alt="">
-                        </span>
-                          <div class="media-body">
-                            <h5 class="media-heading hStyle"><strong>John Smith</strong>
-                          </h5>
-                            <p class="small text-muted p1Style pStyle"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                            <p class="p2Style pStyle">Lorem ipsum dolor sit amet, consectetur gtdd...</p>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-
-                    <li class="message-preview ">
-                      <a href="#">
-                        <div class="media">
-                          <span class="pull-left">
-                        <img class="media-object image" src="http://placehold.it/50x50" alt="">
-                        </span>
-                          <div class="media-body">
-                            <h5 class="media-heading hStyle"><strong>John Smith</strong>
-                          </h5>
-                            <p class="small text-muted p1Style pStyle"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                            <p class="p2Style pStyle">Lorem ipsum dolor sit amet, consectetur gtdd...</p>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-
-                    <li class="message-preview ">
-                      <a href="#">
-                        <div class="media">
-                          <span class="pull-left">
-                        <img class="media-object image" src="http://placehold.it/50x50" alt="">
-                        </span>
-                          <div class="media-body">
-                            <h5 class="media-heading hStyle"><strong>John Smith</strong>
-                          </h5>
-                            <p class="small text-muted p1Style pStyle"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                            <p class="p2Style pStyle">Lorem ipsum dolor sit amet, consectetur gtdd...</p>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-
-                    <li class="message-preview ">
-                      <a href="#">
-                        <div class="media">
-                          <span class="pull-left">
-                        <img class="media-object image" src="http://placehold.it/50x50" alt="">
-                        </span>
-                          <div class="media-body">
-                            <h5 class="media-heading hStyle"><strong>John Smith</strong>
-                          </h5>
-                            <p class="small text-muted p1Style pStyle"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                            <p class="p2Style pStyle">Lorem ipsum dolor sit amet, consectetur gtdd...</p>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-
-
-                  </ul>
-
-                </div>
-
-              </li>
               <!-- /Notifications -->
 
               <li><a href="{{ request.user.get_absolute_url }}">
@@ -310,7 +221,7 @@
                   {% endif %}
                 </i></a></li>
 
-                <div class="username"><span>{{ request.user.first_name }}</span></div>
+              <div class="username"><span>{{ request.user.first_name }}</span></div>
             </ul>
           </div>
         </div>
@@ -404,28 +315,28 @@
   <!-- /MENU-SIDEBAR -->
 
 
-    <!-- CONTENT -->
-    <div class="cContent" id="content">
-      {% block content %} {% endblock %}
-    </div>
-    <!-- /CONTENT -->
+  <!-- CONTENT -->
+  <div class="cContent" id="content">
+    {% block content %} {% endblock %}
+  </div>
+  <!-- /CONTENT -->
 
-    <!-- FOOTER -->
-    <div class="footer-bottom">
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-            <div class="copyright">
-              © 2017, XFactor, All rights reserved
-            </div>
+  <!-- FOOTER -->
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+          <div class="copyright">
+            © 2017, XFactor, All rights reserved
           </div>
-          <div class="col-md-6">
-            <ul class="bottom_ul">
-              <li><a href="#">Om oss</a></li>
-              <li><a href="#">Kontakt oss</a></li>
-              <li><a href="{% url 'user:user_settings' %}">Innstillinger</a></li>
+        </div>
+        <div class="col-md-6">
+          <ul class="bottom_ul">
+            <li><a href="#">Om oss</a></li>
+            <li><a href="#">Kontakt oss</a></li>
+            <li><a href="{% url 'user:user_settings' %}">Innstillinger</a></li>
 
-            </ul>
+          </ul>
 
 
         </div>
@@ -442,17 +353,36 @@
     $(document).ready(function () {
         {% block domready %}
         {% endblock %}
+
+        // Notification team join request
+        $('div#req-join-handle button').click(function (e) {
+            e.preventDefault();
+            var buttonClicked = $(this);
+            $.post('{% url "noti:handle-team-req" %}',
+                {
+                    payload: $(this).data('payload'),
+                    action: $(this).data('action')
+                },
+                function (data) {
+                    if (data['status'] === 'ok') {
+                        $(buttonClicked).unbind();
+                        buttonClicked.parent().parent().remove();
+                        var notif_amount = $('span#notif-amount');
+                        notif_amount.text(parseInt(notif_amount.text()) - 1);
+                    }
+                });
+        });
     });
 
-  $("#searchIcon").click(function() {
-    if ( $( "#searchBar" ).is( ":hidden" ) ) {
-    $("#searchBar").slideDown(350, function() {
+    $("#searchIcon").click(function () {
+        if ($("#searchBar").is(":hidden")) {
+            $("#searchBar").slideDown(350, function () {
+            });
+        } else {
+            $("#searchBar").slideUp(350, function () {
+            });
+        }
     });
-      } else {
-        $( "#searchBar" ).slideUp(350, function() {
-    });
-      }
-  });
 </script>
 
 </body>

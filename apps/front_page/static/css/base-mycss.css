@@ -49,6 +49,6 @@
   font-size: 12px;
 }
 
-* {
-  cursor: url('../images/aero-middle-finger.png'), auto;
-}
+/** {*/
+  /*cursor: url('../images/aero-middle-finger.png'), auto;*/
+/*}*/
