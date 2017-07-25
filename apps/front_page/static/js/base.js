@@ -20,30 +20,30 @@ $(document).ready(function () {
     $('#menu-content a[href*="/' + loc[loc.length - 3] + "/" + loc[loc.length - 2] + '/"]').parents("ul:first").attr("aria-expanded", true).addClass("in");
 
 
+    // TOGGLE SOCIAL NOTIFICATIONS PANEL
     // Toggle message and notifications panel
     $('div#notif-panel a.dropdown-toggle').on('mouseup', function (e) {
+        $('div#msg-panel a.dropdown-toggle').parent().removeClass('open');
         $(this).parent().toggleClass('open');
         e.stopPropagation();
     });
 
     // Toggle message and notifications panel
     $('div#msg-panel a.dropdown-toggle').on('mouseup', function (e) {
+        $('div#notif-panel a.dropdown-toggle').parent().removeClass('open');
         $(this).parent().toggleClass('open');
         e.stopPropagation();
     });
 
-    // // Close message and notifications panel when clicking anywhere else
-    // $('body').on('mouseup', function (e) {
-    //     var notifIcon = $('div#notif-panel a.dropdown-toggle');
-    //     var msgIcon = $('div#msg-panel a.dropdown-toggle');
-    //     var socialDropdown = $('.dropdown-menu');
-    //     if (!notifIcon.is(e.target)) {
-    //         notifIcon.parent().removeClass('open');
-    //     }
-    //     if (!msgIcon.is(e.target)) {
-    //         msgIcon.parent().removeClass('open');
-    //     }
-    // });
+    // Close message and notifications panel when clicking anywhere else
+    $('body').on('mouseup', function (e) {
+        var socialIcon = $('a.dropdown-toggle');
+        var socialDropdown = $('.dropdown-menu');
+        if (!socialIcon.is(e.target) && !socialDropdown.is(e.target)) {
+            socialIcon.parent().removeClass('open');
+        }
+    });
+    // TOGGLE SOCIAL NOTIFICATIONS PANEL ------------------------------
 
 });
 
