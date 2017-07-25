@@ -4,6 +4,9 @@
 
 {% block content %}
   <h1>Feed</h1>
+
+<div class="panel panel-default">
+ <div class="panel-body">
   {% load notifs %}
   {% if ur_notif or r_notif %}
     {% if ur_notif %}
@@ -24,7 +27,6 @@
   {% else %}
     <p>Du har ingen notifikasjoner.</p>
   {% endif %}
-
-
-
+ </div>
+</div>
 {% endblock %}
