@@ -32,7 +32,7 @@ urlpatterns = [
     #url(r'^$', frontpage), 
 
     # user authentication app
-    url(r'^uauth/', include('user_auth.urls', namespace='social', app_name='user_auth')),
+    url(r'^uauth/', include('user_auth.urls', namespace='uauth', app_name='user_auth')),
     #url(r'^uauth/', include('social_django.urls', namespace='social')),  # <--
 
     # user app
@@ -50,6 +50,8 @@ urlpatterns = [
     # support app
     #url(r'^support/', include('support.urls', namespace='sup', app_name='support')),
 
+    # Notifications
+    url(r'^notif/', include('notification.urls', namespace='noti', app_name='notifications')),
 ]
 
 if settings.DEBUG:
