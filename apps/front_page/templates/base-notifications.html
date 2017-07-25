@@ -16,7 +16,7 @@
           <li class="message-preview">
             {% if noti.action == 'team_req_join' %}
               <div id="req-join-handle" class="pull-right">
-                <button id="accept" data-action="accept" data-payload="{{ noti.url }}"><i class="fa fa-check" aria-hidden="true"></i></button>
+                <button id="accept" type="button" data-action="accept" data-payload="{{ noti.url }}"><i class="fa fa-check" aria-hidden="true"></i></button>
                 <button id="decline" type="button" data-action="decline" data-payload="{{ noti.url }}"><i class="fa fa-times" aria-hidden="true"></i></button>
               </div>
             {% endif %}
@@ -47,8 +47,8 @@
                 <div class="media-body">
                   <h5 class="media-heading hStyle"><strong>{{ noti.user_from.first_name }} {{ noti.user_from.last_name }}</strong></h5>
                   <p class="small text-muted p1Style pStyle"><i class="fa fa-clock-o"></i> {{ noti.created }}</p>
-                  {% if noti.action == "team_req_join" %}
-                    <p class="pStyle p2Style">{{ noti.user_from.first_name }} ønsker å bli med i ditt team; {% get_team_name noti.foreignPK %}</p>
+                  {% if noti.context == "team" %}
+                    <p class="pStyle p2Style">{{ noti.user_from.first_name }} {{ noti.get_action_display }} {% get_team_name noti.foreignPK %}</p>
                   {% else %}
                     <p class="pStyle p2Style">{{ noti.user_from.first_name }} {{ noti.get_action_display }}</p>
                   {% endif %}

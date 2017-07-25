@@ -20,6 +20,8 @@ class Notification(models.Model):
     ACTION_TYPE = (
         ('none', 'none'),
         ('team_req_join', 'ønsker å bli med i ditt team'),
+        ('team_req_acc', 'har godtatt ditt team forespørsel'),
+        ('team_req_dec', 'har avslått ditt team forespørsel'),
     )
 
     user_from = models.ForeignKey(User, related_name='user_from')

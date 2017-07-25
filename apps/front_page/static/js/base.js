@@ -21,20 +21,27 @@ $(document).ready(function () {
 
 
     // Toggle message and notifications panel
-    $('div#notif-panel a.dropdown-toggle').click(function (e) {
+    $('div#notif-panel a.dropdown-toggle').on('mouseup', function (e) {
         $(this).parent().toggleClass('open');
+        e.stopPropagation();
     });
 
     // Toggle message and notifications panel
-    $('div#msg-panel a.dropdown-toggle').click(function (e) {
+    $('div#msg-panel a.dropdown-toggle').on('mouseup', function (e) {
         $(this).parent().toggleClass('open');
+        e.stopPropagation();
     });
 
     // // Close message and notifications panel when clicking anywhere else
-    // $('body').on('click', function (e) {
-    //     var socialIcon = $('div#notif-panel');
-    //     if (!socialIcon.is(e.target)) {
-    //         socialIcon.removeClass('open');
+    // $('body').on('mouseup', function (e) {
+    //     var notifIcon = $('div#notif-panel a.dropdown-toggle');
+    //     var msgIcon = $('div#msg-panel a.dropdown-toggle');
+    //     var socialDropdown = $('.dropdown-menu');
+    //     if (!notifIcon.is(e.target)) {
+    //         notifIcon.parent().removeClass('open');
+    //     }
+    //     if (!msgIcon.is(e.target)) {
+    //         msgIcon.parent().removeClass('open');
     //     }
     // });
 

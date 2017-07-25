@@ -32,6 +32,14 @@ def team_handel_req(request):
     if not joinObj:
         return JsonResponse({'status': 'ko'})
 
+    print('user', user_id)
+    print('request', request.user)
+    print('foreign', team_id)
+    print('url', payload)
+
+    # Delete TeamJoin object
+    joinObj.delete()
+
     # Mark the notification as read
     notif_req = Notification.objects.get(
         user_from=user_id,
@@ -50,7 +58,20 @@ def team_handel_req(request):
         newMember = TeamUser(team_id_id=team_id, user_id_id=user_id)
         newMember.save()
 
-    # Delete TeamJoin object
-    joinObj.delete()
+    # Create a notification for the requester
+    if action == 'accept':
+        new_action = 'team_req_acc'
+    else:
+        new_action = 'team_req_dec'
+
+    notif_ans = Notification(
+        user_from=request.user,
+        user_to_id=user_id,
+        foreignPK=team_id,
+        context='team',
+        action=new_action,
+        read=False,
+    )
+    notif_ans.save()
 
     return JsonResponse({'status': 'ok'})
