@@ -17,8 +17,6 @@ urlpatterns = [
     url(r'^users/settings/$', views.user_settings, name='user_settings'),
     url(r'^users/(?P<username>[-\w]+)/$', views.user_detail, name='user_detail'),
 
-    url(r'^notifications/', views.user_notif, name='user_notif'),
-
     url(r'^stats/', views.user_stats, name='user_stats'),
     url(r'^feed/', views.user_feed, name='user_feed'),
 ]
