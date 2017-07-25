@@ -1,7 +1,6 @@
 from django.contrib import admin
 from .models import Team
 from .models import TeamUser
-from .models import TeamJoin
 
 
 class TeamAdmin(admin.ModelAdmin):
@@ -21,4 +20,3 @@ class TeamJoinAdmin(admin.ModelAdmin):
 
 admin.site.register(Team, TeamAdmin)
 admin.site.register(TeamUser, TeamUserAdmin)
-admin.site.register(TeamJoin, TeamJoinAdmin)
