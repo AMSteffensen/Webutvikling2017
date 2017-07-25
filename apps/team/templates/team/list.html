@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load utils %}
 
 {% block title %}Teams{% endblock %}
 
@@ -16,7 +17,7 @@
         <button><i class="fa fa-clock-o" aria-hidden="true"></i> Pending</button>
       {% else %}
         <button type="button" id="req_join"
-                data-team="{{ team.pk }}">
+                data-team="{% scramble team.pk %}">
           <i class="fa fa-plus" aria-hidden="true"></i> Req to join</button>
       {% endif %}
     {% endif %}

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load utils %}
 
 {% block title %}{{ team.name }}{% endblock %}
 
@@ -9,7 +10,7 @@
     {% if request.user == team.author %}
       <form action="" method="post">
         {% csrf_token %}
-        <button name="delete_team" value="{{ team.pk }}">Slett team</button>
+        <button name="delete_team" value="{% scramble team.pk %}">Slett team</button>
       </form>
     {% endif %}
 
