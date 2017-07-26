@@ -23,26 +23,9 @@
             <a href="{{ noti.user_from.get_absolute_url }}">
               <div class="media">
           <span class="pull-left">
-            {% if user.profile.photo %}
-              {% load thumbnail %}
-              {% thumbnail noti.user_from.profile.photo "32x32" crop="100%" format="PNG" as im %}
-                <img src="{{ im.url }}" class="user-detail">
-              {% endthumbnail %}
-            {% else %}
-              {% if noti.user_from.profile.gender == "mann" %}
-                {% thumbnail "no_image_male.png" "32x32" crop="100%" format="PNG" as im %}
-                  <img src="{{ im.url }}" class="user-detail">
-                {% endthumbnail %}
-              {% elif noti.user_from.profile.gender == "kvinne" %}
-                {% thumbnail "no_image_female.png" "32x32" crop="100%" format="PNG" as im %}
-                  <img src="{{ im.url }}" class="user-detail">
-                {% endthumbnail %}
-              {% else %}
-                {% thumbnail "no_image.png" "32x32" crop="100%" format="PNG" as im %}
-                  <img src="{{ im.url }}" class="user-detail">
-                {% endthumbnail %}
-              {% endif %}
-            {% endif %}
+            <!-- PROFILE PICTURE -->
+            {% include "profile_picture.html" with img_size="32x32" alt="" classes="user-detail" %}
+            <!-- /PROFILE PICTURE -->
           </span>
                 <div class="media-body">
                   <h5 class="media-heading hStyle"><strong>{{ noti.user_from.first_name }} {{ noti.user_from.last_name }}</strong></h5>
