@@ -39,14 +39,13 @@
   margin: 5px 0px;
   text-align: center;
   font-size: 16px;
-  display: block;
-  color: #fff;
 }
 
 .top-bar .socl-icons li a .widthHeight {
   width: 30px;
   height: 30px;
   line-height: 30px;
+
 }
 
 .username {
@@ -77,7 +76,6 @@
 .top-bar .socl-icons li .notificationBar {
   width: 360px;
   height: 370px;
-  margin-top: 10px;
   overflow-y: scroll;
 }
 
@@ -139,6 +137,12 @@
   padding: 3px;
 }
 
+.top-bar .socl-icons li .viewMore{
+  /*Position for View More link */
+margin-top: -5px ;
+margin-bottom:0px ;
+}
+
 .top-bar .socl-icons .topPadding {
   /* Padding after header */
   margin-top: 12px;
@@ -148,6 +152,8 @@
   /* Padding before footer */
   margin-top: 10px;
 }
+
+
 
 
 /* -Content */
@@ -162,21 +168,42 @@
   font-size: 12px;
   color: black;
   text-align: left;
+
 }
 
-.top-bar .socl-icons li .pStyle {
+.top-bar .socl-icons li .pAll {
   text-align: left;
   line-height: 5px;
   font-family: helvetica, sans-serif;
 }
 
-.top-bar .socl-icons li .p1Style {
-  line-height: 2px;
+.top-bar .socl-icons li .pTime {
   font-size: 9px;
   font-style: italic;
 }
 
-.top-bar .socl-icons li .p2Style {
-  line-height: 5px;
+.top-bar .socl-icons li .pText1 {
   font-size: 11px;
+  display: inline;
+}
+
+.top-bar .socl-icons li .pText2 {
+  font-size: 11px;
+}
+
+
+.top-bar .socl-icons li a .pText3 {
+  line-height: 15px;
+  white-space: normal;
+  max-width: 300px;
+  word-wrap: break-word;
+  text-align: left;
+}
+
+.top-bar .socl-icons li a .btnStyle {
+  /* Accept and decline buttons */
+  color: #333;
+  padding-top: 15px;
+  padding-left: 7px;
+
 }
