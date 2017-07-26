@@ -47,7 +47,7 @@
     										</div>
     									</td>
                       <td><span class="label label-warning">MEDIUM</span></td>
-                      <td>{% include "profile_picture.html" with img_size="32x32" alt="avatar" class="avatar img-circle" %} <a href="#">{{ project.author }}</a></td>
+                      <td>{% include "profile_picture.html" with img_size="32x32" alt="avatar" classes="avatar img-circle" %} <a href="#">{{ project.author }}</a></td>
                       <td><span class="label label-success">AKTIV</span></td>
     								</tr>
                       {% endfor %}
@@ -60,16 +60,20 @@
                       {% endfor %}
                       -->
                       <!--Statisk data-->
+
+                      <div class="progress">
                       <td><a href="#">Lage hjemmeside for Tog foreningen</a></td>
     									<td>13.05.17</td>
     									<td>12 dager</td>
     									<td>
     										<div class="progress">
-    											<div class="progress-bar" data-transitiongoal="95"></div>
+    											<div class="progress-bar progress-bar-striped active" role="progressbar"
+                          aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:40%">
+                            40%" ></div>
     										</div>
     									</td>
     									<td><span class="label label-warning">MEDIUM</span></td>
-    									<td>{% include "profile_picture.html" with img_size="32x32" alt="avatar" class="avatar img-circle" %} <a href="#">Michael</a></td>
+    									<td>{% include "profile_picture.html" with img_size="32x32" alt="avatar" classes="avatar img-circle" %} <a href="#">Michael</a></td>
     									<td><span class="label label-success">AKTIV</span></td>
     								</tr>
     								<tr>
@@ -78,24 +82,27 @@
     									<td>30 dager</td>
     									<td>
     										<div class="progress">
-    											<div class="progress-bar" data-transitiongoal="40"></div>
+    											<div class="progress-bar progress-bar-striped active" role="progressbar"
+                          aria-valuenow="66" aria-valuemin="0" aria-valuemax="100" style="width:66%">
+                            66%</div>
     										</div>
     									</td>
     									<td><span class="label label-success">LAV</span></td>
-    									<td>{% include "profile_picture.html" with img_size="32x32" alt="avatar" class="avatar img-circle" %} <a href="#">Antonius</a></td>
+    									<td>{% include "profile_picture.html" with img_size="32x32" alt="avatar" classes="avatar img-circle" %} <a href="#">Antonius</a></td>
     									<td><span class="label label-warning">VENTER</span></td>
     								</tr>
     								<tr>
     									<td><a href="#">IT Prosjekt</a></td>
     									<td>20.09.17</td>
     									<td>50 dager</td>
-    									<td>
-    										<div class="progress">
-    											<div class="progress-bar" data-transitiongoal="65"></div>
+    									<td>    										<div class="progress">
+    											<div class="progress-bar progress-bar-striped active" role="progressbar"
+                          aria-valuenow="66" aria-valuemin="0" aria-valuemax="100" style="width:66%">
+                            66%</div>
     										</div>
     									</td>
     									<td><span class="label label-danger">HØY</span></td>
-    								<td>{% include "profile_picture.html" with img_size="32x32" alt="avatar" class="avatar img-circle" %} <a href="#">Antonius</a></td>
+    								<td>{% include "profile_picture.html" with img_size="32x32" alt="avatar" classes="avatar img-circle" %} <a href="#">Antonius</a></td>
     									<td><span class="label label-success">AKTIV</span></td>
     								</tr>
     								<tr>
@@ -104,11 +111,13 @@
     									<td>40 dager</td>
     									<td>
     										<div class="progress">
-    											<div class="progress-bar" data-transitiongoal="77"></div>
+    											<div class="progress-bar progress-bar-striped active" role="progressbar"
+                          aria-valuenow="82" aria-valuemin="0" aria-valuemax="100" style="width:82%">
+                            82%</div>
     										</div>
     									</td>
     									<td><span class="label label-warning">MEDIUM</span></td>
-    									<td>{% include "profile_picture.html" with img_size="32x32" alt="" class="" %} <a href="#">Jason</a></td> <a href="#">Michael</a></td>
+    									<td>{% include "profile_picture.html" with img_size="32x32" alt="" classes="" %} <a href="#">Jason</a></td> <a href="#">Michael</a></td>
     									<td><span class="label label-success">AKTIV</span></td>
     								</tr>
     								<tr>
@@ -117,7 +126,9 @@
     									<td>30 dager</td>
     									<td>
     										<div class="progress">
-    											<div class="progress-bar" data-transitiongoal="25"></div>
+    											<div class="progress-bar progress-bar-striped active" role="progressbar"
+                          aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width:25%">
+                            25%></div>
     										</div>
     									</td>
     									<td><span class="label label-success">LAV</span></td>
@@ -130,7 +141,8 @@
     									<td>N/A</td>
     									<td>
     										<div class="progress">
-    											<div class="progress-bar progress-bar-default" data-transitiongoal="100"></div>
+    											<div class="progress-bar progress-bar-striped active" role="progressbar"
+                          aria-valuenow="82" aria-valuemin="0" aria-valuemax="100" style="width:82%">52%</div>
     										</div>
     									</td>
     									<td><span class="label label-default">MEDIUM</span></td>
@@ -143,7 +155,9 @@
     									<td>2 dager</td>
     									<td>
     										<div class="progress">
-    											<div class="progress-bar progress-bar-default" data-transitiongoal="100"></div>
+    											<div class="progress-bar progress-bar-striped active" role="progressbar"
+                          aria-valuenow="66" aria-valuemin="0" aria-valuemax="100" style="width:66%">
+                            66%</div>
     										</div>
     									</td>
     									<td><span class="label label-default">MEDIUM</span></td>
@@ -156,7 +170,8 @@
     									<td>30 dager</td>
     									<td>
     										<div class="progress">
-    											<div class="progress-bar" data-transitiongoal="33"></div>
+    											<div class="progress-bar progress-bar-striped active" role="progressbar"
+                          aria-valuenow="33" aria-valuemin="0" aria-valuemax="100" style="width:33%">33%</div>
     										</div>
     									</td>
     									<td><span class="label label-success">LAV</span></td>
@@ -170,7 +185,6 @@
     				</div>
     			</div>
     			<!-- /main -->
-    			<!-- FOOTER -->
 
 
 

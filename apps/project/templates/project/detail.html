@@ -1,9 +1,14 @@
 {% extends "base.html" %}
 {% load utils %}
+{% load staticfiles %}
 
 {% block title %}{{ project.title }}{% endblock %}
 
 {% block content %}
+<!-- In prosgress
+<link rel="stylesheet" href="{% static 'detail.css' %}">
+-->
+
   <h1>{{ project.title }}</h1>
   {% if request.user == project.author %}
     <form action="" method="post">
@@ -25,4 +30,79 @@
   {% if request.user == project.author %}
     <br><p><i>Opprettet av deg</i></p>
   {% endif %}
+
+    <!-- main -->
+    <div class="content">
+      <div class="main-header">
+        <h2>{{ project.title }}</h2>
+      </div>
+      <div class="main-content">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="project-section general-info">
+              <h3>Prosjektbeskrivelse</h3>
+              {% if request.user == project.author %}
+                {% csrf_token %}
+              <form action="{{ project.get_edit_url }}" class="inline">
+                  <button type="button" class="btn btn-sm btn-primary pull-right"><i class="fa fa-edit"></i> Endre Prosjekt</button>
+              </form>
+              {% endif %}
+
+              <p>Rapidiously monetize orthogonal platforms with 24/7 convergence. Uniquely create error-free alignments for customized users. Credibly facilitate just in time benefits rather than user friendly imperatives. Continually promote extensible process improvements whereas virtual. Enthusiastically pontificate proactive infrastructures vis-a-vis value-added products. Enthusiastically coordinate pandemic platforms rather than team building best practices. Globally facilitate plug-and-play materials and interoperable interfaces. Enthusiastically.</p>
+              <div class="row">
+                <div class="col-sm-9">
+                  <dl class="dl-horizontal">
+                    <dt>Dato:</dt>
+                    <dd>August 1, 2017 - August 30, 2017</dd>
+                    <dt>Varighet:</dt>
+                    <dd>30 dager <span class="text-muted"><small>(20 dager igjen)</small></span></dd>
+                    <dt>Oppdragsgiver:</dt>
+                    <dd><a href="#">Firma AS</a></dd>
+                    <dt>Prioritet:</dt>
+                    <dd><span class="label label-danger">HIGH</span></dd>
+                    <dt>Status:</dt>
+                    <dd><span class="label label-success">Aktiv</span></dd>
+                    <dt>Team:</dt>
+                    <dd>
+                      <ul class="list-inline team-list">
+                        <li>
+                          <td>{% include "profile_picture.html" with img_size="32x32" alt="avatar" class="avatar img-circle" %} <a href="#">Antonius</a></td>
+
+                          <span class="text-muted">Prosjekt leder</span>
+                        </li>
+                        <li>
+                          <td>{% include "profile_picture.html" with img_size="32x32" alt="avatar" class="avatar img-circle" %} <a href="#">Michael</a></td>
+
+                          <span class="text-muted">Designer</span>
+                        </li>
+                        <li>
+                          <td>{% include "profile_picture.html" with img_size="32x32" alt="avatar" class="avatar img-circle" %} <a href="#">Stella Ray</a></td>
+                          <span class="text-muted">Utvikler</span>
+                        </li>
+                        <li>
+                          <td>{% include "profile_picture.html" with img_size="32x32" alt="avatar" class="avatar img-circle" %} <a href="#">Jane Doe</a></td>
+                          <span class="text-muted">Markedsfører</span>
+                        </li>
+                        <li>
+                          <td>{% include "profile_picture.html" with img_size="32x32" alt="avatar" class="avatar img-circle" %} <a href="#">Jason</a></td>
+
+                          <span class="text-muted">Dev Ops</span>
+                        </li>
+                        <li class="team-add">
+                          <i class="icon ion-person"></i>
+                          <a href="#"><i class="fa fa-plus-circle"></i> Legg til </a>
+                        </li>
+                      </ul>
+                    </dd>
+                  </dl>
+                </div>
+<!-- TODO: Make a progress bar -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /main -->
+
+
+
 {% endblock %}
