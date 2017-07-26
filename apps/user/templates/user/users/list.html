@@ -4,35 +4,19 @@
 
 {% block title %}Brukere{% endblock %} {% block content %}
 
-<h1>Brukere</h1>
-<div id="people-list">
-  {% for user in users %}
-  <div class="user">
-    <a href="{{ user.get_absolute_url }}">
-                    {% if user.profile.photo %}
-                        {% thumbnail user.profile.photo "180x180" crop="100%" format="PNG" as im %}
-                            <img src="{{ im.url }}" class="user-detail">
-                        {% endthumbnail %}
-                    {% else %}
-                        {% if user.profile.gender == "mann" %}
-                            {% thumbnail "no_image_male.png" "180x180" crop="100%" format="PNG" as im %}
-                                <img src="{{ im.url }}" class="user-detail">
-                            {% endthumbnail %}
-                        {% elif user.profile.gender == "kvinne" %}
-                            {% thumbnail "no_image_female.png" "180x180" crop="100%" format="PNG" as im %}
-                                <img src="{{ im.url }}" class="user-detail">
-                            {% endthumbnail %}
-                        {% else %}
-                            {% thumbnail "no_image.png" "180x180" crop="100%" format="PNG" as im %}
-                                <img src="{{ im.url }}" class="user-detail">
-                            {% endthumbnail %}
-                        {% endif %}
-                    {% endif %}
-               </a>
-    <div class="info">
-      <a href="{{ user.get_absolute_url }}" class="title">{{ user.get_full_name }}</a>
-    </div>
+  <h1>Brukere</h1>
+  <div id="people-list">
+    {% for user in users %}
+      <div class="user">
+        <a href="{{ user.get_absolute_url }}">
+          <!-- PROFILE PICTURE -->
+          {% include "profile_picture.html" with img_size="180x180" %}
+          <!-- /PROFILE PICTURE -->
+        </a>
+        <div class="info">
+          <a href="{{ user.get_absolute_url }}" class="title">{{ user.get_full_name }}</a>
+        </div>
+      </div>
+    {% endfor %}
   </div>
-  {% endfor %}
-</div>
 {% endblock %}

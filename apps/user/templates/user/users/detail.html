@@ -27,26 +27,9 @@
 							<div class="row">
 								<div class="col-md-3">
 									<div class="user-info-left">
-								        {% if user.profile.photo %}
-								            {% thumbnail user.profile.photo "180x180" crop="100%" format="PNG" as im %}
-								                <img src="{{ im.url }}" class="user-detail">
-								            {% endthumbnail %}
-								        {% else %}
-								            {% if user.profile.gender == "mann" %}
-								                {% thumbnail "no_image_male.png" "180x180" crop="100%" format="PNG" as im %}
-								                    <img src="{{ im.url }}" class="user-detail">
-								                {% endthumbnail %}
-								            {% elif user.profile.gender == "kvinne" %}
-								                {% thumbnail "no_image_female.png" "180x180" crop="100%" format="PNG" as im %}
-								                    <img src="{{ im.url }}" class="user-detail">
-								                {% endthumbnail %}
-								            {% else %}
-								                {% thumbnail "no_image.png" "180x180" crop="100%" format="PNG" as im %}
-								                    <img src="{{ im.url }}" class="user-detail">
-								                {% endthumbnail %}
-								            {% endif %}
-								        {% endif %}
-
+                    <!-- PROFILE PICTURE -->
+                    {% include "profile_picture.html" with img_size="32x32" %}
+                    <!-- /PROFILE PICTURE -->
 										<h2>BRUKERNAVN <i class="fa fa-circle green-font online-icon"></i><sup class="sr-only">Pålogget</sup></h2>
 										<div class="contact">
 											<a href="#" class="btn btn-block btn-custom-primary"><i class="fa fa-envelope-o"></i> Send Melding</a>

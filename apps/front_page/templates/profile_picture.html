@@ -1,0 +1,20 @@
+{% if user.profile.photo %}
+  {% load thumbnail %}
+  {% thumbnail request.user.profile.photo img_size crop="100%" format="PNG" as im %}
+    <img src="{{ im.url }}" class="user-detail">
+  {% endthumbnail %}
+{% else %}
+  {% if request.user.profile.gender == "mann" %}
+    {% thumbnail "no_image_male.png" img_size crop="100%" format="PNG" as im %}
+      <img src="{{ im.url }}" class="user-detail">
+    {% endthumbnail %}
+  {% elif request.user.profile.gender == "kvinne" %}
+    {% thumbnail "no_image_female.png" img_size crop="100%" format="PNG" as im %}
+      <img src="{{ im.url }}" class="user-detail">
+    {% endthumbnail %}
+  {% else %}
+    {% thumbnail "no_image.png" img_size crop="100%" format="PNG" as im %}
+      <img src="{{ im.url }}" class="user-detail">
+    {% endthumbnail %}
+  {% endif %}
+{% endif %}

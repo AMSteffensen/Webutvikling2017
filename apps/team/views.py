@@ -29,7 +29,7 @@ def team_detail(request, slug):
             team_pk = decode_value(team_hash)
         except Exception:
             return redirect('team:team_list')
-        
+
         try:
             teamObj = get_object_or_404(Team, pk=team_pk)
         except Http404:
