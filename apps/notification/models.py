@@ -10,6 +10,7 @@ class NotificationActions(Enum):
     team_req_join = 1
     team_req_acc = 2
     team_req_dec = 3
+    team_invite = 4
 
 @unique
 class NotificationContexts(Enum):
@@ -29,9 +30,18 @@ class NotificationManager(models.Manager):
             user_from=user_id,
             context=NotificationContexts.team.name,
             action=NotificationActions.team_req_join.name,
-            read=False
+            read=False,
         )
         return [getattr(teamReq, 'foreignPK') for teamReq in reqObjs]
+
+    def pending_team_inv(self, team_id):
+        invObjs = super(NotificationManager, self).get_queryset().filter(
+            foreignPK=team_id,
+            context=NotificationContexts.team.name,
+            action=NotificationActions.team_invite.name,
+            read=False,
+        )
+        return [getattr(teamInv, 'user_to') for teamInv in invObjs]
 
 
 class Notification(models.Model):
@@ -51,6 +61,7 @@ class Notification(models.Model):
         (actions.team_req_join.name, 'ønsker å bli med i ditt team'),
         (actions.team_req_acc.name, 'har godtatt ditt team forespørsel'),
         (actions.team_req_dec.name, 'har avslått ditt team forespørsel'),
+        (actions.team_invite.name, 'har invitert deg til team'),
     )
 
     user_from = models.ForeignKey(User, related_name='user_from')

@@ -33,7 +33,11 @@
       <ul>
         {% for non_user in all_users %}
           {% if non_user not in members %}
-            <li><button id="invite" data-team="{{ team.pk }}" data-action="invite"><i class="fa fa-plus" aria-hidden="true"></i> Invite</button> {{ non_user.username }}</li>
+            {% if non_user in pending %}
+              <li><button><i class="fa fa-clock-o" aria-hidden="true"></i> Pending</button> {{ non_user.username }}</li>
+            {% else %}
+            <li><button id="invite" data-value="{% scramble_mul non_user.pk team.pk %}" data-action="invite"><i class="fa fa-plus" aria-hidden="true"></i> Invite</button> {{ non_user.username }}</li>
+            {% endif %}
           {% endif %}
         {% endfor %}
       </ul>
@@ -41,4 +45,28 @@
     <p>Du er ikke medlem av denne gruppen, derfor har du ikke tilgang.</p>
   {% endif %}
 
+{% endblock %}
+
+{% block domready %}
+    $('button#invite').click(function(e){
+        e.preventDefault();
+        var buttonClicked = $(this);
+        $.post('{% url "team:team_invite" %}',
+            {
+                value: $(this).data('value')
+            },
+            function(data) {
+                if (data['status'] === 'ok') {
+                    $(buttonClicked).unbind();
+                    var $icon = (buttonClicked).find('i');
+                    $icon.removeClass('fa-plus');
+                    $icon.addClass('fa-clock-o');
+                    $(buttonClicked).html($icon);
+                    $(buttonClicked).append(' Pending');
+                    $(buttonClicked).removeAttr('id');
+                    $(buttonClicked).removeAttr('data-team');
+                    $(buttonClicked).removeAttr('data-action');
+                }
+            });
+    });
 {% endblock %}

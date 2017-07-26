@@ -53,9 +53,15 @@ def team_detail(request, slug):
 
         # Get members of this team
         members = TeamUser.get.members(teamObj)
+        # Get all members
         all_users = User.objects.all()
+        # Get pending invites
+        pending = Notification.get.pending_team_inv(teamObj.pk)
 
-        return render(request, 'team/detail.html', {'team': teamObj, 'members': members, 'all_users': all_users})
+        return render(request, 'team/detail.html', {'team': teamObj,
+                                                    'members': members,
+                                                    'all_users': all_users,
+                                                    'pending': pending})
 
 
 @login_required

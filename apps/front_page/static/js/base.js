@@ -14,8 +14,9 @@ $.ajaxSetup({
 });
 
 
-// Keep SideNav collapse open on refresh (WORK IN PROGRESS)
 $(document).ready(function () {
+
+    // Keep SideNav collapse open on refresh
     var loc = location.pathname;
     submenu = $('#menu-content a[href*="' + loc + '"]');
     submenu.parents("li:first").addClass("active");
@@ -23,8 +24,7 @@ $(document).ready(function () {
     //user, users
 
 
-
-    // TOGGLE SOCIAL NOTIFICATIONS PANEL
+    // TOGGLE SOCIAL NOTIFICATIONS PANEL ------------------------------
     // Toggle message and notifications panel
     $('div#notif-panel a.dropdown-toggle').on('mouseup', function (e) {
         $('div#msg-panel a.dropdown-toggle').parent().removeClass('open');
@@ -43,11 +43,10 @@ $(document).ready(function () {
     $('body').on('mouseup', function (e) {
         var socialIcon = $('a.dropdown-toggle');
         var socialDropdown = $('.dropdown-menu');
-        if (!socialIcon.is(e.target) && !socialDropdown.is(e.target)) {
+        if (!socialIcon.is(e.target) && !socialDropdown.is(e.target) && !socialDropdown.has(e.target).length > 0) {
             socialIcon.parent().removeClass('open');
         }
     });
     // TOGGLE SOCIAL NOTIFICATIONS PANEL ------------------------------
-
 });
 

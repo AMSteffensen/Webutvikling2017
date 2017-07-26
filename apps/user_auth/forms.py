@@ -48,10 +48,16 @@ class UserRegistrationForm(forms.ModelForm):
 
         # Error Messages
 
-        # HTML5 Required Popup
-        #for field in self.fields.values():
-        #    field.widget.attrs['oninvalid'] = 'this.setCustomValidity("{} er påkrevd")'.format(field.label.replace('*', '').strip())
-        #    field.widget.attrs['oninput'] = 'this.setCustomValidity("")'
+        #<!-- ATTRIBUTES -->
+        self.fields['username'].widget.attrs['class'] = 'yourClass'
+        self.fields['username'].widget.attrs['id'] = 'usernameID'
+        self.fields['first_name'].widget.attrs['class'] += ' anotherClass'
+
+        # Apply something to all fields
+        for field in self.fields.values():
+            field.widget.attrs['class'] += " yetAnotherClass"
+
+        #<!-- /ATTRIBUTES -->
 
         # Disable suggestions
         for field in self.fields.values():

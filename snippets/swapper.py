@@ -1,5 +1,5 @@
 def _compile_sentence(sentence):
-    d = dict()
+    d = {}
     s = set()
 
     for letter in sentence:
@@ -25,7 +25,7 @@ def _compile_transtable(lettersA, lettersB):
     if len(lettersA) != len(lettersB):
         raise Exception("Not equal length")
 
-    d = dict()
+    d = {}
     for index in range(0, len(lettersA)):
         d[lettersA[index]] = lettersB[index]
     return d

@@ -7,6 +7,7 @@ from common.decorators import ajax_required
 from .models import Team
 from notification.models import Notification
 from snippets.hasher import encode_data
+from snippets.hasher import decode_data
 from snippets.hasher import decode_value
 
 
@@ -59,7 +60,7 @@ def team_req_join(request):
     notif_req.save()
 
     # Return a successful response
-    return JsonResponse({'status': 'ok', 'team': teamPK})
+    return JsonResponse({'status': 'ok'})
 
 
 @ajax_required
@@ -67,8 +68,50 @@ def team_req_join(request):
 @login_required
 def team_invite(request):
     # Get POST data
-    pass
+    payload = request.POST.get('value')
+    # Try to decode the scrambled team pk
+    try:
+        data = decode_data(payload)
+    except Exception:
+        print("bad hash")
+        return JsonResponse({'status': 'ko'})
 
+    user_id = int(data[0])
+    team_id = int(data[1])
+
+    # Try to get the team
+    try:
+        team = get_object_or_404(Team, pk=team_id)
+    except Http404:
+        print("team not found", team_id)
+        return JsonResponse({'status': 'ko'})
+
+    # Double check that the request does not already exist
+    if Notification.objects.filter(
+        user_from=request.user,
+        user_to_id=user_id,
+        foreignPK=team_id,
+        context=Notification.contexts.team.name,
+        action=Notification.actions.team_invite.name,
+        url=payload,
+        read=False,
+    ).exists():
+        print("did exist")
+        return JsonResponse({'status': 'ko'})
+
+    # Generate a request notification
+    notif_req = Notification(
+        user_from=request.user,
+        user_to_id=user_id,
+        foreignPK=team_id,
+        context=Notification.contexts.team.name,
+        action=Notification.actions.team_invite.name,
+        url=payload,
+    )
+    notif_req.save()
+
+    # Return a successful response
+    return JsonResponse({'status': 'ok'})
 
 
 

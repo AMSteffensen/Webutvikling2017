@@ -16,6 +16,10 @@ def team_handel_req(request):
     # Get POST data
     payload = request.POST.get('payload')
     action = request.POST.get('action')
+    context = request.POST.get('context')
+
+    print(context)
+    return JsonResponse({'status': 'ko'})
 
     # Verify the payload
     try:
