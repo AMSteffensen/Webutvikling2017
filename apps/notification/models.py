@@ -11,6 +11,8 @@ class NotificationActions(Enum):
     team_req_acc = 2
     team_req_dec = 3
     team_invite = 4
+    team_invite_acc = 5
+    team_invite_dec = 6
 
 @unique
 class NotificationContexts(Enum):
@@ -62,6 +64,8 @@ class Notification(models.Model):
         (actions.team_req_acc.name, 'har godtatt ditt team forespørsel'),
         (actions.team_req_dec.name, 'har avslått ditt team forespørsel'),
         (actions.team_invite.name, 'har invitert deg til team'),
+        (actions.team_invite_acc.name, 'har godtatt din team invitasjon'),
+        (actions.team_invite_dec.name, 'har avslått din team invitasjon'),
     )
 
     user_from = models.ForeignKey(User, related_name='user_from')

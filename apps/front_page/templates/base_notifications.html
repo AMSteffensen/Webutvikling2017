@@ -18,14 +18,14 @@
 
             <a href="{{ noti.user_from.get_absolute_url }}">
               {% if noti.action == 'team_req_join' %}
-                <div id="req-join-handle" class="pull-right btnStyle">
-                  <button id="accept" data-context="request" data-action="accept" data-payload="{{ noti.url }}"><i class="fa fa-check" aria-hidden="true"></i></button>
-                  <button id="decline" data-context="request" data-action="decline" data-payload="{{ noti.url }}"><i class="fa fa-times" aria-hidden="true"></i></button>
+                <div id="team-req-join-handle" class="pull-right btnStyle">
+                  <button id="accept" data-action="accept" data-payload="{{ noti.url }}"><i class="fa fa-check" aria-hidden="true"></i></button>
+                  <button id="decline" data-action="decline" data-payload="{{ noti.url }}"><i class="fa fa-times" aria-hidden="true"></i></button>
                 </div>
               {% elif noti.action == 'team_invite' %}
-                <div id="req-join-handle" class="pull-right btnStyle">
-                  <button id="accept" data-context="invite" data-action="accept" data-payload="{{ noti.url }}"><i class="fa fa-check" aria-hidden="true"></i></button>
-                  <button id="decline" data-context="invite" data-action="decline" data-payload="{{ noti.url }}"><i class="fa fa-times" aria-hidden="true"></i></button>
+                <div id="team-inv-handle" class="pull-right btnStyle">
+                  <button id="accept" data-action="accept" data-payload="{{ noti.url }}"><i class="fa fa-check" aria-hidden="true"></i></button>
+                  <button id="decline" data-action="decline" data-payload="{{ noti.url }}"><i class="fa fa-times" aria-hidden="true"></i></button>
                 </div>
               {% endif %}
 

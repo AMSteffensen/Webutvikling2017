@@ -264,15 +264,32 @@
           {% block domready %}
           {% endblock %}
 
-          // Notification team join request
-          $('div#req-join-handle button').click(function (e) {
+          // Notification team join handle
+          $('div#team-req-join-handle button').click(function (e) {
               e.preventDefault();
               var buttonClicked = $(this);
               $.post('{% url "noti:handle-team-req" %}',
                   {
                       payload: $(this).data('payload'),
-                      action: $(this).data('action'),
-                      context: $(this).data('context')
+                      action: $(this).data('action')
+                  },
+                  function (data) {
+                      if (data['status'] === 'ok') {
+                          $(buttonClicked).unbind();
+                          buttonClicked.parent().parent().remove();
+                          var notif_amount = $('span#notif-amount');
+                          notif_amount.text(parseInt(notif_amount.text()) - 1);
+                      }
+                  });
+          });
+          // Notification team inv handle
+          $('div#team-inv-handle button').click(function (e) {
+              e.preventDefault();
+              var buttonClicked = $(this);
+              $.post('{% url "noti:handle-team-inv" %}',
+                  {
+                      payload: $(this).data('payload'),
+                      action: $(this).data('action')
                   },
                   function (data) {
                       if (data['status'] === 'ok') {
