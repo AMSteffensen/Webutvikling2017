@@ -9,10 +9,12 @@
         <h5 class="media-heading hStyle"><strong>Varsler</strong>
         </h5>
       </li>
+      <li class="topPadding">
+      </li>
 
       {% if notif_list %}
         {% for noti in notif_list %}
-        <li class="message-preview ">
+        <li class="message-preview">
 
           <a href="{{ noti.user_from.get_absolute_url }}">
             {% if noti.action == 'team_req_join' %}
@@ -34,7 +36,7 @@
             {% if noti.action == "team_req_join" %}
               <p class="pAll pText1 pText3 "> ønsker å bli med i ditt team {% get_team_name noti.foreignPK %}</p>
             {% else %}
-              <p class="pAll pText1 pText3">{{ noti.user_from.first_name }} {{ noti.get_action_display }}</p>
+              <p class="pAll pText1 pText3"> {{ noti.get_action_display }}</p>
             {% endif %}
             <p class=" pTime pAll pText3"><i class="fa fa-clock-o"></i> {{ noti.created }}</p>
           </div>
