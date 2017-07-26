@@ -83,7 +83,7 @@ input[type=submit], a.button {
   font-weight: bold;
 }
 
-7.errorlist {
+.errorlist {
   float: left;
   clear: both;
   padding-left: 10px;

@@ -16,8 +16,12 @@ $.ajaxSetup({
 
 // Keep SideNav collapse open on refresh (WORK IN PROGRESS)
 $(document).ready(function () {
-    var loc = location.pathname.split("/");
-    $('#menu-content a[href*="/' + loc[loc.length - 3] + "/" + loc[loc.length - 2] + '/"]').parents("ul:first").attr("aria-expanded", true).addClass("in");
+    var loc = location.pathname;
+    submenu = $('#menu-content a[href*="' + loc + '"]');
+    submenu.parents("li:first").addClass("active");
+    submenu.parents("ul:first").attr("aria-expanded", true).addClass("in").prev().addClass("active");
+    //user, users
+
 
 
     // TOGGLE SOCIAL NOTIFICATIONS PANEL
