@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load utils %}
 
 {% block title %}Teams{% endblock %}
 
@@ -12,12 +13,11 @@
   {% for team in teams %}
     <h2><a href="{{ team.get_absolute_url }}">{{ team.name }}</a></h2>
     {% if team not in memberOf %}
-      {% if team in pending %}
+      {% if team.pk in pending %}
         <button><i class="fa fa-clock-o" aria-hidden="true"></i> Pending</button>
       {% else %}
         <button type="button" id="req_join"
-                data-team="{{ team.pk }}"
-                data-action="team_req_join">
+                data-team="{% scramble team.pk %}">
           <i class="fa fa-plus" aria-hidden="true"></i> Req to join</button>
       {% endif %}
     {% endif %}
@@ -32,8 +32,7 @@
         var buttonClicked = $(this);
         $.post('{% url "team:team_req_join" %}',
             {
-                team: $(this).data('team'),
-                action: $(this).data('action'),
+                team: $(this).data('team')
             },
             function(data) {
                 if (data['status'] === 'ok') {

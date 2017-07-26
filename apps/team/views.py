@@ -1,24 +1,21 @@
-from django.http import JsonResponse
 from django.http import Http404
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.http import require_POST
-from common.decorators import ajax_required
+from django.contrib.auth.models import User
 from .models import Team
 from .models import TeamUser
-from .models import TeamJoin
 from .forms import TeamCreateForm
 from notification.models import Notification
 from snippets.unique_slug import unique_slugify
-from snippets.hasher import encode_data
+from snippets.hasher import decode_value
 
 def team_list(request):
     # Get all public teams
     teams = Team.get.public()
     # Get all teams you're waiting to join
-    pending = TeamJoin.get.pending(request.user)
+    pending = Notification.get.pending_team_req(request.user)
     # Get all teams you are a member of
     memberOf = TeamUser.get.memberOf(request.user)
     return render(request, 'team/list.html', {'teams': teams, 'memberOf': memberOf, 'pending': pending})
@@ -26,7 +23,13 @@ def team_list(request):
 
 def team_detail(request, slug):
     if request.method == 'POST':
-        team_pk = request.POST.get('delete_team', '')
+        team_hash = request.POST.get('delete_team', '')
+        # Try to get the team pk
+        try:
+            team_pk = decode_value(team_hash)
+        except Exception:
+            return redirect('team:team_list')
+
         try:
             teamObj = get_object_or_404(Team, pk=team_pk)
         except Http404:
@@ -50,8 +53,9 @@ def team_detail(request, slug):
 
         # Get members of this team
         members = TeamUser.get.members(teamObj)
+        all_users = User.objects.all()
 
-        return render(request, 'team/detail.html', {'team': teamObj, 'members': members})
+        return render(request, 'team/detail.html', {'team': teamObj, 'members': members, 'all_users': all_users})
 
 
 @login_required
@@ -80,54 +84,3 @@ def team_mine(request):
     memberOf = TeamUser.objects.filter(user_id=request.user)
     teams = [getattr(team, 'team_id') for team in memberOf]
     return render(request, 'team/my_teams.html', {'teams': teams})
-
-
-@ajax_required
-@require_POST
-@login_required
-def team_req_join(request):
-    teamPK = request.POST.get('team')
-    action = request.POST.get('action')
-    print("ajax submit")
-
-    try:
-        team = get_object_or_404(Team, pk=teamPK)
-    except Http404:
-        print("team not found", teamPK)
-        return JsonResponse({'status': 'ko'})
-
-    author = team.author
-
-    if TeamJoin.objects.filter(user_ask=request.user,
-                               team_id=team,
-                               invited=False,
-                               accepted=False).exists():
-        print("Did exist")
-        return JsonResponse({'status': 'ko'})
-
-    print("Did not exist")
-
-    print("Generating hash")
-    notif_url = encode_data([request.user.pk, teamPK])
-    print(notif_url)
-
-    notif_req = Notification(
-        user_from=request.user,
-        user_to=author,
-        foreignPK=teamPK,
-        context='team',
-        action=action,
-        url=notif_url,
-    )
-    notif_req.save()
-
-    team_req = TeamJoin(
-        user_ask=request.user,
-        team_id=team,
-        invited=False,
-        accepted=False
-    )
-    team_req.save()
-
-    print("Created!")
-    return JsonResponse({'status': 'ok', 'team': teamPK})

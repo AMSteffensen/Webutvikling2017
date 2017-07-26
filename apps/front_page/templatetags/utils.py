@@ -1,7 +1,11 @@
 from django import template
-from notification.models import Notification
 
+from notification.models import Notification
 from team.models import Team
+
+from snippets.hasher import encode_value
+
+
 
 register = template.Library()
 
@@ -16,3 +20,7 @@ def get_team_name(pk):
 @register.simple_tag
 def get_team_url(pk):
     return Team.objects.get(pk=int(pk)).get_absolute_url()
+
+@register.simple_tag
+def scramble(value):
+    return encode_value(value)

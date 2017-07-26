@@ -36,13 +36,13 @@ def dashboard(request):
 def user_list(request):
     #users = User.objects.filter(is_active=True).order_by('first_name')
     users = User.objects.filter(is_active=True).extra(select={'lower_first_name': 'lower(first_name)'}).order_by('lower_first_name')
-    return render(request, 'user/users/list.html', {'section': 'people', 'users': users})
+    return render(request, 'user/users/list.html', {'users': users})
 
 
 @login_required
 def user_detail(request, username):
     user = get_object_or_404(User, username=username, is_active=True)
-    return render(request, 'user/users/detail.html', {'section': 'people', 'user': user})
+    return render(request, 'user/users/detail.html', {'user': user})
 
 
 @login_required
@@ -54,16 +54,8 @@ def user_settings(request):
 def user_relations(request):
     isFollowing = Contact.get.isFollowing(request.user)
     followers = Contact.get.followers(request.user)
-
     return render(request, 'user/profile/relations.html', {'isFollowing': isFollowing,
                                                            'followers': followers})
-
-
-@login_required
-def user_notif(request):
-    unread_notif = Notification.get.unread(request.user)
-    read_notif = Notification.get.read(request.user)
-    return render(request, 'user/profile/notifications.html', {'ur_notif': unread_notif, 'r_notif': read_notif})
 
 
 @ajax_required
@@ -91,6 +83,8 @@ def user_stats(request):
 
 @login_required
 def user_feed(request):
-    return render(request, 'user/util/feed.html')
+    unread_notif = Notification.get.unread(request.user)
+    read_notif = Notification.get.read(request.user)
+    return render(request, 'user/util/feed.html', {'ur_notif': unread_notif, 'r_notif': read_notif})
 
 

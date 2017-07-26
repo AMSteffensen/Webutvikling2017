@@ -4,4 +4,29 @@
 
 {% block content %}
   <h1>Feed</h1>
+
+<div class="panel panel-default">
+ <div class="panel-body">
+  {% load utils %}
+  {% if ur_notif or r_notif %}
+    {% if ur_notif %}
+      <h3>Nye Notifikasjoner</h3>
+      {% for notif in ur_notif %}
+        <p><em>{{ notif.created }}</em> - <a href="{{ notif.user_from.get_absolute_url }}">{{ notif.user_from }}</a> {{ notif.get_action_display }} -> <a href="{% get_team_url notif.foreignPK %}">{% get_team_name notif.foreignPK %}</a></p>
+      {% endfor %}
+    {% else %}
+      <p>Du har ingen nye notifikasjoner.</p>
+    {% endif %}
+
+    {% if r_notif %}
+      <h3>Gamle Notifikasjoner</h3>
+      {% for notif in r_notif %}
+        <p><em>{{ notif.created }}</em> - <a href="{{ notif.user_from.get_absolute_url }}">{{ notif.user_from }}</a> {{ notif.get_action_display }} -> <a href="{% get_team_url notif.foreignPK %}">{% get_team_name notif.foreignPK %}</a></p>
+      {% endfor %}
+    {% endif %}
+  {% else %}
+    <p>Du har ingen notifikasjoner.</p>
+  {% endif %}
+ </div>
+</div>
 {% endblock %}

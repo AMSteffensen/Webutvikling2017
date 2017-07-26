@@ -1,25 +1,56 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from enum import Enum
+from enum import unique
+
+@unique
+class NotificationActions(Enum):
+    none = 0
+    team_req_join = 1
+    team_req_acc = 2
+    team_req_dec = 3
+
+@unique
+class NotificationContexts(Enum):
+    none = 0
+    team = 1
+    project = 2
+    user = 3
+
 
 class NotificationManager(models.Manager):
     def unread(self, user_id):
         return super(NotificationManager, self).get_queryset().filter(user_to=user_id, read=False)
     def read(self, user_id):
         return super(NotificationManager, self).get_queryset().filter(user_to=user_id, read=True)
+    def pending_team_req(self, user_id):
+        reqObjs = super(NotificationManager, self).get_queryset().filter(
+            user_from=user_id,
+            context=NotificationContexts.team.name,
+            action=NotificationActions.team_req_join.name,
+            read=False
+        )
+        return [getattr(teamReq, 'foreignPK') for teamReq in reqObjs]
 
 
 class Notification(models.Model):
+
+    actions = NotificationActions
+    contexts = NotificationContexts
+
     CONTEXT_TYPE = (
-        ('none', 'none'),
-        ('team', 'team'),
-        ('project', 'project'),
-        ('user', 'user'),
+        (contexts.none.name, 'none'),
+        (contexts.team.name, 'team'),
+        (contexts.project.name, 'project'),
+        (contexts.user.name, 'user'),
     )
 
     ACTION_TYPE = (
-        ('none', 'none'),
-        ('team_req_join', 'ønsker å bli med i ditt team'),
+        (actions.none.name, 'none'),
+        (actions.team_req_join.name, 'ønsker å bli med i ditt team'),
+        (actions.team_req_acc.name, 'har godtatt ditt team forespørsel'),
+        (actions.team_req_dec.name, 'har avslått ditt team forespørsel'),
     )
 
     user_from = models.ForeignKey(User, related_name='user_from')
@@ -29,8 +60,8 @@ class Notification(models.Model):
     read = models.BooleanField(default=False)
     url = models.URLField(blank=True)
 
-    context = models.CharField(max_length=10, choices=CONTEXT_TYPE, default='none')
-    action = models.CharField(max_length=25, choices=ACTION_TYPE, default='none')
+    context = models.CharField(max_length=10, choices=CONTEXT_TYPE, default=contexts.none.name)
+    action = models.CharField(max_length=25, choices=ACTION_TYPE, default=actions.none.name)
 
     objects = models.Manager()
     get = NotificationManager()
@@ -42,4 +73,3 @@ class Notification(models.Model):
 
     def __str__(self):
         return "{}, {} -> {}".format(self.context, self.user_from, self.user_to)
-

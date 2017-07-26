@@ -19,11 +19,6 @@ class TeamUserManager(models.Manager):
         teamUserObjs = super(TeamUserManager, self).get_queryset().filter(user_id=user_id)
         return [getattr(teamObj, 'team_id') for teamObj in teamUserObjs]
 
-class TeamJoinManager(models.Manager):
-    def pending(self, user_id):
-        teamJoinObjs = super(TeamJoinManager, self).get_queryset().filter(user_ask=user_id)
-        return [getattr(teamReq, 'team_id') for teamReq in teamJoinObjs]
-
 
 class Team(models.Model):
     STATUS_CHOICES = (
@@ -83,17 +78,3 @@ class TeamUser(models.Model):
 # (team_id, user_id)
 # VALUES
 # ('1', '1');
-
-
-class TeamJoin(models.Model):
-    user_ask = models.ForeignKey(User)
-    team_id = models.ForeignKey(Team)
-    asked = models.DateTimeField(auto_now_add=True)
-    invited = models.BooleanField()
-    accepted = models.BooleanField(default=False)
-
-    class Meta:
-        ordering = ('-team_id',)
-
-    objects = models.Manager()
-    get = TeamJoinManager()

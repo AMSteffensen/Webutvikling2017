@@ -4,22 +4,16 @@
 {% block title %}Rediger din profil{% endblock %}
 
 {% block content %}
-    <h1>Rediger din profil</h1>
-    <p>Bruk følgende form for å redigere din profil:</p>
-    <form action="." method="post" enctype="multipart/form-data">
-        {{ user_form.as_p }}
-        {{ profile_form.as_p }}
-        {% if user.profile.photo %}
-            {% thumbnail user.profile.photo "180x180" crop="100%" format="PNG" as im %}
-                <img src="{{ im.url }}" class="user-detail">
-            {% endthumbnail %}
-        {% else %}
-            {% thumbnail "no_image.png" "180x180" crop="100%" format="PNG" as im %}
-                <img src="{{ im.url }}" class="user-detail">
-            {% endthumbnail %}
-        {% endif %}
-        <br>
-        {% csrf_token %}
-        <p><input type="submit" value="Lagre endringer"></p>
-    </form>
+  <h1>Rediger din profil</h1>
+  <p>Bruk følgende form for å redigere din profil:</p>
+  <form action="." method="post" enctype="multipart/form-data">
+    {{ user_form.as_p }}
+    {{ profile_form.as_p }}
+    <!-- PROFILE PICTURE -->
+    {% include "profile_picture.html" with img_size="180x180" alt="" classes="user-detail" %}
+    <!-- /PROFILE PICTURE -->
+    <br>
+    {% csrf_token %}
+    <p><input type="submit" value="Lagre endringer"></p>
+  </form>
 {% endblock %}

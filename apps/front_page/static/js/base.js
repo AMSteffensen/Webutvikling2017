@@ -16,27 +16,38 @@ $.ajaxSetup({
 
 // Keep SideNav collapse open on refresh (WORK IN PROGRESS)
 $(document).ready(function () {
-    var loc = location.pathname.split("/");
-    $('#menu-content a[href*="/' + loc[loc.length - 3] + "/" + loc[loc.length - 2] + '/"]').parents("ul:first").attr("aria-expanded", true).addClass("in");
+    var loc = location.pathname;
+    submenu = $('#menu-content a[href*="' + loc + '"]');
+    submenu.parents("li:first").addClass("active");
+    submenu.parents("ul:first").attr("aria-expanded", true).addClass("in").prev().addClass("active");
+    //user, users
 
 
+
+    // TOGGLE SOCIAL NOTIFICATIONS PANEL
     // Toggle message and notifications panel
-    $('div#notif-panel a.dropdown-toggle').click(function (e) {
+    $('div#notif-panel a.dropdown-toggle').on('mouseup', function (e) {
+        $('div#msg-panel a.dropdown-toggle').parent().removeClass('open');
         $(this).parent().toggleClass('open');
+        e.stopPropagation();
     });
 
     // Toggle message and notifications panel
-    $('div#msg-panel a.dropdown-toggle').click(function (e) {
+    $('div#msg-panel a.dropdown-toggle').on('mouseup', function (e) {
+        $('div#notif-panel a.dropdown-toggle').parent().removeClass('open');
         $(this).parent().toggleClass('open');
+        e.stopPropagation();
     });
 
-    // // Close message and notifications panel when clicking anywhere else
-    // $('body').on('click', function (e) {
-    //     var socialIcon = $('div#notif-panel');
-    //     if (!socialIcon.is(e.target)) {
-    //         socialIcon.removeClass('open');
-    //     }
-    // });
+    // Close message and notifications panel when clicking anywhere else
+    $('body').on('mouseup', function (e) {
+        var socialIcon = $('a.dropdown-toggle');
+        var socialDropdown = $('.dropdown-menu');
+        if (!socialIcon.is(e.target) && !socialDropdown.is(e.target)) {
+            socialIcon.parent().removeClass('open');
+        }
+    });
+    // TOGGLE SOCIAL NOTIFICATIONS PANEL ------------------------------
 
 });
 

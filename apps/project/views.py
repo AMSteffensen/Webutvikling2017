@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.text import slugify
 from .forms import ProjectCreateForm
 from .models import Project
-
+from snippets.hasher import decode_value
 
 
 def project_list(request):
@@ -17,7 +17,13 @@ def project_list(request):
 
 def project_detail(request, year, month, day, slug):
     if request.method == 'POST':
-        project_pk = request.POST.get('delete_project', '')
+        project_hash = request.POST.get('delete_project', '')
+
+        # Try to decode the project pk
+        try:
+            project_pk = decode_value(project_hash)
+        except Exception:
+            return redirect('proj:project_list')
         try:
             projectObj = get_object_or_404(Project, pk=project_pk)
         except Http404:
@@ -77,11 +83,12 @@ def project_edit(request, year, month, day, slug):
     try:
         projectObj = get_object_or_404(Project, slug=slug, status='published', publish__year=year, publish__month=month, publish__day=day)
     except Http404:
-        return redirect('proj:project_list')
+        return redirect('user:dashboard')
 
     # Restrict unallowed users
     if projectObj.author != request.user:
-        return redirect('proj:project_list')
+        print("Not owner")
+        return redirect('user:dashboard')
 
     if request.method == 'POST':
         project_form = ProjectCreateForm(instance=projectObj, data=request.POST)

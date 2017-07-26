@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load utils %}
 
 {% block title %}{{ team.name }}{% endblock %}
 
@@ -9,7 +10,7 @@
     {% if request.user == team.author %}
       <form action="" method="post">
         {% csrf_token %}
-        <button name="delete_team" value="{{ team.pk }}">Slett team</button>
+        <button name="delete_team" value="{% scramble team.pk %}">Slett team</button>
       </form>
     {% endif %}
 
@@ -28,6 +29,14 @@
         {% endfor %}
       </ul>
     {% endif %}
+      <h4>Non-Members</h4>
+      <ul>
+        {% for non_user in all_users %}
+          {% if non_user not in members %}
+            <li><button id="invite" data-team="{{ team.pk }}" data-action="invite"><i class="fa fa-plus" aria-hidden="true"></i> Invite</button> {{ non_user.username }}</li>
+          {% endif %}
+        {% endfor %}
+      </ul>
   {% else %}
     <p>Du er ikke medlem av denne gruppen, derfor har du ikke tilgang.</p>
   {% endif %}
