@@ -271,7 +271,8 @@
               $.post('{% url "noti:handle-team-req" %}',
                   {
                       payload: $(this).data('payload'),
-                      action: $(this).data('action')
+                      action: $(this).data('action'),
+                      context: $(this).data('context')
                   },
                   function (data) {
                       if (data['status'] === 'ok') {

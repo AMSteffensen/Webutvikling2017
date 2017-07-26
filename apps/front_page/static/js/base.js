@@ -43,11 +43,10 @@ $(document).ready(function () {
     $('body').on('mouseup', function (e) {
         var socialIcon = $('a.dropdown-toggle');
         var socialDropdown = $('.dropdown-menu');
-        if (!socialIcon.is(e.target) && !socialDropdown.is(e.target)) {
+        if (!socialIcon.is(e.target) && !socialDropdown.is(e.target) && !socialDropdown.has(e.target).length > 0) {
             socialIcon.parent().removeClass('open');
         }
     });
     // TOGGLE SOCIAL NOTIFICATIONS PANEL ------------------------------
-
 });
 

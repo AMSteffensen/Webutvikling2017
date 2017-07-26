@@ -55,7 +55,7 @@ class UserRegistrationForm(forms.ModelForm):
 
         # Apply something to all fields
         for field in self.fields.values():
-            self.field.widget.attrs['class'] += " yetAnotherClass"
+            field.widget.attrs['class'] += " yetAnotherClass"
 
         #<!-- /ATTRIBUTES -->
 
