@@ -4,6 +4,7 @@ from notification.models import Notification
 from team.models import Team
 
 from snippets.hasher import encode_value
+from snippets.hasher import encode_data
 
 
 
@@ -24,3 +25,7 @@ def get_team_url(pk):
 @register.simple_tag
 def scramble(value):
     return encode_value(value)
+
+@register.simple_tag
+def scramble_mul(*args):
+    return encode_data(args)
