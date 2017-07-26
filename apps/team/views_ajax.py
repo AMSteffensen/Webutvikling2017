@@ -99,6 +99,9 @@ def team_invite(request):
         print("did exist")
         return JsonResponse({'status': 'ko'})
 
+    # Generate payload
+    payload = encode_data([request.user.pk, team_id])
+
     # Generate a request notification
     notif_req = Notification(
         user_from=request.user,
