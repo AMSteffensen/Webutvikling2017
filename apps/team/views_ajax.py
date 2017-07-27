@@ -98,6 +98,17 @@ def team_invite(request):
     ).exists():
         print("did exist")
         return JsonResponse({'status': 'ko'})
+    # Double check that the request does not already exist
+    elif Notification.objects.filter(
+        user_from_id=user_id,
+        foreignPK=team_id,
+        context=Notification.contexts.team.name,
+        action=Notification.actions.team_req_join,
+        url=payload,
+        read=False,
+    ).exists():
+        print("did exist")
+        return JsonResponse({'status': 'ko'})
 
     # Generate payload
     payload = encode_data([request.user.pk, team_id])
