@@ -13,7 +13,7 @@
   {% for team in teams %}
     <h2><a href="{{ team.get_absolute_url }}">{{ team.name }}</a></h2>
     {% if team not in memberOf %}
-      {% if team.pk in pending %}
+      {% if team.pk in pending_req or team.pk in pending_inv %}
         <button><i class="fa fa-clock-o" aria-hidden="true"></i> Pending</button>
       {% else %}
         <button type="button" id="req_join"

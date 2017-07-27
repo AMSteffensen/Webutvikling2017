@@ -45,6 +45,24 @@ class NotificationManager(models.Manager):
         )
         return [getattr(teamInv, 'user_to') for teamInv in invObjs]
 
+    def pending_team_req_by_team(self, team_id):
+        invObjs = super(NotificationManager, self).get_queryset().filter(
+            foreignPK=team_id,
+            context=NotificationContexts.team.name,
+            action=NotificationActions.team_req_join.name,
+            read=False,
+        )
+        return [getattr(userReq, 'user_from') for userReq in invObjs]
+
+    def pending_team_inv_by_user(self, user_id):
+        reqObjs = super(NotificationManager, self).get_queryset().filter(
+            user_to=user_id,
+            context=NotificationContexts.team.name,
+            action=NotificationActions.team_invite.name,
+            read=False,
+        )
+        return [getattr(userInv, 'foreignPK') for userInv in reqObjs]
+
 
 class Notification(models.Model):
 

@@ -15,10 +15,15 @@ def team_list(request):
     # Get all public teams
     teams = Team.get.public()
     # Get all teams you're waiting to join
-    pending = Notification.get.pending_team_req(request.user)
+    pending_req = Notification.get.pending_team_req(request.user)
+    # Get all teams you've been invited to
+    pending_inv = Notification.get.pending_team_inv_by_user(request.user)
     # Get all teams you are a member of
     memberOf = TeamUser.get.memberOf(request.user)
-    return render(request, 'team/list.html', {'teams': teams, 'memberOf': memberOf, 'pending': pending})
+    return render(request, 'team/list.html', {'teams': teams,
+                                              'memberOf': memberOf,
+                                              'pending_req': pending_req,
+                                              'pending_inv': pending_inv,})
 
 
 def team_detail(request, slug):
@@ -56,12 +61,14 @@ def team_detail(request, slug):
         # Get all members
         all_users = User.objects.all()
         # Get pending invites
-        pending = Notification.get.pending_team_inv(teamObj.pk)
+        pending_inv = Notification.get.pending_team_inv(teamObj.pk)
+        pending_req = Notification.get.pending_team_req_by_team(teamObj.pk)
 
         return render(request, 'team/detail.html', {'team': teamObj,
                                                     'members': members,
                                                     'all_users': all_users,
-                                                    'pending': pending})
+                                                    'pending_inv': pending_inv,
+                                                    'pending_req': pending_req})
 
 
 @login_required

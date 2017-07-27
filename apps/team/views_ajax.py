@@ -42,6 +42,16 @@ def team_req_join(request):
     ).exists():
         print("Did exist")
         return JsonResponse({'status': 'ko'})
+    # Double check that the request does not already exist
+    elif Notification.objects.filter(
+        user_to=request.user,
+        foreignPK=teamPK,
+        context=Notification.contexts.team.name,
+        action=Notification.actions.team_invite.name,
+        read=False,
+    ).exists():
+        print("Did exist")
+        return JsonResponse({'status': 'ko'})
 
     # Generate datahash
     print("Generating hash")

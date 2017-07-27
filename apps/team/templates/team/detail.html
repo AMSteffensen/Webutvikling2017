@@ -33,7 +33,7 @@
       <ul>
         {% for non_user in all_users %}
           {% if non_user not in members %}
-            {% if non_user in pending %}
+            {% if non_user in pending_inv or non_user in pending_req %}
               <li><button><i class="fa fa-clock-o" aria-hidden="true"></i> Pending</button> {{ non_user.username }}</li>
             {% else %}
             <li><button id="invite" data-value="{% scramble_mul non_user.pk team.pk %}" data-action="invite"><i class="fa fa-plus" aria-hidden="true"></i> Invite</button> {{ non_user.username }}</li>
