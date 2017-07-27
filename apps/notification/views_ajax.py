@@ -105,7 +105,7 @@ def team_handel_inv(request):
 
     # Mark the notification as read
     notif_inv.read = True
-    notif_inv.save();
+    notif_inv.save()
 
     # Create a notification for the inviter
     if action == 'accept':
