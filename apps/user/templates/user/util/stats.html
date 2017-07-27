@@ -2,81 +2,32 @@
 
 {% block title %}Stats{% endblock %}
 
+<!-- BLOCK HEAD -->
 {% block head %}
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
   <style>
-.chart{
-  margin-left: -20px;
-  width: 900px;
-  height: 500px;
-}
+    .chart {
+      margin-left: -20px;
+      width: 900px;
+      height: 500px;
+    }
   </style>
 {% endblock %}
+<!-- /BLOCK HEAD -->
 
-
+<!-- BLOCK CONTENT -->
 {% block content %}
-
-<head>
-
   <h1>Stats</h1>
 
-  <p></p>
+  <p id="stats-blue-row"></p>
+  <p id="stats-red-row"></p>
+
   <div id='chart_div' class='chart'></div>
-
 {% endblock %}
+<!-- /BLOCK CONTENT -->
 
-
+<!-- BLOCK DOMREADY  // LIGGER I 'base.html'-->
 {% block domready %}
-<script>
-
-  google.charts.load('current', {'packages':['annotationchart']});
-  google.charts.setOnLoadCallback(drawChart);
-
-  function drawChart() {
-    var data = new google.visualization.DataTable();
-    data.addColumn('date', 'Date');
-    data.addColumn('number', 'Prosjekt 1');
-    data.addColumn('string', 'Prosjekt 1 title');
-    data.addColumn('string', 'Prosjekt 1 text');
-    data.addColumn('number', 'Prosjekt 2');
-    data.addColumn('string', 'Prosjekt 2 title');
-    data.addColumn('string', 'Prosjekt 2 text');
-    data.addRows([
-      [new Date(2017, 6, 15), 0, 'Prosjekt 1', 'Prosjekt oppstart',
-                              undefined, undefined, undefined],
-      [new Date(2017, 6, 16), 5, 'Prosjekt 1', 'Planleggingsmøte',
-                              0, 'Prosjekt 2', 'Prosjekt oppstart'],
-      [new Date(2017, 6, 17), 5, 'Prosjekt 1', 'Første jobbdag',
-                              2, 'Prosjekt 2', 'Møte med oppdragsgiver'],
-      [new Date(2017, 6, 18), 3, undefined, undefined,
-                              4, undefined, undefined],
-      [new Date(2017, 6, 19), 7, undefined, undefined,
-                              1, undefined, undefined],
-      [new Date(2017, 6, 20), 2, 'Prosjekt 1', 'Prosjekt ferdig',
-                              9, 'Prosjekt 2', 'Siste møte'],
-      [new Date(2017, 6, 21), undefined, undefined, undefined,
-                              3, 'Prosjekt 2', 'Prosjekt ferdig'],
-      [new Date(2017, 6, 22), undefined, undefined, undefined,
-                              undefined, undefined, undefined]
-    ]);
-
-
-    var chart = new google.visualization.AnnotationChart(document.getElementById('chart_div'));
-
-    var options = {
-      displayAnnotations: true
-    };
-
-    chart.draw(data, options);
-  }
-
-function totalN(){
-  var total=0;
-    for(i=0;i<data.length;i++){
-      total+=data[i,1];
-  };
-  return total;
-};
-  </script>
 {% endblock %}
+<!-- /BLOCK DOMREADY -->
