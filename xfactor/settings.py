@@ -33,7 +33,7 @@ DEBUG = True
 THUMBNAIL_DEBUG = DEBUG
 
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['xfaktor.eu-central-1.elasticbeanstalk.com']
 
 
 # Application definition
