@@ -28,7 +28,7 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 SECRET_KEY = 'igu*b8cki054arveyd(w-gw5u51@(pfo!$1osvyr&pwph=yrwy'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False if os.environ.get("USE_PRODUCTION") else True
 #TEMPLATE_DEBUG = True
 THUMBNAIL_DEBUG = DEBUG
 
