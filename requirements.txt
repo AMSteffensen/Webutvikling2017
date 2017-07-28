@@ -1,4 +1,4 @@
 django
 pytz
 sorl-thumbnail
-Pillow
+Pillow==4.0.0
