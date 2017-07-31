@@ -32,7 +32,7 @@
             <div class="col-md-3">
               <div class="user-info-left">
                 <!-- PROFILE PICTURE -->
-                {% include "profile_picture.html" with img_size="180x180" alt="" classes="user-detail" %}
+                {% include "profile_picture.html" with source=user.profile.photo img_size="180x180" alt="" classes="user-detail" %}
                 <!-- /PROFILE PICTURE -->
                 <h2>{{ user.username }} <i class="fa fa-circle green-font online-icon"></i><sup class="sr-only">Pålogget</sup></h2>
                 <div class="contact">
@@ -74,7 +74,7 @@
                   </p>
                   <p class="data-row">
                     <span class="data-name">Kjønn: </span>
-                    <span class="data-value">Mann</span>
+                    <span class="data-value">{{ user.profile.gender }}</span>
                   </p>
                   <p class="data-row">
                     <span class="data-name">Hjemmeside: </span>

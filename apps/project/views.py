@@ -11,7 +11,7 @@ from snippets.hasher import decode_value
 
 
 def project_list(request):
-    projects = Project.get.published()
+    projects = Project.objects.all()
     return render(request, 'project/list.html', {'projects': projects})
 
 
@@ -35,21 +35,15 @@ def project_detail(request, year, month, day, slug):
             projectObj.delete()
             return render(request, 'project/project_deleted.html', {'project_title': project_title})
 
+    # Trying to get a published project
     else:
         # Trying to get a published project
         try:
-            projectObj = get_object_or_404(Project, slug=slug, status='published', publish__year=year, publish__month=month, publish__day=day)
-        # It failed, try to get a drafted project for your user
+            projectObj = get_object_or_404(Project, slug=slug, created__year=year, created__month=month, created__day=day)
+        # It failed, Redirect the user
         except Http404:
-            try:
-                projectObj = get_object_or_404(Project, slug=slug, status='draft', author=request.user, publish__year=year, publish__month=month, publish__day=day)
-            # It failed, return 404
-            except Http404:
-                return redirect('proj:project_list')
-
-        # Restrict unallowed users
-        if projectObj.status == 'draft' and projectObj.author != request.user:
             return redirect('proj:project_list')
+
         return render(request, 'project/detail.html', {'project': projectObj})
 
 
@@ -81,7 +75,7 @@ def project_create(request):
 @login_required
 def project_edit(request, year, month, day, slug):
     try:
-        projectObj = get_object_or_404(Project, slug=slug, status='published', publish__year=year, publish__month=month, publish__day=day)
+        projectObj = get_object_or_404(Project, slug=slug, author=request.user, created__year=year, created__month=month, created__day=day)
     except Http404:
         return redirect('user:dashboard')
 

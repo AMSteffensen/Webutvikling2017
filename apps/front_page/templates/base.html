@@ -135,7 +135,7 @@
               <li><a href="{{ request.user.get_absolute_url }}">
                 <i>
                   <!-- PROFILE PICTURE -->
-                  {% include "profile_picture.html" with img_size="32x32" alt="" classes="user-detail" %}
+                  {% include "profile_picture.html" with source=request.user.profile.photo img_size="32x32" alt="" classes="user-detail" %}
                   <!-- /PROFILE PICTURE -->
                 </i></a></li>
 
