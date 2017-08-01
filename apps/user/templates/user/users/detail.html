@@ -1,38 +1,33 @@
-{% extends "base.html" %}
-{% load thumbnail %}
-{% load staticfiles %}
+{% extends "base.html" %} {% load thumbnail %} {% load staticfiles %} {% block title %}{{ user.get_full_name }}{% endblock %} {% block content %}
+<link rel="stylesheet" href="{% static 'detail.css' %}">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-{% block title %}{{ user.get_full_name }}{% endblock %}
+<!-- main -->
 
-{% block content %}
-  <link rel="stylesheet" href="{% static 'detail.css' %}">
+<!-- Followers -->
+<div class="content">
+  <div class="main-header">
+    <h2>Profil: {{ user.get_full_name }}</h2>
+    <em>Brukerprofil side</em>
 
-  <!-- main -->
-
-  <!-- Followers -->
-  <div class="content">
-    <div class="main-header">
-      <h2>Profil: {{ user.get_full_name }}</h2>
-      <em>Brukerprofil side</em>
-
-    </div>
-    <div class="main-content">
-      <!-- NAV TABS -->
-      <ul class="nav nav-tabs nav-tabs-custom-colored tabs-iconized">
-        <li class="active"><a href="#profile-tab" data-toggle="tab"><i class="fa fa-user"></i> Profil</a></li>
-        <li><a href="#activity-tab" data-toggle="tab"><i class="fa fa-rss"></i> Aktivitet</a></li>
-        <li><a href="#settings-tab" data-toggle="tab"><i class="fa fa-gear"></i> Instillinger</a></li>
-        <li><a href="#settings-tab" data-toggle="tab"><i class="fa fa-camera"></i> Portfolio</a></li>
-      </ul>
-      <!-- END NAV TABS -->
-      <div class="tab-content profile-page">
-        <s!-- PROFILE TAB CONTENT -->
+  </div>
+  <div class="main-content">
+    <!-- NAV TABS -->
+    <ul class="nav nav-tabs nav-tabs-custom-colored tabs-iconized">
+      <li class="active"><a href="#profile-tab" data-toggle="tab"><i class="fa fa-user"></i> Profil</a></li>
+      <li><a href="#activity-tab" data-toggle="tab"><i class="fa fa-rss"></i> Aktivitet</a></li>
+      <li><a href="#settings-tab" data-toggle="tab"><i class="fa fa-gear"></i> Instillinger</a></li>
+      <li><a href="#settings-tab" data-toggle="tab"><i class="fa fa-camera"></i> Portfolio</a></li>
+    </ul>
+    <!-- END NAV TABS -->
+    <div class="tab-content profile-page">
+      <s!-- PROFILE TAB CONTENT -->
         <div class="tab-pane profile active" id="profile-tab">
           <div class="row">
             <div class="col-md-3">
               <div class="user-info-left">
                 <!-- PROFILE PICTURE -->
-                {% include "profile_picture.html" with img_size="180x180" alt="" classes="user-detail" %}
+                {% include "profile_picture.html" with source=user.profile.photo img_size="180x180" alt="" classes="user-detail" %}
                 <!-- /PROFILE PICTURE -->
                 <h2>{{ user.username }} <i class="fa fa-circle green-font online-icon"></i><sup class="sr-only">Pålogget</sup></h2>
                 <div class="contact">
@@ -49,11 +44,11 @@
             </div>
             <!-- Followers -->
             {% with total_followers=user.followers.count %}
-              <span class="count">
+            <span class="count">
 												<span class="total">{{ total_followers }}</span> follower{{ total_followers|pluralize }}
-              </span>
-              {% if user.id is not request.user.id %}
-                <a href="#" data-id="{{ user.id }}" data-action="{% if request.user in user.followers.all %}un{% endif %}follow" class="follow button">
+            </span>
+            {% if user.id is not request.user.id %}
+            <a href="#" data-id="{{ user.id }}" data-action="{% if request.user in user.followers.all %}un{% endif %}follow" class="follow button">
                   {% if request.user not in user.followers.all %}
                     Følg
                   {% else %}
@@ -74,7 +69,7 @@
                   </p>
                   <p class="data-row">
                     <span class="data-name">Kjønn: </span>
-                    <span class="data-value">Mann</span>
+                    <span class="data-value">{{ user.profile.gender }}</span>
                   </p>
                   <p class="data-row">
                     <span class="data-name">Hjemmeside: </span>
@@ -116,23 +111,136 @@
           </div>
         </div>
         <!-- END PROFILE TAB CONTENT -->
+    </div>
+  </div>
+</div>
+<!-- /main -->
+
+
+
+<!-- Add hours to project -->
+
+<h2>Legg timer til prosjekt her</h2>
+
+<!--Add hours to project: First line  -->
+
+<hr class="hrStyle">
+
+<!-- Button with plus-sign -->
+<div class="addElement">
+  <button type="button" class="btn btn-default btnSign btnRed"><i class="fa fa-minus btnSignInside" aria-hidden="true"></i></button>
+</div>
+<!-- Add project -->
+<div class=" addElement">
+  <label class="addLabel"> Velg prosjekt: </label>
+  <select id="dropdown" class="addProject form1">
+<option value="project1">Prosjekt 1</option>
+<option value="project2">Prosjekt 2</option>
+<option value="project3">Prosjekt 3</option>
+<option value="project4">Prosjekt 4</option>
+</select>
+</div>
+
+<!-- Add date -->
+
+<div class="addElement">
+  <label class="addLabel" for="dateofbirth">Velg dato:</label>
+  <input type="date" name="dateofbirth" id="dateofbirth" class="form1">
+</div>
+
+<!-- Add hours -->
+<div class="addElement">
+  <label class="addLabel"> Antall timer: </label>
+  <div class="col-xs-1 addHours">
+    <div class="input-group spinner addHoursInput">
+      <input type="text" class="form-control" value="0" min="0" max="24">
+      <div class="input-group-btn-vertical">
+        <button class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
+        <button class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
       </div>
     </div>
   </div>
-  <!-- /main -->
-{% endblock %}
+</div>
+
+<!-- Add annotation -->
+<div class="addElement">
+  <label class="addLabel">Legg til merknad:</label>
+  <textarea type="text" class="form1 form2" maxlength="75"></textarea>
+</div>
+
+<hr class="hrStyle">
+
+<!--Add hours to project: Second line  -->
+
+<!-- Button with plus-sign -->
+<div class="addElement">
+  <button type="button" class="btn btn-default btnSign btnRed"><i class="fa fa-minus btnSignInside" aria-hidden="true"></i></button>
+</div>
+<!-- Add project -->
+<div class=" addElement">
+  <label class="addLabel"> Velg prosjekt: </label>
+  <select id="dropdown" class="addProject form1">
+<option value="project1">Prosjekt 1</option>
+<option value="project2">Prosjekt 2</option>
+<option value="project3">Prosjekt 3</option>
+<option value="project4">Prosjekt 4</option>
+</select>
+</div>
+
+<!-- Add date -->
+
+<div class="addElement">
+  <label class="addLabel" for="dateofbirth">Velg dato:</label>
+  <input type="date" name="dateofbirth" id="dateofbirth" class="form1">
+</div>
+
+<!-- Add hours -->
+<div class="addElement">
+  <label class="addLabel"> Antall timer: </label>
+  <div class="col-xs-1 addHours">
+    <div class="input-group spinner addHoursInput">
+      <input type="text" class="form-control" value="0" min="0" max="24">
+      <div class="input-group-btn-vertical">
+        <button class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
+        <button class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Add annotation -->
+<div class="addElement">
+  <label class="addLabel">Legg til merknad:</label>
+  <textarea type="text" class="form1 form2" maxlength="75"></textarea>
+</div>
+
+<hr class="hrStyle">
+
+<!--Add hours to project: Third line  -->
+
+<!-- Button with plus-sign -->
+<div class="addElement">
+  <button type="button" class="btn btn-default btnSign btnGreen"><i class="fa fa-plus btnSignInside" aria-hidden="true"></i></button>
+</div>
+
+<!-- Submit button -->
+<div class="addElement">
+  <button type="button" class="btn btn-default btnSubmitHours"><span class="btnSignInside" aria-hidden="true">Legg til timer</span></button>
+</div>
+
+<hr class="hrStyle">
+<!-- /Add hours to project -->
 
 
-{% block domready %}
-      $('a.follow').click(function (e) {
-          e.preventDefault();
-          $.post('{% url "user:user_follow" %}', {id: $(this).data('id'), action: $(this).data('action')}, function (data) {
-              if (data['status'] == 'ok') {
-                  var previous_action
-                      = $('a.follow').data('action'); // toggle data-action $('a.follow').data('action', previous_action == 'follow' ? 'unfollow' : 'follow'); // toggle link text $('a.follow').text(previous_action == 'follow' ? 'Unfollow' : 'Follow'); // update total followers
-                  var previous_followers = parseInt($('span.count .total').text());
-                  $('span.count .total').text(previous_action == 'follow' ? previous_followers + 1 : previous_followers - 1);
-              }
-          });
-      });
-{% endblock %}
+
+{% endblock %} {% block domready %} $('a.follow').click(function (e) { e.preventDefault(); $.post('{% url "user:user_follow" %}', {id: $(this).data('id'), action: $(this).data('action')}, function (data) { if (data['status'] == 'ok') { var previous_action
+= $('a.follow').data('action'); // toggle data-action $('a.follow').data('action', previous_action == 'follow' ? 'unfollow' : 'follow'); // toggle link text $('a.follow').text(previous_action == 'follow' ? 'Unfollow' : 'Follow'); // update total followers
+var previous_followers = parseInt($('span.count .total').text()); $('span.count .total').text(previous_action == 'follow' ? previous_followers + 1 : previous_followers - 1); } }); });
+
+<!-- Add hours to project -->
+$(function(){ $('.spinner .btn:first-of-type').on('click', function() { var btn = $(this); var input = btn.closest('.spinner').find('input'); if (input.attr('max') == undefined || parseInt(input.val())
+< parseInt(input.attr( 'max'))) { input.val(parseInt(input.val(),
+  10) + 1); } else { btn.next( "disabled", true); } }); $( '.spinner .btn:last-of-type').on( 'click', function() { var btn=$ (this); var input=b tn.closest( '.spinner').find( 'input'); if (input.attr( 'min')==u ndefined || parseInt(input.val())> parseInt(input.attr('min'))) { input.val(parseInt(input.val(), 10) - 1); } else { btn.prev("disabled", true); } }); })
+  <!-- /Add hours to project -->
+
+  {% endblock %}

@@ -18,6 +18,7 @@ from django.conf.urls import include
 from django.conf.urls import url
 from django.contrib import admin
 from django.conf import settings
+from django.views.generic.base import TemplateView
 
 from user.views import dashboard
 
@@ -28,8 +29,9 @@ urlpatterns = [
     # front page
     url(r'^$', dashboard),
 
-    # front page app
-    #url(r'^$', frontpage), 
+    # Landing page index
+    url(r'^landing/', TemplateView.as_view(template_name='static_pages/index.html'),
+        name='home'),
 
     # user authentication app
     url(r'^uauth/', include('user_auth.urls', namespace='uauth', app_name='user_auth')),
