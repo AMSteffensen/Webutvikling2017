@@ -3,6 +3,8 @@
 {% block title %}Mine Prosjekter{% endblock %}
 
 {% block content %}
+
+<!--
   <h1>Mine Prosjekter</h1>
 
   {% if request.user.is_authenticated %}
@@ -25,4 +27,92 @@
     <br><br>
     <p>Du har ikke opprettet noen prosjekter enda.<p>
   {% endif %}
+-->
+
+<h1>Prosjekter</h1>
+<div class="content">
+  <div class="main-header">
+    <em>Du tilhører <span class="label label-success">4 aktive</span> prosjekter, <span class="label label-warning">2 ventende</span> og <span class="label label-default">2 lukkede</span></em>
+  </div>
+  <div class="main-content">
+    <div class="bottom-30px">
+      <a href="{% url 'proj:project_create' %}" class="btn btn-primary"><i class="fa fa-plus-square"></i> Opprett nytt prosjekt</a>
+      <nav class="main-content-nav pull-right">
+        <ul class="list-inline">
+          <li><a href="#"><i class="fa fa-tasks"></i> Mine Oppgaver</a></li>
+          <li><a href="#"><i class="fa fa-files-o"></i> Mine filer</a></li>
+          <li><a href="#"><i class="fa fa-history"></i> Min aktivitet</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="table-responsive">
+      <!-- PROJECT TABLE -->
+      <table class="table colored-header datatable project-list">
+        <thead>
+          <tr>
+            <th>Tittel</th>
+            <th>Publisert</th>
+            <th>Dager til deadline</th>
+            <th>Fremgang</th>
+            <th>Prioritet</th>
+            <th>Oppdragsiver</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <!-- TODO: List projectss -->
+            {% if projects %}
+            {% for project in projects %}
+            <td><a href="{{ project.get_absolute_url }}">{{ project.title }}</a></td>
+            <td>{{ project.created }}</td>
+            <td>{{ project.deadline }}</td> <!-- TODO: Calculate time left from todays datetime -->
+            <td>
+              <div class="progress">
+                <div class="progress-bar progress-bar-striped active"
+                     role="progressbar"
+                     aria-valuenow="{{ project.progress }}"
+                     aria-valuemin="0"
+                     aria-valuemax="100"
+                     style="width:{{ project.progress }}%">{{ project.progress }}%</div>
+              </div>
+            </td>
+            <!-- PRIORITY -->
+            {% if project.priority == 'low' %}
+              <td><span class="label label-success">{{ project.priority|upper }}</span></td>
+            {% elif project.priority == 'medium' %}
+              <td><span class="label label-warning">{{ project.priority|upper }}</span></td>
+            {% elif project.priority == 'high' %}
+              <td><span class="label label-danger">{{ project.priority|upper }}</span></td>
+            {% endif %}
+            <!-- /PRIORITY -->
+            <td>{% include "profile_picture.html" with source=project.author.profile.photo img_size="32x32" alt="avatar" classes="avatar img-circle" %} <a href="#">{{ project.author }}</a></td>
+            <!-- STATUS -->
+            <td><span class="label label-success">AKTIV</span></td>
+            {% if project.status == 'open' %}
+              <td><span class="label">{{ project.status|upper }}</span></td>
+            {% elif project.status == 'active' %}
+              <td><span class="label label-success">{{ project.status|upper }}</span></td>
+            {% elif project.status == 'finished' %}
+              <td><span class="label">{{ project.status|upper }}</span></td>
+            {% elif project.status == 'closed' %}
+              <td><span class="label label-danger">{{ project.status|upper }}</span></td>
+            {% endif %}
+            <!-- /STATUS -->
+          </tr>
+          {% endfor %}
+          {% else %}
+            <br><br>
+            <p>Du har ikke opprettet noen prosjekter enda.<p>
+          {% endif %}
+        </tbody>
+      </table>
+
+      <!-- END PROJECT TABLE -->
+      </div>
+    </div>
+  </div>
+  <!-- /main -->
+
+
 {% endblock %}
