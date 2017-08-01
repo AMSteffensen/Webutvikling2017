@@ -28,19 +28,29 @@
   <div class="main-header">
     <h2>{{ project.title }}</h2>
   </div>
+
   <div class="main-content">
   <div class="row">
     <div class="col-md-8">
       <div class="project-section general-info">
-        <h3>Prosjektbeskrivelse</h3> {% if request.user == project.author %} {% csrf_token %}
-        <form action="{{ project.get_edit_url }}" class="inline">
-          <button type="button" class="btn btn-sm btn-primary pull-right"><i class="fa fa-edit"></i> Endre Prosjekt</button>
-        </form>
-      {% endif %}
+        <h3>Prosjektbeskrivelse</h3>
 
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque dignissim dui ut laoreet pretium. Curabitur faucibus porta mollis. Donec at luctus odio. Maecenas ornare nisl a pretium rhoncus. Maecenas non arcu in magna viverra egestas eu et
           orci. Nunc ac tellus sed elit convallis dictum nec eu ex. Praesent eu ipsum sollicitudin, dictum quam at, gravida ex. Duis tempor enim vel nisi congue sollicitudin. Nam rhoncus dolor non augue rutrum laoreet. Integer eu odio diam. Donec a
           semper neque. Donec consequat nunc in elit euismod, eget posuere mauris ultricies. Etiam mattis imperdiet est at iaculis. Fusce venenatis aliquet auctor..</p>
+
+
+          {% if request.user == project.author %} {% csrf_token %}
+          <form action="{{ project.get_edit_url }}" class="inline">
+            <button type="submit" class="btn btn-sm btn-primary pull-right"><i class="fa fa-edit"></i> Endre Prosjekt</button>
+          </form>
+        {% endif %}
+        <form action="" method="post">
+          {% csrf_token %}
+          <button class="btn btn-danger"name="delete_project" value="{% scramble project.pk %}">Slett prosjekt</button>
+        </form>
+
+
         <div class="row">
           <div class="col-sm-9">
             <dl class="dl-horizontal">
