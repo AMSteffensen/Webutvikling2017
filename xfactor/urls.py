@@ -29,6 +29,12 @@ urlpatterns = [
     # front page
     url(r'^$', dashboard),
 
+    # About
+    url(r'^about/', TemplateView.as_view(template_name='static_pages/about.html'),
+        name='about'),
+    # Contact us
+    url(r'^contact/', TemplateView.as_view(template_name='static_pages/contact.html'),
+        name='contact'),
     # Landing page index
     url(r'^landing/', TemplateView.as_view(template_name='static_pages/index.html'),
         name='home'),
