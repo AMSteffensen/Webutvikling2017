@@ -258,10 +258,11 @@
         </div>
       </div>
     </div>
+  </div>
     <!-- /FOOTER -->
 
-  </div>
-  <!-- /WRAPPER -->
+</div>
+<!-- /WRAPPER -->
 
   <!-- Used for scripts in external template files -->
   <script>
@@ -308,17 +309,17 @@
           });
           // <!-- /Notification team inv handle -->
 
-
       });
       // <!-- /DOM-READY -->
 
       // <!-- HEADER SEARCH ICON -->
       $("#searchIcon").click(function () {
-          if ($("#searchBar").is(":hidden")) {
-              $("#searchBar").slideDown(350, function () {
+          var searchBar = ("#searchBar");
+          if (searchBar.is(":hidden")) {
+              searchBar.slideDown(350, function () {
               });
           } else {
-              $("#searchBar").slideUp(350, function () {
+              searchBar.slideUp(350, function () {
               });
           }
       });
