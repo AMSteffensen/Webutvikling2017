@@ -118,129 +118,21 @@
 
 
 
-<!-- Add hours to project -->
-
-<h2>Legg timer til prosjekt her</h2>
-
-<!--Add hours to project: First line  -->
-
-<hr class="hrStyle">
-
-<!-- Button with plus-sign -->
-<div class="addElement">
-  <button type="button" class="btn btn-default btnSign btnRed"><i class="fa fa-minus btnSignInside" aria-hidden="true"></i></button>
-</div>
-<!-- Add project -->
-<div class=" addElement">
-  <label class="addLabel"> Velg prosjekt: </label>
-  <select id="dropdown" class="addProject form1">
-<option value="project1">Prosjekt 1</option>
-<option value="project2">Prosjekt 2</option>
-<option value="project3">Prosjekt 3</option>
-<option value="project4">Prosjekt 4</option>
-</select>
-</div>
-
-<!-- Add date -->
-
-<div class="addElement">
-  <label class="addLabel" for="dateofbirth">Velg dato:</label>
-  <input type="date" name="dateofbirth" id="dateofbirth" class="form1">
-</div>
-
-<!-- Add hours -->
-<div class="addElement">
-  <label class="addLabel"> Antall timer: </label>
-  <div class="col-xs-1 addHours">
-    <div class="input-group spinner addHoursInput">
-      <input type="text" class="form-control" value="0" min="0" max="24">
-      <div class="input-group-btn-vertical">
-        <button class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
-        <button class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Add annotation -->
-<div class="addElement">
-  <label class="addLabel">Legg til merknad:</label>
-  <textarea type="text" class="form1 form2" maxlength="75"></textarea>
-</div>
-
-<hr class="hrStyle">
-
-<!--Add hours to project: Second line  -->
-
-<!-- Button with plus-sign -->
-<div class="addElement">
-  <button type="button" class="btn btn-default btnSign btnRed"><i class="fa fa-minus btnSignInside" aria-hidden="true"></i></button>
-</div>
-<!-- Add project -->
-<div class=" addElement">
-  <label class="addLabel"> Velg prosjekt: </label>
-  <select id="dropdown" class="addProject form1">
-<option value="project1">Prosjekt 1</option>
-<option value="project2">Prosjekt 2</option>
-<option value="project3">Prosjekt 3</option>
-<option value="project4">Prosjekt 4</option>
-</select>
-</div>
-
-<!-- Add date -->
-
-<div class="addElement">
-  <label class="addLabel" for="dateofbirth">Velg dato:</label>
-  <input type="date" name="dateofbirth" id="dateofbirth" class="form1">
-</div>
-
-<!-- Add hours -->
-<div class="addElement">
-  <label class="addLabel"> Antall timer: </label>
-  <div class="col-xs-1 addHours">
-    <div class="input-group spinner addHoursInput">
-      <input type="text" class="form-control" value="0" min="0" max="24">
-      <div class="input-group-btn-vertical">
-        <button class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
-        <button class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Add annotation -->
-<div class="addElement">
-  <label class="addLabel">Legg til merknad:</label>
-  <textarea type="text" class="form1 form2" maxlength="75"></textarea>
-</div>
-
-<hr class="hrStyle">
-
-<!--Add hours to project: Third line  -->
-
-<!-- Button with plus-sign -->
-<div class="addElement">
-  <button type="button" class="btn btn-default btnSign btnGreen"><i class="fa fa-plus btnSignInside" aria-hidden="true"></i></button>
-</div>
-
-<!-- Submit button -->
-<div class="addElement">
-  <button type="button" class="btn btn-default btnSubmitHours"><span class="btnSignInside" aria-hidden="true">Legg til timer</span></button>
-</div>
-
-<hr class="hrStyle">
-<!-- /Add hours to project -->
-
-
-
-{% endblock %} {% block domready %} $('a.follow').click(function (e) { e.preventDefault(); $.post('{% url "user:user_follow" %}', {id: $(this).data('id'), action: $(this).data('action')}, function (data) { if (data['status'] == 'ok') { var previous_action
-= $('a.follow').data('action'); // toggle data-action $('a.follow').data('action', previous_action == 'follow' ? 'unfollow' : 'follow'); // toggle link text $('a.follow').text(previous_action == 'follow' ? 'Unfollow' : 'Follow'); // update total followers
-var previous_followers = parseInt($('span.count .total').text()); $('span.count .total').text(previous_action == 'follow' ? previous_followers + 1 : previous_followers - 1); } }); });
-
-<!-- Add hours to project -->
-$(function(){ $('.spinner .btn:first-of-type').on('click', function() { var btn = $(this); var input = btn.closest('.spinner').find('input'); if (input.attr('max') == undefined || parseInt(input.val())
-< parseInt(input.attr( 'max'))) { input.val(parseInt(input.val(),
-  10) + 1); } else { btn.next( "disabled", true); } }); $( '.spinner .btn:last-of-type').on( 'click', function() { var btn=$ (this); var input=b tn.closest( '.spinner').find( 'input'); if (input.attr( 'min')==u ndefined || parseInt(input.val())> parseInt(input.attr('min'))) { input.val(parseInt(input.val(), 10) - 1); } else { btn.prev("disabled", true); } }); })
-  <!-- /Add hours to project -->
+ {% endblock %}
+  {% block domready %}
+  $('a.follow').click(function(e) {
+    e.preventDefault();
+    $.post('{% url "user:user_follow" %}', {
+        id: $(this).data('id'),
+        action: $(this).data('action')
+      },
+      function(data) {
+        if (data['status'] == 'ok') {
+          var previous_action = $('a.follow').data('action'); // toggle data-action $('a.follow').data('action', previous_action == 'follow' ? 'unfollow' : 'follow'); // toggle link text $('a.follow').text(previous_action == 'follow' ? 'Unfollow' : 'Follow'); // update total followers
+          var previous_followers = parseInt($('span.count .total').text());
+          $('span.count .total').text(previous_action == 'follow' ? previous_followers + 1 : previous_followers - 1);
+        }
+      });
+  });
 
   {% endblock %}
