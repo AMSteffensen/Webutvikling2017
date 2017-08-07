@@ -6,7 +6,8 @@ from user.models import Profile
 
 class LoginForm(forms.Form):
     username = forms.CharField(label='Brukernavn / Email', required=True, error_messages={'required': 'Vennligst fyll in dette feltet'})
-    password = forms.CharField(label='Passord', widget=forms.PasswordInput, required=True)
+    password = forms.CharField(label='Passord', required=True, widget=forms.PasswordInput)
+
 
 
 class UserRegistrationForm(forms.ModelForm):

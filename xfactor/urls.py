@@ -27,11 +27,10 @@ urlpatterns = [
     # admin panel
     url(r'^admin/', admin.site.urls),
     # front page
-    url(r'^$', dashboard),
+    #url(r'^$', dashboard),
 
     # Landing page index
-    url(r'^landing/', TemplateView.as_view(template_name='static_pages/index.html'),
-        name='home'),
+    url(r'^', include('front_page.urls', namespace='front', app_name='front_page')),
 
     # user authentication app
     url(r'^uauth/', include('user_auth.urls', namespace='uauth', app_name='user_auth')),
