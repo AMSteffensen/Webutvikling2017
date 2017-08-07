@@ -259,73 +259,72 @@
       </div>
     </div>
   </div>
-    <!-- /FOOTER -->
+  <!-- /FOOTER -->
 
 </div>
 <!-- /WRAPPER -->
 
-  <!-- Used for scripts in external template files -->
-  <script>
-      $(document).ready(function () {
-          {% block domready %}
-          {% endblock %}
+<!-- Used for scripts in external template files -->
+<script>
+    $(document).ready(function () {
+        {% block domready %}
+        {% endblock %}
 
-          // <!-- Notification team join handle -->
-          $('div#team-req-join-handle button').click(function (e) {
-              e.preventDefault();
-              var buttonClicked = $(this);
-              $.post('{% url "noti:handle-team-req" %}',
-                  {
-                      payload: $(this).data('payload'),
-                      action: $(this).data('action')
-                  },
-                  function (data) {
-                      if (data['status'] === 'ok') {
-                          $(buttonClicked).unbind();
-                          buttonClicked.parent().parent().remove();
-                          var notif_amount = $('span#notif-amount');
-                          notif_amount.text(parseInt(notif_amount.text()) - 1);
-                      }
-                  });
-          });
-          // <!-- /Notification team join handle -->
-          // <!-- Notification team inv handle -->
-          $('div#team-inv-handle button').click(function (e) {
-              e.preventDefault();
-              var buttonClicked = $(this);
-              $.post('{% url "noti:handle-team-inv" %}',
-                  {
-                      payload: $(this).data('payload'),
-                      action: $(this).data('action')
-                  },
-                  function (data) {
-                      if (data['status'] === 'ok') {
-                          $(buttonClicked).unbind();
-                          buttonClicked.parent().parent().remove();
-                          var notif_amount = $('span#notif-amount');
-                          notif_amount.text(parseInt(notif_amount.text()) - 1);
-                      }
-                  });
-          });
-          // <!-- /Notification team inv handle -->
+        // <!-- Notification team join handle -->
+        $('div#team-req-join-handle button').click(function (e) {
+            e.preventDefault();
+            var buttonClicked = $(this);
+            $.post('{% url "noti:handle-team-req" %}',
+                {
+                    payload: $(this).data('payload'),
+                    action: $(this).data('action')
+                },
+                function (data) {
+                    if (data['status'] === 'ok') {
+                        $(buttonClicked).unbind();
+                        buttonClicked.parent().parent().remove();
+                        var notif_amount = $('span#notif-amount');
+                        notif_amount.text(parseInt(notif_amount.text()) - 1);
+                    }
+                });
+        });
+        // <!-- /Notification team join handle -->
+        // <!-- Notification team inv handle -->
+        $('div#team-inv-handle button').click(function (e) {
+            e.preventDefault();
+            var buttonClicked = $(this);
+            $.post('{% url "noti:handle-team-inv" %}',
+                {
+                    payload: $(this).data('payload'),
+                    action: $(this).data('action')
+                },
+                function (data) {
+                    if (data['status'] === 'ok') {
+                        $(buttonClicked).unbind();
+                        buttonClicked.parent().parent().remove();
+                        var notif_amount = $('span#notif-amount');
+                        notif_amount.text(parseInt(notif_amount.text()) - 1);
+                    }
+                });
+        });
+        // <!-- /Notification team inv handle -->
 
-      });
-      // <!-- /DOM-READY -->
+    });
+    // <!-- /DOM-READY -->
 
-      // <!-- HEADER SEARCH ICON -->
-      $("#searchIcon").click(function () {
-          var searchBar = ("#searchBar");
-          if (searchBar.is(":hidden")) {
-              searchBar.slideDown(350, function () {
-              });
-          } else {
-              searchBar.slideUp(350, function () {
-              });
-          }
-      });
-      // <!-- /HEADER SEARCH ICON -->
-  </script>
+    // <!-- HEADER SEARCH ICON -->
+    $("#searchIcon").click(function () {
+        var searchBar = ("#searchBar");
+        if (searchBar.is(":hidden")) {
+            searchBar.slideDown(350, function () {
+            });
+        } else {
+            searchBar.slideUp(350, function () {
+            });
+        }
+    });
+    // <!-- /HEADER SEARCH ICON -->
+</script>
 
 </body>
-
 </html>
