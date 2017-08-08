@@ -9,6 +9,7 @@ from common.decorators import ajax_required
 from .forms import UserEditForm
 from .forms import ProfileEditForm
 from .models import Contact
+from .models import WorkHour
 from notification.models import Notification
 
 
@@ -89,7 +90,6 @@ def user_stats_add_hours(request):
 
         for ent in range(1, int((len(request.POST) - 1) / len(keys))):
             char = str(ent)
-            print(char)
 
             # Check if this entry is entered
             if int(request.POST['hours' + char]) != 0 or int(request.POST['minutes' + char]) != 0:
@@ -101,18 +101,20 @@ def user_stats_add_hours(request):
                 entry['minutes'] = request.POST['minutes' + char]
                 entry['note'] = request.POST['note' + char]
                 entries.append(entry)
+                print(entry['date'])
 
-        print(entries)
+                work = WorkHour(user=request.user,
+                                work_date=entry['date'],
+                                work_project=None,
+                                work_category=entry['sProject'],
+                                work_duration=entry['hours'] + ":" + entry['minutes'],
+                                work_note=entry['note']
+                                )
+                work.save()
 
 
-        #date1, 2
-        #project1, 2
-        #sProject1, 2
-        #hours1, 2
-        #note1, 2
-
-
-    return render(request, 'user/util/add_hours.html')
+    categories = [i[0] for i in WorkHour.CATEGORY_CHOICES]
+    return render(request, 'user/util/add_hours.html', {'categories': categories})
 
 @login_required
 def user_feed(request):

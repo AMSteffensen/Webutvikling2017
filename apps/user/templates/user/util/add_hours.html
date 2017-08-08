@@ -32,13 +32,13 @@
           <option value="project1.4">Prosjekt 4</option>
         </select>
 
+
         <!-- Add sub-project -->
           <select name="sProject1" id="sProject1" class="dropdown addProject form1 addSubProject">
-            <option disabled selected>Velg delprosjekt</option>
-            <option value="sProject1.1">Delprosjekt 1</option>
-            <option value="sProject1.2">Delprosjekt 2</option>
-            <option value="sProject1.3">Delprosjekt 3</option>
-            <option value="sProject1.4">Delprosjekt 4</option>
+            <!-- <option disabled selected>Velg delprosjekt</option> -->
+            {% for cat in categories %}
+              <option value="{{ cat }}">{{ cat|title }}</option>
+            {% endfor %}
           </select>
 
 
@@ -105,11 +105,9 @@
       <div class=" addElement">
         <label class="addLabel"> Velg delprosjekt: </label>
         <select name="sProject2" id="sProject2" class="dropdown addProject form1">
-          <option value="sProject2.0">Alle</option>
-          <option value="sProject2.1">Delprosjekt 1</option>
-          <option value="sProject2.2">Delprosjekt 2</option>
-          <option value="sProject2.3">Delprosjekt 3</option>
-          <option value="sProject2.4">Delprosjekt 4</option>
+          {% for cat in categories %}
+            <option value="{{ cat }}">{{ cat|title }}</option>
+          {% endfor %}
         </select>
       </div>
 
@@ -176,11 +174,9 @@
       <div class=" addElement">
         <label class="addLabel"> Velg delprosjekt: </label>
         <select name="sProject3" id="sProject3" class="dropdown addProject form1">
-          <option value="sProject3.0">Alle</option>
-          <option value="sProject3.1">Delprosjekt 1</option>
-          <option value="sProject3.2">Delprosjekt 2</option>
-          <option value="sProject3.3">Delprosjekt 3</option>
-          <option value="sProject3.4">Delprosjekt 4</option>
+          {% for cat in categories %}
+            <option value="{{ cat }}">{{ cat|title }}</option>
+          {% endfor %}
         </select>
       </div>
 
@@ -248,11 +244,9 @@
       <div class=" addElement">
         <label class="addLabel"> Velg delprosjekt: </label>
         <select name="sProject4" id="sProject4" class="dropdown addProject form1">
-          <option value="sProject4.0">Alle</option>
-          <option value="sProject4.1">Delprosjekt 1</option>
-          <option value="sProject4.2">Delprosjekt 2</option>
-          <option value="sProject4.3">Delprosjekt 3</option>
-          <option value="sProject4.4">Delprosjekt 4</option>
+          {% for cat in categories %}
+            <option value="{{ cat }}">{{ cat|title }}</option>
+          {% endfor %}
         </select>
       </div>
 
@@ -318,11 +312,9 @@
       <div class=" addElement">
         <label class="addLabel"> Velg delprosjekt: </label>
         <select name="sProject5" id="sProject5" class="dropdown addProject form1">
-          <option value="sProject5.0">Alle</option>
-          <option value="sProject5.1">Delprosjekt 1</option>
-          <option value="sProject5.2">Delprosjekt 2</option>
-          <option value="sProject5.3">Delprosjekt 3</option>
-          <option value="sProject5.4">Delprosjekt 4</option>
+          {% for cat in categories %}
+            <option value="{{ cat }}">{{ cat|title }}</option>
+          {% endfor %}
         </select>
       </div>
 
