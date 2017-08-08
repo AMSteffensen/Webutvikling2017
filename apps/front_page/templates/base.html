@@ -26,6 +26,7 @@
   <link rel="stylesheet" href="{% static 'css/base-footer.css' %}">
   <link rel="stylesheet" href="{% static 'css/base-header.css' %}">
   <link rel="stylesheet" href="{% static 'css/base-mycss.css' %}">
+  <link rel="stylesheet" href="{% static 'detail.css' %}">
 
 
   <script src="{% static 'js/base.js' %}"></script>
@@ -174,7 +175,7 @@
               <a href="{% url 'user:user_stats' %}">Mine stats</a>
             </li>
             <li>
-              <a href="#">Rediger stats</a>
+              <a href="{% url 'user:stats_add_hours' %}">Rediger stats</a>
             </li>
           </ul>
           <!-- /Stats -->
