@@ -26,6 +26,7 @@
   <link rel="stylesheet" href="{% static 'css/base-footer.css' %}">
   <link rel="stylesheet" href="{% static 'css/base-header.css' %}">
   <link rel="stylesheet" href="{% static 'css/base-mycss.css' %}">
+  <link rel="stylesheet" href="{% static 'detail.css' %}">
 
 
   <script src="{% static 'js/base.js' %}"></script>
@@ -167,8 +168,16 @@
           <!-- /Feed -->
           <!-- Stats -->
           <li data-toggle="collapse" data-target="#stats" class="collapsed">
-            <a href="{% url 'user:user_stats' %}"><i class="fa fa-bar-chart" aria-hidden="true"></i> Stats </a>
+            <a><i class="fa fa-bar-chart" aria-hidden="true"></i> Stats </a>
           </li>
+          <ul class="sub-menu collapse" id="stats">
+            <li>
+              <a href="{% url 'user:user_stats' %}">Mine stats</a>
+            </li>
+            <li>
+              <a href="{% url 'user:stats_add_hours' %}">Rediger stats</a>
+            </li>
+          </ul>
           <!-- /Stats -->
           <!-- Users -->
           <li data-toggle="collapse" data-target="#brukere" class="collapsed">
