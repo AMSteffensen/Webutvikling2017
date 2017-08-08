@@ -82,6 +82,10 @@ def user_stats(request):
     return render(request, 'user/util/stats.html')
 
 @login_required
+def user_stats_add_hours(request):
+    return render(request, 'user/util/add_hours.html')
+
+@login_required
 def user_feed(request):
     unread_notif = Notification.get.unread(request.user)
     read_notif = Notification.get.read(request.user)
