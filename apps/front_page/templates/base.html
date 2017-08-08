@@ -167,8 +167,16 @@
           <!-- /Feed -->
           <!-- Stats -->
           <li data-toggle="collapse" data-target="#stats" class="collapsed">
-            <a href="{% url 'user:user_stats' %}"><i class="fa fa-bar-chart" aria-hidden="true"></i> Stats </a>
+            <a><i class="fa fa-bar-chart" aria-hidden="true"></i> Stats </a>
           </li>
+          <ul class="sub-menu collapse" id="stats">
+            <li>
+              <a href="{% url 'user:user_stats' %}">Mine stats</a>
+            </li>
+            <li>
+              <a href="#">Rediger stats</a>
+            </li>
+          </ul>
           <!-- /Stats -->
           <!-- Users -->
           <li data-toggle="collapse" data-target="#brukere" class="collapsed">
