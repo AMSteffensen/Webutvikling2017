@@ -84,19 +84,21 @@ def user_stats(request):
 @login_required
 def user_stats_add_hours(request):
     if request.method == 'POST':
-        keys = ['date', 'project', 'sProject', 'hours', 'note']
+        keys = ['date', 'project', 'sProject', 'hours', 'minutes' 'note']
         entries = []
 
-        for ent in range(1, int(len(request.POST) / len(keys)) + 1):
+        for ent in range(1, int((len(request.POST) - 1) / len(keys))):
             char = str(ent)
+            print(char)
 
             # Check if this entry is entered
-            if int(request.POST['hours' + char]) != 0:
+            if int(request.POST['hours' + char]) != 0 or int(request.POST['minutes' + char]) != 0:
                 entry = {}
                 entry['date'] = request.POST['date' + char]
                 entry['project'] = request.POST['project' + char]
                 entry['sProject'] = request.POST['sProject' + char]
                 entry['hours'] = request.POST['hours' + char]
+                entry['minutes'] = request.POST['minutes' + char]
                 entry['note'] = request.POST['note' + char]
                 entries.append(entry)
 
