@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load bootstrap3 %}
+
 {% block title %}Logg Inn{% endblock %}
 
 {% block content %}
@@ -12,8 +14,9 @@
     {% endif %}
     <div class="login-form">
         <form action="{% url 'uauth:login' %}" method="post">
-            {{ form.as_p }}
             {% csrf_token %}
+            {% bootstrap_field form.username placeholder="Brukernavn" show_label=False layout="form_control" %}
+            {% bootstrap_field form.password placeholder="Passord" show_label=False layout="form_control" %}
             <input type="hidden" name="next" value="{{ next }}" />
             <p><input type="submit" value="Logg Inn"></p>
         </form>

@@ -207,9 +207,9 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # Redirection
-LOGIN_REDIRECT_URL = reverse_lazy('user:dashboard')
-LOGIN_URL = reverse_lazy('uauth:login')
-LOGOUT_URL = reverse_lazy('uauth:logout')
+LOGIN_REDIRECT_URL = reverse_lazy('front:landing')
+LOGIN_URL = reverse_lazy('front:landing')
+LOGOUT_URL = reverse_lazy('front:landing')
 
 ABSOLUTE_URL_OVERRIDES = {
     'auth.user': lambda u: reverse_lazy('user:user_detail', args=[u.username])

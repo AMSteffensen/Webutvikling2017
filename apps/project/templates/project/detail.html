@@ -19,15 +19,16 @@
         {% endif %}
 
 
-          {% if request.user == project.author %} {% csrf_token %}
+        {% if request.user == project.author %} {% csrf_token %}
           <form action="{{ project.get_edit_url }}" class="inline">
             <button type="submit" class="btn btn-sm btn-primary pull-right"><i class="fa fa-edit"></i> Endre Prosjekt</button>
           </form>
+
+          <form action="" method="post">
+            {% csrf_token %}
+            <button class="btn btn-danger" name="delete_project" value="{% scramble project.pk %}">Slett prosjekt</button>
+          </form>
         {% endif %}
-        <form action="" method="post">
-          {% csrf_token %}
-          <button class="btn btn-danger"name="delete_project" value="{% scramble project.pk %}">Slett prosjekt</button>
-        </form>
 
         <br>
         <div class="row">
