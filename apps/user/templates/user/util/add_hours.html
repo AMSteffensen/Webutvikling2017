@@ -15,7 +15,7 @@
     <!-- Add date -->
     <div class="addElement">
       <label class="addLabel" for="date1">Velg dato:</label>
-      <input type="date" name="date1" id="date1" class="form1">
+      <input type="date" name="date1" id="date1" class="form1" min="2017-01-01">
     </div>
 
     <!-- Add project -->
@@ -316,6 +316,7 @@
 <!-- DOMREADY -->
 {% block domready %}
       //Add Hours
+
       // Form functionality
       $(function () {
 
@@ -339,6 +340,26 @@
           });
 
       })
+
+
+      // Datepicker max attribute - current date
+
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth()+1; //January is 0!
+      var yyyy = today.getFullYear();
+      if(dd<10){
+        dd='0'+dd
+      }
+      if(mm<10){
+        mm='0'+mm
+      }
+
+      today = yyyy+'-'+mm+'-'+dd;
+      for(i=1; i<6; i++){
+        document.getElementById("date"+i).setAttribute("max", today);
+      }
+
 
       // Add and remove lines -variables
       var x = 2;
