@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base.html" %}{% load staticfiles %}
 
 {% block title %}Stats{% endblock %}
 
@@ -24,10 +24,54 @@
   <p id="stats-red-row"></p>
 
   <div id='chart_div' class='chart'></div>
+
 {% endblock %}
 <!-- /BLOCK CONTENT -->
 
 <!-- BLOCK DOMREADY  // LIGGER I 'base.html'-->
 {% block domready %}
+      // <!-- STATS GOOGLE GRAPH -->
+      google.charts.load('current', {'packages': ['annotationchart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+          var data = new google.visualization.DataTable();
+          data.addColumn('date', 'Date');
+          data.addColumn('number', 'Prosjekt 1');
+          data.addColumn('string', 'Prosjekt 1 title');
+          data.addColumn('string', 'Prosjekt 1 text');
+          data.addRows([
+              {% for log in logged %}
+                [new Date('{{ log.work_date.isoformat }}'.split('-')),
+                 parseInt('{{ log.work_duration }}'.split(':')[0]),
+                 '{{ log.work_project }}',
+                 '{{ log.work_note }}'],
+              {% endfor %}
+          ]);
+
+
+          var chart = new google.visualization.AnnotationChart(document.getElementById('chart_div'));
+
+          var options = {
+              displayAnnotations: true
+          };
+
+          chart.draw(data, options);
+
+          //var pBlue = $('p#stats-blue-row');
+          //var pRed = $('p#stats-red-row');
+
+          //var totalBlue = 0;
+          //var totalRed = 0;
+          //for (var row = 0; row < data.getNumberOfRows(); row++) {
+              // Red Graph
+              //totalRed += data.getValue(row, 4);
+              // Blue Graph
+              //totalBlue += data.getValue(row, 1);
+          //}
+          //pRed.text("Red Data: " + parseInt(totalRed));
+          //pBlue.text("Blue Data: " + parseInt(totalBlue));
+      }
+      // <!-- /STATS GOOGLE GRAPH -->
 {% endblock %}
 <!-- /BLOCK DOMREADY -->

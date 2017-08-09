@@ -6,11 +6,16 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from common.decorators import ajax_required
+
 from .forms import UserEditForm
 from .forms import ProfileEditForm
 from .models import Contact
+from .models import WorkHour
+
+from project.models import Project
 from notification.models import Notification
 
+from snippets.hasher import decode_value
 
 @login_required
 def edit(request):
@@ -79,7 +84,47 @@ def user_follow(request):
 
 @login_required
 def user_stats(request):
-    return render(request, 'user/util/stats.html')
+
+    hour_entries = WorkHour.get.user_entries(request.user)
+
+    return render(request, 'user/util/stats.html', {'logged': hour_entries})
+
+
+
+@login_required
+def user_stats_add_hours(request):
+    if request.method == 'POST':
+        keys = ['date', 'project', 'sProject', 'hours', 'minutes' 'note']
+        entries = []
+
+        for ent in range(1, int((len(request.POST) - 1) / len(keys))):
+            char = str(ent)
+
+            # Check if this entry is entered
+            if int(request.POST['hours' + char]) != 0 or int(request.POST['minutes' + char]) != 0:
+                entry = {}
+                entry['date'] = request.POST['date' + char]
+                entry['project'] = decode_value(request.POST['project' + char])
+                entry['sProject'] = request.POST['sProject' + char]
+                entry['hours'] = request.POST['hours' + char]
+                entry['minutes'] = request.POST['minutes' + char]
+                entry['note'] = request.POST['note' + char]
+                entries.append(entry)
+
+                work = WorkHour(user=request.user,
+                                work_date=entry['date'],
+                                work_project_id=entry['project'],
+                                work_category=entry['sProject'],
+                                work_duration=entry['hours'] + ":" + entry['minutes'],
+                                work_note=entry['note']
+                                )
+                work.save()
+
+
+    projects = Project.objects.all().order_by('title')
+    categories = [i[0] for i in WorkHour.CATEGORY_CHOICES]
+    return render(request, 'user/util/add_hours.html', {'categories': categories, 'projects': projects})
+
 
 @login_required
 def user_feed(request):

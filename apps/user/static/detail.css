@@ -1,138 +1,145 @@
 
-/*Add hours to project*/
-
-
 /*Horizontal rules*/
-
-.hrStyle {
+.hrStyle{
   width: 100%;
   display: block;
 }
 
-
 /*The button with signs*/
-
-.btnSign {
+.btnSign{
   height: 28px;
   width: 28px;
-  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1);
-  padding-left: 7px;
-  float: left;
+  box-shadow: inset 0 3px 6px rgba(0,0,0,0.1);
+  padding-left: 6px;
+  float:left;
 }
 
-.btnSignInside {
-  color: white;
+.btnSignInside{
+  color:white;
   font-size: 16px;
 }
 
-.btnGreen {
-  background-color: #42D103;
+#btnPlus{
+  background-color:#42D103;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+#btnMinus{
+  background-color:#F22727;
   margin-top: 10px;
 }
 
-.btnRed {
-  background-color: #F22727;
-  margin-top: 25px;
-}
-
-
 /*Submit button*/
 
-.btnSubmitHours {
-  margin-left: 180px;
+#btnSubmitHours{
+  margin-left: 75%;
   margin-bottom: 20px;
-  background-color: #337AB7;
-  float: left;
+  background-color:#337AB7;
+  float:left;
   padding-left: 7px;
   margin-top: 0px;
   height: 50px;
   width: 290px;
-  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 3px 6px rgba(0,0,0,0.1);
 }
 
-
 /*Labels*/
-
-.addLabel {
+.addLabel{
   display: block;
 }
 
-
 /*Input form*/
-
-.form1 {
-  border: 1px solid #c4c4c4;
-  border-radius: 5px;
-  background-color: #fff;
-  padding: 3px 5px;
-  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.1);
-  float: left;
-  clear: both;
+.form1{
+border: 1px solid #c4c4c4;
+border-radius: 5px;
+background-color: #fff;
+padding: 3px 5px;
+box-shadow: inset 0 3px 6px rgba(0,0,0,0.1);
+float: left;
+clear:both;
 }
 
 
 /*Elements*/
-
-.addElement {
-  margin-left: 50px;
-  float: left;
+ .addElement{
+   margin-left: 40px;
+   float: left;
+   display:block;
 }
 
+.firstElement{
+  float:left;
+}
 
 /*Add project*/
-
-.addProject {
+.addProject{
   height: 30px;
-  width: 130px;
+  width: 260px;
 }
 
+.addSubProject{
+  margin-top: 10px;
+}
 
 /*Add date */
 
 [type="date"] {
-  background: #fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png) 97% 50% no-repeat;
+  background:#fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)  97% 50% no-repeat ;
 }
-
 [type="date"]::-webkit-inner-spin-button {
   display: none;
 }
-
 [type="date"]::-webkit-calendar-picker-indicator {
   opacity: 0;
 }
 
-#dateofbirth {
+.dateofbirth {
   width: 130px;
 }
 
-
 /* custom styles */
-
-
 /*.dateBody {
   padding: 4em;
   background: #e5e5e5;
   font: 13px/1.4 Geneva, 'Lucida Sans', 'Lucida Grande', 'Lucida Sans Unicode', Verdana, sans-serif;
 }*/
 
-
 /*Add hours*/
 
 @import url(http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
+
 .spinner input {
   text-align: right;
 }
 
-.addHoursInput input {
+.addHoursInput input{
   margin-left: 0px;
   height: 30px;
   text-align: center;
 }
 
-.addHours {
+.addHours{
   padding-left: 0px;
-  width: 135px;
-  clear: both;
+  width: 130px;
+  clear:both;
+  z-index: 0;
+}
+
+.addMinutes{
+  margin-top: 10px;
+}
+
+.pElement{
+  float: left;
+  display:block;
+}
+.pHours{
+  margin-top:27px;
+}
+
+.pMinutes{
+  padding-top: 5px;
 }
 
 .input-group-btn-vertical {
@@ -143,7 +150,7 @@
   display: table-cell;
 }
 
-.input-group-btn-vertical>.btn {
+.input-group-btn-vertical > .btn {
   display: block;
   float: none;
   width: 100%;
@@ -155,11 +162,11 @@
   border-radius: 0;
 }
 
-.input-group-btn-vertical>.btn:first-child {
+.input-group-btn-vertical > .btn:first-child {
   border-top-right-radius: 4px;
 }
 
-.input-group-btn-vertical>.btn:last-child {
+.input-group-btn-vertical > .btn:last-child {
   margin-top: -2px;
   border-bottom-right-radius: 4px;
 }
@@ -171,13 +178,14 @@
 }
 
 
-/*Add annotation*/
 
-.form2 {
-  height: 50px;
+  /*Add annotation*/
+
+.form2{
+  height: 70px;
   padding-top: 5px;
   width: 260px;
   max-width: 260px;
-  max-height: 50px;
+  max-height: 70px;
   margin-bottom: 20px;
 }

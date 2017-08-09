@@ -1,0 +1,521 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load utils %}
+
+{% block title %}Timeføring{% endblock %}
+
+<!-- CONTENT -->
+{% block content %}
+  <h2>Legg timer til prosjekt her</h2>
+  <hr class="hrStyle">
+
+
+  <form method="POST" id="hour-form">
+    {% csrf_token %}
+    <!--Add hours to project: First line  -->
+    <div id="line1">
+
+      <!-- Add date -->
+      <div class="firstElement">
+        <label class="addLabel" for="date1">Dato</label>
+        <input type="date" name="date1" id="date1" class="form1 dateofbirth" min="2017-01-01">
+      </div>
+
+      <!-- Add project -->
+      <div class=" addElement">
+        <label class="addLabel"> Prosjekt og delprosjekt </label>
+        <select name="project1" id="project1" class="dropdown addProject form1">
+          <option disabled selected>Velg prosjekt</option>
+          {% for proj in projects %}
+            <option value="{% scramble proj.pk %}">{{ proj }}</option>
+          {% endfor %}
+        </select>
+
+
+        <!-- Add sub-project -->
+          <select name="sProject1" id="sProject1" class="dropdown addProject form1 addSubProject">
+            <option disabled selected>Velg delprosjekt</option>
+            {% for cat in categories %}
+              <option value="{{ cat }}">{{ cat|title }}</option>
+            {% endfor %}
+          </select>
+
+
+      </div>
+
+      <!-- Add hours -->
+      <div class="addElement" enctype="multipart/form-data">
+        <label class="addLabel"> Timer og minutter</label>
+        <div class="col-xs-1 addHours">
+          <div class="input-group spinner addHoursInput">
+            <input name="hours1" id="hours1" type="text" maxlength="2" class="form-control" value="0" min="0" max="24">
+            <div class="input-group-btn-vertical">
+              <button class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
+              <button class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
+            </div>
+          </div>
+        </div>
+
+
+      <!-- Add minutes -->
+        <div class="col-xs-1 addHours addMinutes">
+          <div class="input-group spinner addHoursInput">
+            <input name="minutes1" id="minutes1" type="text" maxlength="2" class="form-control" value="0" min="0" max="60">
+            <div class="input-group-btn-vertical">
+              <button class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
+              <button class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<div class="pElement">
+    <p class="pHours"><i>t</i></p>
+  <p class="pMinutes"><i>min</i></p>
+</div>
+      <!-- Add note -->
+      <div class="addElement">
+        <label class="addLabel">Legg til merknad:</label>
+        <textarea name="note1" id="note1" type="text" class="form1 form2" maxlength="105"></textarea>
+      </div>
+
+
+      <hr class="hrStyle">
+    </div>
+
+
+
+    <!--Add hours to project: Second line  -->
+    <div id="line2" style="display:none">
+
+      <!-- Add date -->
+      <div class="firstElement">
+        <label class="addLabel" for="date2">Velg dato:</label>
+        <input type="date" name="date2" id="date2" class="form1" min="2017-01-01">
+      </div>
+
+      <!-- Add project -->
+      <div class=" addElement">
+        <label class="addLabel"> Prosjekt og delprosjekt </label>
+        <select name="project2" id="project2" class="dropdown addProject form1">
+
+          <option disabled selected>Velg prosjekt</option>
+          {% for proj in projects %}
+            <option value="{% scramble proj.pk %}">{{ proj }}</option>
+          {% endfor %}
+
+        </select>
+
+      <!-- Add sub-project -->
+        <select name="sProject2" id="sProject2" class="dropdown addProject form1 addSubProject">
+          <option disabled selected>Velg delprosjekt</option>
+          {% for cat in categories %}
+            <option value="{{ cat }}">{{ cat|title }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+
+      <!-- Add hours -->
+      <div class="addElement">
+        <label class="addLabel"> Timer og minutter </label>
+        <div class="col-xs-1 addHours">
+          <div class="input-group spinner addHoursInput">
+            <input name="hours2" id="hours2" type="text" class="form-control" value="0" min="0" max="24">
+            <div class="input-group-btn-vertical">
+              <button class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
+              <button class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
+            </div>
+          </div>
+        </div>
+
+      <!-- Add minutes -->
+        <div class="col-xs-1 addHours addMinutes">
+          <div class="input-group spinner addHoursInput">
+            <input name="minutes2" id="minutes2" type="text" maxlength="2" class="form-control" value="0" min="0" max="60">
+            <div class="input-group-btn-vertical">
+              <button class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
+              <button class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pElement">
+          <p class="pHours"><i>t</i></p>
+        <p class="pMinutes"><i>min</i></p>
+      </div>
+
+      <!-- Add note -->
+      <div class="addElement">
+        <label class="addLabel">Legg til merknad:</label>
+        <textarea name="note2" id="note2" type="text" class="form1 form2" maxlength="75"></textarea>
+      </div>
+
+      <hr class="hrStyle">
+    </div>
+
+
+    <!--Add hours to project: Third line  -->
+    <div id="line3" style="display:none">
+
+      <!-- Add date -->
+      <div class="firstElement">
+        <label class="addLabel" for="date3">Velg dato:</label>
+        <input type="date" name="date3" id="date3" class="form1" min="2017-01-01">
+      </div>
+
+      <!-- Add project -->
+      <div class=" addElement">
+        <label class="addLabel"> Prosjekt og delprosjekt </label>
+        <select name="project3" id="project3" class="dropdown addProject form1">
+
+          <option disabled selected>Velg prosjekt</option>
+          {% for proj in projects %}
+            <option value="{% scramble proj.pk %}">{{ proj }}</option>
+          {% endfor %}
+
+        </select>
+
+      <!-- Add sub-project -->
+        <select name="sProject3" id="sProject3" class="dropdown addProject form1 addSubProject">
+          <option disabled selected>Velg delprosjekt</option>
+          {% for cat in categories %}
+            <option value="{{ cat }}">{{ cat|title }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+
+      <!-- Add hours -->
+      <div class="addElement">
+        <label class="addLabel"> Timer og minutter </label>
+        <div class="col-xs-1 addHours">
+          <div class="input-group spinner addHoursInput">
+            <input name="hours3" id="hours3" type="text" class="form-control" value="0" min="0" max="24">
+            <div class="input-group-btn-vertical">
+              <button class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
+              <button class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
+            </div>
+          </div>
+        </div>
+
+
+      <!-- Add minutes -->
+        <div class="col-xs-1 addHours addMinutes">
+          <div class="input-group spinner addHoursInput">
+            <input name="minutes3" id="minutes3" type="text" maxlength="2" class="form-control" value="0" min="0" max="60">
+            <div class="input-group-btn-vertical">
+              <button class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
+              <button class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pElement">
+          <p class="pHours"><i>t</i></p>
+        <p class="pMinutes"><i>min</i></p>
+      </div>
+
+      <!-- Add note -->
+      <div class="addElement">
+        <label class="addLabel">Legg til merknad:</label>
+        <textarea name="note3" id="note3" type="text" class="form1 form2" maxlength="75"></textarea>
+      </div>
+
+      <hr class="hrStyle">
+    </div>
+
+
+    <!--Add hours to project: Fourth line  -->
+    <div id="line4" style="display:none">
+
+      <!-- Add date -->
+      <div class="firstElement">
+        <label class="addLabel" for="date4">Velg dato:</label>
+        <input type="date" name="date4" id="date4" class="form1" min="2017-01-01">
+      </div>
+
+      <!-- Add project -->
+      <div class=" addElement">
+        <label class="addLabel"> Prosjekt og delprosjekt </label>
+        <select name="project4" id="project4" class="dropdown addProject form1">
+
+          <option disabled selected>Velg prosjekt</option>
+          {% for proj in projects %}
+            <option value="{% scramble proj.pk %}">{{ proj }}</option>
+          {% endfor %}
+
+        </select>
+
+      <!-- Add sub-project -->
+        <select name="sProject4" id="sProject4" class="dropdown addProject form1 addSubProject">
+          <option disabled selected>Velg delprosjekt</option>
+          {% for cat in categories %}
+            <option value="{{ cat }}">{{ cat|title }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <!-- Add hours -->
+      <div class="addElement">
+        <label class="addLabel"> Timer og minutter </label>
+        <div class="col-xs-1 addHours">
+          <div class="input-group spinner addHoursInput">
+            <input name="hours4" id="hours4" type="text" class="form-control" value="0" min="0" max="24">
+            <div class="input-group-btn-vertical">
+              <button class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
+              <button class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
+            </div>
+          </div>
+        </div>
+
+
+      <!-- Add minutes -->
+        <div class="col-xs-1 addHours addMinutes">
+          <div class="input-group spinner addHoursInput">
+            <input name="minutes4" id="minutes4" type="text" maxlength="2" class="form-control" value="0" min="0" max="60">
+            <div class="input-group-btn-vertical">
+              <button class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
+              <button class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pElement">
+          <p class="pHours"><i>t</i></p>
+        <p class="pMinutes"><i>min</i></p>
+      </div>
+
+      <!-- Add note -->
+      <div class="addElement">
+        <label class="addLabel">Legg til merknad:</label>
+        <textarea name="note4" id="note4" type="text" class="form1 form2" maxlength="75"></textarea>
+      </div>
+
+      <hr class="hrStyle">
+    </div>
+
+
+    <!--Add hours to project: Fifth line  -->
+    <div id="line5" style="display:none">
+
+      <!-- Add date -->
+      <div class="firstElement">
+        <label class="addLabel" for="date5">Velg dato:</label>
+        <input type="date" name="date5" id="date5" class="form1" min="2017-01-01">
+      </div>
+
+      <!-- Add project -->
+      <div class=" addElement">
+        <label class="addLabel"> Prosjekt og delprosjekt </label>
+        <select name="project5" id="project5" class="dropdown addProject form1">
+
+          <option disabled selected>Velg prosjekt</option>
+          {% for proj in projects %}
+            <option value="{% scramble proj.pk %}">{{ proj }}</option>
+          {% endfor %}
+        </select>
+
+      <!-- Add sub-project -->
+        <select name="sProject5" id="sProject5" class="dropdown addProject form1 addSubProject">
+          <option disabled selected>Velg delprosjekt</option>
+          {% for cat in categories %}
+            <option value="{{ cat }}">{{ cat|title }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <!-- Add hours -->
+      <div class="addElement">
+        <label class="addLabel"> Timer og minutter </label>
+        <div class="col-xs-1 addHours">
+          <div class="input-group spinner addHoursInput">
+            <input name="hours5" id="hours5" type="text" class="form-control" value="0" min="0" max="24">
+            <div class="input-group-btn-vertical">
+              <button class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
+              <button class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
+            </div>
+          </div>
+        </div>
+
+      <!-- Add minutes -->
+        <div class="col-xs-1 addHours addMinutes">
+          <div class="input-group spinner addHoursInput">
+            <input name="minutes5" id="minutes5" type="text" maxlength="2" class="form-control" value="0" min="0" max="60">
+            <div class="input-group-btn-vertical">
+              <button class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
+              <button class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pElement">
+          <p class="pHours"><i>t</i></p>
+        <p class="pMinutes"><i>min</i></p>
+      </div>
+
+      <!-- Add note-->
+      <div class="addElement">
+        <label class="addLabel">Legg til merknad:</label>
+        <textarea name="note5" id="note5" type="text" class="form1 form2" maxlength="75"></textarea>
+      </div>
+  <hr class="hrStyle">
+    </div>
+    <!--Add hours to project: Buttons -->
+    <div id="line6">
+
+      <div class="firstElement">
+        <!-- Button with minus-sign -->
+        <button type="button" class="btn btn-default btnSign" id="btnMinus"><i class="fa fa-minus btnSignInside" aria-hidden="true"></i></button>
+        <!-- Button with plus-sign -->
+        <button type="button" class="btn btn-default btnSign" id="btnPlus"><i class="fa fa-plus btnSignInside" aria-hidden="true"></i></button>
+      </div>
+
+      <!-- Submit button -->
+      <div class="addElement">
+        <button type="submit" class="btn btn-default" id="btnSubmitHours"><span class="btnSignInside" aria-hidden="true">Legg til timer</span></button>
+      </div>
+      <hr class="hrStyle">
+
+    </div>
+
+  </form>
+{% endblock %}
+<!-- /CONTENT -->
+
+<!-- DOMREADY -->
+{% block domready %}
+      //Add Hours
+
+      // Form functionality
+      $(function () {
+
+          $('.spinner .btn:first-of-type').on('click', function () {
+              var btn = $(this);
+              var input = btn.closest('.spinner').find('input');
+              if (input.attr('max') == undefined || parseInt(input.val()) < parseInt(input.attr('max'))) {
+                  input.val(parseInt(input.val(), 10) + 1);
+              } else {
+                  btn.next("disabled", true);
+              }
+          });
+          $('.spinner .btn:last-of-type').on('click', function () {
+              var btn = $(this);
+              var input = btn.closest('.spinner').find('input');
+              if (input.attr('min') == undefined || parseInt(input.val()) > parseInt(input.attr('min'))) {
+                  input.val(parseInt(input.val(), 10) - 1);
+              } else {
+                  btn.prev("disabled", true);
+              }
+          });
+
+      })
+
+
+      // Datepicker max attribute - current date
+
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth() + 1; //January is 0!
+      var yyyy = today.getFullYear();
+      if (dd < 10) {
+          dd = '0' + dd
+      }
+      if (mm < 10) {
+          mm = '0' + mm
+      }
+
+      today = yyyy + '-' + mm + '-' + dd;
+      for (i = 1; i < 6; i++) {
+          document.getElementById("date" + i).setAttribute("max", today);
+          document.getElementById("date" + i).setAttribute("value", today);
+      }
+
+
+      // Add and remove lines -variables
+      var x = 2;
+      var btnP = document.getElementById('btnPlus');
+      var btnM = document.getElementById('btnMinus');
+      var btnSH = document.getElementById('btnSubmitHours');
+
+      // Add line
+
+      btnP.onclick = function () {
+          if (x > 0 || x < 6) {
+              var id = "line" + x;
+              document.getElementById(id).style.display = "block";
+              x++;
+          }
+          if (x == 6) {
+              btnP.disabled = true;
+              btnP.style.opacity = "0.5";
+              btnP.style.cursor = "default";
+          }
+
+          if (btnM.disabled == true) {
+              btnM.disabled = false;
+              btnM.style.opacity = "1";
+              btnM.style.cursor = "pointer";
+
+              btnSH.disabled = false;
+              btnSH.style.opacity = "1";
+              btnSH.style.cursor = "pointer";
+          }
+          window.scroll(0, findPos(btnSH));
+      };
+
+      // Remove line
+      btnM.onclick = function () {
+          x--;
+          resetForm();
+          if (x > 1 || x < 7) {
+              var id = "line" + x;
+              document.getElementById(id).style.display = "none";
+
+          }
+          if (x == 1) {
+              btnM.disabled = true;
+              btnM.style.opacity = "0.5";
+              btnM.style.cursor = "default";
+
+              btnSH.disabled = true;
+              btnSH.style.opacity = "0.5";
+              btnSH.style.cursor = "default";
+
+          }
+          if (btnP.disabled == true) {
+              btnP.disabled = false;
+              btnP.style.opacity = "1";
+              btnP.style.cursor = "pointer";
+          }
+
+      };
+
+
+      function resetForm() {
+          document.getElementById("date" + x).value = today;
+          document.getElementById("project" + x).selectedIndex = "0";
+          document.getElementById("sProject" + x).selectedIndex = "0";
+          document.getElementById("hours" + x).value = "0";
+          document.getElementById("note" + x).value = "";
+
+
+      }
+
+      //Finds y value of given object
+      function findPos(obj) {
+          var curtop = 0;
+          if (obj.offsetParent) {
+              do {
+                  curtop += obj.offsetTop;
+              } while (obj = obj.offsetParent);
+              return [curtop];
+          }
+      }
+{% endblock %}
+<!-- /DOMREADY -->

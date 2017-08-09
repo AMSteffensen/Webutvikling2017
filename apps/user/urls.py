@@ -18,5 +18,6 @@ urlpatterns = [
     url(r'^users/(?P<username>[-\w]+)/$', views.user_detail, name='user_detail'),
 
     url(r'^stats/', views.user_stats, name='user_stats'),
+    url(r'^add-hours/', views.user_stats_add_hours, name='stats_add_hours'),
     url(r'^feed/', views.user_feed, name='user_feed'),
 ]
