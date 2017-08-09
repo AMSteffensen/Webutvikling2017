@@ -92,7 +92,7 @@
       <!-- Add date -->
       <div class="firstElement">
         <label class="addLabel" for="date2">Velg dato:</label>
-        <input type="date" name="date2" id="date2" class="form1">
+        <input type="date" name="date2" id="date2" class="form1" min="2017-01-01">
       </div>
 
       <!-- Add project -->
@@ -162,7 +162,7 @@
       <!-- Add date -->
       <div class="firstElement">
         <label class="addLabel" for="date3">Velg dato:</label>
-        <input type="date" name="date3" id="date3" class="form1">
+        <input type="date" name="date3" id="date3" class="form1" min="2017-01-01">
       </div>
 
       <!-- Add project -->
@@ -233,7 +233,7 @@
       <!-- Add date -->
       <div class="firstElement">
         <label class="addLabel" for="date4">Velg dato:</label>
-        <input type="date" name="date4" id="date4" class="form1">
+        <input type="date" name="date4" id="date4" class="form1" min="2017-01-01">
       </div>
 
       <!-- Add project -->
@@ -303,7 +303,7 @@
       <!-- Add date -->
       <div class="firstElement">
         <label class="addLabel" for="date5">Velg dato:</label>
-        <input type="date" name="date5" id="date5" class="form1">
+        <input type="date" name="date5" id="date5" class="form1" min="2017-01-01">
       </div>
 
       <!-- Add project -->
@@ -430,6 +430,7 @@
       today = yyyy + '-' + mm + '-' + dd;
       for (i = 1; i < 6; i++) {
           document.getElementById("date" + i).setAttribute("max", today);
+          document.getElementById("date" + i).setAttribute("value", today);
       }
 
 
