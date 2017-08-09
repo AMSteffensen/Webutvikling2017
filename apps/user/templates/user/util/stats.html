@@ -40,34 +40,13 @@
           data.addColumn('number', 'Prosjekt 1');
           data.addColumn('string', 'Prosjekt 1 title');
           data.addColumn('string', 'Prosjekt 1 text');
-          data.addColumn('number', 'Prosjekt 2');
-          data.addColumn('string', 'Prosjekt 2 title');
-          data.addColumn('string', 'Prosjekt 2 text');
           data.addRows([
-              [new Date(2017, 6, 15), 0, 'Prosjekt 1', 'Prosjekt oppstart',
-                  undefined, undefined, undefined
-              ],
-              [new Date(2017, 6, 16), 5, 'Prosjekt 1', 'Planleggingsmøte',
-                  0, 'Prosjekt 2', 'Prosjekt oppstart'
-              ],
-              [new Date(2017, 6, 17), 5, 'Prosjekt 1', 'Første jobbdag',
-                  2, 'Prosjekt 2', 'Møte med oppdragsgiver'
-              ],
-              [new Date(2017, 6, 18), 3, undefined, undefined,
-                  4, undefined, undefined
-              ],
-              [new Date(2017, 6, 19), 7, undefined, undefined,
-                  1, undefined, undefined
-              ],
-              [new Date(2017, 6, 20), 2, 'Prosjekt 1', 'Prosjekt ferdig',
-                  9, 'Prosjekt 2', 'Siste møte'
-              ],
-              [new Date(2017, 6, 21), undefined, undefined, undefined,
-                  3, 'Prosjekt 2', 'Prosjekt ferdig'
-              ],
-              [new Date(2017, 6, 22), undefined, undefined, undefined,
-                  undefined, undefined, undefined
-              ]
+              {% for log in logged %}
+                [new Date('{{ log.work_date.isoformat }}'.split('-')),
+                 parseInt('{{ log.work_duration }}'.split(':')[0]),
+                 '{{ log.work_project }}',
+                 '{{ log.work_note }}'],
+              {% endfor %}
           ]);
 
 
@@ -79,19 +58,19 @@
 
           chart.draw(data, options);
 
-          var pBlue = $('p#stats-blue-row');
-          var pRed = $('p#stats-red-row');
+          //var pBlue = $('p#stats-blue-row');
+          //var pRed = $('p#stats-red-row');
 
-          var totalBlue = 0;
-          var totalRed = 0;
-          for (var row = 0; row < data.getNumberOfRows(); row++) {
+          //var totalBlue = 0;
+          //var totalRed = 0;
+          //for (var row = 0; row < data.getNumberOfRows(); row++) {
               // Red Graph
-              totalRed += data.getValue(row, 4);
+              //totalRed += data.getValue(row, 4);
               // Blue Graph
-              totalBlue += data.getValue(row, 1);
-          }
-          pRed.text("Red Data: " + parseInt(totalRed));
-          pBlue.text("Blue Data: " + parseInt(totalBlue));
+              //totalBlue += data.getValue(row, 1);
+          //}
+          //pRed.text("Red Data: " + parseInt(totalRed));
+          //pBlue.text("Blue Data: " + parseInt(totalBlue));
       }
       // <!-- /STATS GOOGLE GRAPH -->
 {% endblock %}

@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load static %}
+{% load utils %}
 
 {% block title %}Timeføring{% endblock %}
 
@@ -25,10 +26,9 @@
       <div class=" addElement">
         <label class="addLabel"> Velg prosjekt: </label>
         <select name="project1" id="project1" class="dropdown addProject form1">
-          <option value="project1.1">Prosjekt 1</option>
-          <option value="project1.2">Prosjekt 2</option>
-          <option value="project1.3">Prosjekt 3</option>
-          <option value="project1.4">Prosjekt 4</option>
+          {% for proj in projects %}
+            <option value="{% scramble proj.pk %}">{{ proj }}</option>
+          {% endfor %}
         </select>
       </div>
 
@@ -93,10 +93,9 @@
       <div class=" addElement">
         <label class="addLabel"> Velg prosjekt: </label>
         <select name="project2" id="project2" class="dropdown addProject form1">
-          <option value="project2.1">Prosjekt 1</option>
-          <option value="project2.2">Prosjekt 2</option>
-          <option value="project2.3">Prosjekt 3</option>
-          <option value="project2.4">Prosjekt 4</option>
+          {% for proj in projects %}
+            <option value="{% scramble proj.pk %}">{{ proj }}</option>
+          {% endfor %}
         </select>
       </div>
 
@@ -162,10 +161,9 @@
       <div class=" addElement">
         <label class="addLabel"> Velg prosjekt: </label>
         <select name="project3" id="project3" class="dropdown addProject form1">
-          <option value="project3.1">Prosjekt 1</option>
-          <option value="project3.2">Prosjekt 2</option>
-          <option value="project3.3">Prosjekt 3</option>
-          <option value="project3.4">Prosjekt 4</option>
+          {% for proj in projects %}
+            <option value="{% scramble proj.pk %}">{{ proj }}</option>
+          {% endfor %}
         </select>
       </div>
 
@@ -232,10 +230,9 @@
       <div class=" addElement">
         <label class="addLabel"> Velg prosjekt: </label>
         <select name="project4" id="project4" class="dropdown addProject form1">
-          <option value="project4.1">Prosjekt 1</option>
-          <option value="project4.2">Prosjekt 2</option>
-          <option value="project4.3">Prosjekt 3</option>
-          <option value="project4.4">Prosjekt 4</option>
+          {% for proj in projects %}
+            <option value="{% scramble proj.pk %}">{{ proj }}</option>
+          {% endfor %}
         </select>
       </div>
 
@@ -300,10 +297,9 @@
       <div class=" addElement">
         <label class="addLabel"> Velg prosjekt: </label>
         <select name="project5" id="project5" class="dropdown addProject form1">
-          <option value="project5.1">Prosjekt 1</option>
-          <option value="project5.2">Prosjekt 2</option>
-          <option value="project5.3">Prosjekt 3</option>
-          <option value="project5.4">Prosjekt 4</option>
+          {% for proj in projects %}
+            <option value="{% scramble proj.pk %}">{{ proj }}</option>
+          {% endfor %}
         </select>
       </div>
 
