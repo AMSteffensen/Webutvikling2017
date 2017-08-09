@@ -18,33 +18,34 @@
 
       <!-- Add date -->
       <div class="firstElement">
-        <label class="addLabel" for="date1">Velg dato:</label>
-        <input type="date" name="date1" id="date1" class="form1" min="2017-01-01">
+        <label class="addLabel" for="date1">Dato</label>
+        <input type="date" name="date1" id="date1" class="form1 dateofbirth" min="2017-01-01">
       </div>
 
       <!-- Add project -->
       <div class=" addElement">
-        <label class="addLabel"> Velg prosjekt: </label>
+        <label class="addLabel"> Prosjekt og delprosjekt </label>
         <select name="project1" id="project1" class="dropdown addProject form1">
           {% for proj in projects %}
             <option value="{% scramble proj.pk %}">{{ proj }}</option>
           {% endfor %}
         </select>
-      </div>
 
-      <!-- Add sub-project -->
-      <div class=" addElement">
-        <label class="addLabel"> Velg delprosjekt: </label>
-        <select name="sProject1" id="sProject1" class="dropdown addProject form1">
-          {% for cat in categories %}
-            <option value="{{ cat }}">{{ cat|title }}</option>
-          {% endfor %}
-        </select>
+
+        <!-- Add sub-project -->
+          <select name="sProject1" id="sProject1" class="dropdown addProject form1 addSubProject">
+            <!-- <option disabled selected>Velg delprosjekt</option> -->
+            {% for cat in categories %}
+              <option value="{{ cat }}">{{ cat|title }}</option>
+            {% endfor %}
+          </select>
+
+
       </div>
 
       <!-- Add hours -->
       <div class="addElement" enctype="multipart/form-data">
-        <label class="addLabel"> Antall timer: </label>
+        <label class="addLabel"> Timer og minutter <span class="addSpace"></span></label>
         <div class="col-xs-1 addHours">
           <div class="input-group spinner addHoursInput">
             <input name="hours1" id="hours1" type="text" maxlength="2" class="form-control" value="0" min="0" max="24">
@@ -54,11 +55,9 @@
             </div>
           </div>
         </div>
-      </div>
+        <p class="pHoursMinutes"><i>t</i></p>
 
       <!-- Add minutes -->
-      <div class="addElement">
-        <label class="addLabel"> Antall minutter: </label>
         <div class="col-xs-1 addHours">
           <div class="input-group spinner addHoursInput">
             <input name="minutes1" id="minutes1" type="text" maxlength="2" class="form-control" value="0" min="0" max="60">
@@ -68,12 +67,13 @@
             </div>
           </div>
         </div>
+        <p class="pHoursMinutes"><i>min</i></p>
       </div>
 
       <!-- Add note -->
       <div class="addElement">
         <label class="addLabel">Legg til merknad:</label>
-        <textarea name="note1" id="note1" type="text" class="form1 form2" maxlength="75"></textarea>
+        <textarea name="note1" id="note1" type="text" class="form1 form2" maxlength="105"></textarea>
       </div>
 
       <hr class="hrStyle">

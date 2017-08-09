@@ -63,7 +63,7 @@ clear:both;
 
 /*Elements*/
  .addElement{
-   margin-left: 30px;
+   margin-left: 50px;
    float: left;
 }
 
@@ -74,7 +74,11 @@ clear:both;
 /*Add project*/
 .addProject{
   height: 30px;
-  width: 130px;
+  width: 260px;
+}
+
+.addSubProject{
+  margin-top: 10px;
 }
 
 /*Add date */
@@ -89,7 +93,7 @@ clear:both;
   opacity: 0;
 }
 
-#dateofbirth {
+.dateofbirth {
   width: 130px;
 }
 
@@ -108,6 +112,11 @@ clear:both;
   text-align: right;
 }
 
+.addSpace{
+  width: 100px;
+  display: inline-block;
+}
+
 .addHoursInput input{
   margin-left: 0px;
   height: 30px;
@@ -117,10 +126,14 @@ clear:both;
 
 .addHours{
   padding-left: 0px;
-  padding-right: 0px;
-  width: 120px;
+  width: 130px;
   clear:both;
   z-index: 0;
+}
+
+.pHoursMinutes{
+  padding-top:5px;
+  padding-bottom: 5px;
 }
 
 .input-group-btn-vertical {
@@ -163,10 +176,10 @@ clear:both;
   /*Add annotation*/
 
 .form2{
-  height: 50px;
+  height: 70px;
   padding-top: 5px;
   width: 260px;
   max-width: 260px;
-  max-height: 50px;
+  max-height: 70px;
   margin-bottom: 20px;
 }
