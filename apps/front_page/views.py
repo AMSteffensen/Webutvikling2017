@@ -1,8 +1,10 @@
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.shortcuts import redirect
+from django.shortcuts import render_to_response
 from django.contrib.auth import authenticate
 from django.contrib.auth import login
+from django.template import RequestContext
 
 from user_auth.forms import LoginForm
 
@@ -29,3 +31,10 @@ def landing(request):
     else:
         form = LoginForm()
     return render(request, 'front_page/landing.html', {'form': form})
+
+
+def e_handler404(request):
+    context = RequestContext(request)
+    response = render_to_response('e_handlers/error404.html', context=context)
+    response.status_code = 404
+    return response
