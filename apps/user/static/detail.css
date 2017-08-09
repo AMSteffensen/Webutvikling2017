@@ -63,8 +63,9 @@ clear:both;
 
 /*Elements*/
  .addElement{
-   margin-left: 50px;
+   margin-left: 40px;
    float: left;
+   display:block;
 }
 
 .firstElement{
@@ -112,16 +113,10 @@ clear:both;
   text-align: right;
 }
 
-.addSpace{
-  width: 100px;
-  display: inline-block;
-}
-
 .addHoursInput input{
   margin-left: 0px;
   height: 30px;
   text-align: center;
-
 }
 
 .addHours{
@@ -131,9 +126,20 @@ clear:both;
   z-index: 0;
 }
 
-.pHoursMinutes{
-  padding-top:5px;
-  padding-bottom: 5px;
+.addMinutes{
+  margin-top: 10px;
+}
+
+.pElement{
+  float: left;
+  display:block;
+}
+.pHours{
+  margin-top:27px;
+}
+
+.pMinutes{
+  padding-top: 5px;
 }
 
 .input-group-btn-vertical {
