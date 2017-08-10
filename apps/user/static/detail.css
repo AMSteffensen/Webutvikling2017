@@ -1,11 +1,14 @@
 
 /*Horizontal rules*/
+
 .hrStyle{
   width: 100%;
   display: block;
 }
 
-/*The button with signs*/
+/*Buttons*/
+
+/* - plus and minus*/
 .btnSign{
   height: 28px;
   width: 28px;
@@ -14,6 +17,7 @@
   float:left;
 }
 
+/* -The sign itself*/
 .btnSignInside{
   color:white;
   font-size: 16px;
@@ -31,7 +35,6 @@
 }
 
 /*Submit button*/
-
 #btnSubmitHours{
   margin-left: 75%;
   margin-bottom: 20px;
@@ -45,11 +48,13 @@
 }
 
 /*Labels*/
+
 .addLabel{
   display: block;
 }
 
-/*Input form*/
+/*Input form -all elements except hours and minutes*/
+
 .form1{
 border: 1px solid #c4c4c4;
 border-radius: 5px;
@@ -62,22 +67,25 @@ clear:both;
 
 
 /*Elements*/
+
+/* -the first element in every line*/
+.firstElement{
+  float:left;
+}
+/* -all the other elements*/
  .addElement{
    margin-left: 40px;
    float: left;
    display:block;
 }
 
-.firstElement{
-  float:left;
-}
-
 /*Add project*/
+
 .addProject{
   height: 30px;
   width: 260px;
 }
-
+/* -subproject*/
 .addSubProject{
   margin-top: 10px;
 }
@@ -130,6 +138,7 @@ clear:both;
   margin-top: 10px;
 }
 
+/* -text: hours and minutes*/
 .pElement{
   float: left;
   display:block;
