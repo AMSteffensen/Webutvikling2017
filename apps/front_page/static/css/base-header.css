@@ -195,7 +195,7 @@ margin-bottom:0px ;
 .top-bar .socl-icons li a .pText3 {
   line-height: 15px;
   white-space: normal;
-  max-width: 300px;
+  max-width: 250px;
   word-wrap: break-word;
   text-align: left;
 }
@@ -206,4 +206,22 @@ margin-bottom:0px ;
 padding-top: 15px;
   padding-left: 7px;
 
+}
+
+.top-bar .socl-icons li .btnDelete{
+  float:right;
+  padding:0px 5px;
+  margin-left:5px;
+  border-color:transparent;
+  background-color: transparent;
+}
+
+.top-bar .socl-icons li .btnDelete:hover{
+background-color:white;
+}
+
+.top-bar .socl-icons li .notificationMargin{
+  padding-right:5px;
+  padding-left:7px;
+  width:340px;
 }
