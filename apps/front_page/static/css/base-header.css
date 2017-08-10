@@ -144,12 +144,12 @@
 
 .top-bar .socl-icons .topPadding {
   /* Padding after header */
-  margin-top: 12px;
+  margin-top: 15px;
 }
 
 .top-bar .socl-icons .botPadding {
   /* Padding before footer */
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 
@@ -193,8 +193,10 @@
   max-width: 250px;
   word-wrap: break-word;
   text-align: left;
+  margin-bottom: 0px;
 }
 
+/*  -content: buttons */
 .top-bar .socl-icons li a .btnStyle {
   /* Accept and decline buttons */
   color: #333;
@@ -217,10 +219,19 @@
 .top-bar .socl-icons li .notificationMargin {
   padding-right: 5px;
   padding-left: 7px;
+  padding-top: 0px;
+  margin-top:0px;
   width: 340px;
 }
 
 .top-bar .socl-icons li a .closeIcon {
   color: #C5C5C5;
   font-size: 12px;
+}
+
+.top-bar .socl-icons li a .notBot {
+padding-bottom: 0px;
+padding-top:0px;
+margin-top:0px;
+margin-bottom:0px;
 }
