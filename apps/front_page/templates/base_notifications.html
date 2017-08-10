@@ -1,5 +1,4 @@
-{% load utils %}
-{% my_notifications request as notif_list %}
+{% load utils %} {% my_notifications request as notif_list %}
 <li>
   <div id="notif-panel" class="dropdown">
     <a class="dropdown-toggle"><i class="fa fa-bell widthHeight" aria-hidden="true"></i><span id="notif-amount" class="badge cBadge">{{ notif_list|length }}</span></a>
@@ -12,12 +11,11 @@
       <li class="topPadding">
       </li>
 
-      {% if notif_list %}
-        {% for noti in notif_list %}
-          <li class="message-preview ">
+      {% if notif_list %} {% for noti in notif_list %}
+      <li class="message-preview">
 
-            <a class="notificationMargin notificationWidth" href="{{ noti.user_from.get_absolute_url }}">
-              <button type="submit" class="btn btn-default btnDelete"><i class="fa fa-times" aria-hidden="true" style="color:#C5C5C5; text-align:center; font-size:12px; vertical-align:center;"></i></button>
+        <a class="notificationMargin notificationWidth" href="{{ noti.user_from.get_absolute_url }}">
+              <button type="submit" class="btn btn-default btnDelete"><i class="fa fa-times closeIcon" aria-hidden="true"></i></button>
 
               {% if noti.action == 'team_req_join' %}
                 <div id="team-req-join-handle" class="pull-right btnStyle">
@@ -53,18 +51,17 @@
 
               </div>
             </a>
-          </li>
-        {% endfor %}
-      {% else %}
-        <li class="message-preview ">
-          <a>
-            <div class="media">
-              <div class="media-body">
-                <h5 class="media-heading hStyle"><strong>Du har ingen nye notifikasjoner</strong></h5>
-              </div>
+      </li>
+      {% endfor %} {% else %}
+      <li class="message-preview ">
+        <a>
+          <div class="media">
+            <div class="media-body">
+              <h5 class="media-heading hStyle"><strong>Du har ingen nye notifikasjoner</strong></h5>
             </div>
-          </a>
-        </li>
+          </div>
+        </a>
+      </li>
       {% endif %}
       <li class="message-preview barTopBottom margTop2 ">
         <h5 class="viewMore"><a href="{% url 'user:user_feed' %}" class="hStyle media-heading"><strong>Vis mer...</strong>

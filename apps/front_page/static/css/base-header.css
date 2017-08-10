@@ -45,7 +45,6 @@
   width: 30px;
   height: 30px;
   line-height: 30px;
-
 }
 
 .username {
@@ -137,10 +136,10 @@
   padding: 3px;
 }
 
-.top-bar .socl-icons li .viewMore{
+.top-bar .socl-icons li .viewMore {
   /*Position for View More link */
-margin-top: -5px ;
-margin-bottom:0px ;
+  margin-top: -5px;
+  margin-bottom: 0px;
 }
 
 .top-bar .socl-icons .topPadding {
@@ -152,8 +151,6 @@ margin-bottom:0px ;
   /* Padding before footer */
   margin-top: 10px;
 }
-
-
 
 
 /* -Content */
@@ -168,7 +165,6 @@ margin-bottom:0px ;
   font-size: 12px;
   color: black;
   text-align: left;
-
 }
 
 .top-bar .socl-icons li .pAll {
@@ -191,7 +187,6 @@ margin-bottom:0px ;
   font-size: 11px;
 }
 
-
 .top-bar .socl-icons li a .pText3 {
   line-height: 15px;
   white-space: normal;
@@ -203,25 +198,29 @@ margin-bottom:0px ;
 .top-bar .socl-icons li a .btnStyle {
   /* Accept and decline buttons */
   color: #333;
-padding-top: 15px;
+  padding-top: 15px;
   padding-left: 7px;
-
 }
 
-.top-bar .socl-icons li .btnDelete{
-  float:right;
-  padding:0px 5px;
-  margin-left:5px;
-  border-color:transparent;
+.top-bar .socl-icons li .btnDelete {
+  float: right;
+  padding: 0px 5px;
+  margin-left: 5px;
+  border-color: transparent;
   background-color: transparent;
 }
 
-.top-bar .socl-icons li .btnDelete:hover{
-background-color:white;
+.top-bar .socl-icons li .btnDelete:hover {
+  background-color: white;
 }
 
-.top-bar .socl-icons li .notificationMargin{
-  padding-right:5px;
-  padding-left:7px;
-  width:340px;
+.top-bar .socl-icons li .notificationMargin {
+  padding-right: 5px;
+  padding-left: 7px;
+  width: 340px;
+}
+
+.top-bar .socl-icons li a .closeIcon {
+  color: #C5C5C5;
+  font-size: 12px;
 }
