@@ -16,6 +16,7 @@ $.ajaxSetup({
 
 $(document).ready(function () {
 
+
     // Keep SideNav collapse open on refresh
     var loc = location.pathname;
     submenu = $('#menu-content a[href*="' + loc + '"]');
@@ -47,6 +48,19 @@ $(document).ready(function () {
             socialIcon.parent().removeClass('open');
         }
     });
+
+    // Toggle visibility for close button in notification panel
+
+    jQuery(document).ready(function() {
+      jQuery('.btnDelete').css('visibility', 'hidden');
+    });
+    jQuery(document).ready(function() {
+      jQuery('.notificationMargin').hover(function() {
+        jQuery(this).find('.btnDelete').css('visibility', 'visible');
+        },
+      function() {
+        jQuery('.btnDelete').css('visibility', 'hidden');
+        });
+    });
     // TOGGLE SOCIAL NOTIFICATIONS PANEL ------------------------------
 });
-
