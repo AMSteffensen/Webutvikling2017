@@ -48,31 +48,16 @@
       <div class="container">
         <div class="row">
           <div class="col-md-6">
+
             <!--Search bar -->
             <div class="container searchbarBody" id="searchBar" style="display:none;">
               <div class="row">
                 <div class="col-xs-8 col-xs-offset-0">
                   <div class="input-group">
-                    <!--<div class="input-group-btn search-panel">
-                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        <span id="search_concept">Kategori</span> <span class="caret"></span>
-                      </button>
-                      <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Team</a></li>
-                        <li><a href="#">Prosjekter</a></li>
-                        <li><a href="#">Brukere</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#all">Alt</a></li>
-                      </ul>
-                    </div>
-
-                  <input type="hidden" name="search_param" value="all" id="search_param">-->
-
                     <input type="text" class="form-control" name="x" placeholder="Søk her...">
                     <span class="input-group-btn">
                                 <button class="btn btn-default" type="button">Søk <span style="display:inline-block; width:5px;"></span><span class="glyphicon glyphicon-search text"></span></button>
                     </span>
-
                   </div>
                 </div>
               </div>
@@ -85,7 +70,6 @@
               <li><a id="searchIcon" style="cursor: pointer"><i class="fa fa-search widthHeight" aria-hidden="true"></i></a></li>
 
               <!-- Messages -->
-
               <li>
                 <div id="msg-panel" class="dropdown">
                   <a class="dropdown-toggle "><i class="fa fa-comments widthHeight" aria-hidden="true"></i> </a>
@@ -96,20 +80,15 @@
                       <h5 class="media-heading hStyle"><strong>Meldinger</strong>
                       </h5>
                     </li>
-
                     <li class="topPadding">
                     </li>
                     <li class="message-preview ">
                       <a class="notificationMargin notificationWidth" href="#">
-                        <button type="submit" class="btn btn-default btnDelete" style="display:inline;"><i class="fa fa-times" aria-hidden="true" style="color:#C5C5C5; text-align:center; font-size:12px; vertical-align:center;"></i></button>
-
+                        <button type="submit" class="btn btn-default btnDelete"><i class="fa fa-times closeIcon" aria-hidden="true" ></i></button>
                         <div class="media">
-
                           <span class="pull-left">
-
                         <img class="media-object image" src="http://placehold.it/50x50" alt="">
                         </span>
-
                           <div class="media-body">
                             <h5 class="media-heading hStyle"><strong>John Smith</strong>
                             </h5>
@@ -126,17 +105,14 @@
                     </li>
                     <li class="botPadding">
                     </li>
-
                   </ul>
                 </div>
               </li>
               <!-- /Messages -->
 
-
               <!-- Notifications -->
               {% include "base_notifications.html" %}
               <!-- /Notifications -->
-
 
               <li><a href="{{ request.user.get_absolute_url }}">
                 <i>
@@ -151,7 +127,6 @@
         </div>
       </div>
     </div>
-
     <!--/Header-->
 
     <!-- MENU-SIDEBAR -->
