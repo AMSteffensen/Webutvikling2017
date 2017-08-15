@@ -5,6 +5,7 @@ from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_exempt
 from common.decorators import ajax_required
 
 from .forms import UserEditForm
@@ -66,6 +67,7 @@ def user_relations(request):
 @ajax_required
 @require_POST
 @login_required
+@csrf_exempt
 def user_follow(request):
     user_id = request.POST.get('id')
     action = request.POST.get('action')
