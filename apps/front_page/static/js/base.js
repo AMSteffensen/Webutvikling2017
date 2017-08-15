@@ -13,7 +13,6 @@ $.ajaxSetup({
     }
 });
 
-
 $(document).ready(function () {
 
 

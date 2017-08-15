@@ -9,6 +9,7 @@
 
   <!-- External Resources -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">-->
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -43,7 +44,6 @@
 <div class="cWrapper">
   {% if request.user.is_authenticated %}
     <!--Header-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <div class="top-bar">
       <div class="container">
         <div class="row">
@@ -296,6 +296,23 @@
                 });
         });
         // <!-- /Notification team inv handle -->
+
+        $('div#hide-notif button').click(function (e) {
+            e.preventDefault();
+            var buttonClicked = $(this);
+            $.post('{% url "noti:hide-notif" %}',
+                {
+                    payload: $(this).data('payload')
+                },
+                function (data) {
+                    if (data['status'] === 'ok') {
+                        $(buttonClicked).unbind();
+                        buttonClicked.parent().parent().remove();
+                        var notif_amount = $('span#notif-amount');
+                        notif_amount.text(praseInt(notif_amount.text()) - 1);
+                    }
+                });
+        });
 
     });
     // <!-- /DOM-READY -->

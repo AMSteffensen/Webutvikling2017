@@ -7,29 +7,27 @@
 
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'detail.css' %}">
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
-<!-- main -->
+  <!-- main -->
 
-<!-- Followers -->
-<div class="content">
-  <div class="main-header">
-    <h2>Profil: {{ user.get_full_name }}</h2>
-    <em>Brukerprofil side</em>
+  <!-- Followers -->
+  <div class="content">
+    <div class="main-header">
+      <h2>Profil: {{ user.get_full_name }}</h2>
+      <em>Brukerprofil side</em>
 
-  </div>
-  <div class="main-content">
-    <!-- NAV TABS -->
-    <ul class="nav nav-tabs nav-tabs-custom-colored tabs-iconized">
-      <li class="active"><a href="#profile-tab" data-toggle="tab"><i class="fa fa-user"></i> Profil</a></li>
-      <li><a href="#activity-tab" data-toggle="tab"><i class="fa fa-rss"></i> Aktivitet</a></li>
-      <li><a href="#settings-tab" data-toggle="tab"><i class="fa fa-gear"></i> Instillinger</a></li>
-      <li><a href="#settings-tab" data-toggle="tab"><i class="fa fa-camera"></i> Portfolio</a></li>
-    </ul>
-    <!-- END NAV TABS -->
-    <div class="tab-content profile-page">
-      <!-- PROFILE TAB CONTENT -->
+    </div>
+    <div class="main-content">
+      <!-- NAV TABS -->
+      <ul class="nav nav-tabs nav-tabs-custom-colored tabs-iconized">
+        <li class="active"><a href="#profile-tab" data-toggle="tab"><i class="fa fa-user"></i> Profil</a></li>
+        <li><a href="#activity-tab" data-toggle="tab"><i class="fa fa-rss"></i> Aktivitet</a></li>
+        <li><a href="#settings-tab" data-toggle="tab"><i class="fa fa-gear"></i> Instillinger</a></li>
+        <li><a href="#settings-tab" data-toggle="tab"><i class="fa fa-camera"></i> Portfolio</a></li>
+      </ul>
+      <!-- END NAV TABS -->
+      <div class="tab-content profile-page">
+        <!-- PROFILE TAB CONTENT -->
         <div class="tab-pane profile active" id="profile-tab">
           <div class="row">
             <div class="col-md-3">
@@ -52,11 +50,11 @@
             </div>
             <!-- Followers -->
             {% with total_followers=user.followers.count %}
-            <span class="count">
-												<span class="total">{{ total_followers }}</span> follower{{ total_followers|pluralize }}
+              <span class="count">
+												<span class="total">{{ total_followers }}</span> {% if total_followers == 0 or total_followers > 1 %}følgere{% else %}følger{% endif %}
             </span>
-            {% if user.id is not request.user.id %}
-            <a href="#" data-id="{{ user.id }}" data-action="{% if request.user in user.followers.all %}un{% endif %}follow" class="follow button">
+              {% if user.id is not request.user.id %}
+                <a href="#" data-id="{{ user.id }}" data-action="{% if request.user in user.followers.all %}un{% endif %}follow" class="follow button">
                   {% if request.user not in user.followers.all %}
                     Følg
                   {% else %}
@@ -119,28 +117,37 @@
           </div>
         </div>
         <!-- END PROFILE TAB CONTENT -->
+      </div>
     </div>
   </div>
-</div>
-<!-- /main -->
+  <!-- /main -->
+{% endblock %}
 
-
-
- {% endblock %}
-  {% block domready %}
-  $('a.follow').click(function(e) {
-    e.preventDefault();
-    $.post('{% url "user:user_follow" %}', {
-        id: $(this).data('id'),
-        action: $(this).data('action')
-      },
-      function(data) {
-        if (data['status'] == 'ok') {
-          var previous_action = $('a.follow').data('action'); // toggle data-action $('a.follow').data('action', previous_action == 'follow' ? 'unfollow' : 'follow'); // toggle link text $('a.follow').text(previous_action == 'follow' ? 'Unfollow' : 'Follow'); // update total followers
-          var previous_followers = parseInt($('span.count .total').text());
-          $('span.count .total').text(previous_action == 'follow' ? previous_followers + 1 : previous_followers - 1);
-        }
-      });
-  });
-
-  {% endblock %}
+{% block domready %}
+    $('a.follow').click(function (e) {
+        e.preventDefault();
+        $.post('{% url "user:user_follow" %}', {
+                id: $(this).data('id'),
+                action: $(this).data('action')
+            },
+            function (data) {
+                if (data['status'] === 'ok') {
+                    var follow_button = $('a.follow');
+                    var previous_action = follow_button.data('action');
+                    // toggle data-action
+                    if (previous_action === 'follow') {
+                        follow_button.data('action', 'unfollow');
+                    } else {
+                        follow_button.data('action', 'follow');
+                    }
+                    //follow_button.data('action', previous_action === 'follow' ? 'unfollow' : 'follow');
+                    // toggle link text
+                    follow_button.text(previous_action === 'follow' ? 'Slutt å følge' : 'Følg');
+                    // update total followers
+                    var follow_amount = $('span.count .total');
+                    var previous_followers = parseInt(follow_amount.text());
+                    follow_amount.text(previous_action === 'follow' ? previous_followers + 1 : previous_followers - 1);
+                }
+            });
+    });
+{% endblock %}
