@@ -139,10 +139,13 @@ def hide_notif(request):
 
     # Verify the payload
     try:
-        notif_pk = decode_data(payload)
+        data = decode_data(payload)
     except Exception:
         print("bad hash")
         return JsonResponse({'status': 'ko'})
+
+    # Extract data
+    notif_pk = int(data[0])
 
     # Get notification object
     try:
