@@ -309,7 +309,7 @@
                         $(buttonClicked).unbind();
                         buttonClicked.parent().parent().remove();
                         var notif_amount = $('span#notif-amount');
-                        notif_amount.text(praseInt(notif_amount.text()) - 1);
+                        notif_amount.text(parseInt(notif_amount.text()) - 1);
                     }
                 });
         });
