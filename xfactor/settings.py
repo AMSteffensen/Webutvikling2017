@@ -160,6 +160,18 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+#overwrite if in production
+if os.environ.get("USE_PRODUCTION"):
+    DATABASES = {
+        'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'xfaktor1',
+        'USERNAME': os.environ.get("DB_USERNAME"),
+        'PASSWORD': os.environ.get("DB_PASSWORD"),
+        'HOST': os.environ.get("DB_HOST"),
+        'PORT': os.environ.get("DB_PORT"),
+   }
+}
 
 
 # Password validation
