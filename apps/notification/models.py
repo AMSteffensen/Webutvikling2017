@@ -110,8 +110,8 @@ class Notification(models.Model):
 
 class Messages(models.Model):
 
-    user_from = models.ForeignKey(User, related_name='user_from')
-    user_to = models.ForeignKey(User, related_name='user_to')
+    user_from = models.ForeignKey(User, related_name='user_from_msg')
+    user_to = models.ForeignKey(User, related_name='user_to_msg')
     created = models.DateTimeField(auto_now_add=True)
     read = models.BooleanField(default=False)
     message = models.TextField()
