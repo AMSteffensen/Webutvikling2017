@@ -1,3 +1,9 @@
 from django.contrib import admin
+from .models import MessageRelation
 
-# Register your models here.
+
+class MessageRelationAdmin(admin.ModelAdmin):
+    list_display = ('userA', 'userB', 'read')
+
+
+admin.site.register(MessageRelation, MessageRelationAdmin)

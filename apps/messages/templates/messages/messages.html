@@ -7,6 +7,7 @@
 <!-- CONTENT -->
 {% block content %}
   <div class="container">
+  {% if False %}
     <div class="row">
 
       <div class="conversation-wrap col-lg-3">
@@ -59,11 +60,16 @@
 
     </div>
   </div>
+  {% else %}
+    <p>Du har ikke opprettet kontakt med noen enda. Besøk deres profil og trykk på "Send melding".</p>
+  {% endif %}
+
 {% endblock %}
 <!-- /CONTENT -->
 
 <!-- DOMREADY -->
 {% block domready %}
+  {% if False %}
       $(document).ready(function() {
          $('#msg-wrap').hide();
          $('.conversation').click(function() {
@@ -76,5 +82,6 @@
             $('#msg-wrap').show();
         });
     });
+  {% endif %}
 {% endblock %}
 <!-- /DOMREADY -->
