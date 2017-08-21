@@ -30,7 +30,6 @@ INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.messages',
     'django.contrib.staticfiles',
     'bootstrap3',
     'user_auth',
@@ -44,6 +43,7 @@ INSTALLED_APPS = [
     'support',
     'actions',
     'notification',
+    'messages',
 ]
 
 #Default settings
