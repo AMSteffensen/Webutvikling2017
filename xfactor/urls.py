@@ -35,6 +35,9 @@ urlpatterns = [
 
     # Notifications
     url(r'^notif/', include('notification.urls', namespace='noti', app_name='notifications')),
+
+    # Messages
+    url(r'^messages/', include('messages.urls', namespace='msg', app_name='messages')),
 ]
 
 if settings.DEBUG:
