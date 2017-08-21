@@ -106,14 +106,3 @@ class Notification(models.Model):
 
     def __str__(self):
         return "{}, {} -> {}".format(self.context, self.user_from, self.user_to)
-
-
-class Messages(models.Model):
-
-    user_from = models.ForeignKey(User, related_name='user_from_msg')
-    user_to = models.ForeignKey(User, related_name='user_to_msg')
-    created = models.DateTimeField(auto_now_add=True)
-    read = models.BooleanField(default=False)
-    message = models.TextField()
-
-    ## (TODO add 1 minute buffer to all messages)
