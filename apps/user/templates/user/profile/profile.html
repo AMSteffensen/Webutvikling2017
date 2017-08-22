@@ -15,152 +15,34 @@
 
 
 {% block content %}
+  
+<div id="page-content">
 
-  <!-- main -->
+ <div id="profile">
+   {% include "user/profile/tab-profile.html" %}
+ </div>
 
-  <!-- Followers -->
-  <div class="content">
-    <div class="main-header">
-      <h2>Profil: {{ user.get_full_name }}</h2>
-      <em>Brukerprofil side</em>
+ <div id="tab-activity">
+   {% include "user/profile/tab-activity.html" %}
+ </div>
 
-    </div>
-    <div class="main-content">
-      <!-- NAV TABS -->
-      <ul class="nav nav-tabs nav-tabs-custom-colored tabs-iconized">
-        <li class="active"><a href="#profile-tab" data-toggle="tab"><i class="fa fa-user"></i> Profil</a></li>
-        <li><a href="#activity-tab" data-toggle="tab"><i class="fa fa-rss"></i> Aktivitet</a></li>
-        <li><a href="#settings-tab" data-toggle="tab"><i class="fa fa-gear"></i> Instillinger</a></li>
-        <li><a href="#settings-tab" data-toggle="tab"><i class="fa fa-camera"></i> Portfolio</a></li>
-      </ul>
-      <!-- END NAV TABS -->
-      <div class="tab-content profile-page">
-        <!-- PROFILE TAB CONTENT -->
-        <div class="tab-pane profile active" id="profile-tab">
-          <div class="row">
-            <div class="col-md-3">
-              <div class="user-info-left">
-                <!-- PROFILE PICTURE -->
-                {% include "profile_picture.html" with source=user.profile.photo img_size="180x180" alt="" classes="user-detail" %}
-                <!-- /PROFILE PICTURE -->
-                <h2>{{ user.username }} <i class="fa fa-circle green-font online-icon"></i><sup class="sr-only">Pålogget</sup></h2>
-                <div class="contact">
-                  {% if request.user != user %}
-                    <form name="new-message" action="{% url 'msg:new_message' %}" method="post" style="padding-left: 20px;">
-                      {% csrf_token %}
-                      <button name="new-message" class="btn btn-default" value="{% scramble user.pk %}"><i class="fa fa-envelope-o"></i> Send Melding</button>
-                    </form>
-                  {% endif %}
-                  <a href="#" class="btn btn-block btn-custom-secondary"><i class="fa fa-book"></i> Legg til i venneliste</a>
-                  <ul class="list-inline social">
-                    <li><a href="#" title="Google Plus"><i class="fa fa-github-square"></i></a></li>
-                    <li><a href="#" title="Facebook"><i class="fa fa-facebook-square"></i></a></li>
-                    <li><a href="#" title="Twitter"><i class="fa fa-twitter-square"></i></a></li>
-                    <li><a href="#" title="Google Plus"><i class="fa fa-google-plus-square"></i></a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <!-- Followers -->
-            {% with total_followers=user.followers.count %}
-              <span class="count">
-												<span class="total">{{ total_followers }}</span> {% if total_followers == 0 or total_followers > 1 %}følgere{% else %}følger{% endif %}
-            </span>
-              {% if user.id is not request.user.id %}
-                <a href="#" data-id="{{ user.id }}" data-action="{% if request.user in user.followers.all %}un{% endif %}follow" class="follow button">
-                  {% if request.user not in user.followers.all %}
-                    Følg
-                  {% else %}
-                    Slutt å følge
-                  {% endif %}
-                </a> {% endif %} {% endwith %}
-            <div class="col-md-9">
-              <div class="user-info-right">
-                <div class="basic-info">
-                  <h3><i class="fa fa-square"></i> Info</h3>
-                  <p class="data-row">
-                    <span class="data-name">Navn: </span>
-                    <span class="data-value">{{ user.first_name }} {{ user.last_name }}	</span>
-                  </p>
-                  <p class="data-row">
-                    <span class="data-name">Fødselsdato: </span>
-                    <span class="data-value">{{ user.profile.date_of_birth }}</span>
-                  </p>
-                  <p class="data-row">
-                    <span class="data-name">Kjønn: </span>
-                    <span class="data-value">{{ user.profile.gender }}</span>
-                  </p>
-                  <p class="data-row">
-                    <span class="data-name">Hjemmeside: </span>
-                    <span class="data-value"><a href="#">www.abc.com</a></span>
-                  </p>
-                  <p class="data-row">
-                    <span class="data-name">Sist pålogget</span>
-                    <span class="data-value">{{ user.last_login }}</span>
-                  </p>
-                  <p class="data-row">
-                    <span class="data-name">Registreringsdato: </span>
-                    <span class="data-value">{{ user.date_joined }}</span>
-                  </p>
-                </div>
-                <div class="contact_info">
-                  <h3><i class="fa fa-square"></i> Kontakt Info</h3>
-                  <p class="data-row">
-                    <span class="data-name">Email</span>
-                    <span class="data-value">{{ user.email }}</span>
-                  </p>
-                  <p class="data-row">
-                    <span class="data-name">Tlf: </span>
-                    <span class="data-value">12 45 37 82</span>
-                  </p>
-                  <p class="data-row">
-                    <span class="data-name">Adresse: </span>
-                    <span class="data-value">Jernbanegata 1 <br/>Oslo</span>
-                  </p>
-                </div>
-                <div class="about">
-                  <h3><i class="fa fa-square"></i> Om meg</h3>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris eu mauris quam. Phasellus et eleifend est. Aliquam venenatis lacus non erat laoreet efficitur. Mauris quam ante, scelerisque ut ultricies a, finibus ullamcorper leo. Vivamus
-                    magna elit, rhoncus id porttitor vel, volutpat vel turpis. Phasellus euismod sit amet augue euismod egestas. Ut id fringilla ipsum, in tincidunt velit. Maecenas convallis vulputate condimentum. Donec vel ultrices tellus, in euismod
-                    lacus. Donec faucibus neque libero, eu consectetur erat tincidunt sit amet. Integer eros mauris, ornare a velit eu, auctor sagittis enim. Nunc quis posuere lorem, ac rutrum leo. Phasellus consequat ligula sed ex tincidunt, in rhoncus
-                    mauris feugiat. Mauris dignissim ex eu nibh egestas malesuada. Praesent fermentum euismod orci a venenatis. Nam tincidunt odio eget nulla pulvinar, ac pretium velit dapibus.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- END PROFILE TAB CONTENT -->
-      </div>
-    </div>
-  </div>
-  <!-- /main -->
+ <div id="tab-settings">
+   {% include "user/profile/tab-settings.html" %}
+ </div>
+
+ <div id="tab-portifolio">
+   {% include "user/profile/tab-portifolio.html" %}
+ </div>
+</div>
+
+
 {% endblock %}
-
 {% block domready %}
-    $('a.follow').click(function (e) {
-        e.preventDefault();
-        $.post('{% url "user:user_follow" %}', {
-                id: $(this).data('id'),
-                action: $(this).data('action')
-            },
-            function (data) {
-                if (data['status'] === 'ok') {
-                    var follow_button = $('a.follow');
-                    var previous_action = follow_button.data('action');
-                    // toggle data-action
-                    if (previous_action === 'follow') {
-                        follow_button.data('action', 'unfollow');
-                    } else {
-                        follow_button.data('action', 'follow');
-                    }
-                    //follow_button.data('action', previous_action === 'follow' ? 'unfollow' : 'follow');
-                    // toggle link text
-                    follow_button.text(previous_action === 'follow' ? 'Slutt å følge' : 'Følg');
-                    // update total followers
-                    var follow_amount = $('span.count .total');
-                    var previous_followers = parseInt(follow_amount.text());
-                    follow_amount.text(previous_action === 'follow' ? previous_followers + 1 : previous_followers - 1);
-                }
-            });
-    });
+
+
+
+    $('div#tab-activity').hide();
+    $('div#tab-settings').hide();
+    $('div#portifolio').hide();
+
 {% endblock %}
