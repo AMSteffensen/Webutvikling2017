@@ -7,6 +7,13 @@
 {% block title %}{{ user.get_full_name }}{% endblock %}
 
 
+{% include "user/profile/tab-activity.html" %}
+{% include "user/profile/tab-portifolio.html" %}
+{% include "user/profile/tab-profile.html" %}
+{% include "user/profile/tab-settings.html" %}
+
+
+
 {% block content %}
 
   <!-- main -->
