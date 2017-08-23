@@ -9,9 +9,9 @@ from snippets.hasher import decode_value
 
 def messages(request):
 
+    connections = MessageRelation.get.connections(request.user)
 
-    return render(request, 'messages/messages.html')
-
+    return render(request, 'messages/messages.html', {'connections': connections})
 
 
 
@@ -39,5 +39,7 @@ def new_message(request):
         # Create message relation
         relation = MessageRelation(userA=request.user, userB_id=user_id)
         relation.save()
+
+
 
     return redirect('msg:messages')

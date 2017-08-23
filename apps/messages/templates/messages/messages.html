@@ -1,36 +1,33 @@
 {% extends "base.html" %}
 
 {% load thumbnail %}
+{% load utils %}
 
 {% block title %}Meldinger{% endblock %}
 
 <!-- CONTENT -->
 {% block content %}
   <div class="container">
-  {% if False %}
+  {% if connections %}
     <div class="row">
 
-      <div class="conversation-wrap col-lg-3">
-        <div class="media conversation" id="menu_1" style="padding: 2px; height: 54px;">
-          <a class="pull-left" href="#">
-            <img class="media-object" style="width: 50px; height: 50px;">
-          </a>
-          <div class="media-body">
-            <h5 class="media-heading">User 1</h5>
-            <small>Hello</small>
-          </div>
-        </div>
+      <!-- Message List -->
 
-        <div class="media conversation" id="menu_2">
-          <a class="pull-left" href="#">
-            <img class="media-object" style="width: 50px; height: 50px;">
-          </a>
-          <div class="media-body">
-            <h5 class="media-heading">User 2</h5>
-            <small>Hello</small>
+      <div class="conversation-wrap col-lg-3">
+        {% for con in connections %}
+          {% con_sep con request as otherUser %}
+          <div class="media conversation" id="menu_1" style="padding: 2px; height: 54px;">
+            <a class="pull-left" href="#">
+              {% include "profile_picture.html" with source=otherUser.profile.photo img_size="50x50" alt="" classes="user-detail media-object" %}
+            </a>
+            <div class="media-body">
+              <h5 class="media-heading">{{ otherUser.username }}</h5>
+              <small>Hello </small>
+            </div>
           </div>
-        </div>
+        {% endfor %}
       </div>
+      <!-- /Message List -->
 
       <div class="message-wrap col-lg-8" id="msg-wrap">
         <!-- MESSAGE_1 -->
@@ -69,7 +66,7 @@
 
 <!-- DOMREADY -->
 {% block domready %}
-  {% if False %}
+  {% if connections %}
       $(document).ready(function() {
          $('#msg-wrap').hide();
          $('.conversation').click(function() {
