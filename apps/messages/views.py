@@ -1,8 +1,10 @@
+from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.shortcuts import redirect
-
+from django.template.loader import render_to_string
 from messages.models import MessageRelation
+from messages.models import Message
 
 from snippets.hasher import decode_value
 
@@ -33,7 +35,15 @@ def messages(request):
 
     return render(request, 'messages/messages.html', {'wrapper': wrapper})
 
-
+def message(request):
+    try:
+        message = Message.objects.get(pk=request.POST.get("msg"))
+        user = User.objects.get(pk=int(request.POST.get('user')))
+    except:
+        print("WRONG MESSAGE PK")
+        return redirect(request.META.get('HTTP_REFERER'))
+    html = render_to_string('messages/message.html', {'msg':message,'user':user})
+    return HttpResponse(html)
 
 def new_message(request):
     if request.method != 'POST':
