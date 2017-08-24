@@ -31,7 +31,7 @@ def scramble_mul(*args):
     return encode_data(args)
 
 @register.simple_tag
-def con_sep(conObj, request):
+def usr_sep(conObj, request):
     if conObj.userA == request.user:
         return conObj.userB
     else:

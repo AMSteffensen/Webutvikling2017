@@ -12,6 +12,7 @@ class MessageRelation(models.Model):
     userB = models.ForeignKey(User, related_name='userB')
     read = models.BooleanField(default=False)
 
+    objects = models.Manager()
     get = MessageRelationManager()
 
     def __str__(self):
@@ -29,10 +30,14 @@ class MessageManager(models.Manager):
 
 class Message(models.Model):
 
-    msg_id = models.ForeignKey(MessageRelation, related_name='msgRel')
-    user_from = models.ForeignKey(User, related_name='user_from_msg')
-    user_to = models.ForeignKey(User, related_name='user_to_msg')
+    msg_id = models.ForeignKey(MessageRelation, related_name='msg_id')
+    user_from = models.ForeignKey(User, related_name='msg_user_from')
+    user_to = models.ForeignKey(User, related_name='msg_user_to')
     created = models.DateTimeField(auto_now_add=True)
     message = models.TextField()
 
+    objects = models.Manager()
     get = MessageManager()
+
+    class Meta:
+        ordering = ('created',)

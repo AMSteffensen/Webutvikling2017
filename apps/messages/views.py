@@ -7,11 +7,31 @@ from messages.models import MessageRelation
 from snippets.hasher import decode_value
 
 
+class MessageWrapper():
+    def __init__(self, relation, msgs):
+        self.relation = relation
+        if msgs:
+            if len(msgs) > 20:
+                self.msgs = msgs.reverse()[:20].reverse()
+            else:
+                self.msgs = msgs
+            rev = msgs.reverse()[0]
+            self.last_msg = rev.message
+            self.last_from = rev.user_from
+        else:
+            self.last_msg = "Ingen meldinger.."
+            self.user_from = None
+
+
 def messages(request):
 
-    connections = MessageRelation.get.connections(request.user)
+    relations = MessageRelation.get.connections(request.user)
 
-    return render(request, 'messages/messages.html', {'connections': connections})
+    wrapper = []
+    for rel in relations:
+        wrapper.append(MessageWrapper(rel, rel.msg_id.all()))
+
+    return render(request, 'messages/messages.html', {'wrapper': wrapper})
 
 
 

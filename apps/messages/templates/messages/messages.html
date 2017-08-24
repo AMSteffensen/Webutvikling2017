@@ -8,21 +8,25 @@
 <!-- CONTENT -->
 {% block content %}
   <div class="container">
-  {% if connections %}
+  {% if wrapper %}
     <div class="row">
 
       <!-- Message List -->
 
-      <div class="conversation-wrap col-lg-3">
-        {% for con in connections %}
-          {% con_sep con request as otherUser %}
-          <div class="media conversation" id="menu_1" style="padding: 2px; height: 54px;">
+      <div class="conversation-wrap col-lg-3" style="background: #edf1eb;">
+        {% for obj in wrapper %}
+          {% usr_sep obj.relation request as otherUser %}
+          <div class="media conversation" id="menu_{{ forloop.counter }}" style="padding: 2px; height: 54px;">
             <a class="pull-left" href="#">
               {% include "profile_picture.html" with source=otherUser.profile.photo img_size="50x50" alt="" classes="user-detail media-object" %}
             </a>
             <div class="media-body">
               <h5 class="media-heading">{{ otherUser.username }}</h5>
-              <small>Hello </small>
+              <small
+                {% if obj.last_from == request.user %}
+                  style="background: #1263fd; color: white;"
+                {% endif %}>
+                {{ obj.last_msg|truncatechars:30 }}</small>
             </div>
           </div>
         {% endfor %}
@@ -31,28 +35,41 @@
 
       <div class="message-wrap col-lg-8" id="msg-wrap">
         <!-- MESSAGE_1 -->
-        <div class="msg-wrap " id="message_1">
-          <div class="media msg ">
-            <a class="pull-left" href="#">
-              <img class="media-object" style="width: 32px; height: 32px;">
-            </a>
-            <div class="media-body">
-              <small class="pull-right time"><i class="fa fa-clock-o"></i> DATE-TIME</small>
-              <h5 class="media-heading">NAME</h5>
-              <small class="col-lg-10">MESSAGE</small>
+        {% for obj in wrapper %}
+          <div class="msg-wrap" id="message_{{ forloop.counter }}" style="display:none">
+            <div class="media msg">
+              {% for msg in obj.msgs %}
+                <a class="pull-left" href="{{ msg.user_from.get_absolute_url }}">
+                  {% include "profile_picture.html" with source=msg.user_from.profile.photo img_size="32x32" alt="" classes="user-detail media-object" %}
+                </a>
+                <div class="media-body" style="padding: 10px 0;">
+                  <small class="pull-right time"><i class="fa fa-clock-o"></i> {{ msg.created }}</small>
+                  <h5 class="media-heading">{{ msg.user_from }}</h5>
+                  <small class="col-lg-10"
+                    {% if msg.user_from == request.user %}
+                      style="background: #1263fd; color: white;"
+                    {% else %}
+                      style="background: #edede8;"
+                    {% endif %}>
+                  {{ msg.message }}</small>
+                </div>
+              {% endfor %}
             </div>
+
+            <form>
+              <div class="send-wrap ">
+                <textarea id="msg_text" class="form-control send-message" rows="3" placeholder="Skriv en melding..."></textarea>
+              </div>
+
+              <div class="btn-panel">
+                <button type="button" class="col-lg-3 btn send-message-btn"><i class="fa fa-cloud-upload"></i> Legg til filer</button>
+                <button id="msg_send" data-value="{% scramble obj.relation.pk %}" type="button" class="col-lg-4 text-right btn send-message-btn pull-right">
+                  <i class="fa fa-plus"></i> Send Melding</button>
+              </div>
+            </form>
           </div>
-        </div>
+        {% endfor %}
         <!-- //MESSAGE_1 -->
-
-        <div class="send-wrap ">
-          <textarea class="form-control send-message" rows="3" placeholder="Write a reply..."></textarea>
-        </div>
-
-        <div class="btn-panel">
-          <a href="" class="col-lg-3 btn send-message-btn" role="button"><i class="fa fa-cloud-upload"></i> Add Files</a>
-          <a href="" class="col-lg-4 text-right btn send-message-btn pull-right" role="button"><i class="fa fa-plus"></i> Send Message</a>
-        </div>
       </div>
 
     </div>
@@ -66,17 +83,30 @@
 
 <!-- DOMREADY -->
 {% block domready %}
-  {% if connections %}
-      $(document).ready(function() {
-         $('#msg-wrap').hide();
-         $('.conversation').click(function() {
-            var id = this.id.substring(5);
-            $(this).siblings('.conversation').removeClass('active');
-            $(this).addClass('active');
+  {% if wrapper %}
+    $('#msg-wrap').hide();
+    $('.conversation').click(function() {
+        var id = this.id.substring(5);
+        $(this).siblings('.conversation').removeClass('active');
+        $(this).addClass('active');
 
-            $('[id^=message_]').hide();
-            $('#message_'+id).show();
-            $('#msg-wrap').show();
+        $('[id^=message_]').hide();
+        $('#message_'+id).show();
+        $('#msg-wrap').show();
+      });
+
+    $('button#msg_send').click(function(e) {
+        e.preventDefault();
+        var text = $(this).parent().parent().find('textarea#msg_text')[0];
+        $.post('{% url "msg:send_pm" %}',
+            {
+              msg: text.value,
+              rel: $(this).data('value')
+            },
+            function(data) {
+                if (data['status'] === 'ok') {
+                    text.value = "";
+                }
         });
     });
   {% endif %}
