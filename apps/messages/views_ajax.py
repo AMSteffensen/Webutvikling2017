@@ -1,7 +1,11 @@
 from django.http import JsonResponse
+from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from common.decorators import ajax_required
+from django.template.loader import render_to_string
+from django.contrib.auth.models import User
+from django.shortcuts import redirect
 
 from .models import MessageRelation
 from .models import Message
@@ -51,3 +55,18 @@ def send_pm(request):
     new_msg.save()
 
     return JsonResponse({'status': 'ok', 'msg':new_msg.pk,'user':request.user.pk,'rel':value})
+
+
+@ajax_required
+@require_POST
+@login_required
+def insert_pm(request):
+    try:
+        message = Message.objects.get(pk=request.POST.get("msg"))
+        user = User.objects.get(pk=int(request.POST.get('user')))
+    except:
+        print("WRONG MESSAGE PK")
+        return redirect(request.META.get('HTTP_REFERER'))
+
+    html = render_to_string('messages/message.html', {'msg':message,'user':user})
+    return HttpResponse(html)

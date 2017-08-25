@@ -35,15 +35,7 @@ def messages(request):
 
     return render(request, 'messages/messages.html', {'wrapper': wrapper})
 
-def message(request):
-    try:
-        message = Message.objects.get(pk=request.POST.get("msg"))
-        user = User.objects.get(pk=int(request.POST.get('user')))
-    except:
-        print("WRONG MESSAGE PK")
-        return redirect(request.META.get('HTTP_REFERER'))
-    html = render_to_string('messages/message.html', {'msg':message,'user':user})
-    return HttpResponse(html)
+
 
 def new_message(request):
     if request.method != 'POST':

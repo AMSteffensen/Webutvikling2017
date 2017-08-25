@@ -111,7 +111,7 @@
     });
 
     appendmsg = function(data){
-        $.post('{% url "msg:get_message" %}',
+        $.post('{% url "msg:insert_pm" %}',
             {
               msg: data["msg"],
               user: data["user"]
