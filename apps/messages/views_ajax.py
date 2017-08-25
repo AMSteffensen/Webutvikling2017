@@ -68,5 +68,5 @@ def insert_pm(request):
         print("WRONG MESSAGE PK")
         return redirect(request.META.get('HTTP_REFERER'))
 
-    html = render_to_string('messages/message.html', {'msg':message,'user':user})
+    html = render_to_string('messages/insert_message.html', {'msg':message,'user':user})
     return HttpResponse(html)
