@@ -15,7 +15,7 @@
       <div class="conversation-wrap col-lg-3" style="background: #edf1eb;">
         {% for obj in wrapper %}
           {% usr_sep obj.relation request as otherUser %}
-          <div class="media conversation" id="menu_{{ forloop.counter }}" style="padding: 2px; height: 54px;">
+          <div class="media conversation" id="menu_{% scramble obj.relation.pk %}" style="padding: 2px; height: 54px;">
             <a class="pull-left" href="#">
               {% include "profile_picture.html" with source=otherUser.profile.photo img_size="50x50" alt="" classes="user-detail media-object" %}
             </a>
@@ -35,7 +35,7 @@
       <div class="message-wrap col-lg-8" id="msg-wrap">
         <!-- MESSAGE_1 -->
         {% for obj in wrapper %}
-          <div class="msg-wrap" id="message_{{ forloop.counter }}" style="display:none">
+          <div class="msg-wrap" id="message_{% scramble obj.relation.pk %}" style="display:none">
             <div class="media msg">
               {% for msg in obj.msgs %}
                 <a class="pull-left" href="{{ msg.user_from.get_absolute_url }}">
@@ -105,10 +105,24 @@
             function(data) {
                 if (data['status'] === 'ok') {
                     text.value = "";
-                    location.reload();
+                    appendmsg(data); 
                 }
         });
     });
+
+    appendmsg = function(data){
+        $.post('{% url "msg:get_message" %}',
+            {
+              msg: data["msg"],
+              user: data["user"]
+            },
+            function(htmldata) {
+            console.log('#message_' +data["rel"]+ ' .media.msg')
+               $('#message_' +data["rel"]+ ' .media.msg').append(htmldata); 
+        });
+
+    }
+
   {% endif %}
 {% endblock %}
 <!-- /DOMREADY -->

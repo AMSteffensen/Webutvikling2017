@@ -50,4 +50,4 @@ def send_pm(request):
                       message=msg)
     new_msg.save()
 
-    return JsonResponse({'status': 'ok'})
+    return JsonResponse({'status': 'ok', 'msg':new_msg.pk,'user':request.user.pk,'rel':value})

@@ -1,0 +1,15 @@
+<a class="pull-left" href="{{ msg.user_from.get_absolute_url }}">
+    {% include "profile_picture.html" with source=msg.user_from.profile.photo img_size="32x32" alt="" classes="user-detail media-object" %}
+</a>
+<div class="media-body" style="padding: 10px 0;">
+    <small class="pull-right time"><i class="fa fa-clock-o"></i> {{ msg.created }}</small>
+    <h5 class="media-heading">{{ msg.user_from }}</h5>
+    <small class="col-lg-10"
+           {% if msg.user_from == user %}
+           style="background: #1263fd; color: white;"
+           {% else %}
+           style="background: #edede8;"
+           {% endif %}>
+        {{ msg.message }}</small>
+</div>
+
