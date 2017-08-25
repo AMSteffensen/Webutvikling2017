@@ -1,7 +1,7 @@
 from django import template
 
 from notification.models import Notification
-from messages.models import MessageRelation
+from messages.models import MessageNotification
 from team.models import Team
 
 from snippets.hasher import encode_value
@@ -17,7 +17,7 @@ def my_unread_notifications(request):
 
 @register.assignment_tag
 def my_unread_messages(request):
-    return MessageRelation.get.unread(request.user)
+    return MessageNotification.get.unread(request.user)
 
 @register.assignment_tag
 def last_unread_message(rel):

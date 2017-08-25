@@ -43,3 +43,23 @@ class Message(models.Model):
     class Meta:
         ordering = ('created',)
 ## /MESSAGES
+
+## MESSAGE NOTIFICATIONS
+class MessageNotificationManager(models.Manager):
+    def unread(self, user_id):
+        return super(MessageNotificationManager, self).get_queryset().filter(user_to=user_id).order_by('updated')
+
+
+class MessageNotification(models.Model):
+    relation = models.ForeignKey(MessageRelation, related_name='msg_notif_rel')
+    user_from = models.ForeignKey(User, related_name='msg_notif_user_from')
+    user_to = models.ForeignKey(User, related_name='msg_notif_user_to')
+    updated = models.DateTimeField(auto_now_add=True)
+    message = models.TextField()
+
+    objects = models.Manager()
+    get = MessageNotificationManager()
+
+    class Meta:
+        ordering = ('updated',)
+## /MESSAGE NOTIFICATIONS

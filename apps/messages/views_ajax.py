@@ -7,6 +7,7 @@ from django.template.loader import render_to_string
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
 
+from .models import MessageNotification
 from .models import MessageRelation
 from .models import Message
 
@@ -54,7 +55,25 @@ def send_pm(request):
                       message=msg)
     new_msg.save()
 
+
+    # Check if a notification already exists
+    try:
+        msg_notif = MessageNotification.objects.get(relation=msgRelObj,
+                                                    user_from__in=(request.user, otherUser),
+                                                    user_to__in=(request.user, otherUser))
+        msg_notif.delete()
+    except Exception:
+        pass
+
+    # Create a new notification
+    new_msg_notif = MessageNotification(relation=msgRelObj,
+                                        user_from=request.user,
+                                        user_to=otherUser,
+                                        message=msg)
+    new_msg_notif.save()
+
     return JsonResponse({'status': 'ok', 'msg':new_msg.pk,'user':request.user.pk,'rel':value})
+
 
 
 @ajax_required

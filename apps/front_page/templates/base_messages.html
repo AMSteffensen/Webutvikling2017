@@ -1,8 +1,8 @@
 {% load utils %}
-{% my_unread_messages request as rel_list %}
+{% my_unread_messages request as msg_notif_list %}
 <li>
   <div id="msg-panel" class="dropdown">
-    <a class="dropdown-toggle "><i class="fa fa-comments widthHeight" aria-hidden="true"></i><span id="notif-amount" class="badge cBadge">{{ rel_list|length }}</span></a>
+    <a class="dropdown-toggle "><i class="fa fa-comments widthHeight" aria-hidden="true"></i><span id="notif-amount" class="badge cBadge">{{ msg_notif_list|length }}</span></a>
     <ul class="dropdown-menu message-dropdown  notificationBar mMargLeft">
       <li class="arrow mArrowPos"></li>
 
@@ -12,21 +12,19 @@
       </li>
       <li class="topPadding">
       </li>
-      {% if rel_list %}
-        {% for rel in rel_list %}
-          {% usr_sep rel request as otherUser %}
-          {% last_unread_message rel as msg %}
+      {% if msg_notif_list %}
+        {% for msg_notif in msg_notif_list %}
           <li class="message-preview ">
             <a class="notificationMargin notificationWidth" href="{% url 'msg:messages' %}">
               <button type="submit" class="btn btn-default btnDelete"><i class="fa fa-times closeIcon" aria-hidden="true"></i></button>
               <div class="media">
                 <span class="pull-left">
-                  {% include "profile_picture.html" with source=otherUser.profile.photo img_size="32x32" alt="" classes="user-detail" %}
+                  {% include "profile_picture.html" with source=msg_notif.user_from.profile.photo img_size="32x32" alt="" classes="user-detail" %}
                 </span>
                 <div class="media-body">
-                  <h5 class="media-heading hStyle"><strong>{{ otherUser }}</strong></h5>
-                  <p class="pTime pAll"><i class="fa fa-clock-o"></i> {{ msg.created }}</p>
-                  <p class="pAll pText2">{{ msg.message|truncatechars:30 }}</p>
+                  <h5 class="media-heading hStyle"><strong>{{ msg_notif.user_from }}</strong></h5>
+                  <p class="pTime pAll"><i class="fa fa-clock-o"></i> {{ msg_notif.updated }}</p>
+                  <p class="pAll pText2">{{ msg_notif.message|truncatechars:30 }}</p>
                 </div>
               </div>
             </a>
