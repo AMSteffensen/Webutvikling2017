@@ -1,0 +1,45 @@
+{% load utils %}
+{% my_unread_messages request as rel_list %}
+<li>
+  <div id="msg-panel" class="dropdown">
+    <a class="dropdown-toggle "><i class="fa fa-comments widthHeight" aria-hidden="true"></i><span id="notif-amount" class="badge cBadge">{{ rel_list|length }}</span></a>
+    <ul class="dropdown-menu message-dropdown  notificationBar mMargLeft">
+      <li class="arrow mArrowPos"></li>
+
+      <li class="message-preview barTopBottom margTop1">
+        <h5 class="media-heading hStyle"><strong>Meldinger</strong>
+        </h5>
+      </li>
+      <li class="topPadding">
+      </li>
+      {% if rel_list %}
+        {% for rel in rel_list %}
+          {% usr_sep rel request as otherUser %}
+          {% last_unread_message rel as msg %}
+          <li class="message-preview ">
+            <a class="notificationMargin notificationWidth" href="{% url 'msg:messages' %}">
+              <button type="submit" class="btn btn-default btnDelete"><i class="fa fa-times closeIcon" aria-hidden="true"></i></button>
+              <div class="media">
+                <span class="pull-left">
+                  {% include "profile_picture.html" with source=otherUser.profile.photo img_size="32x32" alt="" classes="user-detail" %}
+                </span>
+                <div class="media-body">
+                  <h5 class="media-heading hStyle"><strong>{{ otherUser }}</strong></h5>
+                  <p class="pTime pAll"><i class="fa fa-clock-o"></i> {{ msg.created }}</p>
+                  <p class="pAll pText2">{{ msg.message|truncatechars:30 }}</p>
+                </div>
+              </div>
+            </a>
+          </li>
+        {% endfor %}
+      {% endif %}
+
+      <li class="message-preview barTopBottom margTop2">
+        <h5 class="viewMore"><a href="{% url 'msg:messages' %}" class="hStyle media-heading"><strong>Vis mer...</strong></a>
+        </h5>
+      </li>
+      <li class="botPadding">
+      </li>
+    </ul>
+  </div>
+</li>

@@ -70,44 +70,7 @@
               <li><a id="searchIcon" style="cursor: pointer"><i class="fa fa-search widthHeight" aria-hidden="true"></i></a></li>
 
               <!-- Messages -->
-              <li>
-                <div id="msg-panel" class="dropdown">
-                  <a class="dropdown-toggle "><i class="fa fa-comments widthHeight" aria-hidden="true"></i> </a>
-                  <ul class="dropdown-menu message-dropdown  notificationBar mMargLeft">
-                    <li class="arrow mArrowPos"></li>
-
-                    <li class="message-preview barTopBottom margTop1">
-                      <h5 class="media-heading hStyle"><strong>Meldinger</strong>
-                      </h5>
-                    </li>
-                    <li class="topPadding">
-                    </li>
-                    <li class="message-preview ">
-                      <a class="notificationMargin notificationWidth" href="#">
-                        <button type="submit" class="btn btn-default btnDelete"><i class="fa fa-times closeIcon" aria-hidden="true" ></i></button>
-                        <div class="media">
-                          <span class="pull-left">
-                        <img class="media-object image" src="http://placehold.it/50x50" alt="">
-                        </span>
-                          <div class="media-body">
-                            <h5 class="media-heading hStyle"><strong>John Smith</strong>
-                            </h5>
-                            <p class="pTime pAll"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
-                            <p class="pAll pText2">Lorem ipsum dolor sit amet, conse...</p>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-
-                    <li class="message-preview barTopBottom margTop2">
-                      <h5 class="viewMore"><a href="{% url 'msg:messages' %}" class="hStyle media-heading"><strong>Vis mer...</strong></a>
-                      </h5>
-                    </li>
-                    <li class="botPadding">
-                    </li>
-                  </ul>
-                </div>
-              </li>
+              {% include "base_messages.html" %}
               <!-- /Messages -->
 
               <!-- Notifications -->
