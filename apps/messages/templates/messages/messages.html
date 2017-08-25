@@ -104,10 +104,16 @@
             },
             function(data) {
                 if (data['status'] === 'ok') {
-                    text.value = "";
-                    appendmsg(data); 
+
+                    if (/\S/.test(text.value)) {
+                      text.value = "";
+                      appendmsg(data);
+                    }
+                    else {
+                      text.value = "";
+                    }
                 }
-        });
+            });
     });
 
     appendmsg = function(data){
@@ -117,12 +123,10 @@
               user: data["user"]
             },
             function(htmldata) {
-            console.log('#message_' +data["rel"]+ ' .media.msg')
                $('#message_' +data["rel"]+ ' .media.msg').append(htmldata); 
         });
 
     }
-
   {% endif %}
 {% endblock %}
 <!-- /DOMREADY -->

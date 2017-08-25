@@ -1,10 +1,7 @@
-from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.shortcuts import render
 from django.shortcuts import redirect
-from django.template.loader import render_to_string
 from messages.models import MessageRelation
-from messages.models import Message
 
 from snippets.hasher import decode_value
 
@@ -14,12 +11,13 @@ class MessageWrapper():
         self.relation = relation
         if msgs:
             if len(msgs) > 20:
-                self.msgs = msgs.reverse()[:20].reverse()
+                self.msgs = msgs.reverse()[len(msgs)-20:].reverse()
             else:
                 self.msgs = msgs
             rev = msgs.reverse()[0]
             self.last_msg = rev.message
             self.last_from = rev.user_from
+            self.last_datetime = rev.created
         else:
             self.last_msg = "Ingen meldinger.."
             self.user_from = None
@@ -32,6 +30,11 @@ def messages(request):
     wrapper = []
     for rel in relations:
         wrapper.append(MessageWrapper(rel, rel.msg_id.all()))
+
+
+    wrapper.sort(key=lambda x: x.last_datetime, reverse=True)
+    for i in wrapper:
+        print(i.last_datetime, i.last_msg)
 
     return render(request, 'messages/messages.html', {'wrapper': wrapper})
 
