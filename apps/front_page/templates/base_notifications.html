@@ -1,5 +1,5 @@
 {% load utils %}
-{% my_notifications request as notif_list %}
+{% my_unread_notifications request as notif_list %}
 <li>
   <div id="notif-panel" class="dropdown">
     <a class="dropdown-toggle"><i class="fa fa-bell widthHeight" aria-hidden="true"></i><span id="notif-amount" class="badge cBadge">{{ notif_list|length }}</span></a>
@@ -16,7 +16,7 @@
         {% for noti in notif_list %}
           <li class="message-preview">
 
-            <a href="{{ noti.user_from.get_absolute_url }}">
+            <a class="notificationMargin notificationWidth" href="{{ noti.user_from.get_absolute_url }}">
               {% if noti.action == 'team_req_join' %}
                 <div id="team-req-join-handle" class="pull-right btnStyle">
                   <button id="accept" data-action="accept" data-payload="{{ noti.url }}"><i class="fa fa-check" aria-hidden="true"></i></button>
@@ -27,23 +27,26 @@
                   <button id="accept" data-action="accept" data-payload="{{ noti.url }}"><i class="fa fa-check" aria-hidden="true"></i></button>
                   <button id="decline" data-action="decline" data-payload="{{ noti.url }}"><i class="fa fa-times" aria-hidden="true"></i></button>
                 </div>
+              {% else %}
+                <div id="hide-notif">
+                  <button data-payload="{% scramble noti.pk %}" type="submit" class="btn btn-default btnDelete"><i class="fa fa-times btnDeleteInside" aria-hidden="true"></i></button>
+                </div>
               {% endif %}
 
               <div class="media">
-          <span class="pull-left">
-            <!-- PROFILE PICTURE -->
-            {% include "profile_picture.html" with img_size="32x32" alt="" classes="user-detail" %}
-            <!-- /PROFILE PICTURE -->
-          </span>
-                <div class="media-body pText3">
+                <span class="pull-left">
+                  <!-- PROFILE PICTURE -->
+                  {% include "profile_picture.html" with source=noti.user_from.profile.photo img_size="32x32" alt="" classes="user-detail" %}
+                  <!-- /PROFILE PICTURE -->
+                </span>
+                <div class="media-body pWrap">
                   <p class="pAll pText1"><strong>{{ noti.user_from.first_name }} {{ noti.user_from.last_name }}</strong></p>
-
                   {% if noti.context == "team" %}
-                    <p class="pAll pText1 pText3 "> {{ noti.get_action_display }}; {% get_team_name noti.foreignPK %}</p>
+                    <p class="pAll pText1  "> {{ noti.get_action_display }}; {% get_team_name noti.foreignPK %}</p>
                   {% else %}
-                    <p class="pAll pText1 pText3"> {{ noti.get_action_display }}</p>
+                    <p class="pAll pText1 "> {{ noti.get_action_display }}</p>
                   {% endif %}
-                  <p class=" pTime pAll pText3"><i class="fa fa-clock-o"></i> {{ noti.created }}</p>
+                  <p class=" pTime pAll "><i class="fa fa-clock-o"></i> {{ noti.created }}</p>
                 </div>
               </div>
             </a>

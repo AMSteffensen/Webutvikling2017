@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% load thumbnail %}
+{% load utils %}
+{% load staticfiles %}
+
+{% block title %}{{ user.get_full_name }}{% endblock %}
+
+{% block content %}
+  <div class="content">
+    <div class="main-header">
+      <h2>Profil: {{ user.get_full_name }}</h2>
+      <em>Brukerprofil side</em>
+
+    </div>
+    <div class="main-content">
+      <!-- NAV TABS -->
+      <ul class="nav nav-tabs nav-tabs-custom-colored tabs-iconized">
+        <li id="tab-btn-profile" class="active"><a href="#profile-tab" data-toggle="tab"><i class="fa fa-user"></i> Profil</a></li>
+        <li id="tab-btn-activity"><a href="#tab-activity" data-toggle="tab"><i class="fa fa-rss"></i> Aktivitet</a></li>
+        <li id="tab-btn-settings"><a href="#settings-tab" data-toggle="tab"><i class="fa fa-gear"></i> Innstillinger</a></li>
+        <li id="tab-btn-portifolio"><a href="#settings-tab" data-toggle="tab"><i class="fa fa-camera"></i> Portfolio</a></li>
+      </ul>
+
+      <!-- TABS -->
+      <div id="tab-profile">
+        {% include "user/profile/tab-profile.html" %}
+      </div>
+
+      <div id="tab-activity">
+        {% include "user/profile/tab-activity.html" %}
+      </div>
+
+      <div id="tab-settings">
+        {% include "user/profile/tab-settings.html" %}
+      </div>
+
+      <div id="tab-portifolio">
+        {% include "user/profile/tab-portifolio.html" %}
+      </div>
+      <!-- /TABS -->
+
+    </div>
+  </div>
+{% endblock %}
+
+{% block domready %}
+    $('a.follow').click(function (e) {
+          e.preventDefault();
+          $.post('{% url "user:user_follow" %}', {
+              id: $(this).data('id'),
+              action: $(this).data('action')
+            },
+            function (data) {
+              if (data['status'] === 'ok') {
+                var follow_button = $('a.follow');
+                var previous_action = follow_button.data('action');
+                // toggle data-action
+                if (previous_action === 'follow') {
+                  follow_button.data('action', 'unfollow');
+                } else {
+                  follow_button.data('action', 'follow');
+                }
+                //follow_button.data('action', previous_action === 'follow' ? 'unfollow' : 'follow');
+                // toggle link text
+                follow_button.text(previous_action === 'follow' ? 'Slutt å følge' : 'Følg');
+                // update total followers
+                var follow_amount = $('span.count .total');
+                var previous_followers = parseInt(follow_amount.text());
+                follow_amount.text(previous_action === 'follow' ? previous_followers + 1 : previous_followers - 1);
+              }
+            });
+    });
+
+    // HARDCODE MASTER DANIEL \\
+    // Buttons
+    var btn_profile = $('li#tab-btn-profile');
+    var btn_activity = $('li#tab-btn-activity');
+    var btn_settings = $('li#tab-btn-settings');
+    var btn_portifolio = $('li#tab-btn-portifolio');
+
+    // Tabs
+    var tab_profile = $('div#tab-profile');
+    var tab_activity = $('div#tab-activity');
+    var tab_settings = $('div#tab-settings');
+    var tab_portifolio = $('div#tab-portifolio');
+
+    tab_activity.hide();
+    tab_settings.hide();
+    tab_portifolio.hide();
+
+    // Profile button click
+    btn_profile.click(function (e) {
+        tab_profile.show();
+        tab_activity.hide();
+        tab_settings.hide();
+        tab_portifolio.hide();
+    });
+
+    // Activity button click
+    btn_activity.click(function (e) {
+        tab_profile.hide();
+        tab_activity.show();
+        tab_settings.hide();
+        tab_portifolio.hide();
+    });
+
+    // Settings button click
+    btn_settings.click(function (e) {
+       tab_profile.hide();
+       tab_activity.hide();
+       tab_settings.show();
+       tab_portifolio.hide();
+    });
+
+    // Portifolio button click
+    btn_portifolio.click(function (e) {
+        tab_profile.hide();
+        tab_activity.hide();
+        tab_settings.hide();
+        tab_portifolio.show();
+    });
+
+{% endblock %}
+

@@ -16,8 +16,7 @@
       {% if team.pk in pending_req or team.pk in pending_inv %}
         <button><i class="fa fa-clock-o" aria-hidden="true"></i> Pending</button>
       {% else %}
-        <button type="button" id="req_join"
-                data-team="{% scramble team.pk %}">
+        <button type="button" id="req_join" data-team="{% scramble team.pk %}">
           <i class="fa fa-plus" aria-hidden="true"></i> Req to join</button>
       {% endif %}
     {% endif %}

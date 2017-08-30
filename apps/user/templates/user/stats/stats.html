@@ -43,7 +43,7 @@
           data.addRows([
               {% for log in logged %}
                 [new Date('{{ log.work_date.isoformat }}'.split('-')),
-                 parseInt('{{ log.work_duration }}'.split(':')[0]),
+                 parseFloat('{{ log.work_duration }}'.split(':')[0] + "." + (parseFloat('{{ log.work_duration }}'.split(':')[1]) / 60.0 * 100.0).toString()),
                  '{{ log.work_project }}',
                  '{{ log.work_note }}'],
               {% endfor %}

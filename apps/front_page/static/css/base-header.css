@@ -1,4 +1,4 @@
-/*header*/
+/*Header*/
 
 .top-bar {
   background: #1A3051 none repeat scroll 0 0;
@@ -34,7 +34,6 @@
 .top-bar .socl-icons li a {
   display: inline-block;
   border-radius: 0;
-  /*background: #000;*/
   color: #fff;
   margin: 5px 0px;
   text-align: center;
@@ -45,7 +44,6 @@
   width: 30px;
   height: 30px;
   line-height: 30px;
-
 }
 
 .username {
@@ -137,23 +135,21 @@
   padding: 3px;
 }
 
-.top-bar .socl-icons li .viewMore{
+.top-bar .socl-icons li .viewMore {
   /*Position for View More link */
-margin-top: -5px ;
-margin-bottom:0px ;
+  margin-top: -5px;
+  margin-bottom: 0px;
 }
 
 .top-bar .socl-icons .topPadding {
   /* Padding after header */
-  margin-top: 12px;
+  margin-top: 15px;
 }
 
 .top-bar .socl-icons .botPadding {
   /* Padding before footer */
-  margin-top: 10px;
+  margin-top: 15px;
 }
-
-
 
 
 /* -Content */
@@ -165,45 +161,78 @@ margin-bottom:0px ;
 }
 
 .top-bar .socl-icons li .hStyle {
+  /*Used for full name*/
   font-size: 12px;
   color: black;
   text-align: left;
-
 }
 
 .top-bar .socl-icons li .pAll {
+  /*Nearly all p-text*/
   text-align: left;
-  line-height: 5px;
+  /*line-height: 5px;*/
   font-family: helvetica, sans-serif;
+  line-height: 15px;
 }
 
 .top-bar .socl-icons li .pTime {
+  /*shows time*/
   font-size: 9px;
   font-style: italic;
 }
 
 .top-bar .socl-icons li .pText1 {
+  /*in notification bar*/
   font-size: 11px;
   display: inline;
 }
 
 .top-bar .socl-icons li .pText2 {
+  /*in messages*/
   font-size: 11px;
 }
 
-
-.top-bar .socl-icons li a .pText3 {
+.top-bar .socl-icons li a .pWrap {
+  /*Wrapped around all the text*/
   line-height: 15px;
   white-space: normal;
-  max-width: 300px;
+  max-width: 250px;
   word-wrap: break-word;
   text-align: left;
+  margin-bottom: 0px;
 }
+
+
+/*  -content: buttons */
 
 .top-bar .socl-icons li a .btnStyle {
   /* Accept and decline buttons */
   color: #333;
-padding-top: 15px;
+  padding-top: 15px;
   padding-left: 7px;
+}
 
+.top-bar .socl-icons li .btnDelete {
+  /*Remove-notification button*/
+  float: right;
+  padding: 0px 5px;
+  margin-left: 5px;
+  border-color: transparent;
+  background-color: transparent;
+}
+
+.top-bar .socl-icons li .btnDelete:hover {
+  background-color: white;
+}
+
+.top-bar .socl-icons li a .btnDeleteInside {
+  /*The sign inside*/
+  color: #C5C5C5;
+  font-size: 12px;
+}
+
+.top-bar .socl-icons li .notificationMargin {
+  padding-right: 5px;
+  padding-left: 7px;
+  width: 340px;
 }
