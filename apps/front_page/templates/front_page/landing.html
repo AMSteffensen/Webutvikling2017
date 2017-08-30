@@ -3,7 +3,6 @@
 
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,231 +13,218 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">-->
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <!--<script src="https://code.jquery.com/jquery-1.10.2.js"></script>-->
-  <!-- Searchbar slide down -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="http://cdn.jsdelivr.net/jquery.cookie/1.4.1/jquery.cookie.min.js "></script>
   <!-- /External Resources -->
 
   <!-- My Resources -->
-
+  <link rel="stylesheet" href="{% static 'css/landing-style.css' %}">
   <script src="{% static 'js/base.js' %}"></script>
   <!-- /My Resources -->
 
-   <!-- CSS -->
-   <link rel="stylesheet" href="{% static 'css/landing-style.css' %}">
 
   {% block head %}
   {% endblock %}
 
 </head>
-
 <body>
 
+  <!-- /Container -->
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">xFactor</a>
+    </div>
 
-      <div class="container-fluid">
-      <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">xFactor</a>
-      </div>
-
-
-
-<ul class="nav navbar-nav navbar-right">
-  <li><a href="{% url 'uauth:register' %}">Register</a></li>
-  <li class="dropdown">
-  <a class="dropdown-toggle" data-toggle="dropdown">Logg Inn<b class="caret"></b></a>
-    <ul class="dropdown-menu" style="padding: 15px;min-width: 250px;">
+    <ul class="nav navbar-nav navbar-right">
       <li>
-      <div class="row">
-      <div class="col-md-12">
-        <form action="{% url 'uauth:login' %}" class="form" role="form" action="" method="post">
-              {% csrf_token %}
-              <div class="form-group">
-              {% bootstrap_field form.username placeholder="Brukernavn" show_label=False layout="form_control" %}
+        <a href="{% url 'uauth:register' %}">Register</a>
+      </li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown">Logg Inn</a>
+        <ul class="dropdown-menu" style="padding: 15px;min-width: 250px;">
+          <li>
+            <div class="row">
+              <div class="col-md-12">
+                <form class="form" role="form" action="" method="post">
+                  {% csrf_token %}
+                  <div class="form-group">
+                    {% bootstrap_field form.username placeholder="Brukernavn/Email" show_label=False layout="form_control" %}
+                  </div>
+                  <div class="form-group">
+                    {% bootstrap_field form.password placeholder="Passord" show_label=False layout="form_control" %}
+                  </div>
+                  <input type="hidden" name="next" value="{{ next }}"/>
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-success btn-block">Logg Inn</button>
+                  </div>
+                  <ul>
+                    <li>
+                      <input class="btn btn-primary btn-block" type="button" id="sign-in-google" value="Logg inn med Facebook"/>
+                      <input class="btn btn-primary btn-block" type="button" id="sign-in-twitter" value="Logg inn med Twitter"/>
+                    </li>
+                  </ul>
+                </form>
               </div>
-              <div class="form-group">
-              {% bootstrap_field form.password placeholder="Passord" show_label=False layout="form_control" %}
-              </div>
-              <input type="hidden" name="next" value="{{ next }}" />
-                          <div class="form-group">
-                             <button type="submit" class="btn btn-success btn-block">Logg Inn</button>
-                          </div>
-         <li class="divider"></li>
-        <li>
-          <input class="btn btn-primary btn-block" type="button" id="sign-in-google" value="Logg inn med Facebook">
-          <input class="btn btn-primary btn-block" type="button" id="sign-in-twitter" value="Logg inn med Twitter">
-        </li>
-        </form>
-      </div>
-      </div>
+            </div>
+          </li>
+        </ul>
       </li>
     </ul>
-  </li>
-</ul>
+
+    <!-- Top content -->
+    <div class="top-content">
+
+      <div class="inner-bg">
+        <div class="container">
+
+          <div class="row">
+            <div class="col-sm-8 col-sm-offset-2 text">
+              <h1>Velkommen til xFaktor</h1>
+              <div class="description">
+                <p>
+                  Din fremtidge virtuelle arbeidsplass.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-5">
+              <div class="form-box">
+                <div class="form-top">
+                  <div class="form-top-left">
+                    <h3>Jeg har et oppdrag</h3>
+                    <p>Fyll ut skjema for og legge ut prosjekt:</p>
+
+                  </div>
+                  <div class="form-top-right">
+                    <i class="fa fa-pencil"></i>
+                  </div>
+                </div>
+                <div class="form-bottom">
+                  <form role="form" action="" method="post" class="registration-form">
+                    <div class="form-group">
+                      <label class="sr-only" for="form-first-name">Fornavn</label>
+                      <input type="text" name="form-first-name" placeholder="Fornavn..." class="form-first-name form-control" id="form-first-name">
+                    </div>
+                    <div class="form-group">
+                      <label class="sr-only" for="form-last-name">Etternavn</label>
+                      <input type="text" name="form-last-name" placeholder="Etternavn..." class="form-last-name form-control" id="form-last-name">
+                    </div>
+                    <div class="form-group">
+                      <label class="sr-only" for="form-email">Email</label>
+                      <input type="text" name="form-email" placeholder="Email..." class="form-email form-control" id="form-email">
+                    </div>
+                    <div class="form-group">
+                      <label class="sr-only" for="form-about-yourself">Prosjekt Beskrivelse</label>
+                      <textarea name="form-about-yourself" placeholder="Prosjekt beskrivelse..."
+                                class="form-about-yourself form-control" id="form-about-yourself"></textarea>
+                    </div>
+                    <button type="button" class="btn">Legg ut prosjekt!</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-sm-1 middle-border"></div>
+            <div class="col-sm-1"></div>
+
+            <div class="col-sm-5">
+
+              <div class="form-box">
+                <div class="form-top">
+                  <div class="form-top-left">
+                    <h3>Jeg er et talent</h3>
+                    <p>Fyll ut skjema for tilgang:</p>
+                  </div>
+                  <div class="form-top-right">
+                    <i class="fa fa-pencil"></i>
+                  </div>
+                </div>
+                <div class="form-bottom">
+                  <form role="form" action="" method="post" class="registration-form">
+                    <div class="form-group">
+                      <label class="sr-only" for="form-first-name">Fornavn</label>
+                      <input type="text" name="form-first-name" placeholder="Fornavn..." class="form-first-name form-control" id="form-first-name">
+                    </div>
+                    <div class="form-group">
+                      <label class="sr-only" for="form-last-name">Etternavn</label>
+                      <input type="text" name="form-last-name" placeholder="Etternavn..." class="form-last-name form-control" id="form-last-name">
+                    </div>
+                    <div class="form-group">
+                      <label class="sr-only" for="form-email">Email</label>
+                      <input type="text" name="form-email" placeholder="Email..." class="form-email form-control" id="form-email">
+                    </div>
+                    <div class="form-group">
+                      <label class="sr-only" for="form-about-yourself">Om deg</label>
+                      <textarea name="form-about-yourself" placeholder="Om deg..."
+                                class="form-about-yourself form-control" id="form-about-yourself"></textarea>
+                    </div>
+                    <button type="button" class="btn">Registrer mitt talent!</button>
+                  </form>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
       </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container text-center">
+        <hr/>
+        <div class="row">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="col-md-3">
+                <ul class="nav nav-pills nav-stacked">
+                  <li><a href="#">Om oss</a></li>
+                  <li><a href="#">Blog</a></li>
+                </ul>
+              </div>
+              <div class="col-md-3">
+                <ul class="nav nav-pills nav-stacked">
+                  <li><a href="#">Kontakt oss</a></li>
+                  <li><a href="#">Personvern</a></li>
+                </ul>
+              </div>
+              <div class="col-md-3">
+                <ul class="nav nav-pills nav-stacked">
+                  <li><a href="#">Jobb</a></li>
+                  <li><a href="#">Media og presse</a></li>
+                </ul>
+              </div>
+              <div class="col-md-3">
+                <ul class="nav nav-pills nav-stacked">
+                  <li><a href="#">Hjelp</a></li>
+                  <li><a href="#">Utviklere</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="copyright">
+            © 2017, XFactor, All rights reserved
+          </div>
+
+        </div>
       </div>
+      <hr>
+    </footer>
+    <!-- /Footer -->
   </div>
-
-
-<!-- Top content -->
-     <div class="top-content">
-
-         <div class="inner-bg">
-             <div class="container">
-
-                 <div class="row">
-                     <div class="col-sm-8 col-sm-offset-2 text">
-                         <h1>Velkommen til xFaktor</h1>
-                         <div class="description">
-                           <p>
-                             Din fremtidge virtuelle arbeidsplass.
-                           </p>
-                         </div>
-                     </div>
-                 </div>
-
-
-                 <div class="row">
-                     <div class="col-sm-5">
-                       <div class="form-box">
-                         <div class="form-top">
-                           <div class="form-top-left">
-                             <h3>Jeg har et oppdrag</h3>
-                               <p>Fyll ut skjema for og legge ut prosjekt:</p>
-
-                           </div>
-                           <div class="form-top-right">
-                             <i class="fa fa-pencil"></i>
-                           </div>
-                           </div>
-                           <div class="form-bottom">
-                         <form role="form" action="" method="post" class="registration-form">
-                           <div class="form-group">
-                             <label class="sr-only" for="form-first-name">Fornavn</label>
-                               <input type="text" name="form-first-name" placeholder="Fornavn..." class="form-first-name form-control" id="form-first-name">
-                             </div>
-                             <div class="form-group">
-                               <label class="sr-only" for="form-last-name">Etternavn</label>
-                               <input type="text" name="form-last-name" placeholder="Etternavn..." class="form-last-name form-control" id="form-last-name">
-                             </div>
-                             <div class="form-group">
-                               <label class="sr-only" for="form-email">Email</label>
-                               <input type="text" name="form-email" placeholder="Email..." class="form-email form-control" id="form-email">
-                             </div>
-                             <div class="form-group">
-                               <label class="sr-only" for="form-about-yourself">Prosjekt Beskrivelse</label>
-                               <textarea name="form-about-yourself" placeholder="Prosjekt beskrivelse..."
-                                     class="form-about-yourself form-control" id="form-about-yourself"></textarea>
-                             </div>
-                             <button type="button" class="btn">Legg ut prosjekt!</button>
-                         </form>
-                       </div>
-                       </div>
-                     </div>
-
-                     <div class="col-sm-1 middle-border"></div>
-                     <div class="col-sm-1"></div>
-
-                     <div class="col-sm-5">
-
-                       <div class="form-box">
-                         <div class="form-top">
-                           <div class="form-top-left">
-                             <h3>Jeg er et talent</h3>
-                               <p>Fyll ut skjema for tilgang:</p>
-                           </div>
-                           <div class="form-top-right">
-                             <i class="fa fa-pencil"></i>
-                           </div>
-                           </div>
-                           <div class="form-bottom">
-                         <form role="form" action="" method="post" class="registration-form">
-                           <div class="form-group">
-                             <label class="sr-only" for="form-first-name">Fornavn</label>
-                               <input type="text" name="form-first-name" placeholder="Fornavn..." class="form-first-name form-control" id="form-first-name">
-                             </div>
-                             <div class="form-group">
-                               <label class="sr-only" for="form-last-name">Etternavn</label>
-                               <input type="text" name="form-last-name" placeholder="Etternavn..." class="form-last-name form-control" id="form-last-name">
-                             </div>
-                             <div class="form-group">
-                               <label class="sr-only" for="form-email">Email</label>
-                               <input type="text" name="form-email" placeholder="Email..." class="form-email form-control" id="form-email">
-                             </div>
-                             <div class="form-group">
-                               <label class="sr-only" for="form-about-yourself">Om deg</label>
-                               <textarea name="form-about-yourself" placeholder="Om deg..."
-                                     class="form-about-yourself form-control" id="form-about-yourself"></textarea>
-                             </div>
-                             <button type="button" class="btn">Registrer mitt talent!</button>
-                         </form>
-                       </div>
-                       </div>
-
-                     </div>
-                 </div>
-
-             </div>
-         </div>
-
-     </div>
-
-     <!-- Footer -->
-     <footer>
-       <div class="container text-center">
-         <hr />
-         <div class="row">
-           <div class="row">
-             <div class="col-lg-12">
-               <div class="col-md-3">
-                 <ul class="nav nav-pills nav-stacked">
-                   <li><a href="#">Om oss</a></li>
-                   <li><a href="#">Blog</a></li>
-                 </ul>
-               </div>
-               <div class="col-md-3">
-                 <ul class="nav nav-pills nav-stacked">
-                   <li><a href="#">Kontakt oss</a></li>
-                   <li><a href="#">Personvern</a></li>
-                 </ul>
-               </div>
-               <div class="col-md-3">
-                 <ul class="nav nav-pills nav-stacked">
-                   <li><a href="#">Jobb</a></li>
-                   <li><a href="#">Media og presse</a></li>
-                 </ul>
-               </div>
-               <div class="col-md-3">
-                 <ul class="nav nav-pills nav-stacked">
-                   <li><a href="#">Hjelp</a></li>
-                   <li><a href="#">Utviklere</a></li>
-                 </ul>
-               </div>
-             </div>
-           </div>
-
-                     <div class="copyright">
-                       © 2017, XFactor, All rights reserved
-                     </div>
-
-         </div>
-       </div>
-          <hr>
-     </footer>
-
-
-
-
-
+  <!-- /Container -->
 
 </body>
-
 </html>
