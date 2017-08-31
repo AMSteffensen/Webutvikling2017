@@ -21,7 +21,7 @@ DEBUG = False if os.environ.get("USE_PRODUCTION") else True
 THUMBNAIL_DEBUG = DEBUG
 
 
-ALLOWED_HOSTS = ['xfaktor.eu-central-1.elasticbeanstalk.com','52.57.27.189']
+ALLOWED_HOSTS = ['127.0.0.1','xfaktor.eu-central-1.elasticbeanstalk.com','52.57.27.189']
 
 
 # Application definition

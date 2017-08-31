@@ -9,7 +9,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}{% endblock %}</title>
 
-  <!-- External Resources -->
+  <!-- External Resources
+
+
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -17,10 +19,14 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="http://cdn.jsdelivr.net/jquery.cookie/1.4.1/jquery.cookie.min.js "></script>
-  <!-- /External Resources -->
+  <! /External Resources -->
 
-  <!-- My Resources -->
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="{% static 'css/landing-style.css' %}">
+  <!-- My Resources
+  <link rel="stylesheet" href="{% static 'css/landing-style.css' %}">
+  -->
   <script src="{% static 'js/base.js' %}"></script>
   <!-- /My Resources -->
 
@@ -31,200 +37,132 @@
 </head>
 <body>
 
-  <!-- /Container -->
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">xFactor</a>
-    </div>
-
-    <ul class="nav navbar-nav navbar-right">
-      <li>
-        <a href="{% url 'uauth:register' %}">Register</a>
-      </li>
-      <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown">Logg Inn</a>
-        <ul class="dropdown-menu" style="padding: 15px;min-width: 250px;">
-          <li>
-            <div class="row">
-              <div class="col-md-12">
-                <form class="form" role="form" action="" method="post">
-                  {% csrf_token %}
-                  <div class="form-group">
-                    {% bootstrap_field form.username placeholder="Brukernavn/Email" show_label=False layout="form_control" %}
-                  </div>
-                  <div class="form-group">
-                    {% bootstrap_field form.password placeholder="Passord" show_label=False layout="form_control" %}
-                  </div>
-                  <input type="hidden" name="next" value="{{ next }}"/>
-                  <div class="form-group">
-                    <button type="submit" class="btn btn-success btn-block">Logg Inn</button>
-                  </div>
-                  <ul>
-                    <li>
-                      <input class="btn btn-primary btn-block" type="button" id="sign-in-google" value="Logg inn med Facebook"/>
-                      <input class="btn btn-primary btn-block" type="button" id="sign-in-twitter" value="Logg inn med Twitter"/>
-                    </li>
-                  </ul>
-                </form>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </li>
-    </ul>
-
-    <!-- Top content -->
-    <div class="top-content">
-
-      <div class="inner-bg">
-        <div class="container">
-
+  <div class="navigation">
+      <div class="container">
           <div class="row">
-            <div class="col-sm-8 col-sm-offset-2 text">
-              <h1>Velkommen til xFaktor</h1>
-              <div class="description">
-                <p>
-                  Din fremtidge virtuelle arbeidsplass.
-                </p>
+
+              <div class="col-md-6 col-sm-3 col-xs-12">
+                  <div>
+                      <img class="logo" src="{% static 'images/logo.png' %}" alt="">
+                  </div>
+                </div>
+
+              <div class="col-md-6 col-sm-9 col-xs-12 cta-block">
+
+                  <button type="button" class="sign-in" name="button"
+                          onclick="location.href='{% url 'uauth:login' %}';">LOGG INN
+                  </button>
+                  <button type="button" class="create-account" name="button"
+                          onclick="location.href='{% url 'uauth:register' %}';">LAG KONTO
+                  </button>
+                  <ul class="nav navbar-nav navbar-right">
+
               </div>
-            </div>
+
           </div>
-
-          <div class="row">
-            <div class="col-sm-5">
-              <div class="form-box">
-                <div class="form-top">
-                  <div class="form-top-left">
-                    <h3>Jeg har et oppdrag</h3>
-                    <p>Fyll ut skjema for og legge ut prosjekt:</p>
-
-                  </div>
-                  <div class="form-top-right">
-                    <i class="fa fa-pencil"></i>
-                  </div>
-                </div>
-                <div class="form-bottom">
-                  <form role="form" action="" method="post" class="registration-form">
-                    <div class="form-group">
-                      <label class="sr-only" for="form-first-name">Fornavn</label>
-                      <input type="text" name="form-first-name" placeholder="Fornavn..." class="form-first-name form-control" id="form-first-name">
-                    </div>
-                    <div class="form-group">
-                      <label class="sr-only" for="form-last-name">Etternavn</label>
-                      <input type="text" name="form-last-name" placeholder="Etternavn..." class="form-last-name form-control" id="form-last-name">
-                    </div>
-                    <div class="form-group">
-                      <label class="sr-only" for="form-email">Email</label>
-                      <input type="text" name="form-email" placeholder="Email..." class="form-email form-control" id="form-email">
-                    </div>
-                    <div class="form-group">
-                      <label class="sr-only" for="form-about-yourself">Prosjekt Beskrivelse</label>
-                      <textarea name="form-about-yourself" placeholder="Prosjekt beskrivelse..."
-                                class="form-about-yourself form-control" id="form-about-yourself"></textarea>
-                    </div>
-                    <button type="button" class="btn">Legg ut prosjekt!</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-sm-1 middle-border"></div>
-            <div class="col-sm-1"></div>
-
-            <div class="col-sm-5">
-
-              <div class="form-box">
-                <div class="form-top">
-                  <div class="form-top-left">
-                    <h3>Jeg er et talent</h3>
-                    <p>Fyll ut skjema for tilgang:</p>
-                  </div>
-                  <div class="form-top-right">
-                    <i class="fa fa-pencil"></i>
-                  </div>
-                </div>
-                <div class="form-bottom">
-                  <form role="form" action="" method="post" class="registration-form">
-                    <div class="form-group">
-                      <label class="sr-only" for="form-first-name">Fornavn</label>
-                      <input type="text" name="form-first-name" placeholder="Fornavn..." class="form-first-name form-control" id="form-first-name">
-                    </div>
-                    <div class="form-group">
-                      <label class="sr-only" for="form-last-name">Etternavn</label>
-                      <input type="text" name="form-last-name" placeholder="Etternavn..." class="form-last-name form-control" id="form-last-name">
-                    </div>
-                    <div class="form-group">
-                      <label class="sr-only" for="form-email">Email</label>
-                      <input type="text" name="form-email" placeholder="Email..." class="form-email form-control" id="form-email">
-                    </div>
-                    <div class="form-group">
-                      <label class="sr-only" for="form-about-yourself">Om deg</label>
-                      <textarea name="form-about-yourself" placeholder="Om deg..."
-                                class="form-about-yourself form-control" id="form-about-yourself"></textarea>
-                    </div>
-                    <button type="button" class="btn">Registrer mitt talent!</button>
-                  </form>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-        </div>
       </div>
-
-    </div>
-
-    <!-- Footer -->
-    <footer>
-      <div class="container text-center">
-        <hr/>
-        <div class="row">
-          <div class="row">
-            <div class="col-lg-12">
-              <div class="col-md-3">
-                <ul class="nav nav-pills nav-stacked">
-                  <li><a href="#">Om oss</a></li>
-                  <li><a href="#">Blog</a></li>
-                </ul>
-              </div>
-              <div class="col-md-3">
-                <ul class="nav nav-pills nav-stacked">
-                  <li><a href="#">Kontakt oss</a></li>
-                  <li><a href="#">Personvern</a></li>
-                </ul>
-              </div>
-              <div class="col-md-3">
-                <ul class="nav nav-pills nav-stacked">
-                  <li><a href="#">Jobb</a></li>
-                  <li><a href="#">Media og presse</a></li>
-                </ul>
-              </div>
-              <div class="col-md-3">
-                <ul class="nav nav-pills nav-stacked">
-                  <li><a href="#">Hjelp</a></li>
-                  <li><a href="#">Utviklere</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div class="copyright">
-            © 2017, XFactor, All rights reserved
-          </div>
-
-        </div>
-      </div>
-      <hr>
-    </footer>
-    <!-- /Footer -->
   </div>
-  <!-- /Container -->
+
+  <div class="container">
+      <div class="row">
+          <div class="col-md-12 callout">
+              <h1>Din digitale arbeidsplass, for prosjekter og samhandling.</h1>
+              <h2>En<span class="orange"> enkel</span>, <span class="orange">moderne</span> &
+                  <span class="orange">inntuitiv </span> løsning for digitale talenter & oppdragsgivere.</h2>
+                  <br>
+              <h2>
+                  Lag en konto <strong><span class="orange">GRATIS</span></strong>.
+              </h2>
+              <button type="button" class="main-cta" name="button"
+                      onclick="location.href='{% url 'uauth:register' %}';">LAG GRATIS KONTO
+                  <img class="arrow"
+                       src="{% static 'images/right.svg' %}"
+                       alt=""></button>
+          </div>
+      </div>
+  </div>
+
+
+  <div class="container">
+      <div class="row feature">
+          <div class="col-md-6 contacts">
+          </div>
+          <div class="col-md-6 feature-description">
+              <img src="/static/landing/img/clients.svg" class="description-img" alt="">
+              <h3>Hold styr på dine oppdragsgivere!</h3>
+              <p>Mist aldri oversikten i dine prosjekter! Sammhandling mellom Talent og Oppdragsgiver.
+                </p>
+          </div>
+      </div>
+  </div>
+
+  <div class="container">
+      <div class="row feature">
+          <div class="col-md-6 feature-description">
+              <img src="/static/landing/img/check.svg" class="description-img" alt="">
+              <h3>Styr dine prosjekter, oppgaver & timeføring.</h3>
+              <p>Vær mer Produktiv! Opprett prosjekter, oppgaver og før timer for
+                  vær oppgave.</p>
+          </div>
+          <div class="col-md-6 projects">
+          </div>
+      </div>
+  </div>
+
+
+  <div class="container">
+      <div class="row feature">
+          <div class="col-md-6 invoices">
+          </div>
+          <div class="col-md-6 feature-description">
+              <img src="/static/landing/img/invoicing.svg" class="description-img" alt="">
+              <h3>Lag og send faktura</h3>
+              <p>Få betalt i tide! Flexibelt og brukervennlig betalingsløsning system.</p>
+          </div>
+      </div>
+  </div>
+
+  <div class="container">
+      <div class="row feature">
+          <div class="col-md-6 feature-description">
+              <img src="/static/landing/img/apps.png" class="description-img" alt="">
+              <h3>Bli med i ett Team av digitale talenter!</h3>
+              <p>Bli bedre og lær av andre! Vær med og bygge Norges tøffeste miljø av den neste generasjon digitale talenter.</p>
+          </div>
+          <div class="col-md-6 apps">
+          </div>
+      </div>
+  </div>
+
+  <div class="container">
+      <div class="row">
+          <div class="col-md-12 callout mid">
+              <h1>Hjelp oss med og bygge wrsp</h1>
+              <h2>Vi ønsker og bygge fremtidens digitale arbeidsplass. Lag en <strong><span
+                      class="orange">GRATIS</span></strong>
+                  konto!</h2>
+              <button type="button" class="main-cta" name="button"
+                      onclick="location.href='{% url 'uauth:register' %}';">LAG GRATIS KONTO!
+                  <img class="arrow"
+                       src="/static/landing/img/right.svg"
+                       alt=""></button>
+          </div>
+      </div>
+  </div>
+
+
+
+  <footer>
+      <div class="container">
+          <div class="row">
+              <div class="col-md-6 col-sm-2 col-xs-4"><span class="copy">© wrsp 2017</span></div>
+              <div class="col-md-6 col-sm-10 col-xs-8 links"><a class="copy"
+                                                                href="mailto:post@wrsp.no">kontakt oss
+                  </a></div>
+          </div>
+      </div>
+  </footer>
+
 
 </body>
 </html>
