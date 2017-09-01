@@ -63,7 +63,7 @@ class WorkCategories(Enum):
 
 class WorkHourManager(models.Manager):
     def user_entries(self, user_id):
-        return super(WorkHourManager, self).get_queryset().filter(user=user_id).order_by('-created')
+        return super(WorkHourManager, self).get_queryset().filter(user=user_id).order_by('work_project')
 
 
 class WorkHour(models.Model):

@@ -10,9 +10,9 @@
   <h2>Legg timer til prosjekt her</h2>
   <hr class="hrStyle">
 
-
   <form method="POST" id="hour-form">
     {% csrf_token %}
+
     <!--Add hours to project: First line  -->
     <div id="line1">
 
@@ -40,8 +40,6 @@
               <option value="{{ cat }}">{{ cat|title }}</option>
             {% endfor %}
           </select>
-
-
       </div>
 
       <!-- Add hours -->
@@ -70,21 +68,19 @@
         </div>
       </div>
 
-<div class="pElement">
-    <p class="pHours"><i>t</i></p>
-  <p class="pMinutes"><i>min</i></p>
-</div>
+      <div class="pElement">
+        <p class="pHours"><i>t</i></p>
+        <p class="pMinutes"><i>min</i></p>
+      </div>
+
       <!-- Add note -->
       <div class="addElement">
         <label class="addLabel">Legg til merknad:</label>
         <textarea name="note1" id="note1" type="text" class="form1 form2" maxlength="105"></textarea>
       </div>
 
-
       <hr class="hrStyle">
     </div>
-
-
 
     <!--Add hours to project: Second line  -->
     <div id="line2" style="display:none">
@@ -144,7 +140,7 @@
 
       <div class="pElement">
           <p class="pHours"><i>t</i></p>
-        <p class="pMinutes"><i>min</i></p>
+          <p class="pMinutes"><i>min</i></p>
       </div>
 
       <!-- Add note -->
@@ -216,7 +212,7 @@
 
       <div class="pElement">
           <p class="pHours"><i>t</i></p>
-        <p class="pMinutes"><i>min</i></p>
+          <p class="pMinutes"><i>min</i></p>
       </div>
 
       <!-- Add note -->
@@ -287,7 +283,7 @@
 
       <div class="pElement">
           <p class="pHours"><i>t</i></p>
-        <p class="pMinutes"><i>min</i></p>
+          <p class="pMinutes"><i>min</i></p>
       </div>
 
       <!-- Add note -->
@@ -364,9 +360,12 @@
         <label class="addLabel">Legg til merknad:</label>
         <textarea name="note5" id="note5" type="text" class="form1 form2" maxlength="75"></textarea>
       </div>
-  <hr class="hrStyle">
+      <hr class="hrStyle">
     </div>
+
+
     <!--Add hours to project: Buttons -->
+
     <div id="line6">
 
       <div class="firstElement">
@@ -392,7 +391,7 @@
 {% block domready %}
       //Add Hours
 
-      // Form functionality
+      // Functionality - "add hours and minutes" buttons
       $(function () {
 
           $('.spinner .btn:first-of-type').on('click', function () {
@@ -438,6 +437,7 @@
 
 
       // Add and remove lines -variables
+
       var x = 2;
       var btnP = document.getElementById('btnPlus');
       var btnM = document.getElementById('btnMinus');
@@ -470,6 +470,7 @@
       };
 
       // Remove line
+
       btnM.onclick = function () {
           x--;
           resetForm();
@@ -496,6 +497,7 @@
 
       };
 
+      // Resets forms when lines are removed
 
       function resetForm() {
           document.getElementById("date" + x).value = today;

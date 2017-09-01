@@ -47,19 +47,6 @@ class UserRegistrationForm(forms.ModelForm):
         self.fields['username'].widget.attrs['placeholder'] = 'e.g. Joe'
         self.fields['email'].widget.attrs['placeholder'] = 'example@example.com'
 
-        # Error Messages
-
-        #<!-- ATTRIBUTES -->
-        self.fields['username'].widget.attrs['class'] = 'yourClass'
-        self.fields['username'].widget.attrs['id'] = 'usernameID'
-        self.fields['first_name'].widget.attrs['class'] += ' anotherClass'
-
-        # Apply something to all fields
-        for field in self.fields.values():
-            field.widget.attrs['class'] += " yetAnotherClass"
-
-        #<!-- /ATTRIBUTES -->
-
         # Disable suggestions
         for field in self.fields.values():
             field.widget.attrs['autocomplete'] = 'off'

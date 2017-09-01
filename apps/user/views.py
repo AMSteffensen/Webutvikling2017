@@ -5,6 +5,7 @@ from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
+from django.views.decorators.csrf import csrf_exempt
 from common.decorators import ajax_required
 
 from .forms import UserEditForm
@@ -29,12 +30,12 @@ def edit(request):
     else:
         user_form = UserEditForm(instance=request.user)
         profile_form = ProfileEditForm(instance=request.user.profile)
-    return render(request, 'user/profile/edit.html', {'user_form': user_form, 'profile_form': profile_form})
+    return render(request, 'user/settings/edit.html', {'user_form': user_form, 'profile_form': profile_form})
 
 
 @login_required
 def dashboard(request):
-    return render(request, 'user/profile/dashboard.html', {'section': 'dashboard'})
+    return render(request, 'user/other/dashboard.html', {'section': 'dashboard'})
 
 
 @login_required
@@ -47,25 +48,26 @@ def user_list(request):
 @login_required
 def user_detail(request, username):
     user = get_object_or_404(User, username=username, is_active=True)
-    return render(request, 'user/users/detail.html', {'user': user})
+    return render(request, 'user/profile/profile.html', {'user': user})
 
 
 @login_required
 def user_settings(request):
-    return render(request, 'user/profile/settings.html')
+    return render(request, 'user/settings/settings.html')
 
 
 @login_required
 def user_relations(request):
     isFollowing = Contact.get.isFollowing(request.user)
     followers = Contact.get.followers(request.user)
-    return render(request, 'user/profile/relations.html', {'isFollowing': isFollowing,
+    return render(request, 'user/other/relations.html', {'isFollowing': isFollowing,
                                                            'followers': followers})
 
 
 @ajax_required
 @require_POST
 @login_required
+@csrf_exempt
 def user_follow(request):
     user_id = request.POST.get('id')
     action = request.POST.get('action')
@@ -76,6 +78,7 @@ def user_follow(request):
                 Contact.objects.get_or_create(user_from=request.user, user_to=user)
             else:
                 Contact.objects.filter(user_from=request.user, user_to=user).delete()
+            print("jamann")
             return JsonResponse({'status': 'ok'})
         except User.DoesNotExist:
             return JsonResponse({'status': 'ko'})
@@ -87,7 +90,7 @@ def user_stats(request):
 
     hour_entries = WorkHour.get.user_entries(request.user)
 
-    return render(request, 'user/util/stats.html', {'logged': hour_entries})
+    return render(request, 'user/stats/stats.html', {'logged': hour_entries})
 
 
 
@@ -123,13 +126,13 @@ def user_stats_add_hours(request):
 
     projects = Project.objects.all().order_by('title')
     categories = [i[0] for i in WorkHour.CATEGORY_CHOICES]
-    return render(request, 'user/util/add_hours.html', {'categories': categories, 'projects': projects})
+    return render(request, 'user/stats/add_hours.html', {'categories': categories, 'projects': projects})
 
 
 @login_required
 def user_feed(request):
     unread_notif = Notification.get.unread(request.user)
     read_notif = Notification.get.read(request.user)
-    return render(request, 'user/util/feed.html', {'ur_notif': unread_notif, 'r_notif': read_notif})
+    return render(request, 'user/feed/feed.html', {'ur_notif': unread_notif, 'r_notif': read_notif})
 
 

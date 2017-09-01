@@ -128,3 +128,34 @@ def team_handel_inv(request):
 
     print("went well")
     return JsonResponse({'status': 'ok'})
+
+
+@ajax_required
+@require_POST
+@login_required
+def hide_notif(request):
+    # Get POST data
+    payload = request.POST.get('payload')
+
+    # Verify the payload
+    try:
+        data = decode_data(payload)
+    except Exception:
+        print("bad hash")
+        return JsonResponse({'status': 'ko'})
+
+    # Extract data
+    notif_pk = int(data[0])
+
+    # Get notification object
+    try:
+        notif_obj = Notification.objects.get(pk=notif_pk)
+    except Exception:
+        print("no notification with that pk")
+        return JsonResponse({'status': 'ko'})
+
+    notif_obj.read = True
+    notif_obj.save()
+
+    print("went well")
+    return JsonResponse({'status': 'ok'})
