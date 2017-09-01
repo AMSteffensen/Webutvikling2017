@@ -31,10 +31,12 @@ def messages(request):
     for rel in relations:
         wrapper.append(MessageWrapper(rel, rel.msg_id.all()))
 
-
-    wrapper.sort(key=lambda x: x.last_datetime, reverse=True)
-    for i in wrapper:
-        print(i.last_datetime, i.last_msg)
+    try:
+        wrapper.sort(key=lambda x: x.last_datetime, reverse=True)
+        for i in wrapper:
+            print(i.last_datetime, i.last_msg)
+    except Exception:
+        pass
 
     return render(request, 'messages/messages.html', {'wrapper': wrapper})
 
