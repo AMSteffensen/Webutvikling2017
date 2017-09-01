@@ -5,8 +5,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}{% endblock %}</title>
-
+  <title>{% block title %}wrsp - Din digitale arbeidsplass{% endblock %}</title>
+  <meta name="description"
+          content="wrsp is a workspace for digital talents to manage prosjects, files, and teams.
+          Work togheter with other digital professionals in teams. Join now to
+          get early access.">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/icon.png' %}">
   <!-- External Resources -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -94,7 +98,11 @@
 
     <!-- MENU-SIDEBAR -->
     <div class="nav-side-menu">
-      <div class="brand">XFaktor</div>
+
+      <div class="brand"><img style="max-width:100px; margin-top: -7px;"
+           src="{% static 'images/logo.png' %}"></div>
+
+
       <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
       <div class="menu-list">
         <ul id="menu-content" class="menu-content collapse in">
@@ -197,7 +205,7 @@
       <div class="row">
         <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
           <div class="copyright">
-            © 2017, XFactor, All rights reserved
+            © 2017, wrsp, All rights reserved
           </div>
           <div class="col-md-6">
             <ul class="bottom_ul">
