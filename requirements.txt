@@ -3,3 +3,4 @@ django-bootstrap3
 pytz
 sorl-thumbnail
 Pillow==4.0.0
+mysqlclient

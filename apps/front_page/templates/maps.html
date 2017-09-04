@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% load bootstrap3 %}
+
+{% block title %}Maps{% endblock %}
+
+{% block head %}
+
+<style>
+  /* Always set the map height explicitly to define the size of the div
+   * element that contains the map. */
+  #map {
+    height: 100%;
+  }
+  /* Optional: Makes the sample page fill the window. */
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+</style>
+
+
+  <script src="{% static 'js/maps.js' %}"></script>
+
+
+{% endblock %}
+{% block content %}
+
+<div class="col-md-12">
+    <h1>Kart</h1>
+</div>
+
+<div class="col-md-12">
+	<div class="panel panel-default">
+	  	<div class="panel-heading">Søk her for og finne talenter i ditt nærområde. </div>
+
+	  	<div class="panel-body">
+		    <div class="row">
+		    	<div class="col-md-12">
+		    		<div class="form-group">
+	     				<input id="address" class="form-control"  type="text" placeholder="f.eks, php, java, Oslo"/>
+	     			</div>
+		    	</div>
+		    </div>
+  </div>
+	</div>
+
+
+
+
+<div id="map"></div>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB110ezRYYfSWYPcpELa_qQrOOFWDsQ6zc&callback=initMap">
+    </script>
+
+
+{% endblock %}

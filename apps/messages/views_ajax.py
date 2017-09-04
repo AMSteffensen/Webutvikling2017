@@ -34,7 +34,7 @@ def send_pm(request):
         return JsonResponse({'status': 'ko'})
 
     # Extract data
-    msg_rel_id = int(data[0])
+    msg_rel_id = int(data)
 
     # Get other user
     try:
