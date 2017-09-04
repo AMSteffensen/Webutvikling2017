@@ -45,6 +45,7 @@
 <body>
 
   <div class="wrapper">
+    {% if request.user.is_authenticated %}
       <div class="sidebar" data-color="blue" data-image="{% static 'images/sidebar-5.jpg' %}">">
 
       	<div class="sidebar-wrapper" style="min-height: 400px; overflow: hidden;">
@@ -165,7 +166,7 @@
 
 
 <!-- MAIN CONTENT -->
-
+{% endif %}
 <!-- CONTENT -->
 <div class="cContent" id="content">
   {% block content %} {% endblock %}
