@@ -12,7 +12,6 @@
     <div class="row">
 
       <!-- Message List -->
-
       <div class="conversation-wrap col-lg-3" style="background: #edf1eb;">
         {% for obj in wrapper %}
           {% usr_sep obj.relation request as otherUser %}
@@ -80,7 +79,9 @@
 
 {% endblock %}
 <!-- /CONTENT -->
+<script>
 
+</script>
 <!-- DOMREADY -->
 {% block domready %}
   {% if wrapper %}
@@ -105,25 +106,29 @@
             },
             function(data) {
                 if (data['status'] === 'ok') {
-                    text.value = "";
-                    appendmsg(data); 
+
+                    if (/\S/.test(text.value)) {
+                      text.value = "";
+                      appendmsg(data);
+                    }
+                    else {
+                      text.value = "";
+                    }
                 }
-        });
+            });
     });
 
     appendmsg = function(data){
-        $.post('{% url "msg:get_message" %}',
+        $.post('{% url "msg:insert_pm" %}',
             {
               msg: data["msg"],
               user: data["user"]
             },
             function(htmldata) {
-            console.log('#message_' +data["rel"]+ ' .media.msg')
-               $('#message_' +data["rel"]+ ' .media.msg').append(htmldata); 
+               $('#message_' +data["rel"]+ ' .media.msg').append(htmldata);
         });
 
     }
-
   {% endif %}
 {% endblock %}
 <!-- /DOMREADY -->

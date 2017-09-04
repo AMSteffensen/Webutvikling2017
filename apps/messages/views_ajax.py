@@ -1,8 +1,13 @@
 from django.http import JsonResponse
+from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from common.decorators import ajax_required
+from django.template.loader import render_to_string
+from django.contrib.auth.models import User
+from django.shortcuts import redirect
 
+from .models import MessageNotification
 from .models import MessageRelation
 from .models import Message
 
@@ -29,7 +34,7 @@ def send_pm(request):
         return JsonResponse({'status': 'ko'})
 
     # Extract data
-    msg_rel_id = int(data[0])
+    msg_rel_id = int(data)
 
     # Get other user
     try:
@@ -50,4 +55,37 @@ def send_pm(request):
                       message=msg)
     new_msg.save()
 
+
+    # Check if a notification already exists
+    try:
+        msg_notif = MessageNotification.objects.get(relation=msgRelObj,
+                                                    user_from__in=(request.user, otherUser),
+                                                    user_to__in=(request.user, otherUser))
+        msg_notif.delete()
+    except Exception:
+        pass
+
+    # Create a new notification
+    new_msg_notif = MessageNotification(relation=msgRelObj,
+                                        user_from=request.user,
+                                        user_to=otherUser,
+                                        message=msg)
+    new_msg_notif.save()
+
     return JsonResponse({'status': 'ok', 'msg':new_msg.pk,'user':request.user.pk,'rel':value})
+
+
+
+@ajax_required
+@require_POST
+@login_required
+def insert_pm(request):
+    try:
+        message = Message.objects.get(pk=request.POST.get("msg"))
+        user = User.objects.get(pk=int(request.POST.get('user')))
+    except:
+        print("WRONG MESSAGE PK")
+        return redirect(request.META.get('HTTP_REFERER'))
+
+    html = render_to_string('messages/insert_message.html', {'msg':message,'user':user})
+    return HttpResponse(html)

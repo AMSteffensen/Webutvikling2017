@@ -1,4 +1,6 @@
-django
+django==1.11.2
+django-bootstrap3
 pytz
 sorl-thumbnail
-Pillow
+Pillow==4.0.0
+mysqlclient

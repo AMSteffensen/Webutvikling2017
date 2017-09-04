@@ -1,5 +1,5 @@
 {% load utils %}
-{% my_notifications request as notif_list %}
+{% my_unread_notifications request as notif_list %}
 <li>
   <div id="notif-panel" class="dropdown">
     <a class="dropdown-toggle"><i class="fa fa-bell widthHeight" aria-hidden="true"></i><span id="notif-amount" class="badge cBadge">{{ notif_list|length }}</span></a>
@@ -36,7 +36,7 @@
               <div class="media">
                 <span class="pull-left">
                   <!-- PROFILE PICTURE -->
-                  {% include "profile_picture.html" with img_size="32x32" alt="" classes="user-detail" %}
+                  {% include "profile_picture.html" with source=noti.user_from.profile.photo img_size="32x32" alt="" classes="user-detail" %}
                   <!-- /PROFILE PICTURE -->
                 </span>
                 <div class="media-body pWrap">
