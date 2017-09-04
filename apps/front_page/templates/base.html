@@ -34,16 +34,6 @@
   <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
   <link href="{% static 'css/pe-icon-7-stroke.css' %}" rel="stylesheet" />
 
-  <!--
-  <link rel="stylesheet" href="{% static 'css/base-django-tut.css' %}">
-  <link rel="stylesheet" href="{% static 'css/base-sidenav.css' %}">
-  <link rel="stylesheet" href="{% static 'css/base-profilenav.css' %}">
-  <link rel="stylesheet" href="{% static 'css/base-footer.css' %}">
-  <link rel="stylesheet" href="{% static 'css/base-header.css' %}">
-  <link rel="stylesheet" href="{% static 'css/base-mycss.css' %}">
-  <link rel="stylesheet" href="{% static 'detail.css' %}">
--->
-
   <script src="{% static 'js/base.js' %}"></script>
   <!-- /My Resources -->
 
@@ -55,23 +45,17 @@
 <body>
 
   <div class="wrapper">
+    {% if request.user.is_authenticated %}
       <div class="sidebar" data-color="blue" data-image="{% static 'images/sidebar-5.jpg' %}">">
 
-      <!--
-
-          Tip 1: you can change the color of the sidebar using: data-color="blue | azure | green | orange | red | purple"
-          Tip 2: you can also add an image using data-image tag
-
-      -->
-
-      	<div class="sidebar-wrapper">
+      	<div class="sidebar-wrapper" style="min-height: 400px; overflow: hidden;">
               <div class="logo">
                 <div class="brand"><img style="max-width:100px; margin-top: -7px;"
                      src="{% static 'images/logo.png' %}"></div>
               </div>
 
               <ul class="nav">
-                  <li class="active">
+                  <li>
                       <a href="{% url 'user:dashboard' %}">
                           <i class="pe-7s-graph"></i>
                           <p>Dashboard</p>
@@ -102,19 +86,14 @@
                       </a>
                   </li>
                   <li>
-                      <a href="maps.html">
+                      <a href="/maps">
                           <i class="pe-7s-map-marker"></i>
                           <p>Kart</p>
                       </a>
                   </li>
-                  <li>
-                      <a href="notifications.html">
-                          <i class="pe-7s-bell"></i>
-                          <p>Notifikasjoner</p>
-                      </a>
-                  </li>
+
   				<li class="active-pro">
-                      <a href="upgrade.html">
+                      <a href="/upgrade">
                           <i class="pe-7s-rocket"></i>
                           <p>Oppgrader til PRO</p>
                       </a>
@@ -144,16 +123,13 @@
                           </li>
                           <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+
                                       <i class="fa fa-globe"></i>
                                       <b class="caret"></b>
                                       <span class="notification">5</span>
                                 </a>
                                 <ul class="dropdown-menu">
-                                  <li><a href="#">Notification 1</a></li>
-                                  <li><a href="#">Notification 2</a></li>
-                                  <li><a href="#">Notification 3</a></li>
-                                  <li><a href="#">Notification 4</a></li>
-                                  <li><a href="#">Another notification</a></li>
+                                    {% include "base_notifications.html" %}
                                 </ul>
                           </li>
                           <li>
@@ -166,22 +142,16 @@
                       <ul class="nav navbar-nav navbar-right">
                           <li>
                              <a href="{% url 'user:user_settings' %}">
-                                 Konto instillinger
+                                 Innstillinger
                               </a>
                           </li>
                           <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                      Meldinger
+                                        Meldinger
                                       <b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu">
-                                  <li><a href="#">Action</a></li>
-                                  <li><a href="#">Another action</a></li>
-                                  <li><a href="#">Something</a></li>
-                                  <li><a href="#">Another action</a></li>
-                                  <li><a href="#">Something</a></li>
-                                  <li class="divider"></li>
-                                  <li><a href="#">Separated link</a></li>
+                                  {% include "base_messages.html" %}
                                 </ul>
                           </li>
                           <li>
@@ -196,7 +166,7 @@
 
 
 <!-- MAIN CONTENT -->
-
+{% endif %}
 <!-- CONTENT -->
 <div class="cContent" id="content">
   {% block content %} {% endblock %}
@@ -217,7 +187,7 @@
                           </li>
                           <li>
                               <a href="{% url 'user:user_settings' %}">
-                                  Instillinger
+                                  Innstillinger
                               </a>
                           </li>
                           <li>
@@ -257,8 +227,6 @@
       <!--  Notifications Plugin    -->
       <script src="{% static 'js/bootstrap-notify.js' %}"></script>
 
-      <!--  Google Maps Plugin    -->
-      <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 
       <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
   	<script src="{% static 'js/light-bootstrap-dashboard.js' %}"></script>
@@ -266,19 +234,10 @@
 
   	<script type="text/javascript">
       	$(document).ready(function(){
-
-          	demo.initChartist();
-
-          	$.notify({
-              	icon: 'pe-7s-gift',
-              	message: "Welcome to <b>Light Bootstrap Dashboard</b> - a beautiful freebie for every web developer."
-
-              },{
-                  type: 'info',
-                  timer: 4000
-              });
-
-      	});
+          // get current URL path and assign 'active' class
+	         var pathname = window.location.pathname;
+	          $('.nav > li > a[href="'+pathname+'"]').parent().addClass('active');
+        });
   	</script>
 
 
