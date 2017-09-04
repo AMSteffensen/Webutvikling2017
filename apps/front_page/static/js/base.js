@@ -14,6 +14,7 @@ $.ajaxSetup({
 });
 
 
+
 $(document).ready(function () {
 
     // Keep SideNav collapse open on refresh
