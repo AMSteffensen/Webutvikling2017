@@ -13,6 +13,15 @@
                         <h4 class="title">Prosjekter</h4>
                         <p class="category">Aktive Prosjekter</p>
                     </div>
+                        {% if usr_proj %}
+                            <tr>
+                                {% for proj in usr_proj %}
+                                    <td><a href="{{ proj.get_absolute_url }}">{{ proj.title }}</a></td><br>
+                                {% endfor %}
+                            </tr>
+                        {% else %}
+                            <p>Du har ingen aktive prosjekter.</p>
+                        {% endif %}
                     <div class="content">
                         <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
 

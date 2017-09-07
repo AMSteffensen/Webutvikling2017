@@ -35,7 +35,10 @@ def edit(request):
 
 @login_required
 def dashboard(request):
-    return render(request, 'user/other/dashboard.html', {'section': 'dashboard'})
+    # Get projects made by user
+    user_projects = Project.objects.filter(author=request.user)
+
+    return render(request, 'user/other/dashboard.html', {'usr_proj': user_projects})
 
 
 @login_required
