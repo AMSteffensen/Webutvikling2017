@@ -49,7 +49,7 @@
                 <td><span class="label label-danger">{{ project.priority|upper }}</span></td>
               {% endif %}
               <!-- /PRIORITY -->
-              <td>{% include "profile_picture.html" with source=project.author.profile.photo img_size="32x32" alt="avatar" classes="avatar img-circle" %} <a href="#">{{ project.author }}</a></td>
+              <td>{% include "profile_picture.html" with source=project.author.profile.photo img_size="32x32" alt="avatar" classes="avatar img-circle" %} <a href="{{ project.author.get_absolute_url }}">{{ project.author }}</a></td>
               <!-- STATUS -->
               <td><span class="label label-success">AKTIV</span></td>
               {% if project.status == 'open' %}
