@@ -1,18 +1,18 @@
 {% extends "base.html" %} {% block title %}Prosjekter{% endblock %} {% block content %}
 
-<h1>Prosjekter</h1>
-<div class="content">
-  <div class="main-header">
-  </div>
-  <div class="main-content">
-    <div class="bottom-30px">
-      <a href="{% url 'proj:project_create' %}" class="btn btn-primary"><i class="fa fa-plus-square"></i> Opprett nytt prosjekt</a>
-  
+  <h1>Prosjekter</h1>
+  <div class="content">
+    <div class="main-header">
     </div>
-    <div class="table-responsive">
-      <!-- PROJECT TABLE -->
-      <table class="table colored-header datatable project-list">
-        <thead>
+    <div class="main-content">
+      <div class="bottom-30px">
+        <a href="{% url 'proj:project_create' %}" class="btn btn-primary"><i class="fa fa-plus-square"></i> Opprett nytt prosjekt</a>
+
+      </div>
+      <div class="table-responsive">
+        <!-- PROJECT TABLE -->
+        <table class="table colored-header datatable project-list">
+          <thead>
           <tr>
             <th>Tittel</th>
             <th>Publisert</th>
@@ -22,53 +22,53 @@
             <th>Oppdragsiver</th>
             <th>Status</th>
           </tr>
-        </thead>
-        <tbody>
+          </thead>
+          <tbody>
           <tr>
-            <!-- TODO: List projectss -->
             {% for project in projects %}
-            <td><a href="{{ project.get_absolute_url }}">{{ project.title }}</a></td>
-            <td>{{ project.created }}</td>
-            <td>{{ project.deadline }}</td> <!-- TODO: Calculate time left from todays datetime -->
-            <td>
-              <div class="progress">
-                <div class="progress-bar progress-bar-striped active"
-                     role="progressbar"
-                     aria-valuenow="{{ project.progress }}"
-                     aria-valuemin="0"
-                     aria-valuemax="100"
-                     style="width:{{ project.progress }}%">{{ project.progress }}%</div>
-              </div>
-            </td>
-            <!-- PRIORITY -->
-            {% if project.priority == 'low' %}
-              <td><span class="label label-success">{{ project.priority|upper }}</span></td>
-            {% elif project.priority == 'medium' %}
-              <td><span class="label label-warning">{{ project.priority|upper }}</span></td>
-            {% elif project.priority == 'high' %}
-              <td><span class="label label-danger">{{ project.priority|upper }}</span></td>
-            {% endif %}
-            <!-- /PRIORITY -->
-            <td>{% include "profile_picture.html" with source=project.author.profile.photo img_size="32x32" alt="avatar" classes="avatar img-circle" %} <a href="#">{{ project.author }}</a></td>
-            <!-- STATUS -->
-            <td><span class="label label-success">AKTIV</span></td>
-            {% if project.status == 'open' %}
-              <td><span class="label">{{ project.status|upper }}</span></td>
-            {% elif project.status == 'active' %}
-              <td><span class="label label-success">{{ project.status|upper }}</span></td>
-            {% elif project.status == 'finished' %}
-              <td><span class="label">{{ project.status|upper }}</span></td>
-            {% elif project.status == 'closed' %}
-              <td><span class="label label-danger">{{ project.status|upper }}</span></td>
-            {% endif %}
-            <!-- /STATUS -->
-          </tr>
-          {% endfor %}
+              <td><a href="{{ project.get_absolute_url }}">{{ project.title }}</a></td>
+              <td>{{ project.created }}</td>
+              <td>{{ project.deadline }}</td> <!-- TODO: Calculate time left from todays datetime -->
+              <td>
+                <div class="progress">
+                  <div class="progress-bar progress-bar-striped active"
+                       role="progressbar"
+                       aria-valuenow="{{ project.progress }}"
+                       aria-valuemin="0"
+                       aria-valuemax="100"
+                       style="width:{{ project.progress }}%">{{ project.progress }}%
+                  </div>
+                </div>
+              </td>
+              <!-- PRIORITY -->
+              {% if project.priority == 'low' %}
+                <td><span class="label label-success">{{ project.priority|upper }}</span></td>
+              {% elif project.priority == 'medium' %}
+                <td><span class="label label-warning">{{ project.priority|upper }}</span></td>
+              {% elif project.priority == 'high' %}
+                <td><span class="label label-danger">{{ project.priority|upper }}</span></td>
+              {% endif %}
+              <!-- /PRIORITY -->
+              <td>{% include "profile_picture.html" with source=project.author.profile.photo img_size="32x32" alt="avatar" classes="avatar img-circle" %} <a href="#">{{ project.author }}</a></td>
+              <!-- STATUS -->
+              <td><span class="label label-success">AKTIV</span></td>
+              {% if project.status == 'open' %}
+                <td><span class="label">{{ project.status|upper }}</span></td>
+              {% elif project.status == 'active' %}
+                <td><span class="label label-success">{{ project.status|upper }}</span></td>
+              {% elif project.status == 'finished' %}
+                <td><span class="label">{{ project.status|upper }}</span></td>
+              {% elif project.status == 'closed' %}
+                <td><span class="label label-danger">{{ project.status|upper }}</span></td>
+              {% endif %}
+              <!-- /STATUS -->
+              </tr>
+            {% endfor %}
 
-        </tbody>
-      </table>
+          </tbody>
+        </table>
 
-      <!-- END PROJECT TABLE -->
+        <!-- END PROJECT TABLE -->
       </div>
     </div>
   </div>
@@ -76,4 +76,4 @@
 
 
 
-  {% endblock %}
+{% endblock %}
